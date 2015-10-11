@@ -1,0 +1,25 @@
+﻿<Properties StartupItem="MLearning.Droid\Hitec.Droid.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.4C3AWN154L014669" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="MLearning.Droid\AsyncStorage\DroidAsyncStorageService.cs">
+    <Files>
+      <File FileName="MLearning.Core\DownloadCache\CacheService.cs" Line="25" Column="37" />
+      <File FileName="MLearning.Core\DownloadCache\DownloadCacheAttribute.cs" Line="1" Column="1" />
+      <File FileName="MLearning.Core\DownloadCache\IncrementalDownload.cs" Line="1" Column="1" />
+      <File FileName="MLearning.Droid\Properties\AndroidManifest.xml" Line="1" Column="1" />
+      <File FileName="MLearning.Droid\SplashScreen.cs" Line="1" Column="1" />
+      <File FileName="MLearning.Droid\Views\MainView.cs" Line="1" Column="1" />
+      <File FileName="MLearning.Droid\Views\LoginView.cs" Line="1" Column="1" />
+      <File FileName="MLearning.Droid\Views\RegisterView.cs" Line="1" Column="1" />
+      <File FileName="MLearning.Droid\AsyncStorage\DroidAsyncStorageService.cs" Line="7" Column="11" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore>
+      <Breakpoint file="C:\Users\ImBonus\Documents\Visual Studio 2013\Projects\mLearningCore\MLearning.Droid\MvxActionBarEventSourceActivity.cs" line="89" column="1" />
+      <Breakpoint file="C:\Users\ImBonus\Documents\Visual Studio 2013\Projects\mLearningCore\MLearning.Droid\MvxActionBarEventSourceActivity.cs" line="90" column="1" />
+    </BreakpointStore>
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <AuthorInfo Name="ImBonus" Email="" Copyright="ImBonus.org" Company="" Trademark="" />
+  <MonoDevelop.Ide.ItemProperties.Hitec.Droid AndroidDesignerPreferredDevice="Nexus 4" AndroidDesignerPreferredTheme="Theme.DeviceDefault.Dialog.NoActionBar" />
+</Properties>
