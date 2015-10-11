@@ -462,6 +462,16 @@
     <AndroidAsset Include="Assets\icons\imdownloading.png" />
     <AndroidAsset Include="Assets\icons\nouser.png" />
     <AndroidAsset Include="Assets\icons\salir.png" />
+    <AndroidAsset Include="Assets\icons\iconrutas.png" />
+    <AndroidAsset Include="Assets\icons\iconhome.png" />
+    <AndroidAsset Include="Assets\icons\iconcamara.png" />
+    <AndroidAsset Include="Assets\icons\iconservicios.png" />
+    <AndroidAsset Include="Assets\icons\iconvidasilvestre.png" />
+    <AndroidAsset Include="Assets\icons\iconsalir.png" />
+    <AndroidAsset Include="Assets\icons\iconcifras.png" />
+    <AndroidAsset Include="Assets\icons\rutasmenores.png" />
+    <AndroidAsset Include="Assets\icons\rutasallkantay.png" />
+    <AndroidAsset Include="Assets\icons\rutamachupicchu.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MLearning.Core\MLearning.Core.csproj">

@@ -72,6 +72,14 @@ namespace MLearning.Droid.Views
 		LinearLayout linearSchool;
 		LinearLayout linearListCurso;
 		LinearLayout linearListTask;
+
+		List<ImageView> listRutas = new List<ImageView> ();
+		HorizontalScrollView scrollRutas;
+
+		LinearLayout linearListTaskTop;
+		LinearLayout linearListRutas;
+		LinearLayout linearListTaskBotton;
+
 		LinearLayout linearList;
 		LinearLayout linearPendiente;
 		LinearLayout linearUser;
@@ -84,11 +92,19 @@ namespace MLearning.Droid.Views
 		int widthInDp;
 		int heightInDp;
 		int PositionLO =0;
+
 		List<CursoItem> _currentCursos = new List<CursoItem>();
 		ListView  listCursos;
 
 		List<TaskItem> _currentTask = new List<TaskItem>();
 		ListView  listTasks;
+
+		List<TaskItem> _tasksTop = new List<TaskItem>();
+		ListView  _listTasksTop;
+
+		List<TaskItem> _tasksBotton = new List<TaskItem>();
+		ListView  _listTasksBotton;
+
 
 		FrameLayout frameLayout;
 
@@ -115,6 +131,8 @@ namespace MLearning.Droid.Views
 
 			task = new TaskView (this);
 
+
+			initRutas ();
 			iniMenu ();
 
 			mToolbar = FindViewById<SupportToolbar>(Resource.Id.toolbar);
@@ -147,10 +165,7 @@ namespace MLearning.Droid.Views
 			Drawable dr = new BitmapDrawable (Bitmap.CreateScaledBitmap (getBitmapFromAsset ("icons/nubeactivity.png"), 768, 1024, true));
 			RL.SetBackgroundDrawable (dr);
 
-			dr = null;
-
 			//seting up chat view content
-
 
 			title_view = FindViewById<TextView> (Resource.Id.chat_view_title);
 
@@ -223,10 +238,13 @@ namespace MLearning.Droid.Views
 			{
 				SupportActionBar.SetTitle(Resource.String.closeDrawer);
 			}
-				
+
+
 			initListCursos ();
 			iniPeoples ();
 			initListTasks ();
+			initListTaskTop ();
+			initListTaskBotton ();
 
         }
 
@@ -267,13 +285,27 @@ namespace MLearning.Droid.Views
 			linearUser = new LinearLayout (this);
 			linearListCurso = new LinearLayout (this);
 			linearListTask = new LinearLayout (this);
+
+			linearListTaskTop = new LinearLayout(this);
+			linearListRutas = new LinearLayout (this);
+			linearListTaskBotton = new LinearLayout(this);
+
 			linearList = new LinearLayout (this);
 			linearPendiente = new LinearLayout (this);
 
 			linearTxtValorBarra = new LinearLayout (this);
 
 			listCursos = new ListView (this);
-			listTasks = new ListView (this);	
+			listTasks = new ListView (this);
+
+			scrollRutas = new HorizontalScrollView (this);
+			scrollRutas.LayoutParameters = new HorizontalScrollView.LayoutParams (-1,-2);
+
+
+
+			_listTasksTop = new ListView (this);
+			_listTasksBotton = new ListView (this);
+
 			mItemsChat = new List<ChatDataRow> ();
 
 			mainLayout.LayoutParameters = new RelativeLayout.LayoutParams (-1,-1);
@@ -288,8 +320,15 @@ namespace MLearning.Droid.Views
 			linearUserData.LayoutParameters = new LinearLayout.LayoutParams (-1,LinearLayout.LayoutParams.WrapContent);
 			linearUser.LayoutParameters = new LinearLayout.LayoutParams (-1, LinearLayout.LayoutParams.WrapContent);
 			linearListCurso.LayoutParameters = new LinearLayout.LayoutParams (-1,Configuration.getHeight(250));
-			linearListTask.LayoutParameters = new LinearLayout.LayoutParams (-1,LinearLayout.LayoutParams.WrapContent);
-			linearList.LayoutParameters = new LinearLayout.LayoutParams (-1, LinearLayout.LayoutParams.WrapContent);
+
+			linearListTask.LayoutParameters = new LinearLayout.LayoutParams (-1,-2);
+
+			linearListTaskTop.LayoutParameters = new LinearLayout.LayoutParams (-1,-2);
+			linearListRutas.LayoutParameters = new LinearLayout.LayoutParams (-1, -2);
+			linearListTaskBotton.LayoutParameters = new LinearLayout.LayoutParams (-1,-2);
+
+
+			linearList.LayoutParameters = new LinearLayout.LayoutParams (-1, -2);
 			linearPendiente.LayoutParameters = new LinearLayout.LayoutParams (Configuration.getWidth (30), Configuration.getWidth (30));
 			linearTxtValorBarra.LayoutParameters = new LinearLayout.LayoutParams (-1, -2);
 
@@ -316,7 +355,15 @@ namespace MLearning.Droid.Views
 			linearUser.SetGravity (GravityFlags.CenterHorizontal);
 
 			linearListCurso.Orientation = Orientation.Vertical;
+
 			linearListTask.Orientation = Orientation.Vertical;
+
+			linearListTaskTop.Orientation = Orientation.Vertical;
+			linearListRutas.Orientation = Orientation.Horizontal;
+			linearListTaskBotton.Orientation = Orientation.Vertical;
+
+
+			linearList.SetGravity (GravityFlags.Center);
 
 			linearList.Orientation = Orientation.Vertical;
 
@@ -339,7 +386,7 @@ namespace MLearning.Droid.Views
 		//	txtUserName.Text ="David Spencer";
 			txtUserName.Typeface =  Typeface.CreateFromAsset(this.Assets, "fonts/HelveticaNeue.ttf");
 
-			txtUserRol.Text ="Alumno";
+			txtUserRol.Text ="Perú";
 			txtUserRol.Typeface =  Typeface.CreateFromAsset(this.Assets, "fonts/HelveticaNeue.ttf");
 
 			txtSchoolName.Text ="Colegio Sagrados Corazones";
@@ -425,12 +472,29 @@ namespace MLearning.Droid.Views
 			linearUserData.AddView (linearUser);
 
 			linearListCurso.AddView (listCursos);
+
 			linearListTask.AddView (listTasks);
 
-			linearList.AddView (linearCurse);
-			linearList.AddView (linearListCurso);
-			linearList.AddView (linearTask);
-			linearList.AddView (linearListTask);
+			Console.WriteLine ("RUTASCOUNT" + listRutas.Count);
+			for (int i = 0; i < listRutas.Count; i++) 
+			{
+				Console.WriteLine (":::::::::::::::::::::" + listRutas.Count);
+				linearListRutas.AddView (listRutas [i]);
+			}
+			scrollRutas.AddView (linearListRutas);
+
+
+			linearListTaskTop.AddView (_listTasksTop);
+			//linearListRutas.AddView (scrollRutas);
+			linearListTaskBotton.AddView (_listTasksBotton);
+
+			linearList.AddView (linearListTaskTop);
+			linearList.AddView (scrollRutas);
+			//linearList.AddView (linearCurse);
+			//linearList.AddView (linearListCurso);
+			//linearList.AddView (linearTask);
+			//linearList.AddView (linearListTask);
+			linearList.AddView (linearListTaskBotton);
 
 
 			imgChat.SetX (Configuration.getWidth(59)); imgChat.SetY (Configuration.getHeight(145));
@@ -449,11 +513,11 @@ namespace MLearning.Droid.Views
 
 			linearPendiente.SetX (Configuration.getWidth(94));  linearPendiente.SetY (Configuration.getHeight(217)); 
 
-			linearUserData.SetX (0); linearUserData.SetY (Configuration.getHeight(130));
+			linearUserData.SetX (0); linearUserData.SetY (Configuration.getHeight(100));
 			linearBarraCurso.SetX (0); linearBarraCurso.SetY (Configuration.getHeight(412));
 			linearTxtValorBarra.SetX (0); linearTxtValorBarra.SetY (Configuration.getHeight(443));
 			linearSchool.SetX (0); linearSchool.SetY (Configuration.getHeight(532));
-			linearList.SetX (0); linearList.SetY (Configuration.getHeight(583));
+			linearList.SetX (0); linearList.SetY (Configuration.getHeight(360));
 
 			Bitmap bm;
 			txtUserName.Text = vm.UserFirstName + " "+ vm.UserLastName;
@@ -476,7 +540,7 @@ namespace MLearning.Droid.Views
 			mainLayout.AddView (linearUserData);
 			mainLayout.AddView (linearBarraCurso);
 			mainLayout.AddView (linearTxtValorBarra);
-			mainLayout.AddView (linearSchool);
+			//mainLayout.AddView (linearSchool);
 			mainLayout.AddView (linearList);
 
 			imgChat = null;
@@ -700,6 +764,77 @@ namespace MLearning.Droid.Views
 		}
 
 
+		public void initListTaskTop()
+		{
+			TaskItem home = new TaskItem ();
+			TaskItem fotos = new TaskItem ();
+			TaskItem rutas = new TaskItem ();
+
+			home.Name = "Home";
+			fotos.Name = "Fotos";
+			rutas.Name = "Rutas";
+
+			home.Asset = "icons/iconhome.png";
+			fotos.Asset = "icons/iconcamara.png";
+			rutas.Asset = "icons/iconrutas.png";
+
+			_tasksTop.Add (home);
+			_tasksTop.Add (fotos);
+			_tasksTop.Add (rutas);
+
+			_listTasksTop.Adapter = new TaskAdapter (this, _tasksTop);
+
+
+
+
+		}
+		public void initRutas()
+		{
+
+			ImageView ruta1 = new ImageView (this);
+			ImageView ruta2 = new ImageView (this);
+			ImageView ruta3 = new ImageView (this);
+
+
+			ruta1.SetImageBitmap (Bitmap.CreateScaledBitmap (getBitmapFromAsset ("icons/rutamachupicchu.png"), Configuration.getWidth (130), Configuration.getWidth (130), true));
+			ruta2.SetImageBitmap (Bitmap.CreateScaledBitmap (getBitmapFromAsset ("icons/rutasallkantay.png"), Configuration.getWidth (130), Configuration.getWidth (130), true));
+			ruta3.SetImageBitmap (Bitmap.CreateScaledBitmap (getBitmapFromAsset ("icons/rutasmenores.png"), Configuration.getWidth (130), Configuration.getWidth (130), true));
+
+			listRutas.Add (ruta1);
+			listRutas.Add (ruta2);
+			listRutas.Add (ruta3);
+
+			Console.WriteLine ("___________________Rutas" + listRutas.Count);
+
+		}
+
+		public void initListTaskBotton()
+		{
+			TaskItem guiaServicios = new TaskItem ();
+			TaskItem guiaSilvestre = new TaskItem ();
+			TaskItem caminoCifras = new TaskItem ();
+			TaskItem salir = new TaskItem ();
+
+			guiaServicios.Name = "Guia de servicios";
+			guiaSilvestre.Name = "Guia de vida ilvestre";
+			caminoCifras.Name = "Camino inca en cifras";
+			salir.Name = "Salir";
+
+			guiaServicios.Asset = "icons/iconservicios.png";
+			guiaSilvestre.Asset = "icons/iconvidasilvestre.png";
+			caminoCifras.Asset = "icons/iconcifras.png";
+			salir.Asset = "icons/iconsalir.png";
+
+			_tasksBotton.Add (guiaServicios);
+			_tasksBotton.Add (guiaSilvestre);
+			_tasksBotton.Add (caminoCifras);
+			_tasksBotton.Add (salir);
+
+			_listTasksBotton.Adapter = new TaskAdapter (this, _tasksBotton);
+
+		}
+
+
 		public void initListTasks (){
 			TaskItem item1 = new TaskItem();
 			TaskItem item2 = new TaskItem();
@@ -904,6 +1039,7 @@ namespace MLearning.Droid.Views
 				mDrawerLayout.CloseDrawer (mRightDrawer);
 				mDrawerToggle.OnOptionsItemSelected(item);
 				return true;
+
 
 			case Resource.Id.action_chat:
 				if (mDrawerLayout.IsDrawerOpen(mRightDrawer))
