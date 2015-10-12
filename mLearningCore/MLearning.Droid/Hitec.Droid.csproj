@@ -214,6 +214,7 @@
     <Compile Include="Views\ImageLOView.cs" />
     <Compile Include="Views\CommentAdapter.cs" />
     <Compile Include="Views\LoginView.cs" />
+    <Compile Include="Views\frontView.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -472,6 +473,14 @@
     <AndroidAsset Include="Assets\icons\rutasmenores.png" />
     <AndroidAsset Include="Assets\icons\rutasallkantay.png" />
     <AndroidAsset Include="Assets\icons\rutamachupicchu.png" />
+    <AndroidAsset Include="Assets\icons\iconlike.png" />
+    <AndroidAsset Include="Assets\icons\iconmap.png" />
+    <AndroidAsset Include="Assets\icons\iconiwashere.png" />
+    <AndroidAsset Include="Assets\images\fondovidasilvestre.png" />
+    <AndroidAsset Include="Assets\images\fondorutas.png" />
+    <AndroidAsset Include="Assets\images\fondoguias.png" />
+    <AndroidAsset Include="Assets\images\fondocaminoinca.png" />
+    <AndroidAsset Include="Assets\icons\headerapp.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MLearning.Core\MLearning.Core.csproj">

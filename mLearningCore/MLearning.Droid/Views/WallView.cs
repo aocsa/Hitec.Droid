@@ -248,7 +248,7 @@ namespace MLearning.Droid
 
 			_fondo2 = new LinearLayout (context);
 			_fondo2.LayoutParameters = new LinearLayout.LayoutParams (-1, Configuration.getWidth (640));
-			_fondo2.SetY (Configuration.getHeight (109));
+			_fondo2.SetY (Configuration.getHeight (125));
 
 			Drawable dr1 = new BitmapDrawable (getBitmapFromAsset("icons/fondoselec.png"));
 			_fondo2.SetBackgroundDrawable (dr1);
@@ -509,10 +509,16 @@ namespace MLearning.Droid
 
 			//----------------------------------------------------------
 
+			Drawable dr = new BitmapDrawable (getBitmapFromAsset("icons/headerapp.png"));
+			LinearLayout header = new LinearLayout(context);
+			header.LayoutParameters = new LinearLayout.LayoutParams (-1,Configuration.getHeight(125));
+			header.Orientation = Orientation.Vertical;
 
-			
-			Drawable dr = new BitmapDrawable (getBitmapFromAsset("icons/fondo.png"));
-			_mainLayout.SetBackgroundDrawable (dr);
+			header.SetBackgroundDrawable (dr);
+
+
+			//_mainLayout.SetBackgroundDrawable (dr);
+			_mainLayout.AddView(header);
 			dr = null;
 		
 			_workspace = new LinearLayout (context);

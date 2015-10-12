@@ -73,6 +73,8 @@ namespace MLearning.Droid.Views
 		LinearLayout linearListCurso;
 		LinearLayout linearListTask;
 
+		LinearLayout linearinfo1;
+
 		List<ImageView> listRutas = new List<ImageView> ();
 		HorizontalScrollView scrollRutas;
 
@@ -110,6 +112,7 @@ namespace MLearning.Droid.Views
 
 
 		MainViewModel vm;
+		frontView frontView;
 		WallView lo;
 
         protected override void OnCreate(Bundle bundle)
@@ -120,6 +123,7 @@ namespace MLearning.Droid.Views
 
 			vm = this.ViewModel as MainViewModel;
 			lo = new WallView(this);
+			frontView = new frontView (this);
 
 			LinearLayout linearMainLayout = FindViewById<LinearLayout>(Resource.Id.left_drawer);
 
@@ -133,6 +137,7 @@ namespace MLearning.Droid.Views
 
 
 			initRutas ();
+			initLinearInfo ();
 			iniMenu ();
 
 			mToolbar = FindViewById<SupportToolbar>(Resource.Id.toolbar);
@@ -157,6 +162,7 @@ namespace MLearning.Droid.Views
 			lo.OpenUnits.Click += imBtn_Units_Click;
 
 			main_ContentView.AddView (lo);
+			lo.getWorkSpaceLayout.AddView (frontView);
 
 			frameLayout.AddView (main_ContentView);
 
@@ -286,6 +292,8 @@ namespace MLearning.Droid.Views
 			linearListCurso = new LinearLayout (this);
 			linearListTask = new LinearLayout (this);
 
+
+
 			linearListTaskTop = new LinearLayout(this);
 			linearListRutas = new LinearLayout (this);
 			linearListTaskBotton = new LinearLayout(this);
@@ -300,6 +308,8 @@ namespace MLearning.Droid.Views
 
 			scrollRutas = new HorizontalScrollView (this);
 			scrollRutas.LayoutParameters = new HorizontalScrollView.LayoutParams (-1,-2);
+
+
 
 
 
@@ -346,7 +356,6 @@ namespace MLearning.Droid.Views
 			linearTask.SetGravity (GravityFlags.CenterVertical);
 
 			linearSchool.Orientation = Orientation.Horizontal;
-			//linearSchool.SetGravity (GravityFlags.CenterVer);
 
 			linearUserData.Orientation = Orientation.Vertical;
 			linearUserData.SetGravity (GravityFlags.Center);
@@ -363,7 +372,7 @@ namespace MLearning.Droid.Views
 			linearListTaskBotton.Orientation = Orientation.Vertical;
 
 
-			linearList.SetGravity (GravityFlags.Center);
+			linearListRutas.SetGravity (GravityFlags.Center);
 
 			linearList.Orientation = Orientation.Vertical;
 
@@ -475,13 +484,13 @@ namespace MLearning.Droid.Views
 
 			linearListTask.AddView (listTasks);
 
-			Console.WriteLine ("RUTASCOUNT" + listRutas.Count);
+
 			for (int i = 0; i < listRutas.Count; i++) 
 			{
-				Console.WriteLine (":::::::::::::::::::::" + listRutas.Count);
 				linearListRutas.AddView (listRutas [i]);
 			}
 			scrollRutas.AddView (linearListRutas);
+			scrollRutas.SetPadding (Configuration.getWidth (45), 0, Configuration.getWidth (45), 0);
 
 
 			linearListTaskTop.AddView (_listTasksTop);
@@ -490,11 +499,13 @@ namespace MLearning.Droid.Views
 
 			linearList.AddView (linearListTaskTop);
 			linearList.AddView (scrollRutas);
+			linearList.AddView (linearinfo1);
 			//linearList.AddView (linearCurse);
 			//linearList.AddView (linearListCurso);
 			//linearList.AddView (linearTask);
 			//linearList.AddView (linearListTask);
 			linearList.AddView (linearListTaskBotton);
+
 
 
 			imgChat.SetX (Configuration.getWidth(59)); imgChat.SetY (Configuration.getHeight(145));
@@ -795,19 +806,24 @@ namespace MLearning.Droid.Views
 			ImageView ruta2 = new ImageView (this);
 			ImageView ruta3 = new ImageView (this);
 
+			int space = Configuration.getWidth (15);
+			int w = Configuration.getWidth (123);
+			int h = Configuration.getWidth (136);
 
-			ruta1.SetImageBitmap (Bitmap.CreateScaledBitmap (getBitmapFromAsset ("icons/rutamachupicchu.png"), Configuration.getWidth (130), Configuration.getWidth (130), true));
-			ruta2.SetImageBitmap (Bitmap.CreateScaledBitmap (getBitmapFromAsset ("icons/rutasallkantay.png"), Configuration.getWidth (130), Configuration.getWidth (130), true));
-			ruta3.SetImageBitmap (Bitmap.CreateScaledBitmap (getBitmapFromAsset ("icons/rutasmenores.png"), Configuration.getWidth (130), Configuration.getWidth (130), true));
+			ruta1.SetImageBitmap (Bitmap.CreateScaledBitmap (getBitmapFromAsset ("icons/rutamachupicchu.png"), w, h, true));
+			ruta2.SetImageBitmap (Bitmap.CreateScaledBitmap (getBitmapFromAsset ("icons/rutasallkantay.png"), w, h, true));
+			ruta3.SetImageBitmap (Bitmap.CreateScaledBitmap (getBitmapFromAsset ("icons/rutasmenores.png"), w, h, true));
+
+			ruta1.SetPadding (space, 0, space, 0);
+			ruta2.SetPadding (space, 0, space, 0);
+			ruta3.SetPadding (space, 0, space, 0);
 
 			listRutas.Add (ruta1);
 			listRutas.Add (ruta2);
 			listRutas.Add (ruta3);
 
-			Console.WriteLine ("___________________Rutas" + listRutas.Count);
 
 		}
-
 		public void initListTaskBotton()
 		{
 			TaskItem guiaServicios = new TaskItem ();
@@ -833,8 +849,69 @@ namespace MLearning.Droid.Views
 			_listTasksBotton.Adapter = new TaskAdapter (this, _tasksBotton);
 
 		}
+		public void initLinearInfo()
+		{
+			linearinfo1 = new LinearLayout (this);
+			linearinfo1.LayoutParameters = new LinearLayout.LayoutParams (-1, -2);
+			linearinfo1.Orientation = Orientation.Horizontal;
+			linearinfo1.SetGravity (GravityFlags.CenterHorizontal);
+
+			List<String> items = new List<string> ();
+			List<ImageView> icons = new List<ImageView> ();
+			List<String> iconsPath = new List<string> ();
+
+			items.Add ("I was here");
+			items.Add ("Your faves");
+			items.Add ("Guides");
+
+			iconsPath.Add ("icons/iconiwashere.png");
+			iconsPath.Add ("icons/iconlike.png");
+			iconsPath.Add ("icons/iconmap.png");
+
+			int w = Configuration.getWidth(30);
+			int h = Configuration.getWidth(30);
+			int spacing = Configuration.getWidth(15);
+			int titleSpace = Configuration.getWidth (10);
 
 
+			for (int i = 0; i < items.Count; i++) 
+			{
+				Console.WriteLine ("ITEMS::::::::::" + items[i]);	
+				icons.Add (new ImageView (this));
+				icons [i].SetImageBitmap (Bitmap.CreateScaledBitmap (getBitmapFromAsset (iconsPath[i]), w, h, true));
+
+				TextView title = new TextView (this);
+				title.Text = items [i];
+				title.SetTextColor (Color.ParseColor ("#ffffff"));
+				title.Typeface =  Typeface.CreateFromAsset(this.Assets, "fonts/HelveticaNeue.ttf");
+				title.SetPadding (titleSpace, 0, 0, 0);
+				title.SetTextSize (Android.Util.ComplexUnitType.Px, Configuration.getHeight (25));
+
+
+				LinearLayout itemLayoutmp = new LinearLayout (this);
+				itemLayoutmp.LayoutParameters = new LinearLayout.LayoutParams (-2, -2);
+				itemLayoutmp.Orientation = Orientation.Horizontal;
+				itemLayoutmp.SetGravity (GravityFlags.CenterVertical);
+				itemLayoutmp.SetPadding(spacing, 0, spacing, 0);
+
+				itemLayoutmp.AddView (icons [i]);
+				itemLayoutmp.AddView (title);
+
+
+
+				linearinfo1.AddView (itemLayoutmp);
+				//linearinfo1.AddView (icons[i]);
+				//linearinfo1.AddView (title);
+
+
+
+			}
+
+			int padding = Configuration.getWidth (45);
+
+			linearinfo1.SetPadding (padding, 0, padding, 0);
+
+		}
 		public void initListTasks (){
 			TaskItem item1 = new TaskItem();
 			TaskItem item2 = new TaskItem();

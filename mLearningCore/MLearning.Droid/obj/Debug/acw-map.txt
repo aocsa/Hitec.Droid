@@ -198,6 +198,10 @@ MLearning.Droid.Views.LoginView, Hitec;md5b895ed9b3f44921449db3de40bdf2cb2.Login
 MLearning.Droid.Views.LoginView, Hitec, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;md5b895ed9b3f44921449db3de40bdf2cb2.LoginView
 MLearning.Droid.Views.LoginView;md5b895ed9b3f44921449db3de40bdf2cb2.LoginView
 mlearning.droid.views.LoginView;md5b895ed9b3f44921449db3de40bdf2cb2.LoginView
+MLearning.Droid.frontView, Hitec;md5745c0a650cc3178052138db39ddf7295.frontView
+MLearning.Droid.frontView, Hitec, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;md5745c0a650cc3178052138db39ddf7295.frontView
+MLearning.Droid.frontView;md5745c0a650cc3178052138db39ddf7295.frontView
+mlearning.droid.frontView;md5745c0a650cc3178052138db39ddf7295.frontView
 Cirrious.CrossCore.Droid.MvxJavaContainer, Cirrious.CrossCore.Droid;md594e974f7daaa4f544d8fe5f075a74d26.MvxJavaContainer
 Cirrious.CrossCore.Droid.MvxJavaContainer, Cirrious.CrossCore.Droid, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;md594e974f7daaa4f544d8fe5f075a74d26.MvxJavaContainer
 Cirrious.CrossCore.Droid.MvxJavaContainer;md594e974f7daaa4f544d8fe5f075a74d26.MvxJavaContainer

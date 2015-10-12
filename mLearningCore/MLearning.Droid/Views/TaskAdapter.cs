@@ -46,7 +46,7 @@ namespace MLearning.Droid.Views
 			txtName.Text = item.Name;
 			txtName.SetTextColor (Color.ParseColor ("#ffffff"));
 			txtName.Typeface =  Typeface.CreateFromAsset(context.Assets, "fonts/HelveticaNeue.ttf");
-			imgIcon.SetImageBitmap (Bitmap.CreateScaledBitmap (getBitmapFromAsset (item.Asset), Configuration.getWidth (23), Configuration.getHeight (28), true));
+			imgIcon.SetImageBitmap (Bitmap.CreateScaledBitmap (getBitmapFromAsset (item.Asset), Configuration.getWidth (30), Configuration.getWidth (30), true));
 
 			linearItem.LayoutParameters = new LinearLayout.LayoutParams (-1, Configuration.getHeight (89));
 			linearItem.Orientation = Orientation.Horizontal;
