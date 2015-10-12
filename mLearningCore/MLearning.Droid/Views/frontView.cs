@@ -76,7 +76,7 @@ namespace MLearning.Droid
 			_mainLayout.LayoutParameters = new RelativeLayout.LayoutParams (-1, -1);
 
 			_scrollItems = new VerticalScrollView (context);
-			_scrollItems.LayoutParameters = new VerticalScrollView.LayoutParams (-1, -2);
+			_scrollItems.LayoutParameters = new VerticalScrollView.LayoutParams (-1, Configuration.getHeight(1050));
 			_scrollItems.SetY (Configuration.getHeight (125));
 
 			initItems ();
@@ -91,7 +91,7 @@ namespace MLearning.Droid
 			var textFormat = Android.Util.ComplexUnitType.Px;
 
 			_linearContentLayout = new LinearLayout (context);
-			_linearContentLayout.LayoutParameters = new LinearLayout.LayoutParams (-1, -1);
+			_linearContentLayout.LayoutParameters = new LinearLayout.LayoutParams (-1, -2);
 			_linearContentLayout.Orientation = Orientation.Vertical;
 
 
@@ -144,7 +144,7 @@ namespace MLearning.Droid
 				TextView itemTitle = new TextView (context);
 				itemTitle.Text = title [i];
 				itemTitle.SetTextColor (Color.ParseColor("#ffffff"));
-				itemTitle.Typeface =  Typeface.CreateFromAsset(context.Assets, "fonts/HelveticaNeue.ttf");
+				itemTitle.Typeface =  Typeface.CreateFromAsset(context.Assets, "fonts/ArcherMediumPro.otf");
 				itemTitle.SetTextSize (textFormat,Configuration.getHeight(50));
 
 				LinearLayout linearTitle = new LinearLayout (context);
@@ -157,30 +157,35 @@ namespace MLearning.Droid
 				ImageView iconlike = new ImageView (context);
 				iconlike.SetImageBitmap(likeBitmap);
 
+
 				LinearLayout linearLike = new LinearLayout (context);
-				linearLike.LayoutParameters = new LinearLayout.LayoutParams (-2, -2);
+				linearLike.LayoutParameters = new LinearLayout.LayoutParams (-1, -2);
 				linearLike.Orientation = Orientation.Vertical;
-				linearLike.SetGravity (GravityFlags.Center);
+				linearLike.SetGravity (GravityFlags.CenterHorizontal);
 
 				TextView txtnumLike = new TextView (context);
 				txtnumLike.Text = numLikes[i];
+				txtnumLike.Gravity = GravityFlags.CenterHorizontal;
 				txtnumLike.SetTextColor (Color.ParseColor ("#ffffff"));
+
 
 				linearLike.AddView (iconlike);
 				linearLike.AddView (txtnumLike);
 
 
 				LinearLayout linearType = new LinearLayout (context);
-				linearType.LayoutParameters = new LinearLayout.LayoutParams (-2, -2);
+				linearType.LayoutParameters = new LinearLayout.LayoutParams (-1, -2);
 				linearType.Orientation = Orientation.Vertical;
-				linearType.SetGravity (GravityFlags.Center);
+				linearType.SetGravity (GravityFlags.CenterHorizontal);
 
 				TextView txtnumType = new TextView (context);
 				txtnumType.Text = numTypes[i];
+				txtnumType.Gravity = GravityFlags.CenterHorizontal;
 				txtnumType.SetTextColor (Color.ParseColor ("#ffffff"));
 
 				TextView txtType = new TextView (context);
 				txtType.Text = type[i];
+				txtType.Gravity = GravityFlags.CenterHorizontal;
 				txtType.SetTextColor (Color.ParseColor ("#ffffff"));
 
 				int space = Configuration.getHeight (20);
@@ -188,23 +193,23 @@ namespace MLearning.Droid
 				linearLike.SetPadding (0, 0, 0, space);
 				linearType.SetPadding (space, 0, 0, 0);
 
-				linearLike.AddView (txtnumType);
-				linearLike.AddView (txtType);
 
-				//linearType.AddView (txtnumType);
-				//linearType.AddView (txtType);
+				linearType.AddView (txtnumType);
+				linearType.AddView (txtType);
+
+
 
 
 
 
 
 				LinearLayout linearExtraInfo = new LinearLayout (context);
-				linearExtraInfo.LayoutParameters = new LinearLayout.LayoutParams (-2, -2);
+				linearExtraInfo.LayoutParameters = new LinearLayout.LayoutParams (Configuration.getWidth(100), -2);
 				linearExtraInfo.Orientation = Orientation.Vertical;
-				linearExtraInfo.SetGravity (GravityFlags.Center);
+				linearExtraInfo.SetGravity (GravityFlags.CenterHorizontal);
 
 				linearExtraInfo.AddView (linearLike);
-				//linearExtraInfo.AddView (linearType);
+				linearExtraInfo.AddView (linearType);
 
 				item.AddView (linearTitle);
 				item.AddView (linearExtraInfo);

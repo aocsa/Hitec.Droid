@@ -832,7 +832,7 @@ namespace MLearning.Droid.Views
 			TaskItem salir = new TaskItem ();
 
 			guiaServicios.Name = "Guia de servicios";
-			guiaSilvestre.Name = "Guia de vida ilvestre";
+			guiaSilvestre.Name = "Guia de vida silvestre";
 			caminoCifras.Name = "Camino inca en cifras";
 			salir.Name = "Salir";
 

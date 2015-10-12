@@ -481,11 +481,14 @@ namespace MLearning.Droid
 			_imItems_S4[0].SetImageBitmap(Bitmap.CreateScaledBitmap (getBitmapFromAsset(botton_icon_path[0]), Configuration.getWidth (60), Configuration.getWidth (54), true));
 			_mainLayout.AddView (_imItems_S4[0]);
 			_imItems_S4[0].SetX (Configuration.getWidth(58));_imItems_S4[0].SetY (Configuration.getHeight(1069));
+			_imItems_S4 [0].Visibility = Android.Views.ViewStates.Invisible;
 
 			_imItems_S4.Add (new ImageView (context));
 			_imItems_S4[1].SetImageBitmap(Bitmap.CreateScaledBitmap (getBitmapFromAsset(botton_icon_path[1]), Configuration.getWidth (78), Configuration.getWidth (55), true));
 			_mainLayout.AddView (_imItems_S4[1]);
 			_imItems_S4[1].SetX (Configuration.getWidth(169));_imItems_S4[1].SetY (Configuration.getHeight(1069));
+			_imItems_S4 [1].Visibility = Android.Views.ViewStates.Invisible;
+
 
 
 
@@ -493,6 +496,7 @@ namespace MLearning.Droid
 			_imItems_S4[2].SetImageBitmap(Bitmap.CreateScaledBitmap (getBitmapFromAsset(botton_icon_path[2]), Configuration.getWidth (60), Configuration.getWidth (60), true));
 			_mainLayout.AddView (_imItems_S4 [2]);
 			_imItems_S4[2].SetX (Configuration.getWidth(297));_imItems_S4[2].SetY (Configuration.getHeight(1069));
+			_imItems_S4 [2].Visibility = Android.Views.ViewStates.Invisible;
 
 
 
@@ -500,12 +504,14 @@ namespace MLearning.Droid
 			_imItems_S4[3].SetImageBitmap(Bitmap.CreateScaledBitmap (getBitmapFromAsset(botton_icon_path[3]), Configuration.getWidth (30), Configuration.getWidth (51), true));
 			_mainLayout.AddView (_imItems_S4[3]);
 			_imItems_S4[3].SetX (Configuration.getWidth(421));_imItems_S4[3].SetY (Configuration.getHeight(1069));
+			_imItems_S4 [3].Visibility = Android.Views.ViewStates.Invisible;
 
 
 			_imItems_S4.Add (new ImageView (context));
 			_imItems_S4[4].SetImageBitmap(Bitmap.CreateScaledBitmap (getBitmapFromAsset(botton_icon_path[4]), Configuration.getWidth (41), Configuration.getWidth (50), true));
 			_mainLayout.AddView (_imItems_S4 [4]);
 			_imItems_S4[4].SetX (Configuration.getWidth(540));_imItems_S4[4].SetY (Configuration.getHeight(1069));
+			_imItems_S4 [4].Visibility = Android.Views.ViewStates.Invisible;
 
 			//----------------------------------------------------------
 
@@ -522,7 +528,7 @@ namespace MLearning.Droid
 			dr = null;
 		
 			_workspace = new LinearLayout (context);
-			_workspace.LayoutParameters = new LinearLayout.LayoutParams (-1, Configuration.getHeight (1045));
+			_workspace.LayoutParameters = new LinearLayout.LayoutParams (-1, -1);
 			//_workspace.SetY (Configuration.getHeight (110));
 
 			_mainLayout.AddView (_workspace);

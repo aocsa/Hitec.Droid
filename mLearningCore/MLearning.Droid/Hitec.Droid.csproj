@@ -481,6 +481,7 @@
     <AndroidAsset Include="Assets\images\fondoguias.png" />
     <AndroidAsset Include="Assets\images\fondocaminoinca.png" />
     <AndroidAsset Include="Assets\icons\headerapp.png" />
+    <AndroidAsset Include="Assets\fonts\ArcherMediumPro.otf" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MLearning.Core\MLearning.Core.csproj">
