@@ -26,6 +26,8 @@ namespace MLearning.Droid
 
 		List<LinearLayout> _listLinearItem = new List<LinearLayout>();
 
+		public List<Drawable> _coverImages = new List<Drawable> ();
+
 		int widthInDp;
 		int heightInDp;
 
@@ -140,6 +142,7 @@ namespace MLearning.Droid
 
 				Drawable cover = new BitmapDrawable (getBitmapFromAsset(coverImagePath[i]));
 				item.SetBackgroundDrawable (cover);
+				_coverImages.Add (cover);
 
 				TextView itemTitle = new TextView (context);
 				itemTitle.Text = title [i];

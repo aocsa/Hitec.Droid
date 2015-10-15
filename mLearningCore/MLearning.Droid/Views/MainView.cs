@@ -794,11 +794,50 @@ namespace MLearning.Droid.Views
 			_tasksTop.Add (rutas);
 
 			_listTasksTop.Adapter = new TaskAdapter (this, _tasksTop);
+			_listTasksTop.ItemClick += _listTasksItemTop_Click;
 
 
 
 
 		}
+
+		void _listTasksItemTop_Click (object sender, AdapterView.ItemClickEventArgs e)
+		{
+			if (e.Position == 0)//home
+			{
+				showHome ();
+			}
+			else if(e.Position == 1)//fotos
+			{
+				
+			}
+			else if(e.Position == 2)//rutas
+			{
+				showRutas ();
+			}
+
+		}
+
+		void _listTaskItemBotton_Click (object sender, AdapterView.ItemClickEventArgs e)
+		{
+			if (e.Position == 0)//servicios
+			{
+
+			}
+			else if(e.Position == 1)//silvestre
+			{
+
+			}
+			else if(e.Position == 2)//otros
+			{
+				showRutas ();
+			}
+			else if(e.Position == 3)//otros
+			{
+				LogOut();
+			}
+		}
+
 		public void initRutas()
 		{
 
@@ -847,8 +886,35 @@ namespace MLearning.Droid.Views
 			_tasksBotton.Add (salir);
 
 			_listTasksBotton.Adapter = new TaskAdapter (this, _tasksBotton);
+			_listTasksBotton.ItemClick += _listTaskItemBotton_Click;
+
 
 		}
+
+
+
+		public void LogOut()
+		{
+			vm.LogoutCommand.Execute(null);
+		}
+
+		public void showHome()
+		{
+			lo.getWorkSpaceLayout.AddView (frontView);
+			lo.OpenUnits.Visibility = ViewStates.Visible;
+			lo.OpenComments.Visibility = ViewStates.Visible;
+			lo.OpenTasks.Visibility = ViewStates.Visible;
+		}
+
+		public void showRutas()
+		{
+			lo.getWorkSpaceLayout.RemoveAllViews ();
+			vm.SelectCircleCommand.Execute(vm.CirclesList[0]);
+		}
+
+
+
+
 		public void initLinearInfo()
 		{
 			linearinfo1 = new LinearLayout (this);

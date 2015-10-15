@@ -1384,17 +1384,14 @@ namespace MLearning.Droid
 			// aapt resource value: 0x7f020043
 			public const int logo_icon = 2130837571;
 			
-			// aapt resource value: 0x7f020044
-			public const int monoandroidsplash = 2130837572;
+			// aapt resource value: 0x7f020046
+			public const int notification_template_icon_bg = 2130837574;
 			
-			// aapt resource value: 0x7f020047
-			public const int notification_template_icon_bg = 2130837575;
+			// aapt resource value: 0x7f020044
+			public const int progressBackground = 2130837572;
 			
 			// aapt resource value: 0x7f020045
-			public const int progressBackground = 2130837573;
-			
-			// aapt resource value: 0x7f020046
-			public const int splash = 2130837574;
+			public const int splash = 2130837573;
 			
 			static Drawable()
 			{
@@ -2580,9 +2577,6 @@ namespace MLearning.Droid
 			
 			// aapt resource value: 0x7f070070
 			public const int Base_Widget_AppCompat_Toolbar_Button_Navigation = 2131165296;
-			
-			// aapt resource value: 0x7f070127
-			public const int Mono_Android_Theme_Splash = 2131165479;
 			
 			// aapt resource value: 0x7f070126
 			public const int MyDrawerArrowStyle = 2131165478;

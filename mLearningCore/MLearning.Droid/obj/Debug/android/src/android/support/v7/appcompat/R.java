@@ -1611,10 +1611,9 @@ containing a value of this type.
         public static int hamburger=0x7f020041;
         public static int icon=0x7f020042;
         public static int logo_icon=0x7f020043;
-        public static int monoandroidsplash=0x7f020044;
-        public static int notification_template_icon_bg=0x7f020047;
-        public static int progressbackground=0x7f020045;
-        public static int splash=0x7f020046;
+        public static int notification_template_icon_bg=0x7f020046;
+        public static int progressbackground=0x7f020044;
+        public static int splash=0x7f020045;
     }
     public static final class id {
         public static int MvxBindingTagUnique=0x7f0b000a;
@@ -1996,7 +1995,6 @@ containing a value of this type.
         public static int Base_Widget_AppCompat_TextView_SpinnerItem=0x7f07006f;
         public static int Base_Widget_AppCompat_Toolbar=0x7f0700a2;
         public static int Base_Widget_AppCompat_Toolbar_Button_Navigation=0x7f070070;
-        public static int Mono_Android_Theme_Splash=0x7f070127;
         public static int MyDrawerArrowStyle=0x7f070126;
         public static int MyTheme=0x7f070125;
         public static int Platform_AppCompat=0x7f070010;

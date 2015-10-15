@@ -40,6 +40,12 @@ namespace MLearning.Droid
 
 		List<ImageLOView> _ListLOImages_S2;
 
+		public void setFooterBackground(Drawable background)
+		{
+			linearGradiente.SetBackgroundDrawable (background);
+		}
+
+
 		private CommentDataRow[] _listItems;
 		public CommentDataRow[] ListItems{
 			set{_listItems = value;
