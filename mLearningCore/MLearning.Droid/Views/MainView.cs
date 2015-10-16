@@ -124,6 +124,10 @@ namespace MLearning.Droid.Views
 			vm = this.ViewModel as MainViewModel;
 			lo = new WallView(this);
 			frontView = new frontView (this);
+			frontView._listLinearItem [0].Click += delegate {
+				showRutas ();
+			};
+
 
 			LinearLayout linearMainLayout = FindViewById<LinearLayout>(Resource.Id.left_drawer);
 
@@ -247,8 +251,8 @@ namespace MLearning.Droid.Views
 
 
 			initListCursos ();
-			iniPeoples ();
-			initListTasks ();
+			//iniPeoples ();
+			//initListTasks ();
 			initListTaskTop ();
 			initListTaskBotton ();
 
@@ -710,7 +714,9 @@ namespace MLearning.Droid.Views
 					imgLO.Author = vm.LearningOjectsList [i].lo.name + " " + vm.LearningOjectsList [i].lo.lastname;
 					//Bitmap bm = BitmapFactory.DecodeByteArray (vm.LearningOjectsList [i].cover_bytes, 0, vm.LearningOjectsList [i].cover_bytes.Length);
 					//imgLO.ImageBitmap=Configuration.GetImageBitmapFromUrl(vm.LearningOjectsList[i].lo.url_cover);
-					imgLO.Url = vm.LearningOjectsList [i].lo.url_background;
+
+					imgLO.Url = vm.LearningOjectsList [i].lo.url_cover;
+					imgLO.sBackgoundUrl = vm.LearningOjectsList [i].lo.url_background;
 					imgLO.ImagenUsuario = getBitmapFromAsset ("icons/imgautor.png");
 					imgLO.Chapter = "Flora y Fauna";
 					imgLO.index = i;
@@ -809,7 +815,7 @@ namespace MLearning.Droid.Views
 			}
 			else if(e.Position == 1)//fotos
 			{
-				
+				showHome ();
 			}
 			else if(e.Position == 2)//rutas
 			{
@@ -822,15 +828,15 @@ namespace MLearning.Droid.Views
 		{
 			if (e.Position == 0)//servicios
 			{
-
+				//showServicios ();
 			}
 			else if(e.Position == 1)//silvestre
 			{
-
+				//showGuiaSilvestre ();
 			}
 			else if(e.Position == 2)//otros
 			{
-				showRutas ();
+				//showCifras ();
 			}
 			else if(e.Position == 3)//otros
 			{
@@ -900,17 +906,25 @@ namespace MLearning.Droid.Views
 
 		public void showHome()
 		{
+			lo.getWorkSpaceLayout.RemoveAllViews ();
 			lo.getWorkSpaceLayout.AddView (frontView);
-			lo.OpenUnits.Visibility = ViewStates.Visible;
-			lo.OpenComments.Visibility = ViewStates.Visible;
-			lo.OpenTasks.Visibility = ViewStates.Visible;
+			mDrawerLayout.CloseDrawer (mLeftDrawer);
 		}
 
-		public void showRutas()
+		public void showCurso(int index)
 		{
 			lo.getWorkSpaceLayout.RemoveAllViews ();
-			vm.SelectCircleCommand.Execute(vm.CirclesList[0]);
+			lo.OpenUnits.Visibility = ViewStates.Visible;
+			lo.OpenLO.Visibility = ViewStates.Visible;
+			lo.OpenTasks.Visibility = ViewStates.Visible;
+			vm.SelectCircleCommand.Execute(vm.CirclesList[index]);
+			mDrawerLayout.CloseDrawer (mLeftDrawer);
 		}
+
+		public void showRutas()	{showCurso (0);lo.setFooterBackground (frontView._coverImages [0]);}
+		public void showServicios()	{showCurso (1);lo.setFooterBackground (frontView._coverImages [1]);}
+		public void showGuiaSilvestre()	{showCurso (2);lo.setFooterBackground (frontView._coverImages [2]);}
+		public void showCifras()	{showCurso (2);lo.setFooterBackground (frontView._coverImages [0]);}
 
 
 
@@ -1155,7 +1169,7 @@ namespace MLearning.Droid.Views
 		void Lo_ImagenLO_Click (object sender, EventArgs e)
 		{
 			
-			_dialogDownload.Show ();
+			//_dialogDownload.Show ();
 			Configuration.IndiceActual = PositionLO;
 			vm.OpenLOCommand.Execute(vm.LearningOjectsList[PositionLO]);
 			//vm.SelectLOCommand.Execute
@@ -1183,22 +1197,6 @@ namespace MLearning.Droid.Views
 				mDrawerToggle.OnOptionsItemSelected(item);
 				return true;
 
-
-			case Resource.Id.action_chat:
-				if (mDrawerLayout.IsDrawerOpen(mRightDrawer))
-				{
-					//Right Drawer is already open, close it
-					mDrawerLayout.CloseDrawer(mRightDrawer);
-				}
-
-				else
-				{
-					//Right Drawer is closed, open it and just in case close left drawer
-					mDrawerLayout.OpenDrawer (mRightDrawer);
-					mDrawerLayout.CloseDrawer (mLeftDrawer);
-				}
-
-				return true;
 
 			default:
 				return base.OnOptionsItemSelected (item);

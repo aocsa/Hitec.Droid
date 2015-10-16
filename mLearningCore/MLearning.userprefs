@@ -1,10 +1,10 @@
 ﻿<Properties StartupItem="MLearning.Droid/Hitec.Droid.csproj">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.Xamarin_Android_API_15" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.4C3AWN154L014669" />
   <MonoDevelop.Ide.Workbench ActiveDocument="MLearning.Droid/Views/WallView.cs">
     <Files>
-      <File FileName="MLearning.Droid/Views/WallView.cs" Line="41" Column="38" />
-      <File FileName="MLearning.Droid/Views/MainView.cs" Line="901" Column="3" />
-      <File FileName="MLearning.Droid/Views/frontView.cs" Line="29" Column="10" />
+      <File FileName="MLearning.Droid/Views/WallView.cs" Line="39" Column="30" />
+      <File FileName="MLearning.Droid/Views/MainView.cs" Line="1" Column="1" />
+      <File FileName="MLearning.Droid/Views/frontView.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

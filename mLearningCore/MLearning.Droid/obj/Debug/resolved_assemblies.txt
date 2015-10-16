@@ -1,4 +1,4 @@
-/Users/mac/Projects/Hitec.Droid/mLearningCore/MLearning.Droid/obj/Debug/assemblies/Hitec.dll
+/Users/mac/Projects/Hitec.Droid/mLearningCore/MLearning.Droid/obj/Debug/assemblies/CaminoInca.dll
 /Users/mac/Projects/Hitec.Droid/mLearningCore/MLearning.Droid/obj/Debug/assemblies/ByteSmith.WindowsAzure.Messaging.Android.dll
 /Users/mac/Projects/Hitec.Droid/mLearningCore/MLearning.Droid/obj/Debug/assemblies/Cirrious.MvvmCross.Community.Plugins.Sqlite.Droid.dll
 /Users/mac/Projects/Hitec.Droid/mLearningCore/MLearning.Droid/obj/Debug/assemblies/Cirrious.MvvmCross.Plugins.File.Droid.dll

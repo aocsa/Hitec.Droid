@@ -1625,7 +1625,6 @@ containing a value of this type.
         public static final int action_bar_spinner=0x7f0b0001;
         public static final int action_bar_subtitle=0x7f0b0026;
         public static final int action_bar_title=0x7f0b0025;
-        public static final int action_chat=0x7f0b0089;
         public static final int action_context_bar=0x7f0b0043;
         public static final int action_divider=0x7f0b006c;
         public static final int action_menu_divider=0x7f0b0002;

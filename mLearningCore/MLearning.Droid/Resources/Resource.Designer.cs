@@ -1433,9 +1433,6 @@ namespace MLearning.Droid
 			// aapt resource value: 0x7f0b0025
 			public const int action_bar_title = 2131427365;
 			
-			// aapt resource value: 0x7f0b0089
-			public const int action_chat = 2131427465;
-			
 			// aapt resource value: 0x7f0b0043
 			public const int action_context_bar = 2131427395;
 			

@@ -1,7 +1,7 @@
 /Users/mac/Projects/Hitec.Droid/mLearningCore/MLearning.Droid/obj/Debug/MonoAndroid,Version=v4.3.AssemblyAttribute.cs
-/Users/mac/Projects/Hitec.Droid/mLearningCore/MLearning.Droid/bin/Debug/Hitec.dll.config
-/Users/mac/Projects/Hitec.Droid/mLearningCore/MLearning.Droid/bin/Debug/Hitec.dll.mdb
-/Users/mac/Projects/Hitec.Droid/mLearningCore/MLearning.Droid/bin/Debug/Hitec.dll
+/Users/mac/Projects/Hitec.Droid/mLearningCore/MLearning.Droid/bin/Debug/CaminoInca.dll.config
+/Users/mac/Projects/Hitec.Droid/mLearningCore/MLearning.Droid/bin/Debug/CaminoInca.dll.mdb
+/Users/mac/Projects/Hitec.Droid/mLearningCore/MLearning.Droid/bin/Debug/CaminoInca.dll
 /Users/mac/Projects/Hitec.Droid/mLearningCore/MLearning.Droid/bin/Debug/hitec.Droid.apk
 /Users/mac/Projects/Hitec.Droid/mLearningCore/MLearning.Droid/obj/Debug/android/bin/hitec.Droid.apk
 /Users/mac/Projects/Hitec.Droid/mLearningCore/MLearning.Droid/obj/Debug/res/layout/splashscreen.xml
@@ -14,7 +14,6 @@
 /Users/mac/Projects/Hitec.Droid/mLearningCore/MLearning.Droid/obj/Debug/res/layout/item_publisher.xml
 /Users/mac/Projects/Hitec.Droid/mLearningCore/MLearning.Droid/obj/Debug/res/layout/item_user.xml
 /Users/mac/Projects/Hitec.Droid/mLearningCore/MLearning.Droid/obj/Debug/res/layout/loginview.xml
-/Users/mac/Projects/Hitec.Droid/mLearningCore/MLearning.Droid/obj/Debug/res/layout/mainview.xml
 /Users/mac/Projects/Hitec.Droid/mLearningCore/MLearning.Droid/obj/Debug/res/layout/managepublishersview.xml
 /Users/mac/Projects/Hitec.Droid/mLearningCore/MLearning.Droid/obj/Debug/res/layout/registrationview.xml
 /Users/mac/Projects/Hitec.Droid/mLearningCore/MLearning.Droid/obj/Debug/res/layout/managecirclesview.xml
@@ -44,6 +43,7 @@
 /Users/mac/Projects/Hitec.Droid/mLearningCore/MLearning.Droid/obj/Debug/res/drawable/border.xml
 /Users/mac/Projects/Hitec.Droid/mLearningCore/MLearning.Droid/obj/Debug/res/drawable/logo_icon.png
 /Users/mac/Projects/Hitec.Droid/mLearningCore/MLearning.Droid/obj/Debug/res/drawable/gradiente.xml
+/Users/mac/Projects/Hitec.Droid/mLearningCore/MLearning.Droid/obj/Debug/res/layout/mainview.xml
 /Users/mac/Projects/Hitec.Droid/mLearningCore/MLearning.Droid/obj/Debug/res/values/strings.xml
 /Users/mac/Projects/Hitec.Droid/mLearningCore/MLearning.Droid/obj/Debug/res/drawable/icon.png
 /Users/mac/Projects/Hitec.Droid/mLearningCore/MLearning.Droid/obj/Debug/res/values/splashstyle.xml
@@ -52,8 +52,8 @@
 /Users/mac/Projects/Hitec.Droid/mLearningCore/MLearning.Droid/obj/Debug/R.cs.flag
 /Users/mac/Projects/Hitec.Droid/mLearningCore/MLearning.Droid/bin/Debug/hitec.Droid-Signed.apk
 /Users/mac/Projects/Hitec.Droid/mLearningCore/MLearning.Droid/obj/Debug/uploadflags.txt
-/Users/mac/Projects/Hitec.Droid/mLearningCore/MLearning.Droid/obj/Debug/Hitec.dll
-/Users/mac/Projects/Hitec.Droid/mLearningCore/MLearning.Droid/obj/Debug/Hitec.dll.mdb
+/Users/mac/Projects/Hitec.Droid/mLearningCore/MLearning.Droid/obj/Debug/CaminoInca.dll
+/Users/mac/Projects/Hitec.Droid/mLearningCore/MLearning.Droid/obj/Debug/CaminoInca.dll.mdb
 /Users/mac/Projects/Hitec.Droid/mLearningCore/MLearning.Droid/bin/Debug/ByteSmith.WindowsAzure.Messaging.Android.dll
 /Users/mac/Projects/Hitec.Droid/mLearningCore/MLearning.Droid/bin/Debug/Cirrious.MvvmCross.Community.Plugins.Sqlite.Droid.dll
 /Users/mac/Projects/Hitec.Droid/mLearningCore/MLearning.Droid/bin/Debug/Cirrious.MvvmCross.Plugins.File.Droid.dll

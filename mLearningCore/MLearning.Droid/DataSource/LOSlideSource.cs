@@ -165,7 +165,7 @@ namespace DataSource
 
 
 		public RelativeLayout getViewSlide(){
-			
+
 			if (_type == 1) {
 				Template1 plantilla = new Template1 (context);
 				plantilla.Title = _title;
@@ -188,11 +188,11 @@ namespace DataSource
 			if (_type == 3) {
 				Template3 plantilla = new Template3 (context);
 				plantilla.Title = _title;
-				/*string [] lista = new string[_itemize.Count];
+				string [] lista = new string[_itemize.Count];
 				for (int i = 0; i < _itemize.Count; i++) {
 					lista[i]=_itemize[i].Text;
-				}*/
-				string[] lista = {"sdfsdf sdfs fsdf sf sdfs"," dfsdfsdf sdfsd fsd ds"," fsdf sfsdf sdfsd"," fdsfsdf sdfsdf sdfsf"};
+				}
+				//string[] lista = {"sdfsdf sdfs fsdf sf sdfs"," dfsdfsdf sdfsd fsd ds"," fsdf sfsdf sdfsd"," fdsfsdf sdfsdf sdfsf"};
 				//Console.WriteLine ("CREA PLANTILLAAAAAAAAA  333333");
 				plantilla.ListItems = lista;
 				return plantilla;
@@ -216,15 +216,15 @@ namespace DataSource
 				CustomerImageView plantilla = new CustomerImageView (context);
 				plantilla.Title = _title;
 				plantilla.Description = _paragraph;
-				//plantilla.Imagen = _imageurl;//BitmapFactory.DecodeByteArray (_imagebytes, 0, _imagebytes.Length);
+				plantilla.Imagen = _imageurl;//BitmapFactory.DecodeByteArray (_imagebytes, 0, _imagebytes.Length);
 				return plantilla;
 			}
 
 			if (_type == 7) {
 				CustomerVideoView plantilla = new CustomerVideoView (context);
 				plantilla.Title = _title;
-				//plantilla.Imagen = _imageurl;
-				//plantilla.ImagenPlay = "images/playa.png";
+				plantilla.Imagen = _imageurl;
+				plantilla.ImagenPlay = "images/playa.png";
 				return plantilla;
 			}
 			return null;

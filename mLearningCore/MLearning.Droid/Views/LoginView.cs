@@ -355,6 +355,7 @@ namespace MLearning.Droid.Views
 			etxtUser.Typeface =  Typeface.CreateFromAsset(this.Assets, "fonts/HelveticaNeue.ttf");
 
 			etxtPassword.Hint = "  Contraseña";
+			etxtPassword.InputType = Android.Text.InputTypes.TextVariationPassword | Android.Text.InputTypes.ClassText;
 			etxtPassword.Typeface =  Typeface.CreateFromAsset(this.Assets, "fonts/HelveticaNeue.ttf");
 			etxtPassword.InputType = InputTypes.TextVariationVisiblePassword;
 

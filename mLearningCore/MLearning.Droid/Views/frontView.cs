@@ -24,7 +24,7 @@ namespace MLearning.Droid
 		LinearLayout _linearContentLayout;
 		VerticalScrollView _scrollItems;
 
-		List<LinearLayout> _listLinearItem = new List<LinearLayout>();
+		public List<LinearLayout> _listLinearItem = new List<LinearLayout>();
 
 		public List<Drawable> _coverImages = new List<Drawable> ();
 

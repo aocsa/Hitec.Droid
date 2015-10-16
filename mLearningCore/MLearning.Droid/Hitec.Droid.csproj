@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>MLearning.Droid</RootNamespace>
-    <AssemblyName>Hitec</AssemblyName>
+    <AssemblyName>CaminoInca</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <AndroidApplication>true</AndroidApplication>
     <AndroidResgenFile>Resources\Resource.Designer.cs</AndroidResgenFile>
@@ -245,9 +245,6 @@
     <AndroidResource Include="Resources\layout\LoginView.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\MainView.axml">
-      <SubType>Designer</SubType>
-    </AndroidResource>
     <AndroidResource Include="Resources\layout\ManagePublishersView.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
@@ -299,6 +296,7 @@
     <AndroidResource Include="Resources\drawable\border.xml" />
     <AndroidResource Include="Resources\drawable\logo_icon.png" />
     <AndroidResource Include="Resources\drawable\gradiente.xml" />
+    <AndroidResource Include="Resources\layout\MainView.axml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\Strings.xml" />
@@ -482,6 +480,8 @@
     <AndroidAsset Include="Assets\images\fondocaminoinca.png" />
     <AndroidAsset Include="Assets\icons\headerapp.png" />
     <AndroidAsset Include="Assets\fonts\ArcherMediumPro.otf" />
+    <AndroidAsset Include="Assets\icons\btnhome.png" />
+    <AndroidAsset Include="Assets\icons\btnmap.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MLearning.Core\MLearning.Core.csproj">

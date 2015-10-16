@@ -158,7 +158,7 @@ namespace MLearning.Droid
 
 			test.LayoutParameters = new LinearLayout.LayoutParams (-1, -1);
 
-			Picasso.With (context).Load (imView.Url).Resize(Configuration.getWidth(640),Configuration.getWidth(640)).CenterCrop().Into (test);
+			Picasso.With (context).Load (imView.sBackgoundUrl).Resize(Configuration.getWidth(640),Configuration.getWidth(640)).CenterCrop().Into (test);
 			_fondo2.SetVerticalGravity (Android.Views.GravityFlags.Start);
 			_fondo2.RemoveAllViews();
 
@@ -225,26 +225,12 @@ namespace MLearning.Droid
 		public void ini(){
 
 
-			//creating comment List
-
-
-
-			commentLayout = new LinearLayout(context);
-			commentLayout.LayoutParameters = new LinearLayout.LayoutParams (-1, Configuration.getHeight (934));
-			commentList = new ListView (context);
-
-
-			//commentList.AddView (commentList);
-
-
-
-			//end comment List
 
 			_mainLayout = new RelativeLayout (context);
 
 
 			linearGradiente = new LinearLayout (context);
-			linearGradiente.LayoutParameters = new LinearLayout.LayoutParams (-1, Configuration.getHeight (541));
+			linearGradiente.LayoutParameters = new LinearLayout.LayoutParams (-1, Configuration.getHeight (310));
 			linearGradiente.SetBackgroundResource (Resource.Drawable.gradiente);
 
 
@@ -278,7 +264,7 @@ namespace MLearning.Droid
 
 			//_mainLayout.AddView (_txtTitle_S1);
 			//_mainLayout.AddView (_txtAuthor_S1);
-			_mainLayout.AddView (_imAuthor_S1);
+			//_mainLayout.AddView (_imAuthor_S1);
 
 			//_mainLayout.AddView (_txtChapter_S1);
 
@@ -297,26 +283,26 @@ namespace MLearning.Droid
 			_linearTitle.AddView (_txtTitle_S1);
 			_linearTitle.SetY (Configuration.getHeight (60));
 
-			linearGradiente.SetX (0); linearGradiente.SetY (Configuration.getHeight(502));
+			linearGradiente.SetX (0); linearGradiente.SetY (Configuration.getHeight(860));
 			_mainLayout.AddView (linearGradiente);
 			_mainLayout.AddView (_linearTitle);
 
 			//_txtTitle_S1.SetX (Configuration.getWidth (245));_txtTitle_S1.SetY (Configuration.getHeight (60));
 
-			Bitmap newbm = Configuration.getRoundedShape(Bitmap.CreateScaledBitmap( getBitmapFromAsset("icons/imgautor.png"), Configuration.getWidth(170), Configuration.getWidth(170), true),Configuration.getWidth(170),Configuration.getHeight(170));
+			//Bitmap newbm = Configuration.getRoundedShape(Bitmap.CreateScaledBitmap( getBitmapFromAsset("icons/imgautor.png"), Configuration.getWidth(170), Configuration.getWidth(170), true),Configuration.getWidth(170),Configuration.getHeight(170));
 		
-			_imAuthor_S1.SetImageBitmap (newbm);
+			//_imAuthor_S1.SetImageBitmap (newbm);
 		//	newbm.Recycle ();
-			newbm = null;
+			//newbm = null;
 
-			_imAuthor_S1.SetX (Configuration.getWidth (240));_imAuthor_S1.SetY (Configuration.getHeight (189));
+			//_imAuthor_S1.SetX (Configuration.getWidth (240));_imAuthor_S1.SetY (Configuration.getHeight (189));
 
 			LinearLayout _linearAuthor = new LinearLayout (context);
 			_linearAuthor.LayoutParameters = new LinearLayout.LayoutParams (-1, -2);
 			_linearAuthor.SetGravity (Android.Views.GravityFlags.Center);
 			_linearAuthor.AddView (_txtAuthor_S1);
 			_linearAuthor.SetY (Configuration.getHeight (378));
-			_mainLayout.AddView (_linearAuthor);
+			//_mainLayout.AddView (_linearAuthor);
 
 			//_txtAuthor_S1.SetX (Configuration.getWidth (228));_txtAuthor_S1.SetY (Configuration.getHeight (378));
 
@@ -376,14 +362,14 @@ namespace MLearning.Droid
 				
 				_imItem_S1.Add(new ImageView(context));
 				_imItem_S1[i].SetImageBitmap(Bitmap.CreateScaledBitmap (getBitmapFromAsset(item_path[i]), Configuration.getWidth (30), Configuration.getWidth (30), true));
-				_mainLayout.AddView (_imItem_S1 [i]);
+				//_mainLayout.AddView (_imItem_S1 [i]);
 				_imItem_S1 [i].SetX (inixItemIM+(i*crecIM));_imItem_S1 [i].SetY (Configuration.getHeight(602));
 
 
 				if (i != item_path.Count - 1) {
 					ImageView linea = new ImageView (context);
 					linea.SetImageBitmap (Bitmap.CreateScaledBitmap (getBitmapFromAsset ("icons/lineatareas.png"), 1, Configuration.getHeight (68), true));
-					_mainLayout.AddView (linea);
+					//_mainLayout.AddView (linea);
 					linea.SetX (inixLinea + (i * crecIM));
 					linea.SetY (Configuration.getHeight (605));
 					linea = null;
@@ -396,7 +382,7 @@ namespace MLearning.Droid
 				_txtItem_S1 [i].SetTextColor (Color.ParseColor ("#2E9AFE"));
 				_txtItem_S1[i].Typeface =  Typeface.CreateFromAsset(context.Assets, "fonts/HelveticaNeue.ttf");
 				_txtItem_S1[i].SetTextSize (textFormat,Configuration.getHeight(30));
-				_mainLayout.AddView (_txtItem_S1 [i]);
+				//_mainLayout.AddView (_txtItem_S1 [i]);
 				_txtItem_S1 [i].SetX (inixItemTXT+(i*crecTXT));_txtItem_S1 [i].SetY (Configuration.getHeight(640));
 				_imItem_S1 [i] = null;
 
@@ -477,14 +463,14 @@ namespace MLearning.Droid
 
 
 			List<string> botton_icon_path = new List<string> ();
-			botton_icon_path.Add ("icons/btnunidadesazul.png");
+			botton_icon_path.Add ("icons/btnhome.png");
 			botton_icon_path.Add ("icons/btncomentariosazul.png");
-			botton_icon_path.Add ("icons/btncontenidoazul.png");
+			botton_icon_path.Add ("icons/btncontenido.png");
 			botton_icon_path.Add ("icons/btnchatazul.png");
-			botton_icon_path.Add ("icons/btntareasazul.png");
+			botton_icon_path.Add ("icons/btnmap.png");
 
 			_imItems_S4.Add (new ImageView (context));
-			_imItems_S4[0].SetImageBitmap(Bitmap.CreateScaledBitmap (getBitmapFromAsset(botton_icon_path[0]), Configuration.getWidth (60), Configuration.getWidth (54), true));
+			_imItems_S4[0].SetImageBitmap(Bitmap.CreateScaledBitmap (getBitmapFromAsset(botton_icon_path[0]), Configuration.getWidth (40), Configuration.getWidth (40), true));
 			_mainLayout.AddView (_imItems_S4[0]);
 			_imItems_S4[0].SetX (Configuration.getWidth(58));_imItems_S4[0].SetY (Configuration.getHeight(1069));
 			_imItems_S4 [0].Visibility = Android.Views.ViewStates.Invisible;
@@ -499,9 +485,9 @@ namespace MLearning.Droid
 
 
 			_imItems_S4.Add (new ImageView (context));
-			_imItems_S4[2].SetImageBitmap(Bitmap.CreateScaledBitmap (getBitmapFromAsset(botton_icon_path[2]), Configuration.getWidth (60), Configuration.getWidth (60), true));
+			_imItems_S4[2].SetImageBitmap(Bitmap.CreateScaledBitmap (getBitmapFromAsset(botton_icon_path[2]), Configuration.getWidth (80), Configuration.getWidth (80), true));
 			_mainLayout.AddView (_imItems_S4 [2]);
-			_imItems_S4[2].SetX (Configuration.getWidth(297));_imItems_S4[2].SetY (Configuration.getHeight(1069));
+			_imItems_S4[2].SetX (Configuration.getWidth(297));_imItems_S4[2].SetY (Configuration.getHeight(1050));
 			_imItems_S4 [2].Visibility = Android.Views.ViewStates.Invisible;
 
 
@@ -514,7 +500,7 @@ namespace MLearning.Droid
 
 
 			_imItems_S4.Add (new ImageView (context));
-			_imItems_S4[4].SetImageBitmap(Bitmap.CreateScaledBitmap (getBitmapFromAsset(botton_icon_path[4]), Configuration.getWidth (41), Configuration.getWidth (50), true));
+			_imItems_S4[4].SetImageBitmap(Bitmap.CreateScaledBitmap (getBitmapFromAsset(botton_icon_path[4]), Configuration.getWidth (30), Configuration.getWidth (40), true));
 			_mainLayout.AddView (_imItems_S4 [4]);
 			_imItems_S4[4].SetX (Configuration.getWidth(540));_imItems_S4[4].SetY (Configuration.getHeight(1069));
 			_imItems_S4 [4].Visibility = Android.Views.ViewStates.Invisible;

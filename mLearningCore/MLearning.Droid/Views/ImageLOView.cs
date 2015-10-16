@@ -27,6 +27,7 @@ namespace MLearning.Droid
 		string sChapter;
 
 		string sUrl;
+		public string sBackgoundUrl;
 
 		public int index;
 

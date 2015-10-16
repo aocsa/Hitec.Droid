@@ -46,8 +46,8 @@ namespace Core.ViewModels
             _mLearningService = mLearningService;
 
             
-            Username = "camino";
-            Password = "inca";
+            Username = "aocsa";
+            Password = "1";
 
 
             _maxPixelDimension = 300;

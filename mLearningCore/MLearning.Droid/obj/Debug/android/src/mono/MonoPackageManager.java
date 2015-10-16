@@ -79,7 +79,7 @@ public class MonoPackageManager {
 
 class MonoPackageManager_Resources {
 	public static final String[] Assemblies = new String[]{
-		"Hitec.dll",
+		"CaminoInca.dll",
 		"ByteSmith.WindowsAzure.Messaging.Android.dll",
 		"Cirrious.MvvmCross.Community.Plugins.Sqlite.Droid.dll",
 		"Cirrious.MvvmCross.Plugins.File.Droid.dll",

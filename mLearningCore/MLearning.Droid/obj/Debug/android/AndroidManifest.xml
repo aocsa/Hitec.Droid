@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" android:versionName="1.0" android:installLocation="auto" package="hitec.Droid">
   <uses-sdk android:minSdkVersion="15" android:targetSdkVersion="21" />
-  <application android:theme="@style/MyTheme" android:largeHeap="true" android:debuggable="true" android:hardwareAccelerated="false" android:icon="@drawable/icon" android:label="Hitec" android:name="mono.android.app.Application">
-    <receiver android:permission="com.google.android.c2dm.permission.SEND" android:name="md5a67e286d0fc7d70967a4a367bfa78e7a.MyBroadcastReceiver">
+  <application android:theme="@style/MyTheme" android:largeHeap="true" android:debuggable="true" android:hardwareAccelerated="false" android:icon="@drawable/icon" android:label="Camino Inca" android:name="mono.android.app.Application">
+    <receiver android:permission="com.google.android.c2dm.permission.SEND" android:name="md524accb007a7a9d075e3aefd8a44db6e7.MyBroadcastReceiver">
       <intent-filter>
         <action android:name="com.google.android.c2dm.intent.RECEIVE" />
         <category android:name="hitec.Droid" />
@@ -16,26 +16,26 @@
         <category android:name="hitec.Droid" />
       </intent-filter>
     </receiver>
-    <service android:name="md5a67e286d0fc7d70967a4a367bfa78e7a.GcmService" />
-    <activity android:icon="@drawable/icon" android:label="Hitec" android:noHistory="true" android:screenOrientation="portrait" android:theme="@style/Theme.Splash" android:name="md5745c0a650cc3178052138db39ddf7295.SplashScreen">
+    <service android:name="md524accb007a7a9d075e3aefd8a44db6e7.GcmService" />
+    <activity android:icon="@drawable/icon" android:label="Hitec" android:noHistory="true" android:screenOrientation="portrait" android:theme="@style/Theme.Splash" android:name="md5f410d9818bda040222c310297e0440b4.SplashScreen">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
         <category android:name="android.intent.category.LAUNCHER" />
       </intent-filter>
     </activity>
-    <activity android:label="View for LOViewModel" android:screenOrientation="portrait" android:name="md5b895ed9b3f44921449db3de40bdf2cb2.LOView" />
-    <activity android:label="View for FirstViewModel" android:name="md5b895ed9b3f44921449db3de40bdf2cb2.CreateAccountView" />
-    <activity android:label="View for FirstViewModel" android:name="md5b895ed9b3f44921449db3de40bdf2cb2.CreateInstitutionView" />
-    <activity android:label="View for AuthViewModel" android:name="md5b895ed9b3f44921449db3de40bdf2cb2.AuthView" />
-    <activity android:label="View for FirstViewModel" android:screenOrientation="portrait" android:name="md5b895ed9b3f44921449db3de40bdf2cb2.MainView" />
-    <activity android:label="View for FirstViewModel" android:name="md5b895ed9b3f44921449db3de40bdf2cb2.ManageCirclesView" />
-    <activity android:label="View for HeadMainView" android:name="md5b895ed9b3f44921449db3de40bdf2cb2.HeadMainView" />
-    <activity android:label="View for PublisherMainView" android:name="md5b895ed9b3f44921449db3de40bdf2cb2.PublisherMainView" />
-    <activity android:label="View for FirstViewModel" android:name="md5b895ed9b3f44921449db3de40bdf2cb2.ManagePublishersView" />
-    <activity android:label="View for FirstViewModel" android:name="md5b895ed9b3f44921449db3de40bdf2cb2.RegistrationView" />
-    <activity android:label="View for CameraViewModel" android:name="md5745c0a650cc3178052138db39ddf7295.CameraView" />
-    <activity android:label="View for FirstViewModel" android:name="md5745c0a650cc3178052138db39ddf7295.RegisterView" />
-    <activity android:label="View for FirstViewModel" android:screenOrientation="portrait" android:name="md5b895ed9b3f44921449db3de40bdf2cb2.LoginView" />
+    <activity android:label="View for LOViewModel" android:screenOrientation="portrait" android:name="md508497d9069bda639632a99abaeede3be.LOView" />
+    <activity android:label="View for FirstViewModel" android:name="md508497d9069bda639632a99abaeede3be.CreateAccountView" />
+    <activity android:label="View for FirstViewModel" android:name="md508497d9069bda639632a99abaeede3be.CreateInstitutionView" />
+    <activity android:label="View for AuthViewModel" android:name="md508497d9069bda639632a99abaeede3be.AuthView" />
+    <activity android:label="View for FirstViewModel" android:screenOrientation="portrait" android:name="md508497d9069bda639632a99abaeede3be.MainView" />
+    <activity android:label="View for FirstViewModel" android:name="md508497d9069bda639632a99abaeede3be.ManageCirclesView" />
+    <activity android:label="View for HeadMainView" android:name="md508497d9069bda639632a99abaeede3be.HeadMainView" />
+    <activity android:label="View for PublisherMainView" android:name="md508497d9069bda639632a99abaeede3be.PublisherMainView" />
+    <activity android:label="View for FirstViewModel" android:name="md508497d9069bda639632a99abaeede3be.ManagePublishersView" />
+    <activity android:label="View for FirstViewModel" android:name="md508497d9069bda639632a99abaeede3be.RegistrationView" />
+    <activity android:label="View for CameraViewModel" android:name="md5f410d9818bda040222c310297e0440b4.CameraView" />
+    <activity android:label="View for FirstViewModel" android:name="md5f410d9818bda040222c310297e0440b4.RegisterView" />
+    <activity android:label="View for FirstViewModel" android:screenOrientation="portrait" android:name="md508497d9069bda639632a99abaeede3be.LoginView" />
     <activity android:label="Web Authenticator" android:name="md588920fb9403ed228b036d6919cddd329.FormAuthenticatorActivity" />
     <activity android:label="Web Authenticator" android:name="md588920fb9403ed228b036d6919cddd329.WebAuthenticatorActivity" />
     <provider android:name="mono.MonoRuntimeProvider" android:exported="false" android:initOrder="2147483647" android:authorities="hitec.Droid.mono.MonoRuntimeProvider.__mono_init__" />

@@ -13,6 +13,7 @@ using Android.Views;
 using Android.Widget;
 using Android.Graphics;
 using Android.Graphics.Drawables;
+using Square.Picasso;
 
 namespace MLearning.Droid
 {
@@ -55,6 +56,7 @@ namespace MLearning.Droid
 			txtTitle.SetTextSize (ComplexUnitType.Px, Configuration.getHeight (40));
 			txtDescription.SetTextSize (ComplexUnitType.Px, Configuration.getHeight (30));
 
+
 			background.AddView (txtTitle);
 			background.AddView (txtDescription);
 
@@ -90,10 +92,17 @@ namespace MLearning.Droid
 		public String Imagen{
 			get{ return _imagen;}
 			set{ _imagen = value;
-				Bitmap bm = Configuration.GetImageBitmapFromUrl (_imagen);
-				Drawable dr = new BitmapDrawable (Bitmap.CreateScaledBitmap (bm, Configuration.getWidth (582), Configuration.getHeight (394), true));
+				//Bitmap bm = Configuration.GetImageBitmapFromUrl (_imagen);
+				//Drawable dr = new BitmapDrawable (Bitmap.CreateScaledBitmap (bm, Configuration.getWidth (582), Configuration.getHeight (394), true));
 
-				image.SetBackgroundDrawable (dr);
+				//image.SetBackgroundDrawable (dr);
+				ImageView imBack = new ImageView (context);
+				image.AddView (imBack);
+
+				Picasso.With (context).Load (_imagen).Resize(Configuration.getWidth(582),Configuration.getHeight(394)).Into (imBack);
+
+
+
 			}
 
 
