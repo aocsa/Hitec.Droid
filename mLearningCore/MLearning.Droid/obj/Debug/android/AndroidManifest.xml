@@ -4,7 +4,7 @@
   <application android:theme="@style/MyTheme" android:largeHeap="true" android:debuggable="true" android:hardwareAccelerated="false" android:icon="@drawable/icon" android:label="Camino Inca" android:name="mono.android.app.Application">
     <receiver android:permission="com.google.android.c2dm.permission.SEND" android:name="md524accb007a7a9d075e3aefd8a44db6e7.MyBroadcastReceiver">
       <intent-filter>
-        <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+        <action android:name="com.google.android.gcm.intent.RETRY" />
         <category android:name="hitec.Droid" />
       </intent-filter>
       <intent-filter>
@@ -12,7 +12,7 @@
         <category android:name="hitec.Droid" />
       </intent-filter>
       <intent-filter>
-        <action android:name="com.google.android.gcm.intent.RETRY" />
+        <action android:name="com.google.android.c2dm.intent.RECEIVE" />
         <category android:name="hitec.Droid" />
       </intent-filter>
     </receiver>
@@ -51,8 +51,8 @@
   <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
   <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
   <permission android:name="hitec.Droid.permission.C2D_MESSAGE" />
-  <uses-permission android:name="hitec.Droid.permission.C2D_MESSAGE" />
-  <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
   <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+  <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
   <uses-permission android:name="android.permission.WAKE_LOCK" />
+  <uses-permission android:name="hitec.Droid.permission.C2D_MESSAGE" />
 </manifest>

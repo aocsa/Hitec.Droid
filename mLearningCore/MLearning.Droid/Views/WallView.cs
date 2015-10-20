@@ -8,11 +8,20 @@ using Android.Graphics;
 
 using Android.Graphics.Drawables;
 using Square.Picasso;
+using MLearning.Droid.Views;
 
 namespace MLearning.Droid
 {
 	public class WallView: RelativeLayout
 	{
+
+		public VerticalScrollView _scrollSpace;
+		public LinearLayout header;
+		List<UnidadItem> _listUnidades = new List<UnidadItem>();
+		ListView  _listViewUnidades;
+
+		public List<LinearLayout> _listLinearUnidades = new List<LinearLayout> ();
+
 
 		RelativeLayout _mainLayout;
 		LinearLayout _fondo2;
@@ -111,7 +120,8 @@ namespace MLearning.Droid
 
 		public List<ImageLOView> ListImages{
 			set{ _ListLOImages_S2 = value;
-				_images_S2.RemoveAllViews ();		
+				_images_S2.RemoveAllViews ();	
+
 				for (int i = 0; i < _ListLOImages_S2.Count; i++) {
 
 					_images_S2.AddView (_ListLOImages_S2[i]);
@@ -146,7 +156,7 @@ namespace MLearning.Droid
 		//section_2
 
 
-		HorizontalScrollView _contentScrollView_S2;
+		public HorizontalScrollView _contentScrollView_S2;
 		LinearLayout _images_S2;
 
 
@@ -215,6 +225,8 @@ namespace MLearning.Droid
 		}
 
 
+
+
 		public Bitmap getBitmapFromAsset( String filePath) {
 			System.IO.Stream s = context.Assets.Open (filePath);
 			Bitmap bitmap = BitmapFactory.DecodeStream (s);
@@ -238,14 +250,28 @@ namespace MLearning.Droid
 
 			_mainLayout.LayoutParameters = new RelativeLayout.LayoutParams (-1, -1);
 
+
+			_scrollSpace = new VerticalScrollView (context);
+			_scrollSpace.LayoutParameters = new VerticalScrollView.LayoutParams (-1, Configuration.getHeight(1015));
+			_scrollSpace.SetY (Configuration.getHeight (125));
+			//_scrollSpace.SetBackgroundColor (Color.ParseColor ("#FF0000"));
+			_mainLayout.AddView (_scrollSpace);
+
+
+			LinearLayout _mainSpace = new LinearLayout (context);
+			_mainSpace.LayoutParameters = new LinearLayout.LayoutParams (-1, -2);
+			_mainSpace.Orientation = Orientation.Vertical;
+
+			_scrollSpace.AddView (_mainSpace);
+
 			_fondo2 = new LinearLayout (context);
 			_fondo2.LayoutParameters = new LinearLayout.LayoutParams (-1, Configuration.getWidth (640));
-			_fondo2.SetY (Configuration.getHeight (125));
+			_fondo2.SetY (Configuration.getHeight (0));
 
 			Drawable dr1 = new BitmapDrawable (getBitmapFromAsset("icons/fondoselec.png"));
 			_fondo2.SetBackgroundDrawable (dr1);
 			dr1 = null;
-			_mainLayout.AddView (_fondo2);
+			_mainSpace.AddView (_fondo2);
 
 			//section1-----------------------------------------------
 			_contentRLayout_S1 = new RelativeLayout(context);
@@ -268,6 +294,7 @@ namespace MLearning.Droid
 
 			//_mainLayout.AddView (_txtChapter_S1);
 
+			//_mainSpace.AddView (_txtChapter_S1);
 
 
 
@@ -284,8 +311,8 @@ namespace MLearning.Droid
 			_linearTitle.SetY (Configuration.getHeight (60));
 
 			linearGradiente.SetX (0); linearGradiente.SetY (Configuration.getHeight(860));
-			_mainLayout.AddView (linearGradiente);
-			_mainLayout.AddView (_linearTitle);
+			//_mainLayout.AddView (linearGradiente);
+			//_mainLayout.AddView (_linearTitle);
 
 			//_txtTitle_S1.SetX (Configuration.getWidth (245));_txtTitle_S1.SetY (Configuration.getHeight (60));
 
@@ -309,9 +336,9 @@ namespace MLearning.Droid
 			LinearLayout _linearChapter = new LinearLayout (context);
 			_linearChapter.LayoutParameters = new LinearLayout.LayoutParams (-1, -2);
 			_linearChapter.SetGravity (Android.Views.GravityFlags.Center);
-			_linearChapter.AddView (_txtChapter_S1);
+			//_linearChapter.AddView (_txtChapter_S1);
 			_linearChapter.SetY (Configuration.getHeight (502));
-			_mainLayout.AddView (_linearChapter);
+			//_mainLayout.AddView (_linearChapter);
 
 
 			//_txtChapter_S1.SetX (Configuration.getWidth (191));_txtChapter_S1.SetY (Configuration.getHeight (502));
@@ -404,7 +431,6 @@ namespace MLearning.Droid
 			_images_S2.LayoutParameters = new LinearLayout.LayoutParams(-2,-1);
 
 			_contentScrollView_S2.SetX (0);
-			_contentScrollView_S2.SetY (Configuration.getHeight (700));
 
 
 			_contentScrollView_S2.AddView (_images_S2);
@@ -453,10 +479,66 @@ namespace MLearning.Droid
 			//Drawable dr3 = new BitmapDrawable (getBitmapFromAsset("icons/fondonotif.png"));
 			//_contentLLayout_S3.SetBackgroundDrawable(dr3);
 				//_contentLLayout_S3.SetBackgroundColor(Color.ParseColor("#80000000"));
-			_mainLayout.AddView (_contentLLayout_S3);
-			_mainLayout.AddView (_contentScrollView_S2);
+			//_mainLayout.AddView (_contentLLayout_S3);
 
+			//_mainLayout.AddView (_contentScrollView_S2);
+
+			_mainSpace.AddView (_contentScrollView_S2);
 			//----------------------------------------------------------
+
+			_listUnidades.Add(new UnidadItem{ Title = "Dia 1", Description = "Piscacucho-Wayllabamba" });
+			_listUnidades.Add(new UnidadItem{ Title = "Dia 2", Description = "Wayllabamba-Pacaymayo" });
+			_listUnidades.Add(new UnidadItem{ Title = "Dia 3", Description = "Pacaymayo-Wiñay Wayna" });
+			_listUnidades.Add(new UnidadItem{ Title = "Dia 4", Description = "WIñay Wayna-Machu PIcchu"});
+		
+
+			/*
+			_listViewUnidades = new ListView(context);
+			_listViewUnidades.Adapter = new UnidadAdapter (context, _listUnidades);
+
+			_mainSpace.AddView (_listViewUnidades);
+			*/
+			int numUnidades = 4;
+			for (int i = 0; i < numUnidades; i++) 
+			{
+				LinearLayout linearUnidad = new LinearLayout (context);
+				linearUnidad.LayoutParameters = new LinearLayout.LayoutParams (-1, Configuration.getHeight (200));
+				linearUnidad.Orientation = Orientation.Horizontal;
+				linearUnidad.SetGravity (Android.Views.GravityFlags.CenterVertical);
+
+
+				ImageView icon = new ImageView (context);
+				icon.SetImageBitmap(Bitmap.CreateScaledBitmap (getBitmapFromAsset("icons/iconmap.png"), Configuration.getWidth (60), Configuration.getWidth (80), true));
+				icon.SetX (Configuration.getWidth (60));
+
+				linearUnidad.AddView (icon);
+
+				LinearLayout linearContenido = new LinearLayout (context);
+				linearContenido.LayoutParameters = new LinearLayout.LayoutParams (-2, -2);
+				linearContenido.Orientation = Orientation.Vertical;
+				linearContenido.SetGravity (Android.Views.GravityFlags.Center);
+				linearContenido.SetX(Configuration.getWidth (100));
+
+				TextView titleUnidad = new TextView(context);
+				titleUnidad.Text = _listUnidades [i].Title;
+				titleUnidad.SetTextColor(Color.ParseColor (Configuration.ListaColores [i % 6]));
+				titleUnidad.Typeface =  Typeface.CreateFromAsset(context.Assets, "fonts/HelveticaNeue.ttf");
+				titleUnidad.SetTextSize (textFormat,Configuration.getHeight(40));
+
+				TextView descriptionUnidad = new TextView(context);
+				descriptionUnidad.Text = _listUnidades [i].Description;
+				descriptionUnidad.Typeface =  Typeface.CreateFromAsset(context.Assets, "fonts/HelveticaNeue.ttf");
+				descriptionUnidad.SetTextSize (textFormat,Configuration.getHeight(30));
+
+				linearContenido.AddView (titleUnidad);
+				linearContenido.AddView (descriptionUnidad);
+
+				linearUnidad.AddView (linearContenido);
+
+				_mainSpace.AddView (linearUnidad);
+
+				_listLinearUnidades.Add (linearUnidad);
+			}
 
 			//section4------------------------------------------------
 			_imItems_S4 = new List<ImageView>();
@@ -471,13 +553,13 @@ namespace MLearning.Droid
 
 			_imItems_S4.Add (new ImageView (context));
 			_imItems_S4[0].SetImageBitmap(Bitmap.CreateScaledBitmap (getBitmapFromAsset(botton_icon_path[0]), Configuration.getWidth (40), Configuration.getWidth (40), true));
-			_mainLayout.AddView (_imItems_S4[0]);
+			//_mainLayout.AddView (_imItems_S4[0]);
 			_imItems_S4[0].SetX (Configuration.getWidth(58));_imItems_S4[0].SetY (Configuration.getHeight(1069));
 			_imItems_S4 [0].Visibility = Android.Views.ViewStates.Invisible;
 
 			_imItems_S4.Add (new ImageView (context));
 			_imItems_S4[1].SetImageBitmap(Bitmap.CreateScaledBitmap (getBitmapFromAsset(botton_icon_path[1]), Configuration.getWidth (78), Configuration.getWidth (55), true));
-			_mainLayout.AddView (_imItems_S4[1]);
+			//_mainLayout.AddView (_imItems_S4[1]);
 			_imItems_S4[1].SetX (Configuration.getWidth(169));_imItems_S4[1].SetY (Configuration.getHeight(1069));
 			_imItems_S4 [1].Visibility = Android.Views.ViewStates.Invisible;
 
@@ -486,7 +568,7 @@ namespace MLearning.Droid
 
 			_imItems_S4.Add (new ImageView (context));
 			_imItems_S4[2].SetImageBitmap(Bitmap.CreateScaledBitmap (getBitmapFromAsset(botton_icon_path[2]), Configuration.getWidth (80), Configuration.getWidth (80), true));
-			_mainLayout.AddView (_imItems_S4 [2]);
+			//_mainLayout.AddView (_imItems_S4 [2]);
 			_imItems_S4[2].SetX (Configuration.getWidth(297));_imItems_S4[2].SetY (Configuration.getHeight(1050));
 			_imItems_S4 [2].Visibility = Android.Views.ViewStates.Invisible;
 
@@ -494,21 +576,21 @@ namespace MLearning.Droid
 
 			_imItems_S4.Add (new ImageView (context));
 			_imItems_S4[3].SetImageBitmap(Bitmap.CreateScaledBitmap (getBitmapFromAsset(botton_icon_path[3]), Configuration.getWidth (30), Configuration.getWidth (51), true));
-			_mainLayout.AddView (_imItems_S4[3]);
+			//_mainLayout.AddView (_imItems_S4[3]);
 			_imItems_S4[3].SetX (Configuration.getWidth(421));_imItems_S4[3].SetY (Configuration.getHeight(1069));
 			_imItems_S4 [3].Visibility = Android.Views.ViewStates.Invisible;
 
 
 			_imItems_S4.Add (new ImageView (context));
 			_imItems_S4[4].SetImageBitmap(Bitmap.CreateScaledBitmap (getBitmapFromAsset(botton_icon_path[4]), Configuration.getWidth (30), Configuration.getWidth (40), true));
-			_mainLayout.AddView (_imItems_S4 [4]);
+			//_mainLayout.AddView (_imItems_S4 [4]);
 			_imItems_S4[4].SetX (Configuration.getWidth(540));_imItems_S4[4].SetY (Configuration.getHeight(1069));
 			_imItems_S4 [4].Visibility = Android.Views.ViewStates.Invisible;
 
 			//----------------------------------------------------------
 
-			Drawable dr = new BitmapDrawable (getBitmapFromAsset("icons/headerapp.png"));
-			LinearLayout header = new LinearLayout(context);
+			Drawable dr = new BitmapDrawable (getBitmapFromAsset("images/header1.png"));
+			header = new LinearLayout(context);
 			header.LayoutParameters = new LinearLayout.LayoutParams (-1,Configuration.getHeight(125));
 			header.Orientation = Orientation.Vertical;
 
@@ -518,6 +600,11 @@ namespace MLearning.Droid
 			//_mainLayout.SetBackgroundDrawable (dr);
 			_mainLayout.AddView(header);
 			dr = null;
+
+
+
+
+
 		
 			_workspace = new LinearLayout (context);
 			_workspace.LayoutParameters = new LinearLayout.LayoutParams (-1, -1);

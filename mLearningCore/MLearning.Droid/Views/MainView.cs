@@ -107,6 +107,7 @@ namespace MLearning.Droid.Views
 		List<TaskItem> _tasksBotton = new List<TaskItem>();
 		ListView  _listTasksBotton;
 
+		List<Drawable> headersDR = new List<Drawable> ();
 
 		FrameLayout frameLayout;
 
@@ -121,12 +122,20 @@ namespace MLearning.Droid.Views
             base.OnCreate(bundle);
             SetContentView(Resource.Layout.MainView);
 
+			headersDR.Add (new BitmapDrawable (getBitmapFromAsset("images/header1.png")));
+			headersDR.Add (new BitmapDrawable (getBitmapFromAsset("images/header2.png")));
+			headersDR.Add (new BitmapDrawable (getBitmapFromAsset("images/header3.png")));
+			headersDR.Add (new BitmapDrawable (getBitmapFromAsset("images/header4.png")));
+
 			vm = this.ViewModel as MainViewModel;
+			//vm.InitLoad ();
+
 			lo = new WallView(this);
 			frontView = new frontView (this);
-			frontView._listLinearItem [0].Click += delegate {
-				showRutas ();
-			};
+			frontView._listLinearItem [0].Click += delegate {showRutas ();};
+			frontView._listLinearItem [1].Click += delegate {showServicios ();};
+			frontView._listLinearItem [2].Click += delegate {showGuiaSilvestre ();};
+			frontView._listLinearItem [3].Click += delegate {showCifras ();};
 
 
 			LinearLayout linearMainLayout = FindViewById<LinearLayout>(Resource.Id.left_drawer);
@@ -146,7 +155,7 @@ namespace MLearning.Droid.Views
 
 			mToolbar = FindViewById<SupportToolbar>(Resource.Id.toolbar);
 			SetSupportActionBar(mToolbar);
-			mToolbar.SetNavigationIcon (Resource.Drawable.hamburger);
+			mToolbar.SetNavigationIcon (Resource.Drawable.transparent);
 
 			mDrawerLayout = FindViewById<DrawerLayout>(Resource.Id.drawer_layout);
 			mLeftDrawer = FindViewById<LinearLayout>(Resource.Id.left_drawer);
@@ -742,10 +751,23 @@ namespace MLearning.Droid.Views
 
 				//PositionLO = e.Position;
 
+				lo._listLinearUnidades[0].Click += delegate {
+					//TextView tmp = new TextView(this);
+					//vm.OpenLOCommand.Execute(vm.LearningOjectsList[0]);
+
+			
+					//var s_list = vm.info_current_page;
+					//tmp.Text = s_list [0].PagesList [0].page.title;
+				
+					//tmp.Text = "TESTTT";
+					//lo.getWorkSpaceLayout.AddView(tmp);
+				};
+
 
 			}
 
 		}
+
 
 		void Lo_OpenComments_Click (object sender, EventArgs e)
 		{
@@ -828,15 +850,15 @@ namespace MLearning.Droid.Views
 		{
 			if (e.Position == 0)//servicios
 			{
-				//showServicios ();
+				showServicios ();
 			}
 			else if(e.Position == 1)//silvestre
 			{
-				//showGuiaSilvestre ();
+				showGuiaSilvestre ();
 			}
 			else if(e.Position == 2)//otros
 			{
-				//showCifras ();
+				showCifras ();
 			}
 			else if(e.Position == 3)//otros
 			{
@@ -914,17 +936,23 @@ namespace MLearning.Droid.Views
 		public void showCurso(int index)
 		{
 			lo.getWorkSpaceLayout.RemoveAllViews ();
-			lo.OpenUnits.Visibility = ViewStates.Visible;
-			lo.OpenLO.Visibility = ViewStates.Visible;
-			lo.OpenTasks.Visibility = ViewStates.Visible;
-			vm.SelectCircleCommand.Execute(vm.CirclesList[index]);
+			//lo.OpenUnits.Visibility = ViewStates.Visible;
+			//lo.OpenLO.Visibility = ViewStates.Visible;
+			//lo.OpenTasks.Visibility = ViewStates.Visible;
+
+			if (vm.CirclesList.Count > index) {
+				vm.SelectCircleCommand.Execute (vm.CirclesList [index]);
+			}
+
+
+			//vm.SelectCircleCommand.Execute(vm.CirclesList[index]);
 			mDrawerLayout.CloseDrawer (mLeftDrawer);
 		}
 
-		public void showRutas()	{showCurso (0);lo.setFooterBackground (frontView._coverImages [0]);}
-		public void showServicios()	{showCurso (1);lo.setFooterBackground (frontView._coverImages [1]);}
-		public void showGuiaSilvestre()	{showCurso (2);lo.setFooterBackground (frontView._coverImages [2]);}
-		public void showCifras()	{showCurso (2);lo.setFooterBackground (frontView._coverImages [0]);}
+		public void showRutas()			{showCurso (0);lo.header.SetBackgroundDrawable (headersDR[0]);lo._contentScrollView_S2.SetBackgroundColor (Color.ParseColor ("#FFBF00"));}
+		public void showServicios()		{showCurso (1);lo.header.SetBackgroundDrawable (headersDR[1]);lo._contentScrollView_S2.SetBackgroundColor (Color.ParseColor ("#00FFFF"));}
+		public void showGuiaSilvestre()	{showCurso (2);lo.header.SetBackgroundDrawable (headersDR[2]);lo._contentScrollView_S2.SetBackgroundColor (Color.ParseColor ("#74DF00"));}
+		public void showCifras()		{showCurso (2);lo.header.SetBackgroundDrawable (headersDR[3]);lo._contentScrollView_S2.SetBackgroundColor (Color.ParseColor ("#8258FA"));}
 
 
 
@@ -956,7 +984,7 @@ namespace MLearning.Droid.Views
 
 			for (int i = 0; i < items.Count; i++) 
 			{
-				Console.WriteLine ("ITEMS::::::::::" + items[i]);	
+				
 				icons.Add (new ImageView (this));
 				icons [i].SetImageBitmap (Bitmap.CreateScaledBitmap (getBitmapFromAsset (iconsPath[i]), w, h, true));
 
