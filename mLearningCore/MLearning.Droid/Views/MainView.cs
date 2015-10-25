@@ -23,8 +23,9 @@ namespace MLearning.Droid.Views
 
 	[Activity(Label = "View for FirstViewModel", ScreenOrientation = ScreenOrientation.Portrait)]
 	public class MainView : MvxActionBarActivity
-    {
+	{
 
+		ObservableCollection<MLearning.Core.ViewModels.MainViewModel.page_collection_wrapper> s_list;
 		private SupportToolbar mToolbar;
 		private MyActionBarDrawerToggle mDrawerToggle;
 		private DrawerLayout mDrawerLayout;
@@ -40,7 +41,7 @@ namespace MLearning.Droid.Views
 		TextView title_list;
 		TextView info1;
 		TextView info2;
-
+		List<ImageLOView> list = new List<ImageLOView> ();
 
 		//private SupportToolbar mToolbar;
 
@@ -116,11 +117,11 @@ namespace MLearning.Droid.Views
 		frontView frontView;
 		WallView lo;
 
-        protected override void OnCreate(Bundle bundle)
-        {
+		protected override void OnCreate(Bundle bundle)
+		{
 			this.Window.AddFlags(WindowManagerFlags.Fullscreen);
-            base.OnCreate(bundle);
-            SetContentView(Resource.Layout.MainView);
+			base.OnCreate(bundle);
+			SetContentView(Resource.Layout.MainView);
 
 			headersDR.Add (new BitmapDrawable (getBitmapFromAsset("images/header1.png")));
 			headersDR.Add (new BitmapDrawable (getBitmapFromAsset("images/header2.png")));
@@ -224,9 +225,9 @@ namespace MLearning.Droid.Views
 
 			linearMainLayout.AddView (mainLayout);
 
-            vm.PropertyChanged += new PropertyChangedEventHandler(logout_propertyChanged);
+			vm.PropertyChanged += new PropertyChangedEventHandler(logout_propertyChanged);
 
-            RegisterWithGCM();
+			RegisterWithGCM();
 
 			mDrawerToggle = new MyActionBarDrawerToggle(
 				this,							//Host Activity
@@ -265,7 +266,7 @@ namespace MLearning.Droid.Views
 			initListTaskTop ();
 			initListTaskBotton ();
 
-        }
+		}
 
 
 		#region menu
@@ -405,10 +406,10 @@ namespace MLearning.Droid.Views
 			txtCurse.Typeface =  Typeface.CreateFromAsset(this.Assets, "fonts/HelveticaNeue.ttf");
 
 
-		//	txtUserName.Text ="David Spencer";
+			//	txtUserName.Text ="David Spencer";
 			txtUserName.Typeface =  Typeface.CreateFromAsset(this.Assets, "fonts/HelveticaNeue.ttf");
 
-			txtUserRol.Text ="Perú";
+			txtUserRol.Text ="PerÃº";
 			txtUserRol.Typeface =  Typeface.CreateFromAsset(this.Assets, "fonts/HelveticaNeue.ttf");
 
 			txtSchoolName.Text ="Colegio Sagrados Corazones";
@@ -526,7 +527,7 @@ namespace MLearning.Droid.Views
 				mDrawerLayout.CloseDrawer (mLeftDrawer);
 				mDrawerLayout.OpenDrawer (mRightDrawer);
 			};
-				
+
 			imgNotificacion.SetX (Configuration.getWidth(59));  imgNotificacion.SetY (Configuration.getHeight(233)); 
 			imgNotificacion.Click += delegate {
 				mDrawerLayout.CloseDrawer (mLeftDrawer);
@@ -551,7 +552,7 @@ namespace MLearning.Droid.Views
 
 				Bitmap newbm = Configuration.GetRoundedCornerBitmap (Bitmap.CreateScaledBitmap (bm,Configuration.getWidth (154), Configuration.getHeight (154),true));
 				imgUser.SetImageBitmap (newbm);
-			
+
 				newbm = null;
 			}
 			bm = null;
@@ -579,9 +580,9 @@ namespace MLearning.Droid.Views
 
 
 		private void initListCursos(){		
-		//	resetMLOs(0); 
+			//	resetMLOs(0); 
 			populateCircleScroll(0);
-				
+
 		}
 
 		private void iniPeoples (){
@@ -601,12 +602,12 @@ namespace MLearning.Droid.Views
 				txtUserName.Text = vm.UserFirstName + " " + vm.UserLastName;
 				break;
 			case "CirclesList":
-				populateCircleScroll (0);
+				//populateCircleScroll (0);
 				(ViewModel as MainViewModel).CirclesList.CollectionChanged+= CirclesList_CollectionChanged;
 				break;
 			case "UserImage":
 				if (vm.UserImage != null) {
-					
+
 					Bitmap bm = BitmapFactory.DecodeByteArray (vm.UserImage, 0, vm.UserImage.Length);
 
 					Bitmap newbm = Configuration.GetRoundedCornerBitmap (Bitmap.CreateScaledBitmap (bm,Configuration.getWidth (154), Configuration.getHeight (154),true));
@@ -617,8 +618,17 @@ namespace MLearning.Droid.Views
 				break;
 			case "LearningOjectsList":
 				resetMLOs ();
-				//(ViewModel as MainViewModel).LearningOjectsList.CollectionChanged += _learningObjectsList_CollectionChanged;
+				(ViewModel as MainViewModel).LearningOjectsList.CollectionChanged += _learningObjectsList_CollectionChanged;
 				break;
+
+			case  "LOsInCircle":
+				if (vm.LOsInCircle != null) {
+				}
+				populateLoInCircle (0);
+				vm.LOsInCircle.CollectionChanged += Vm_LOsInCircle_CollectionChanged;
+				break;
+
+
 			case "UsersList":
 				populatePeopleScroll(0);
 				(ViewModel as MainViewModel).UsersList.CollectionChanged+=  UsersList_CollectionChanged;
@@ -641,6 +651,42 @@ namespace MLearning.Droid.Views
 				break;
 
 			}
+		}
+
+		void Vm_LOsInCircle_CollectionChanged (object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+		{
+			//populateLoInCircle (e.NewStartingIndex);
+			//Console.WriteLine ("E : " + e.NewStartingIndex);
+		}
+
+		void populateLoInCircle (int index){
+			
+			if (vm.LOsInCircle != null) {
+				//Console.WriteLine ("ENTREEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
+				for (int i = 0; i < vm.LOsInCircle.Count; i++) {
+					//Console.WriteLine ("CONTANDOOOOOOOOOOOOOOO");
+					if (vm.LOsInCircle [i].stack.IsLoaded) {				
+						s_list = vm.LOsInCircle [i].stack.StacksList;
+
+
+
+					}
+				}
+			}
+
+			Console.WriteLine ("____________________>FIN");
+			//var s_list = vm.LOsInCircle [index].stack.StacksList;
+
+
+/*
+			for (int i = 0; i < s_list.Count; i++) {
+				lo._listUnidades.Add(new UnidadItem{ 
+					Title = s_list[index].PagesList[i].page.title, 
+					Description = s_list[index].PagesList[i].page.description });
+			}
+			lo.initUnidades ();
+*/
+
 		}
 
 		void CirclesList_CollectionChanged (object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
@@ -689,31 +735,29 @@ namespace MLearning.Droid.Views
 						state = vm.UsersList[i].user.is_online,
 						index = i,
 						imageProfile = vm.UsersList[i].user.image_url
-							
+
 					};
 					mItemsChat.Add(newinfo);
 				}
 
 				mListViewChat.Adapter = new ChatListViewAdapter(this, mItemsChat);
 				mListViewChat.DividerHeight = 0;
-	
+
 			}
-			
+
 		}
 
-	
+
 
 		void resetMLOs(){
-			
+
 			main_ContentView.RemoveAllViews ();
 			main_ContentView.AddView (lo);
 			mDrawerLayout.CloseDrawer (mLeftDrawer);
 
 
 			if (vm.LearningOjectsList != null) {
-				//lo.Author= vm.LearningOjectsList[].lo.name +" "+vm.LearningOjectsList[e.Position].lo.lastname;
-				//lo.Title = vm.LearningOjectsList [e.Position].lo.title;
-				//lo.Chapter = "Flora y Fauna ";
+
 				List<ImageLOView> list = new List<ImageLOView> ();
 
 				for (int i = 0; i < vm.LearningOjectsList.Count; i++) {
@@ -721,8 +765,6 @@ namespace MLearning.Droid.Views
 
 					imgLO.Title = vm.LearningOjectsList [i].lo.title;
 					imgLO.Author = vm.LearningOjectsList [i].lo.name + " " + vm.LearningOjectsList [i].lo.lastname;
-					//Bitmap bm = BitmapFactory.DecodeByteArray (vm.LearningOjectsList [i].cover_bytes, 0, vm.LearningOjectsList [i].cover_bytes.Length);
-					//imgLO.ImageBitmap=Configuration.GetImageBitmapFromUrl(vm.LearningOjectsList[i].lo.url_cover);
 
 					imgLO.Url = vm.LearningOjectsList [i].lo.url_cover;
 					imgLO.sBackgoundUrl = vm.LearningOjectsList [i].lo.url_background;
@@ -735,39 +777,25 @@ namespace MLearning.Droid.Views
 
 				}
 
-				//lo.getWorkSpaceLayout.Visibility = ViewStates.Invisible;
+				for (int i = 0; i < list.Count; i++) {
+					list [i].Click += Lo_ImagenLO_Click;
+				}
+
 				lo.ListImages = list;
-				lo.OpenLO.Click += Lo_ImagenLO_Click;
-				lo.OpenTasks.Click += Lo_OpenTasks_Click;
-				lo.OpenChat.Click += Lo_OpenChat_Click;
-				//lo.OpenUnits.Click += Lo_OpenUnits_Click;
-				lo.OpenComments.Click += Lo_OpenComments_Click;
-
-
-				//lo.im= Configuration.GetImageBitmapFromUrl(vm.LearningOjectsList [e.Position].lo.url_cover);
-				//lo.ListImages = vm.LearningOjectsList[e.Position].lo.
-
-
-
-				//PositionLO = e.Position;
-
-				lo._listLinearUnidades[0].Click += delegate {
-					//TextView tmp = new TextView(this);
-					//vm.OpenLOCommand.Execute(vm.LearningOjectsList[0]);
-
-			
-					//var s_list = vm.info_current_page;
-					//tmp.Text = s_list [0].PagesList [0].page.title;
-				
-					//tmp.Text = "TESTTT";
-					//lo.getWorkSpaceLayout.AddView(tmp);
-				};
-
 
 			}
 
 		}
 
+		private void imLoClick(object sender, EventArgs eventArgs)
+		{
+			Console.WriteLine (":::::::::::::::::"+s_list [lo.currentLOImageIndex].PagesList [0].page.title);
+
+			//vm.OpenLOCommand.Execute(vm.LearningOjectsList[lo.currentLOImageIndex]);
+			//var s_list = vm.LOsInCircle [0].stack.StacksList;
+			//int a = 10;
+
+		}
 
 		void Lo_OpenComments_Click (object sender, EventArgs e)
 		{
@@ -935,18 +963,22 @@ namespace MLearning.Droid.Views
 
 		public void showCurso(int index)
 		{
+			
 			lo.getWorkSpaceLayout.RemoveAllViews ();
-			//lo.OpenUnits.Visibility = ViewStates.Visible;
-			//lo.OpenLO.Visibility = ViewStates.Visible;
-			//lo.OpenTasks.Visibility = ViewStates.Visible;
 
 			if (vm.CirclesList.Count > index) {
 				vm.SelectCircleCommand.Execute (vm.CirclesList [index]);
 			}
 
 
+			//Configuration.IndiceActual = PositionLO;
+			vm.OpenLOCommand.Execute(vm.LearningOjectsList[index]);
+
+			//populateLoInCircle (index);
+
 			//vm.SelectCircleCommand.Execute(vm.CirclesList[index]);
 			mDrawerLayout.CloseDrawer (mLeftDrawer);
+			resetMLOs ();
 		}
 
 		public void showRutas()			{showCurso (0);lo.header.SetBackgroundDrawable (headersDR[0]);lo._contentScrollView_S2.SetBackgroundColor (Color.ParseColor ("#FFBF00"));}
@@ -984,7 +1016,7 @@ namespace MLearning.Droid.Views
 
 			for (int i = 0; i < items.Count; i++) 
 			{
-				
+
 				icons.Add (new ImageView (this));
 				icons [i].SetImageBitmap (Bitmap.CreateScaledBitmap (getBitmapFromAsset (iconsPath[i]), w, h, true));
 
@@ -1045,7 +1077,7 @@ namespace MLearning.Droid.Views
 
 		void ListTasks_ItemClick (object sender, AdapterView.ItemClickEventArgs e)
 		{
-			
+
 
 			Console.WriteLine ("POSITION!!! = "+ e.Position);
 
@@ -1058,8 +1090,8 @@ namespace MLearning.Droid.Views
 				//salir command
 				vm.LogoutCommand.Execute(null);
 			}
-			
-				
+
+
 			mDrawerLayout.CloseDrawer (mLeftDrawer);
 
 		}
@@ -1089,7 +1121,7 @@ namespace MLearning.Droid.Views
 			}
 
 			_foro.ListaComentarios = _currentComments;
-		
+
 
 		}
 
@@ -1106,7 +1138,7 @@ namespace MLearning.Droid.Views
 			task.NameLO = vm.LearningOjectsList [lo.currentLOImageIndex].lo.title;
 			task.Chapter = vm.LearningOjectsList [lo.currentLOImageIndex].lo.description;
 			task.CoverUrl = vm.LearningOjectsList [lo.currentLOImageIndex].lo.url_background;
-		
+
 
 			loadCompleteQuizzes ();
 			resetPendingQuizzes ();
@@ -1186,7 +1218,7 @@ namespace MLearning.Droid.Views
 
 		void imBtn_Chat_Click(object sender, EventArgs e)
 		{
-			
+
 
 			mDrawerLayout.CloseDrawer (mLeftDrawer);
 			mDrawerLayout.CloseDrawer (mRightDrawer);
@@ -1196,11 +1228,21 @@ namespace MLearning.Droid.Views
 
 		void Lo_ImagenLO_Click (object sender, EventArgs e)
 		{
-			
-			//_dialogDownload.Show ();
-			Configuration.IndiceActual = PositionLO;
-			vm.OpenLOCommand.Execute(vm.LearningOjectsList[PositionLO]);
-			//vm.SelectLOCommand.Execute
+
+			var imView = sender as ImageLOView;
+			//vm.OpenLOCommand.Execute(vm.LearningOjectsList[imView.index]);
+
+			s_list = vm.LOsInCircle [imView.index].stack.StacksList;
+
+			lo._listUnidades.Clear ();
+			for (int j = 0; j < s_list.Count; j++) {
+				lo._listUnidades.Add(new UnidadItem{ 
+					Title = s_list[j].PagesList[0].page.title, 
+					Description = s_list[j].PagesList[0].page.description });
+
+			}
+
+			lo.initUnidades ();
 		}
 
 		/*
@@ -1312,5 +1354,5 @@ namespace MLearning.Droid.Views
 			base.OnPause ();
 			_dialogDownload.Hide ();
 		}
-    }
+	}
 }

@@ -9,16 +9,19 @@ using Android.Graphics;
 using Android.Graphics.Drawables;
 using Square.Picasso;
 using MLearning.Droid.Views;
+using MLearning.Core.ViewModels;
 
 namespace MLearning.Droid
 {
 	public class WallView: RelativeLayout
 	{
-
+		MainViewModel vm;
 		public VerticalScrollView _scrollSpace;
 		public LinearLayout header;
-		List<UnidadItem> _listUnidades = new List<UnidadItem>();
+		public List<UnidadItem> _listUnidades = new List<UnidadItem>();
 		ListView  _listViewUnidades;
+
+		public LinearLayout _spaceUnidades;
 
 		public List<LinearLayout> _listLinearUnidades = new List<LinearLayout> ();
 
@@ -126,6 +129,7 @@ namespace MLearning.Droid
 
 					_images_S2.AddView (_ListLOImages_S2[i]);
 					_ListLOImages_S2 [i].Click += imLoClick;
+
 				}
 			}
 		}
@@ -162,7 +166,11 @@ namespace MLearning.Droid
 
 		private void imLoClick(object sender, EventArgs eventArgs)
 		{
+			
+
 			var imView = sender as ImageLOView;
+			currentLOImageIndex = imView.index;
+		
 			var test = new ImageView (context);
 			test.DrawingCacheEnabled = true;
 
@@ -179,7 +187,7 @@ namespace MLearning.Droid
 			_txtAuthor_S1.Text = imView.Author;
 			_txtChapter_S1.Text = imView.Chapter;
 			_imAuthor_S1.SetImageBitmap (imView.ImagenUsuario);
-			currentLOImageIndex = imView.index;
+
 
 		}
 
@@ -249,6 +257,9 @@ namespace MLearning.Droid
 			var textFormat = Android.Util.ComplexUnitType.Px;
 
 			_mainLayout.LayoutParameters = new RelativeLayout.LayoutParams (-1, -1);
+
+
+
 
 
 			_scrollSpace = new VerticalScrollView (context);
@@ -485,12 +496,12 @@ namespace MLearning.Droid
 
 			_mainSpace.AddView (_contentScrollView_S2);
 			//----------------------------------------------------------
-
+			/*
 			_listUnidades.Add(new UnidadItem{ Title = "Dia 1", Description = "Piscacucho-Wayllabamba" });
 			_listUnidades.Add(new UnidadItem{ Title = "Dia 2", Description = "Wayllabamba-Pacaymayo" });
 			_listUnidades.Add(new UnidadItem{ Title = "Dia 3", Description = "Pacaymayo-Wiñay Wayna" });
 			_listUnidades.Add(new UnidadItem{ Title = "Dia 4", Description = "WIñay Wayna-Machu PIcchu"});
-		
+		*/
 
 			/*
 			_listViewUnidades = new ListView(context);
@@ -498,47 +509,11 @@ namespace MLearning.Droid
 
 			_mainSpace.AddView (_listViewUnidades);
 			*/
-			int numUnidades = 4;
-			for (int i = 0; i < numUnidades; i++) 
-			{
-				LinearLayout linearUnidad = new LinearLayout (context);
-				linearUnidad.LayoutParameters = new LinearLayout.LayoutParams (-1, Configuration.getHeight (200));
-				linearUnidad.Orientation = Orientation.Horizontal;
-				linearUnidad.SetGravity (Android.Views.GravityFlags.CenterVertical);
 
-
-				ImageView icon = new ImageView (context);
-				icon.SetImageBitmap(Bitmap.CreateScaledBitmap (getBitmapFromAsset("icons/iconmap.png"), Configuration.getWidth (60), Configuration.getWidth (80), true));
-				icon.SetX (Configuration.getWidth (60));
-
-				linearUnidad.AddView (icon);
-
-				LinearLayout linearContenido = new LinearLayout (context);
-				linearContenido.LayoutParameters = new LinearLayout.LayoutParams (-2, -2);
-				linearContenido.Orientation = Orientation.Vertical;
-				linearContenido.SetGravity (Android.Views.GravityFlags.Center);
-				linearContenido.SetX(Configuration.getWidth (100));
-
-				TextView titleUnidad = new TextView(context);
-				titleUnidad.Text = _listUnidades [i].Title;
-				titleUnidad.SetTextColor(Color.ParseColor (Configuration.ListaColores [i % 6]));
-				titleUnidad.Typeface =  Typeface.CreateFromAsset(context.Assets, "fonts/HelveticaNeue.ttf");
-				titleUnidad.SetTextSize (textFormat,Configuration.getHeight(40));
-
-				TextView descriptionUnidad = new TextView(context);
-				descriptionUnidad.Text = _listUnidades [i].Description;
-				descriptionUnidad.Typeface =  Typeface.CreateFromAsset(context.Assets, "fonts/HelveticaNeue.ttf");
-				descriptionUnidad.SetTextSize (textFormat,Configuration.getHeight(30));
-
-				linearContenido.AddView (titleUnidad);
-				linearContenido.AddView (descriptionUnidad);
-
-				linearUnidad.AddView (linearContenido);
-
-				_mainSpace.AddView (linearUnidad);
-
-				_listLinearUnidades.Add (linearUnidad);
-			}
+			_spaceUnidades = new LinearLayout (context);
+			_spaceUnidades.LayoutParameters = new LinearLayout.LayoutParams (-1, -2);
+			_spaceUnidades.Orientation = Orientation.Vertical;
+			_mainSpace.AddView (_spaceUnidades);
 
 			//section4------------------------------------------------
 			_imItems_S4 = new List<ImageView>();
@@ -618,6 +593,50 @@ namespace MLearning.Droid
 		}
 
 
+		public void initUnidades()
+		{
+			var textFormat = Android.Util.ComplexUnitType.Px;
+			_spaceUnidades.RemoveAllViews ();
+			int numUnidades = _listUnidades.Count;
+			for (int i = 0; i < numUnidades; i++) 
+			{
+				LinearLayout linearUnidad = new LinearLayout (context);
+				linearUnidad.LayoutParameters = new LinearLayout.LayoutParams (-1, -2);
+				linearUnidad.Orientation = Orientation.Horizontal;
+				linearUnidad.SetGravity (Android.Views.GravityFlags.CenterVertical);
+
+				ImageView icon = new ImageView (context);
+				icon.SetImageBitmap(Bitmap.CreateScaledBitmap (getBitmapFromAsset("icons/iconmap.png"), Configuration.getWidth (60), Configuration.getWidth (80), true));
+				icon.SetX (Configuration.getWidth (60));
+
+				linearUnidad.AddView (icon);
+
+				LinearLayout linearContenido = new LinearLayout (context);
+				linearContenido.LayoutParameters = new LinearLayout.LayoutParams (-2, -2);
+				linearContenido.Orientation = Orientation.Vertical;
+				linearContenido.SetGravity (Android.Views.GravityFlags.Center);
+				linearContenido.SetX(Configuration.getWidth (100));
+
+				TextView titleUnidad = new TextView(context);
+				titleUnidad.Text = _listUnidades [i].Title;
+				titleUnidad.SetTextColor(Color.ParseColor (Configuration.ListaColores [i % 6]));
+				titleUnidad.Typeface =  Typeface.CreateFromAsset(context.Assets, "fonts/HelveticaNeue.ttf");
+				titleUnidad.SetTextSize (textFormat,Configuration.getHeight(40));
+
+				TextView descriptionUnidad = new TextView(context);
+				descriptionUnidad.Text = _listUnidades [i].Description;
+				descriptionUnidad.Typeface =  Typeface.CreateFromAsset(context.Assets, "fonts/HelveticaNeue.ttf");
+				descriptionUnidad.SetTextSize (textFormat,Configuration.getHeight(30));
+
+				linearContenido.AddView (titleUnidad);
+				linearContenido.AddView (descriptionUnidad);
+
+				linearUnidad.AddView (linearContenido);
+
+				_listLinearUnidades.Add (linearUnidad);
+				_spaceUnidades.AddView (linearUnidad);
+			}
+		}
 	}
 }
 
