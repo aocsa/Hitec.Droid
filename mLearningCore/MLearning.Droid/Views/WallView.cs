@@ -10,6 +10,7 @@ using Android.Graphics.Drawables;
 using Square.Picasso;
 using MLearning.Droid.Views;
 using MLearning.Core.ViewModels;
+using Android.Text;
 
 namespace MLearning.Droid
 {
@@ -27,7 +28,10 @@ namespace MLearning.Droid
 
 
 		RelativeLayout _mainLayout;
-		LinearLayout _fondo2;
+		RelativeLayout _fondo2;
+		public TextView _txtCursoN;
+		public TextView _txtUnidadN;
+
 		LinearLayout linearGradiente;
 
 		LinearLayout commentLayout;
@@ -181,6 +185,10 @@ namespace MLearning.Droid
 			_fondo2.RemoveAllViews();
 
 			_fondo2.AddView(test);
+			_txtCursoN.Text = "PROBANDO";
+			_fondo2.AddView (_txtCursoN);
+			_txtUnidadN.Text = "PROBANDO";
+			_fondo2.AddView (_txtUnidadN);
 
 			//actualizar titulo, nombreAuthor, capitulo, imAuthor
 			_txtTitle_S1.Text = imView.Title;
@@ -245,9 +253,11 @@ namespace MLearning.Droid
 		public void ini(){
 
 
-
+			_txtCursoN = new TextView (context);
+			_txtUnidadN = new TextView (context);
 			_mainLayout = new RelativeLayout (context);
 
+		
 
 			linearGradiente = new LinearLayout (context);
 			linearGradiente.LayoutParameters = new LinearLayout.LayoutParams (-1, Configuration.getHeight (310));
@@ -275,14 +285,22 @@ namespace MLearning.Droid
 
 			_scrollSpace.AddView (_mainSpace);
 
-			_fondo2 = new LinearLayout (context);
-			_fondo2.LayoutParameters = new LinearLayout.LayoutParams (-1, Configuration.getWidth (640));
+			_fondo2 = new RelativeLayout (context);
+			_fondo2.LayoutParameters = new RelativeLayout.LayoutParams (-1, Configuration.getWidth (640));
 			_fondo2.SetY (Configuration.getHeight (0));
 
 			Drawable dr1 = new BitmapDrawable (getBitmapFromAsset("icons/fondoselec.png"));
 			_fondo2.SetBackgroundDrawable (dr1);
 			dr1 = null;
+
 			_mainSpace.AddView (_fondo2);
+
+			TextView _txtCurso = new TextView (context);
+			_txtCurso.Text = "LAS RUTAS";
+			_txtCurso.SetY (-100);
+
+			//_mainSpace.AddView (_txtCurso);
+
 
 			//section1-----------------------------------------------
 			_contentRLayout_S1 = new RelativeLayout(context);
@@ -606,13 +624,14 @@ namespace MLearning.Droid
 				linearUnidad.SetGravity (Android.Views.GravityFlags.CenterVertical);
 
 				ImageView icon = new ImageView (context);
+
 				icon.SetImageBitmap(Bitmap.CreateScaledBitmap (getBitmapFromAsset("icons/iconmap.png"), Configuration.getWidth (60), Configuration.getWidth (80), true));
 				icon.SetX (Configuration.getWidth (60));
 
 				linearUnidad.AddView (icon);
 
 				LinearLayout linearContenido = new LinearLayout (context);
-				linearContenido.LayoutParameters = new LinearLayout.LayoutParams (-2, -2);
+				linearContenido.LayoutParameters = new LinearLayout.LayoutParams (Configuration.getWidth(460), -2);
 				linearContenido.Orientation = Orientation.Vertical;
 				linearContenido.SetGravity (Android.Views.GravityFlags.Center);
 				linearContenido.SetX(Configuration.getWidth (100));
@@ -624,9 +643,11 @@ namespace MLearning.Droid
 				titleUnidad.SetTextSize (textFormat,Configuration.getHeight(40));
 
 				TextView descriptionUnidad = new TextView(context);
-				descriptionUnidad.Text = _listUnidades [i].Description;
+				descriptionUnidad.TextFormatted = Html.FromHtml (_listUnidades [i].Description);
+				//descriptionUnidad.Text = _listUnidades [i].Description;
 				descriptionUnidad.Typeface =  Typeface.CreateFromAsset(context.Assets, "fonts/HelveticaNeue.ttf");
 				descriptionUnidad.SetTextSize (textFormat,Configuration.getHeight(30));
+				descriptionUnidad.SetTextIsSelectable (true);
 
 				linearContenido.AddView (titleUnidad);
 				linearContenido.AddView (descriptionUnidad);
@@ -634,7 +655,15 @@ namespace MLearning.Droid
 				linearUnidad.AddView (linearContenido);
 
 				_listLinearUnidades.Add (linearUnidad);
+				LinearLayout separationLinear = new LinearLayout (context);
+				separationLinear.LayoutParameters = new LinearLayout.LayoutParams (-1, 5);
+				separationLinear.SetBackgroundColor (Color.ParseColor ("#D8D8D8"));
+				separationLinear.Orientation = Orientation.Horizontal;
+				linearUnidad.SetPadding (0, Configuration.getWidth (25), 0, Configuration.getWidth (25));
+
+				//linearUnidad.AddView (separationLinear);
 				_spaceUnidades.AddView (linearUnidad);
+				_spaceUnidades.AddView (separationLinear);
 			}
 		}
 	}

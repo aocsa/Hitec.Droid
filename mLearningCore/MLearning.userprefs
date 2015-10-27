@@ -1,34 +1,18 @@
 ﻿<Properties StartupItem="MLearning.Droid\Hitec.Droid.csproj">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Release" PreferredExecutionTarget="Android.4107ef0e0a1fcf43" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="MLearning.Core\ViewModels\MainViewModel.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.4C3AWN154L014669" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="MLearning.Droid\Views\MainView.cs">
     <Files>
-      <File FileName="MLearning.Droid\Views\MainView.cs" Line="967" Column="1" />
-      <File FileName="MLearning.Droid\Views\WallView.cs" Line="620" Column="5" />
+      <File FileName="MLearning.Droid\Views\MainView.cs" Line="922" Column="2" />
+      <File FileName="MLearning.Droid\Views\WallView.cs" Line="645" Column="5" />
       <File FileName="MLearning.Droid\Views\frontView.cs" Line="1" Column="1" />
-      <File FileName="MLearning.Core\ViewModels\MainViewModel.cs" Line="1007" Column="12" />
-      <File FileName="c:\Users\ImBonus\Desktop\Hitec.Droid-master\mLearningCore\MLearning.Droid\Views\ChatListViewAdapter.cs" Line="1" Column="1" />
-      <File FileName="c:\Users\ImBonus\Desktop\Hitec.Droid-master\mLearningCore\MLearning.Core\Services\MLearningAzureService.cs" Line="202" Column="1" />
-      <File FileName="c:\Users\ImBonus\Desktop\Hitec.Droid-master\mLearningCore\MLearning.Core\Repositories\WAMSRepositoryService.cs" Line="1" Column="1" />
-      <File FileName="c:\Users\ImBonus\Desktop\Hitec.Droid-master\mLearningCore\MLearning.Droid\Views\Configuration.cs" Line="38" Column="1" />
-      <File FileName="MLearning.Droid\Views\LOView.cs" Line="161" Column="3" />
+      <File FileName="MLearning.Core\ViewModels\MainViewModel.cs" Line="1" Column="1" />
+      <File FileName="c:\Users\ImBonus\Desktop\Hitec.Droid-master\mLearningCore\MLearning.Droid\Views\Configuration.cs" Line="1" Column="1" />
+      <File FileName="MLearning.Droid\Views\LOView.cs" Line="380" Column="5" />
+      <File FileName="MLearning.Droid\SplashScreen.cs" Line="1" Column="1" />
+      <File FileName="MLearning.Droid\Views\FrontContainerViewPager.cs" Line="157" Column="30" />
+      <File FileName="MLearning.Droid\Views\FrontContainerView.cs" Line="199" Column="3" />
+      <File FileName="MLearning.Droid\DataSource\LOSlideSource.cs" Line="140" Column="1" />
     </Files>
-    <Pads>
-      <Pad Id="ProjectPad">
-        <State name="__root__">
-          <Node name="MLearning" expanded="True">
-            <Node name="Hitec.Droid" expanded="True">
-              <Node name="Views" expanded="True" />
-            </Node>
-            <Node name="MLearning.Core" expanded="True">
-              <Node name="Services" expanded="True" />
-              <Node name="ViewModels" expanded="True">
-                <Node name="MainViewModel.cs" selected="True" />
-              </Node>
-            </Node>
-          </Node>
-        </State>
-      </Pad>
-    </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>

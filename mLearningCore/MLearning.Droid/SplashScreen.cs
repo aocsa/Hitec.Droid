@@ -6,7 +6,7 @@ using Android.Views;
 namespace MLearning.Droid
 {
     [Activity(
-		Label = "Hitec"
+		Label = "Camino Inca"
 		, MainLauncher = true
 		, Icon = "@drawable/icon"
 		, Theme = "@style/Theme.Splash"

@@ -116,6 +116,7 @@ namespace MLearning.Droid.Views
 		MainViewModel vm;
 		frontView frontView;
 		WallView lo;
+		FrontContainerViewPager lector;
 
 		protected override void OnCreate(Bundle bundle)
 		{
@@ -133,6 +134,9 @@ namespace MLearning.Droid.Views
 
 			lo = new WallView(this);
 			frontView = new frontView (this);
+			lector = new FrontContainerViewPager (this);
+
+
 			frontView._listLinearItem [0].Click += delegate {showRutas ();};
 			frontView._listLinearItem [1].Click += delegate {showServicios ();};
 			frontView._listLinearItem [2].Click += delegate {showGuiaSilvestre ();};
@@ -865,7 +869,9 @@ namespace MLearning.Droid.Views
 			}
 			else if(e.Position == 1)//fotos
 			{
-				showHome ();
+				//showHome ();
+				lo.getWorkSpaceLayout.RemoveAllViews();
+				lo.AddView (lector);
 			}
 			else if(e.Position == 2)//rutas
 			{
@@ -1230,19 +1236,29 @@ namespace MLearning.Droid.Views
 		{
 
 			var imView = sender as ImageLOView;
-			//vm.OpenLOCommand.Execute(vm.LearningOjectsList[imView.index]);
 
-			s_list = vm.LOsInCircle [imView.index].stack.StacksList;
+			if (vm.LOsInCircle.Count < imView.index || vm.LOsInCircle [imView.index].stack.StacksList == null) {
+				
+				var myHandler = new Handler ();
+				myHandler.Post(()=>{
+					Toast.MakeText (this, "Descargando Contenido", ToastLength.Short).Show();
+				});
+			} else {
+				Console.WriteLine ("IN");
+				s_list = vm.LOsInCircle [imView.index].stack.StacksList;
+				Console.WriteLine ("OUT");
 
-			lo._listUnidades.Clear ();
-			for (int j = 0; j < s_list.Count; j++) {
-				lo._listUnidades.Add(new UnidadItem{ 
-					Title = s_list[j].PagesList[0].page.title, 
-					Description = s_list[j].PagesList[0].page.description });
+				lo._listUnidades.Clear ();
+				for (int j = 0; j < s_list.Count; j++) {
+					lo._listUnidades.Add (new UnidadItem { 
+						Title = s_list [j].PagesList [0].page.title, 
+						Description = s_list [j].PagesList [0].page.description
+					});
 
+				}
+
+				lo.initUnidades ();
 			}
-
-			lo.initUnidades ();
 		}
 
 		/*
