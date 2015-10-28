@@ -1,17 +1,18 @@
 ﻿<Properties StartupItem="MLearning.Droid\Hitec.Droid.csproj">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.4C3AWN154L014669" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="MLearning.Droid\Views\MainView.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Release" PreferredExecutionTarget="Android.4C3AWN154L014669" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="MLearning.Droid\Views\CustomerImageView.cs">
     <Files>
-      <File FileName="MLearning.Droid\Views\MainView.cs" Line="922" Column="2" />
-      <File FileName="MLearning.Droid\Views\WallView.cs" Line="645" Column="5" />
-      <File FileName="MLearning.Droid\Views\frontView.cs" Line="1" Column="1" />
+      <File FileName="MLearning.Droid\Views\MainView.cs" Line="1302" Column="1" />
+      <File FileName="MLearning.Droid\Views\WallView.cs" Line="183" Column="131" />
+      <File FileName="MLearning.Droid\Views\frontView.cs" Line="93" Column="53" />
       <File FileName="MLearning.Core\ViewModels\MainViewModel.cs" Line="1" Column="1" />
       <File FileName="c:\Users\ImBonus\Desktop\Hitec.Droid-master\mLearningCore\MLearning.Droid\Views\Configuration.cs" Line="1" Column="1" />
-      <File FileName="MLearning.Droid\Views\LOView.cs" Line="380" Column="5" />
+      <File FileName="MLearning.Droid\Views\LOView.cs" Line="1" Column="1" />
       <File FileName="MLearning.Droid\SplashScreen.cs" Line="1" Column="1" />
-      <File FileName="MLearning.Droid\Views\FrontContainerViewPager.cs" Line="157" Column="30" />
-      <File FileName="MLearning.Droid\Views\FrontContainerView.cs" Line="199" Column="3" />
-      <File FileName="MLearning.Droid\DataSource\LOSlideSource.cs" Line="140" Column="1" />
+      <File FileName="MLearning.Droid\Views\FrontContainerViewPager.cs" Line="1" Column="1" />
+      <File FileName="MLearning.Droid\Views\FrontContainerView.cs" Line="1" Column="1" />
+      <File FileName="MLearning.Droid\DataSource\LOSlideSource.cs" Line="216" Column="17" />
+      <File FileName="MLearning.Droid\Views\CustomerImageView.cs" Line="53" Column="4" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

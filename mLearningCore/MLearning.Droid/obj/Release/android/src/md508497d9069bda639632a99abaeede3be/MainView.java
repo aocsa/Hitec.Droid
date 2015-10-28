@@ -16,6 +16,7 @@ public class MainView
 			"n_onPostCreate:(Landroid/os/Bundle;)V:GetOnPostCreate_Landroid_os_Bundle_Handler\n" +
 			"n_onConfigurationChanged:(Landroid/content/res/Configuration;)V:GetOnConfigurationChanged_Landroid_content_res_Configuration_Handler\n" +
 			"n_onPause:()V:GetOnPauseHandler\n" +
+			"n_onBackPressed:()V:GetOnBackPressedHandler\n" +
 			"";
 		mono.android.Runtime.register ("MLearning.Droid.Views.MainView, CaminoInca, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null", MainView.class, __md_methods);
 	}
@@ -83,6 +84,14 @@ public class MainView
 	}
 
 	private native void n_onPause ();
+
+
+	public void onBackPressed ()
+	{
+		n_onBackPressed ();
+	}
+
+	private native void n_onBackPressed ();
 
 	java.util.ArrayList refList;
 	public void monodroidAddReference (java.lang.Object obj)

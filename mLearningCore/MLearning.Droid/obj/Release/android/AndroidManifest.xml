@@ -17,7 +17,7 @@
       </intent-filter>
     </receiver>
     <service android:name="md524accb007a7a9d075e3aefd8a44db6e7.GcmService" />
-    <activity android:icon="@drawable/icon" android:label="Hitec" android:noHistory="true" android:screenOrientation="portrait" android:theme="@style/Theme.Splash" android:name="md5f410d9818bda040222c310297e0440b4.SplashScreen">
+    <activity android:icon="@drawable/icon" android:label="Camino Inca" android:noHistory="true" android:screenOrientation="portrait" android:theme="@style/Theme.Splash" android:name="md5f410d9818bda040222c310297e0440b4.SplashScreen">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
         <category android:name="android.intent.category.LAUNCHER" />

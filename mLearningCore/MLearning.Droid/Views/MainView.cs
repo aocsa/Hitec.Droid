@@ -17,12 +17,15 @@ using SupportToolbar = Android.Support.V7.Widget.Toolbar;
 using System.Collections.ObjectModel;
 using TaskView;
 using Android.Content.PM;
+using DataSource;
+using Android.Support.V4.View;
+using Android.Content;
 
 namespace MLearning.Droid.Views
 {
 
 	[Activity(Label = "View for FirstViewModel", ScreenOrientation = ScreenOrientation.Portrait)]
-	public class MainView : MvxActionBarActivity
+	public class MainView : MvxActionBarActivity, VerticalScrollViewPager.ScrollViewListenerPager
 	{
 
 		ObservableCollection<MLearning.Core.ViewModels.MainViewModel.page_collection_wrapper> s_list;
@@ -112,11 +115,18 @@ namespace MLearning.Droid.Views
 
 		FrameLayout frameLayout;
 
+		List<FrontContainerViewPager> listFrontPager = new List<FrontContainerViewPager>();
+		List<VerticalScrollViewPager> listaScroll = new List<VerticalScrollViewPager>();
+		ViewPager viewPager;
+		Drawable drBack;
 
 		MainViewModel vm;
 		frontView frontView;
 		WallView lo;
 		FrontContainerViewPager lector;
+		public int _currentCurso;
+		public int _currentUnidad;
+		public bool _lectorOpen;
 
 		protected override void OnCreate(Bundle bundle)
 		{
@@ -124,13 +134,16 @@ namespace MLearning.Droid.Views
 			base.OnCreate(bundle);
 			SetContentView(Resource.Layout.MainView);
 
+			_currentCurso = -1;
+			_lectorOpen = false;
+
 			headersDR.Add (new BitmapDrawable (getBitmapFromAsset("images/header1.png")));
 			headersDR.Add (new BitmapDrawable (getBitmapFromAsset("images/header2.png")));
 			headersDR.Add (new BitmapDrawable (getBitmapFromAsset("images/header3.png")));
 			headersDR.Add (new BitmapDrawable (getBitmapFromAsset("images/header4.png")));
 
+			drBack = new BitmapDrawable (Bitmap.CreateScaledBitmap (getBitmapFromAsset ("images/fondocondiagonalm.png"), 640, 1136, true));
 			vm = this.ViewModel as MainViewModel;
-			//vm.InitLoad ();
 
 			lo = new WallView(this);
 			frontView = new frontView (this);
@@ -223,9 +236,6 @@ namespace MLearning.Droid.Views
 			mListViewChat.SetX (0);
 			mListViewChat.SetY (Configuration.getHeight (440));
 
-			//end setting
-
-
 
 			linearMainLayout.AddView (mainLayout);
 
@@ -265,10 +275,13 @@ namespace MLearning.Droid.Views
 
 
 			initListCursos ();
-			//iniPeoples ();
-			//initListTasks ();
 			initListTaskTop ();
 			initListTaskBotton ();
+
+			viewPager = new ViewPager (this);
+
+			viewPager.SetOnPageChangeListener (new MyPageChangeListenerPager (this, listFrontPager));
+
 
 		}
 
@@ -772,7 +785,7 @@ namespace MLearning.Droid.Views
 
 					imgLO.Url = vm.LearningOjectsList [i].lo.url_cover;
 					imgLO.sBackgoundUrl = vm.LearningOjectsList [i].lo.url_background;
-					imgLO.ImagenUsuario = getBitmapFromAsset ("icons/imgautor.png");
+					//imgLO.ImagenUsuario = getBitmapFromAsset ("icons/imgautor.png");
 					imgLO.Chapter = "Flora y Fauna";
 					imgLO.index = i;
 
@@ -863,15 +876,15 @@ namespace MLearning.Droid.Views
 
 		void _listTasksItemTop_Click (object sender, AdapterView.ItemClickEventArgs e)
 		{
+			
 			if (e.Position == 0)//home
-			{
+			{				
 				showHome ();
 			}
 			else if(e.Position == 1)//fotos
 			{
-				//showHome ();
-				lo.getWorkSpaceLayout.RemoveAllViews();
-				lo.AddView (lector);
+				showHome ();
+				mDrawerLayout.CloseDrawer (mLeftDrawer);
 			}
 			else if(e.Position == 2)//rutas
 			{
@@ -923,8 +936,14 @@ namespace MLearning.Droid.Views
 			listRutas.Add (ruta2);
 			listRutas.Add (ruta3);
 
+			/*
+			ruta1.Click += delegate {showRutas();};
+			ruta2.Click += delegate {showRutas();};
+			ruta3.Click += delegate {showRutas();};
+			*/
 
 		}
+
 		public void initListTaskBotton()
 		{
 			TaskItem guiaServicios = new TaskItem ();
@@ -962,35 +981,41 @@ namespace MLearning.Droid.Views
 
 		public void showHome()
 		{
+			_currentCurso = -1;
+			try{
+			lo.getWorkSpaceLayout.SetBackgroundColor (Color.Transparent);
 			lo.getWorkSpaceLayout.RemoveAllViews ();
 			lo.getWorkSpaceLayout.AddView (frontView);
 			mDrawerLayout.CloseDrawer (mLeftDrawer);
+			}catch{
+			}
 		}
 
 		public void showCurso(int index)
 		{
-			
-			lo.getWorkSpaceLayout.RemoveAllViews ();
+			try{
+				_currentCurso = index;
+				
+				lo.getWorkSpaceLayout.SetBackgroundColor (Color.Transparent);
+				lo.getWorkSpaceLayout.RemoveAllViews ();
 
-			if (vm.CirclesList.Count > index) {
-				vm.SelectCircleCommand.Execute (vm.CirclesList [index]);
+				if (vm.CirclesList.Count >= index) {
+					vm.SelectCircleCommand.Execute (vm.CirclesList [index]);
+				}
+						
+				vm.OpenLOCommand.Execute(vm.LearningOjectsList[index]);
+				mDrawerLayout.CloseDrawer (mLeftDrawer);
+				resetMLOs ();
+				lo._spaceUnidades.RemoveAllViews();
+			}catch{
+				
 			}
-
-
-			//Configuration.IndiceActual = PositionLO;
-			vm.OpenLOCommand.Execute(vm.LearningOjectsList[index]);
-
-			//populateLoInCircle (index);
-
-			//vm.SelectCircleCommand.Execute(vm.CirclesList[index]);
-			mDrawerLayout.CloseDrawer (mLeftDrawer);
-			resetMLOs ();
 		}
 
 		public void showRutas()			{showCurso (0);lo.header.SetBackgroundDrawable (headersDR[0]);lo._contentScrollView_S2.SetBackgroundColor (Color.ParseColor ("#FFBF00"));}
 		public void showServicios()		{showCurso (1);lo.header.SetBackgroundDrawable (headersDR[1]);lo._contentScrollView_S2.SetBackgroundColor (Color.ParseColor ("#00FFFF"));}
 		public void showGuiaSilvestre()	{showCurso (2);lo.header.SetBackgroundDrawable (headersDR[2]);lo._contentScrollView_S2.SetBackgroundColor (Color.ParseColor ("#74DF00"));}
-		public void showCifras()		{showCurso (2);lo.header.SetBackgroundDrawable (headersDR[3]);lo._contentScrollView_S2.SetBackgroundColor (Color.ParseColor ("#8258FA"));}
+		public void showCifras()		{showCurso (3);lo.header.SetBackgroundDrawable (headersDR[3]);lo._contentScrollView_S2.SetBackgroundColor (Color.ParseColor ("#8258FA"));}
 
 
 
@@ -1234,21 +1259,28 @@ namespace MLearning.Droid.Views
 
 		void Lo_ImagenLO_Click (object sender, EventArgs e)
 		{
-
+			
 			var imView = sender as ImageLOView;
+			_currentUnidad = imView.index;
 
-			if (vm.LOsInCircle.Count < imView.index || vm.LOsInCircle [imView.index].stack.StacksList == null) {
+			Console.WriteLine ("::::::::::::::::::::::::::: " + imView.index + " :: " +vm.LOsInCircle.Count);
+
+			if (vm.LOsInCircle.Count <= imView.index || vm.LOsInCircle [imView.index].stack.StacksList == null) {
 				
 				var myHandler = new Handler ();
 				myHandler.Post(()=>{
-					Toast.MakeText (this, "Descargando Contenido", ToastLength.Short).Show();
+					Toast.MakeText (this, "Downloading...", ToastLength.Long).Show();
 				});
 			} else {
 				Console.WriteLine ("IN");
-				s_list = vm.LOsInCircle [imView.index].stack.StacksList;
+				try{
+					s_list = vm.LOsInCircle [imView.index].stack.StacksList;
+				}catch{
+				}
 				Console.WriteLine ("OUT");
 
 				lo._listUnidades.Clear ();
+
 				for (int j = 0; j < s_list.Count; j++) {
 					lo._listUnidades.Add (new UnidadItem { 
 						Title = s_list [j].PagesList [0].page.title, 
@@ -1258,9 +1290,25 @@ namespace MLearning.Droid.Views
 				}
 
 				lo.initUnidades ();
+				//lo._txtCursoN.Text = vm.CirclesList[_currentCurso].name;
+				//lo._txtUnidadN.Text = vm.LOsInCircle[imView.index].lo.title;
+
+				if (_currentCurso == 0) {
+
+					for (int i = 0; i < lo._listLinearUnidades.Count; i++) {
+
+						Console.WriteLine ("ADD LECTOR : " + i);
+						lo._listLinearUnidades [i].Click += delegate {
+							LoadPagesDataSource (i);
+						};
+					}
+				}
+
 			}
+
 		}
 
+		
 		/*
 		void resetComments(){
 			
@@ -1347,10 +1395,127 @@ namespace MLearning.Droid.Views
 
 		}
 
+
+		void LoadPagesDataSource (int pageIndex)
+		{
+
+			_lectorOpen = true;
+			bool is_main = true;
+
+			for (int i = 0; i < vm.LOsInCircle.Count; i++)
+			{
+				var s_listp = vm.LOsInCircle[i].stack.StacksList;
+				int indice = 0;
+
+				for (int j = 0; j < s_listp.Count; j++) 
+				{						
+
+						for (int k = 0; k < s_listp [j].PagesList.Count; k++) 
+						{
+							VerticalScrollViewPager scrollPager = new VerticalScrollViewPager (this);
+							scrollPager.setOnScrollViewListener (this); 
+							LinearLayout linearScroll = new LinearLayout (this);
+							linearScroll.LayoutParameters = new LinearLayout.LayoutParams (-1, -2);
+							linearScroll.Orientation = Orientation.Vertical;
+
+							var content = s_listp [j].PagesList [k].content;
+							FrontContainerViewPager front = new FrontContainerViewPager (this);
+							front.Tag = "pager";
+
+
+							front.ImageChapter = s_listp [j].PagesList[k].page.url_img;
+
+
+							front.Title = s_listp [j].PagesList [k].page.title;
+							front.Description =  s_listp [j].PagesList [k].page.description;
+							var slides = s_listp [j].PagesList [k].content.lopage.loslide;
+							front.setBack (drBack);
+
+
+							linearScroll.AddView (front);
+							listFrontPager.Add (front);
+
+							var currentpage = s_listp [j].PagesList [k];
+			
+
+							for (int m = 1; m < slides.Count; m++) 
+							{
+								LOSlideSource slidesource = new LOSlideSource(this);
+
+								var _id_ = vm.LOsInCircle [i].lo.color_id;
+								is_main = !is_main;
+								
+
+								slidesource.ColorS = Configuration.ListaColores [indice % 6];
+
+								slidesource.Type = slides[m].lotype;
+								if (slides[m].lotitle != null) slidesource.Title = slides[m].lotitle;
+								if (slides[m].loparagraph != null) slidesource.Paragraph = slides[m].loparagraph;
+								if (slides[m].loimage != null) slidesource.ImageUrl = slides[m].loimage;
+								if (slides[m].lotext != null) slidesource.Paragraph = slides[m].lotext;
+								if (slides[m].loauthor != null) slidesource.Author = slides[m].loauthor;
+								if (slides[m].lovideo != null) slidesource.VideoUrl = slides[m].lovideo;
+
+								var c_slide = slides[m];
+
+
+								if (c_slide.loitemize != null)
+								{
+									slidesource.Itemize = new ObservableCollection<LOItemSource>();
+									var items = c_slide.loitemize.loitem;
+
+									for (int n = 0; n < items.Count; n++)
+									{ 
+										LOItemSource item = new LOItemSource();
+										if (items[n].loimage != null) item.ImageUrl = items[n].loimage;
+										if (items[n].lotext != null) item.Text = items[n].lotext;
+
+
+										var c_item_ize = items[n];
+
+										slidesource.Itemize.Add(item);
+									}
+								}
+
+								linearScroll.AddView (slidesource.getViewSlide());
+
+							} 
+						scrollPager.VerticalScrollBarEnabled = false;
+						scrollPager.AddView (linearScroll);
+						listaScroll.Add (scrollPager);
+						indice++;
+					}
+
+
+
+
+				}
+
+
+
+			}
+			lo.getWorkSpaceLayout.RemoveAllViews ();
+			lo.getWorkSpaceLayout.SetBackgroundColor (Color.White);
+			lo.getWorkSpaceLayout.AddView (viewPager);
+			//_progresD.Hide ();
+
+			List<int> numUn = new List<int>();
+			numUn.Add (0);
+			numUn.Add (4);
+			numUn.Add (9);
+
+			LOViewAdapter adapter = new LOViewAdapter (this, listaScroll);
+			viewPager.Adapter = adapter;
+			viewPager.SetCurrentItem (numUn[_currentUnidad], false);
+			//viewPager.CurrentItem = IndiceSection;
+
+		}
+
+
 		public Bitmap getBitmapFromAsset( String filePath) {
 			System.IO.Stream s = this.Assets.Open (filePath);
 			Bitmap bitmap = BitmapFactory.DecodeStream (s);
-
+		
 			return bitmap;
 		}
 
@@ -1370,5 +1535,119 @@ namespace MLearning.Droid.Views
 			base.OnPause ();
 			_dialogDownload.Hide ();
 		}
+
+
+		public void OnScrollChangedPager(VerticalScrollViewPager scrollView, int l, int t, int oldl, int oldt) {
+			var view=(LinearLayout)scrollView.GetChildAt (0);
+
+			if (view.GetChildAt (0).Tag.Equals("indice")) {
+				var pagerrr =  (FrontContainerView)view.GetChildAt (0);
+				pagerrr.Imagen.SetY (scrollView.ScrollY / 2);	
+			}if (view.GetChildAt (0).Tag.Equals("pager")) {
+				var pagerrr =  (FrontContainerViewPager)view.GetChildAt (0);
+				pagerrr.Imagen.SetY (scrollView.ScrollY / 2);	
+			}
+
+
+			//Console.WriteLine("SCROLLEOOO LOS PAGERRRRRRRRRRRRR "+ scrollView.ScrollY);
+
+		}
+
+
+		public class MyPageChangeListener : Java.Lang.Object, ViewPager.IOnPageChangeListener
+		{
+			Context _context;
+			List<FrontContainerView> listFront;
+			//ScrollViewHorizontal scroll;
+			public MyPageChangeListener (Context context, List<FrontContainerView> listFront)
+			{
+				_context = context;	
+				this.listFront = listFront;
+
+			}
+
+			#region IOnPageChangeListener implementation
+			public void OnPageScrollStateChanged (int p0)
+			{
+				Console.WriteLine (p0);
+			}
+
+			public void OnPageScrolled (int p0, float p1, int p2)
+			{
+
+				Console.WriteLine ("p0 = " + p0 + " p1 = " + p1 + " p2 = " + p2);
+				listFront [p0].Imagen.SetX (p2 / 2);		
+				//if(p0+1<listFront.Count){
+				//	listFront [p0 + 1].Imagen.SetX (p2/2);
+				//}
+
+			}
+
+			public void OnPageSelected (int position)
+			{
+				//	Toast.MakeText (_context, "Changed to page " + position, ToastLength.Short).Show ();
+			}
+			#endregion
+		}
+
+		public override void OnBackPressed ()
+		{
+
+			if (_lectorOpen) {
+				_lectorOpen = false;
+				showRutas ();
+			} else if (_currentCurso == 0) {
+				showHome ();
+			} else if (_currentCurso == 1) {
+				showHome ();
+			} else if (_currentCurso == 2) {
+				showHome ();
+			} else if (_currentCurso == 3) {
+				showHome ();
+			}
+
+
+		}
+
+
+
+		public class MyPageChangeListenerPager : Java.Lang.Object, ViewPager.IOnPageChangeListener
+		{
+			Context _context;
+			List<FrontContainerViewPager> listFront;
+			//ScrollViewHorizontal scroll;
+			public MyPageChangeListenerPager (Context context, List<FrontContainerViewPager> listFront)
+			{
+				_context = context;	
+				this.listFront = listFront;
+
+			}
+
+			#region IOnPageChangeListener implementation
+			public void OnPageScrollStateChanged (int p0)
+			{
+				Console.WriteLine (p0);
+			}
+
+			public void OnPageScrolled (int p0, float p1, int p2)
+			{
+
+				Console.WriteLine ("p0 = " + p0 + " p1 = " + p1 + " p2 = " + p2);
+				listFront [p0].Imagen.SetX (p2 / 2);		
+				//if(p0+1<listFront.Count){
+				//	listFront [p0 + 1].Imagen.SetX (p2/2);
+				//}
+
+			}
+
+			public void OnPageSelected (int position)
+			{
+				//	Toast.MakeText (_context, "Changed to page " + position, ToastLength.Short).Show ();
+			}
+			#endregion
+		}
+
+
+	
 	}
 }

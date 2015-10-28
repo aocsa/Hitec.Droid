@@ -170,7 +170,7 @@ namespace MLearning.Droid
 
 		private void imLoClick(object sender, EventArgs eventArgs)
 		{
-			
+			var textFormat = Android.Util.ComplexUnitType.Px;
 
 			var imView = sender as ImageLOView;
 			currentLOImageIndex = imView.index;
@@ -184,11 +184,28 @@ namespace MLearning.Droid
 			_fondo2.SetVerticalGravity (Android.Views.GravityFlags.Start);
 			_fondo2.RemoveAllViews();
 
+			LinearLayout infoCursoUnidad = new LinearLayout (context);
+			infoCursoUnidad.LayoutParameters = new LinearLayout.LayoutParams (Configuration.getWidth (320), -2);
+			infoCursoUnidad.Orientation = Orientation.Vertical;
+			//infoCursoUnidad.AddView (_txtCursoN);
+			//infoCursoUnidad.AddView (_txtUnidadN);
+
 			_fondo2.AddView(test);
-			_txtCursoN.Text = "PROBANDO";
-			_fondo2.AddView (_txtCursoN);
-			_txtUnidadN.Text = "PROBANDO";
-			_fondo2.AddView (_txtUnidadN);
+			//_txtCursoN.Text = "PROBANDO";
+			//_txtUnidadN.Text = "PROBANDO";
+			_txtCursoN.SetTextSize (textFormat,Configuration.getHeight(40));
+			_txtUnidadN.SetTextSize (textFormat,Configuration.getHeight(30));
+
+			_txtCursoN.SetTextColor (Color.ParseColor("#ffffff"));
+			_txtCursoN.Typeface =  Typeface.CreateFromAsset(context.Assets, "fonts/ArcherMediumPro.otf");
+
+			_txtUnidadN.SetTextColor (Color.ParseColor("#ffffff"));
+			_txtUnidadN.Typeface =  Typeface.CreateFromAsset(context.Assets, "fonts/ArcherMediumPro.otf");
+				
+				
+			//_fondo2.AddView (infoCursoUnidad);
+			infoCursoUnidad.SetX (Configuration.getWidth (300));
+			infoCursoUnidad.SetY (Configuration.getWidth (500));
 
 			//actualizar titulo, nombreAuthor, capitulo, imAuthor
 			_txtTitle_S1.Text = imView.Title;
@@ -601,9 +618,11 @@ namespace MLearning.Droid
 		
 			_workspace = new LinearLayout (context);
 			_workspace.LayoutParameters = new LinearLayout.LayoutParams (-1, -1);
+			//_workspace.SetBackgroundColor (Color.ParseColor ("#ffffff"));
 			//_workspace.SetY (Configuration.getHeight (110));
 
 			_mainLayout.AddView (_workspace);
+			//_mainLayout.SetBackgroundColor (Color.ParseColor ("#ffffff"));
 			//_workspace.AddView (_foro);
 			//_workspace.Visibility = Android.Views.ViewStates.Invisible;
 
@@ -615,6 +634,7 @@ namespace MLearning.Droid
 		{
 			var textFormat = Android.Util.ComplexUnitType.Px;
 			_spaceUnidades.RemoveAllViews ();
+			_listLinearUnidades.Clear ();
 			int numUnidades = _listUnidades.Count;
 			for (int i = 0; i < numUnidades; i++) 
 			{
@@ -647,7 +667,7 @@ namespace MLearning.Droid
 				//descriptionUnidad.Text = _listUnidades [i].Description;
 				descriptionUnidad.Typeface =  Typeface.CreateFromAsset(context.Assets, "fonts/HelveticaNeue.ttf");
 				descriptionUnidad.SetTextSize (textFormat,Configuration.getHeight(30));
-				descriptionUnidad.SetTextIsSelectable (true);
+				//descriptionUnidad.SetTextIsSelectable (true);
 
 				linearContenido.AddView (titleUnidad);
 				linearContenido.AddView (descriptionUnidad);

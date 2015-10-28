@@ -24,6 +24,7 @@ namespace MLearning.Droid
 		LinearLayout background;
 		TextView txtDescription;
 		TextView txtTitle;
+		ImageView imBack;
 
 		public CustomerImageView (Context context) :
 		base (context)
@@ -39,17 +40,21 @@ namespace MLearning.Droid
 			this.SetGravity(GravityFlags.Center);
 
 
+			imBack = new ImageView (context);
 			image = new RelativeLayout(context);
 			txtDescription = new TextView (context);
 			txtTitle = new TextView (context);
 			background = new LinearLayout (context);
 
-			image.SetGravity (GravityFlags.Center);
+
 			background.LayoutParameters = new LinearLayout.LayoutParams (Configuration.getWidth (530), Configuration.getHeight (356));
 			background.Orientation = Orientation.Vertical;
 			background.SetBackgroundColor (Color.ParseColor ("#50000000"));
+			background.BaselineAligned = true;
 
 			image.LayoutParameters = new RelativeLayout.LayoutParams (Configuration.getWidth (582), Configuration.getHeight (394));
+			image.SetGravity (GravityFlags.Center);
+
 
 			txtTitle.SetTextColor (Color.ParseColor("#ffffff"));
 			txtDescription.SetTextColor(Color.ParseColor("#ffffff"));
@@ -62,6 +67,8 @@ namespace MLearning.Droid
 
 
 
+
+			image.AddView (imBack);
 			image.AddView (background);
 
 			this.AddView (image);
@@ -96,10 +103,9 @@ namespace MLearning.Droid
 				//Drawable dr = new BitmapDrawable (Bitmap.CreateScaledBitmap (bm, Configuration.getWidth (582), Configuration.getHeight (394), true));
 
 				//image.SetBackgroundDrawable (dr);
-				ImageView imBack = new ImageView (context);
-				image.AddView (imBack);
 
-				Picasso.With (context).Load (_imagen).Resize(Configuration.getWidth(582),Configuration.getHeight(394)).Into (imBack);
+
+				Picasso.With (context).Load (_imagen).Resize(Configuration.getWidth(582),Configuration.getHeight(394)).CenterCrop().Into (imBack);
 
 
 
