@@ -71,7 +71,8 @@ namespace MLearning.Droid
 
 			txtTitle.SetTextColor (Color.ParseColor("#ffffff"));
 			txtTitle.SetPadding (Configuration.getWidth (20), 0, 0, 0);
-			txtTitle.SetTextSize (ComplexUnitType.Px, Configuration.getHeight (40));
+			//txtTitle.SetTextSize (ComplexUnitType.Px, Configuration.getHeight (40));
+			txtTitle.SetTextSize (ComplexUnitType.Dip, 21.0f);
 			txtTitle.Ellipsize = Android.Text.TextUtils.TruncateAt.End;
 			txtTitle.SetMaxLines (2);
 

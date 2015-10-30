@@ -64,8 +64,12 @@ namespace MLearning.Droid
 			//linearBarra.SetGravity (GravityFlags.CenterHorizontal);
 			linearTextContainer.SetGravity (GravityFlags.CenterVertical);
 
-			txtPhrase.SetTextSize (ComplexUnitType.Px, Configuration.getHeight (40));
-			txtAuthor.SetTextSize(ComplexUnitType.Px, Configuration.getHeight (30));
+			//txtPhrase.SetTextSize (ComplexUnitType.Px, Configuration.getHeight (40));
+			//txtAuthor.SetTextSize(ComplexUnitType.Px, Configuration.getHeight (30));
+
+			txtPhrase.SetTextSize (ComplexUnitType.Dip, 21.0f);
+			txtAuthor.SetTextSize(ComplexUnitType.Dip, 16.0f);
+
 			txtAuthor.SetTextColor (Color.ParseColor("#b0afb5"));
 
 			linearBarra.AddView (imgComilla);

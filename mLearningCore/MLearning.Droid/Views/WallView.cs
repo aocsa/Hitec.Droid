@@ -548,6 +548,7 @@ namespace MLearning.Droid
 			_spaceUnidades = new LinearLayout (context);
 			_spaceUnidades.LayoutParameters = new LinearLayout.LayoutParams (-1, -2);
 			_spaceUnidades.Orientation = Orientation.Vertical;
+			_spaceUnidades.SetBackgroundColor (Color.White);
 			_mainSpace.AddView (_spaceUnidades);
 
 			//section4------------------------------------------------
@@ -630,7 +631,7 @@ namespace MLearning.Droid
 		}
 
 
-		public void initUnidades()
+		public void initUnidades(int indexCurso, int indexUnidad)
 		{
 			var textFormat = Android.Util.ComplexUnitType.Px;
 			_spaceUnidades.RemoveAllViews ();
@@ -648,7 +649,9 @@ namespace MLearning.Droid
 				icon.SetImageBitmap(Bitmap.CreateScaledBitmap (getBitmapFromAsset("icons/iconmap.png"), Configuration.getWidth (60), Configuration.getWidth (80), true));
 				icon.SetX (Configuration.getWidth (60));
 
-				linearUnidad.AddView (icon);
+				if (indexCurso == 0) {
+					linearUnidad.AddView (icon);
+				}
 
 				LinearLayout linearContenido = new LinearLayout (context);
 				linearContenido.LayoutParameters = new LinearLayout.LayoutParams (Configuration.getWidth(460), -2);
@@ -671,6 +674,14 @@ namespace MLearning.Droid
 
 				linearContenido.AddView (titleUnidad);
 				linearContenido.AddView (descriptionUnidad);
+
+
+				if (indexCurso == 2) {
+					linearContenido.RemoveViewAt (1);
+					ImageView imgUnidad = new ImageView (context);
+					Picasso.With (context).Load (_listUnidades[i].ImageUrl).Resize(Configuration.getWidth(500),Configuration.getHeight(400)).CenterInside().Into (imgUnidad);
+					linearContenido.AddView (imgUnidad);
+				}
 
 				linearUnidad.AddView (linearContenido);
 

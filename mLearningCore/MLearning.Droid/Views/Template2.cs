@@ -65,6 +65,9 @@ namespace MLearning.Droid
 		public void ini(){
 
 			var textFormat = Android.Util.ComplexUnitType.Px;
+			var textFormatdip = Android.Util.ComplexUnitType.Dip;
+
+
 
 			mainLayout = new RelativeLayout (context);
 			mainLayout.LayoutParameters = new RelativeLayout.LayoutParams (-1,-1);
@@ -81,11 +84,14 @@ namespace MLearning.Droid
 
 			//titleHeader.Text = "El Perú cuenta con mas de 357000 tipos de aves";
 			titleHeader.SetTypeface(null,TypefaceStyle.Bold);
-			titleHeader.SetTextSize (textFormat, Configuration.getHeight (52));
+			//titleHeader.SetTextSize (textFormat, Configuration.getHeight (52));
+			titleHeader.SetTextSize (textFormatdip, 27.0f);
 			titleHeader.SetMaxWidth (Configuration.getWidth (583));
 
 			//content.Text = "Los factores geográficos, climáticos y evolutivos  convierten al Perú en el mejor lugar para realizar la observacion de aves(birthwaching) Tiene 1830 especies de pájaros(segun la lista oficial del SACC/CRAP), tambien es considerado el";
-			content.SetTextSize (textFormat, Configuration.getHeight (26));
+		//	content.SetTextSize (textFormat, Configuration.getHeight (26));
+			content.SetTextSize (textFormatdip, 12.0f);
+
 			content.SetMaxWidth (Configuration.getWidth(583));
 
 			contenLayout.AddView (titleHeader);

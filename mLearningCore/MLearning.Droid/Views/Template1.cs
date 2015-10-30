@@ -70,6 +70,8 @@ namespace MLearning.Droid
 
 			var textFormat = Android.Util.ComplexUnitType.Px;
 
+			var textFormatdip = Android.Util.ComplexUnitType.Dip;
+
 			mainLayout = new RelativeLayout (context);
 			mainLayout.LayoutParameters = new RelativeLayout.LayoutParams (-1,-1);
 
@@ -125,6 +127,7 @@ namespace MLearning.Droid
 			//titleHeader.Text = "Diferentes tipos de aves en Perú";
 			titleHeader.SetTextColor (Color.ParseColor ("#FF0080"));
 			titleHeader.SetTextSize (textFormat, Configuration.getHeight (38));
+			titleHeader.SetTextSize (textFormatdip, 16.0f);
 			titleHeader.SetMaxWidth (Configuration.getWidth (274));
 			titleHeader.SetMaxHeight (Configuration.getHeight (80));
 			//titleHeader.SetX (Configuration.getHeight (218));titleHeader.SetY (Configuration.getWidth (794-desviacion));
@@ -142,7 +145,8 @@ namespace MLearning.Droid
 			AutorHeader.SetMaxLines(1);
 
 			//content.Text = "Los factores geográficos, climáticos y evolutivos  convierten al Perú en el mejor lugar para realizar la observacion de aves(birthwaching) Tiene 1830 especies de";
-			content.SetTextSize (textFormat, Configuration.getHeight (24));
+			//content.SetTextSize (textFormat, Configuration.getHeight (24));
+			content.SetTextSize (textFormatdip, 12.0f);
 			content.SetMaxWidth (Configuration.getWidth(501));
 			//content.SetX (Configuration.getHeight (68));content.SetY (Configuration.getWidth (951-desviacion));
 			//content.Ellipsize = TextUtils.TruncateAt.End;

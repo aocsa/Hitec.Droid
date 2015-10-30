@@ -999,8 +999,10 @@ namespace MLearning.Droid.Views
 				lo.getWorkSpaceLayout.SetBackgroundColor (Color.Transparent);
 				lo.getWorkSpaceLayout.RemoveAllViews ();
 
-				if (vm.CirclesList.Count >= index) {
+				if (vm.CirclesList.Count >= index || vm.CirclesList[index]==null) {
 					vm.SelectCircleCommand.Execute (vm.CirclesList [index]);
+				}else{
+					return;
 				}
 						
 				vm.OpenLOCommand.Execute(vm.LearningOjectsList[index]);
@@ -1265,12 +1267,15 @@ namespace MLearning.Droid.Views
 
 			Console.WriteLine ("::::::::::::::::::::::::::: " + imView.index + " :: " +vm.LOsInCircle.Count);
 
-			if (vm.LOsInCircle.Count <= imView.index || vm.LOsInCircle [imView.index].stack.StacksList == null) {
+			if (vm.LOsInCircle.Count <= imView.index 
+				|| vm.LOsInCircle [imView.index].stack == null
+				|| vm.LOsInCircle [imView.index].stack.StacksList == null) {
 				
 				var myHandler = new Handler ();
 				myHandler.Post(()=>{
-					Toast.MakeText (this, "Downloading...", ToastLength.Long).Show();
+					Toast.MakeText (this, "Downloading...", ToastLength.Short).Show();
 				});
+				return;
 			} else {
 				Console.WriteLine ("IN");
 				try{
@@ -1284,12 +1289,16 @@ namespace MLearning.Droid.Views
 				for (int j = 0; j < s_list.Count; j++) {
 					lo._listUnidades.Add (new UnidadItem { 
 						Title = s_list [j].PagesList [0].page.title, 
-						Description = s_list [j].PagesList [0].page.description
+						Description = s_list [j].PagesList [0].page.description,
+						ImageUrl = s_list[j].PagesList[0].page.url_img
+							
 					});
-
+					Console.WriteLine (lo._listUnidades[j].Title);
+					Console.WriteLine (lo._listUnidades[j].Description);
+					Console.WriteLine (lo._listUnidades[j].ImageUrl);
 				}
 
-				lo.initUnidades ();
+				lo.initUnidades (_currentCurso,_currentUnidad);
 				//lo._txtCursoN.Text = vm.CirclesList[_currentCurso].name;
 				//lo._txtUnidadN.Text = vm.LOsInCircle[imView.index].lo.title;
 

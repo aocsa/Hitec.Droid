@@ -58,6 +58,8 @@ namespace MLearning.Droid
 
 
 			var textFormat = Android.Util.ComplexUnitType.Px;
+			var textFormatdip = Android.Util.ComplexUnitType.Dip;
+
 
 			mainLayout = new RelativeLayout (context);
 			mainLayout.LayoutParameters = new RelativeLayout.LayoutParams (-1,-1);
@@ -78,7 +80,8 @@ namespace MLearning.Droid
 
 			//titleHeaderList.Text = "Tipos de Aves";
 			titleHeaderList.SetTextColor (Color.ParseColor ("#FF0080"));
-			titleHeaderList.SetTextSize (textFormat, Configuration.getHeight (38));
+			//titleHeaderList.SetTextSize (textFormat, Configuration.getHeight (38));
+			titleHeaderList.SetTextSize (textFormatdip, 20.0f);
 			titleHeaderList.SetMaxWidth (Configuration.getWidth (510));
 
 			contentListLayout.SetBackgroundResource (Resource.Drawable.border);
