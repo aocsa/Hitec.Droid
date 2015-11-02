@@ -1,9 +1,9 @@
 ﻿<Properties StartupItem="MLearning.Droid\Hitec.Droid.csproj">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Release" PreferredExecutionTarget="Android.4C3AWN154L014669" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Release" PreferredExecutionTarget="Android.Api15" />
   <MonoDevelop.Ide.Workbench ActiveDocument="MLearning.Droid\Views\MainView.cs">
     <Files>
-      <File FileName="MLearning.Droid\Views\MainView.cs" Line="1277" Column="8" />
-      <File FileName="MLearning.Droid\Views\WallView.cs" Line="686" Column="44" />
+      <File FileName="MLearning.Droid\Views\MainView.cs" Line="1268" Column="18" />
+      <File FileName="MLearning.Droid\Views\WallView.cs" Line="1" Column="1" />
       <File FileName="MLearning.Droid\Views\frontView.cs" Line="1" Column="1" />
       <File FileName="MLearning.Core\ViewModels\MainViewModel.cs" Line="1" Column="1" />
       <File FileName="c:\Users\ImBonus\Desktop\Hitec.Droid-master\mLearningCore\MLearning.Droid\Views\Configuration.cs" Line="1" Column="1" />
@@ -11,10 +11,10 @@
       <File FileName="MLearning.Droid\SplashScreen.cs" Line="1" Column="1" />
       <File FileName="MLearning.Droid\Views\FrontContainerViewPager.cs" Line="1" Column="1" />
       <File FileName="MLearning.Droid\Views\FrontContainerView.cs" Line="1" Column="1" />
-      <File FileName="MLearning.Droid\DataSource\LOSlideSource.cs" Line="170" Column="11" />
-      <File FileName="MLearning.Droid\Views\CustomerImageView.cs" Line="38" Column="3" />
-      <File FileName="MLearning.Droid\Views\UnidadItem.cs" Line="13" Column="1" />
-      <File FileName="MLearning.Droid\Views\Template1.cs" Line="229" Column="138" />
+      <File FileName="MLearning.Droid\DataSource\LOSlideSource.cs" Line="1" Column="1" />
+      <File FileName="MLearning.Droid\Views\CustomerImageView.cs" Line="1" Column="1" />
+      <File FileName="MLearning.Droid\Views\UnidadItem.cs" Line="1" Column="1" />
+      <File FileName="MLearning.Droid\Views\Template1.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
