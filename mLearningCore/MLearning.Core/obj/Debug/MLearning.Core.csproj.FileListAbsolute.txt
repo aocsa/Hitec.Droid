@@ -258,4 +258,3 @@ C:\Users\ImBonus\Documents\GitHub\Hitec\Hitec.Droid\mLearningCore\MLearning.Core
 C:\Users\ImBonus\Documents\GitHub\Hitec\Hitec.Droid\mLearningCore\MLearning.Core\obj\Debug\MLearning.Core.csproj.App.config
 C:\Users\ImBonus\Documents\GitHub\Hitec\Hitec.Droid\mLearningCore\MLearning.Core\obj\Debug\MLearning.Core.dll
 C:\Users\ImBonus\Documents\GitHub\Hitec\Hitec.Droid\mLearningCore\MLearning.Core\obj\Debug\MLearning.Core.pdb
-C:\Users\ImBonus\Documents\GitHub\Hitec\Hitec.Droid\mLearningCore\MLearning.Core\obj\Debug\MLearning.Core.csprojResolveAssemblyReference.cache
