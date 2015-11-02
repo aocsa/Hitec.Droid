@@ -82,7 +82,7 @@ $RECYCLE.BIN/
 *.csproj
 *.sln
 
-bin/
-obj/
-Release/
-Debug/
+/bin/
+/obj/
+/Release/
+/Debug/
