@@ -84,3 +84,5 @@ $RECYCLE.BIN/
 
 bin/
 obj/
+Release/
+Debug/
