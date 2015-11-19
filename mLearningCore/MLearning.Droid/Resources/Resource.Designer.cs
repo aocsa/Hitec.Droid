@@ -1412,8 +1412,8 @@ namespace MLearning.Droid
 			// aapt resource value: 0x7f06000a
 			public const int MvxBindingTagUnique = 2131099658;
 			
-			// aapt resource value: 0x7f060068
-			public const int action0 = 2131099752;
+			// aapt resource value: 0x7f060061
+			public const int action0 = 2131099745;
 			
 			// aapt resource value: 0x7f060042
 			public const int action_bar = 2131099714;
@@ -1439,8 +1439,8 @@ namespace MLearning.Droid
 			// aapt resource value: 0x7f060043
 			public const int action_context_bar = 2131099715;
 			
-			// aapt resource value: 0x7f06006c
-			public const int action_divider = 2131099756;
+			// aapt resource value: 0x7f060065
+			public const int action_divider = 2131099749;
 			
 			// aapt resource value: 0x7f060003
 			public const int action_menu_divider = 2131099651;
@@ -1478,29 +1478,14 @@ namespace MLearning.Droid
 			// aapt resource value: 0x7f060038
 			public const int buttonPanel = 2131099704;
 			
-			// aapt resource value: 0x7f060069
-			public const int cancel_action = 2131099753;
-			
-			// aapt resource value: 0x7f060066
-			public const int chat_list_title = 2131099750;
-			
-			// aapt resource value: 0x7f060067
-			public const int chat_list_view = 2131099751;
-			
-			// aapt resource value: 0x7f060064
-			public const int chat_view_info1 = 2131099748;
-			
-			// aapt resource value: 0x7f060065
-			public const int chat_view_info2 = 2131099749;
-			
-			// aapt resource value: 0x7f060063
-			public const int chat_view_title = 2131099747;
+			// aapt resource value: 0x7f060062
+			public const int cancel_action = 2131099746;
 			
 			// aapt resource value: 0x7f06003a
 			public const int checkbox = 2131099706;
 			
-			// aapt resource value: 0x7f06006f
-			public const int chronometer = 2131099759;
+			// aapt resource value: 0x7f060068
+			public const int chronometer = 2131099752;
 			
 			// aapt resource value: 0x7f060019
 			public const int collapseActionView = 2131099673;
@@ -1541,8 +1526,8 @@ namespace MLearning.Droid
 			// aapt resource value: 0x7f060016
 			public const int end = 2131099670;
 			
-			// aapt resource value: 0x7f060074
-			public const int end_padder = 2131099764;
+			// aapt resource value: 0x7f06006d
+			public const int end_padder = 2131099757;
 			
 			// aapt resource value: 0x7f060029
 			public const int expand_activities_button = 2131099689;
@@ -1568,32 +1553,32 @@ namespace MLearning.Droid
 			// aapt resource value: 0x7f06005b
 			public const int imageView1 = 2131099739;
 			
-			// aapt resource value: 0x7f060076
-			public const int imageView_Row_CL = 2131099766;
+			// aapt resource value: 0x7f06006f
+			public const int imageView_Row_CL = 2131099759;
 			
-			// aapt resource value: 0x7f06007b
-			public const int imageView_Row_NL = 2131099771;
+			// aapt resource value: 0x7f060074
+			public const int imageView_Row_NL = 2131099764;
 			
-			// aapt resource value: 0x7f060080
-			public const int imageView_Row_TemplateList = 2131099776;
-			
-			// aapt resource value: 0x7f060083
-			public const int imageView_point_TemplateList = 2131099779;
-			
-			// aapt resource value: 0x7f060073
-			public const int info = 2131099763;
-			
-			// aapt resource value: 0x7f060077
-			public const int info_Row_CL = 2131099767;
+			// aapt resource value: 0x7f060079
+			public const int imageView_Row_TemplateList = 2131099769;
 			
 			// aapt resource value: 0x7f06007c
-			public const int info_Row_NL = 2131099772;
+			public const int imageView_point_TemplateList = 2131099772;
 			
-			// aapt resource value: 0x7f060081
-			public const int info_Row_TemplateList_LinearLayout = 2131099777;
+			// aapt resource value: 0x7f06006c
+			public const int info = 2131099756;
 			
-			// aapt resource value: 0x7f060082
-			public const int info_Row_TemplateList_LinearLayout_INFO = 2131099778;
+			// aapt resource value: 0x7f060070
+			public const int info_Row_CL = 2131099760;
+			
+			// aapt resource value: 0x7f060075
+			public const int info_Row_NL = 2131099765;
+			
+			// aapt resource value: 0x7f06007a
+			public const int info_Row_TemplateList_LinearLayout = 2131099770;
+			
+			// aapt resource value: 0x7f06007b
+			public const int info_Row_TemplateList_LinearLayout_INFO = 2131099771;
 			
 			// aapt resource value: 0x7f060000
 			public const int item_touch_helper_previous_elevation = 2131099648;
@@ -1601,11 +1586,11 @@ namespace MLearning.Droid
 			// aapt resource value: 0x7f060060
 			public const int left_drawer = 2131099744;
 			
-			// aapt resource value: 0x7f06006d
-			public const int line1 = 2131099757;
+			// aapt resource value: 0x7f060066
+			public const int line1 = 2131099750;
 			
-			// aapt resource value: 0x7f060071
-			public const int line3 = 2131099761;
+			// aapt resource value: 0x7f06006a
+			public const int line3 = 2131099754;
 			
 			// aapt resource value: 0x7f060057
 			public const int linearLayout1 = 2131099735;
@@ -1625,11 +1610,8 @@ namespace MLearning.Droid
 			// aapt resource value: 0x7f06005d
 			public const int main_view_relativeLayout = 2131099741;
 			
-			// aapt resource value: 0x7f060062
-			public const int main_view_relativeLayoutCL = 2131099746;
-			
-			// aapt resource value: 0x7f06006b
-			public const int media_actions = 2131099755;
+			// aapt resource value: 0x7f060064
+			public const int media_actions = 2131099748;
 			
 			// aapt resource value: 0x7f060017
 			public const int middle = 2131099671;
@@ -1661,17 +1643,14 @@ namespace MLearning.Droid
 			// aapt resource value: 0x7f06003c
 			public const int radio = 2131099708;
 			
-			// aapt resource value: 0x7f060061
-			public const int right_drawer = 2131099745;
+			// aapt resource value: 0x7f06006e
+			public const int row_chat_list = 2131099758;
 			
-			// aapt resource value: 0x7f060075
-			public const int row_chat_list = 2131099765;
+			// aapt resource value: 0x7f060073
+			public const int row_notification_list = 2131099763;
 			
-			// aapt resource value: 0x7f06007a
-			public const int row_notification_list = 2131099770;
-			
-			// aapt resource value: 0x7f06007f
-			public const int row_template_list = 2131099775;
+			// aapt resource value: 0x7f060078
+			public const int row_template_list = 2131099768;
 			
 			// aapt resource value: 0x7f060021
 			public const int screen = 2131099681;
@@ -1736,8 +1715,8 @@ namespace MLearning.Droid
 			// aapt resource value: 0x7f060024
 			public const int src_over = 2131099684;
 			
-			// aapt resource value: 0x7f06006a
-			public const int status_bar_latest_event_content = 2131099754;
+			// aapt resource value: 0x7f060063
+			public const int status_bar_latest_event_content = 2131099747;
 			
 			// aapt resource value: 0x7f06004d
 			public const int submit_area = 2131099725;
@@ -1745,11 +1724,11 @@ namespace MLearning.Droid
 			// aapt resource value: 0x7f06000d
 			public const int tabMode = 2131099661;
 			
-			// aapt resource value: 0x7f060072
-			public const int text = 2131099762;
+			// aapt resource value: 0x7f06006b
+			public const int text = 2131099755;
 			
-			// aapt resource value: 0x7f060070
-			public const int text2 = 2131099760;
+			// aapt resource value: 0x7f060069
+			public const int text2 = 2131099753;
 			
 			// aapt resource value: 0x7f060035
 			public const int textSpacerNoButtons = 2131099701;
@@ -1766,35 +1745,35 @@ namespace MLearning.Droid
 			// aapt resource value: 0x7f060054
 			public const int textView4 = 2131099732;
 			
-			// aapt resource value: 0x7f06007e
-			public const int textView_comment_NL = 2131099774;
+			// aapt resource value: 0x7f060077
+			public const int textView_comment_NL = 2131099767;
 			
-			// aapt resource value: 0x7f060088
-			public const int textView_comment_TemplateList = 2131099784;
+			// aapt resource value: 0x7f060081
+			public const int textView_comment_TemplateList = 2131099777;
+			
+			// aapt resource value: 0x7f060076
+			public const int textView_date_NL = 2131099766;
+			
+			// aapt resource value: 0x7f060080
+			public const int textView_date_TemplateList = 2131099776;
+			
+			// aapt resource value: 0x7f060071
+			public const int textView_name_CL = 2131099761;
+			
+			// aapt resource value: 0x7f06007e
+			public const int textView_name_TemplateList = 2131099774;
 			
 			// aapt resource value: 0x7f06007d
-			public const int textView_date_NL = 2131099773;
+			public const int textView_space1_TemplateList = 2131099773;
 			
-			// aapt resource value: 0x7f060087
-			public const int textView_date_TemplateList = 2131099783;
+			// aapt resource value: 0x7f06007f
+			public const int textView_space2_TemplateList = 2131099775;
 			
-			// aapt resource value: 0x7f060078
-			public const int textView_name_CL = 2131099768;
+			// aapt resource value: 0x7f060072
+			public const int textView_status_CL = 2131099762;
 			
-			// aapt resource value: 0x7f060085
-			public const int textView_name_TemplateList = 2131099781;
-			
-			// aapt resource value: 0x7f060084
-			public const int textView_space1_TemplateList = 2131099780;
-			
-			// aapt resource value: 0x7f060086
-			public const int textView_space2_TemplateList = 2131099782;
-			
-			// aapt resource value: 0x7f060079
-			public const int textView_status_CL = 2131099769;
-			
-			// aapt resource value: 0x7f06006e
-			public const int time = 2131099758;
+			// aapt resource value: 0x7f060067
+			public const int time = 2131099751;
 			
 			// aapt resource value: 0x7f06002e
 			public const int title = 2131099694;

@@ -21,8 +21,10 @@ namespace MLearning.Droid
 		public LinearLayout header;
 		public List<UnidadItem> _listUnidades = new List<UnidadItem>();
 		ListView  _listViewUnidades;
+		public List<ImageView> _listIconMap = new List<ImageView> ();
 
 		public LinearLayout _spaceUnidades;
+		public LinearLayout _mapSpace;
 
 		public List<LinearLayout> _listLinearUnidades = new List<LinearLayout> ();
 
@@ -37,7 +39,7 @@ namespace MLearning.Droid
 		LinearLayout commentLayout;
 		ListView commentList;
 		List<CommentDataRow> _dataTemplateItem = new List<CommentDataRow> ();
-
+		LinearLayout infoCursoUnidad;
 
 		LinearLayout _workspace;
 
@@ -136,6 +138,11 @@ namespace MLearning.Droid
 
 				}
 			}
+
+		}
+
+		public LinearLayout getMapSpaceLayout{
+			get{ return _mapSpace;}
 		}
 
 		public LinearLayout getWorkSpaceLayout{
@@ -177,43 +184,37 @@ namespace MLearning.Droid
 		
 			var test = new ImageView (context);
 			test.DrawingCacheEnabled = true;
-
 			test.LayoutParameters = new LinearLayout.LayoutParams (-1, -1);
 
 			Picasso.With (context).Load (imView.sBackgoundUrl).Resize(Configuration.getWidth(640),Configuration.getWidth(640)).CenterCrop().Into (test);
 			_fondo2.SetVerticalGravity (Android.Views.GravityFlags.Start);
 			_fondo2.RemoveAllViews();
 
-			LinearLayout infoCursoUnidad = new LinearLayout (context);
-			infoCursoUnidad.LayoutParameters = new LinearLayout.LayoutParams (Configuration.getWidth (320), -2);
-			infoCursoUnidad.Orientation = Orientation.Vertical;
-			//infoCursoUnidad.AddView (_txtCursoN);
-			//infoCursoUnidad.AddView (_txtUnidadN);
+			infoCursoUnidad.RemoveAllViews ();
+			infoCursoUnidad.AddView (_txtCursoN);
+			infoCursoUnidad.AddView (_txtUnidadN);
 
 			_fondo2.AddView(test);
 			//_txtCursoN.Text = "PROBANDO";
 			//_txtUnidadN.Text = "PROBANDO";
-			_txtCursoN.SetTextSize (textFormat,Configuration.getHeight(40));
-			_txtUnidadN.SetTextSize (textFormat,Configuration.getHeight(30));
+			_txtCursoN.SetTextSize (textFormat,Configuration.getHeight(60));
+			_txtUnidadN.SetTextSize (textFormat,Configuration.getHeight(50));
 
 			_txtCursoN.SetTextColor (Color.ParseColor("#ffffff"));
 			_txtCursoN.Typeface =  Typeface.CreateFromAsset(context.Assets, "fonts/ArcherMediumPro.otf");
 
 			_txtUnidadN.SetTextColor (Color.ParseColor("#ffffff"));
 			_txtUnidadN.Typeface =  Typeface.CreateFromAsset(context.Assets, "fonts/ArcherMediumPro.otf");
+			_txtCursoN.Gravity = Android.Views.GravityFlags.Right;
+			_txtUnidadN.Gravity = Android.Views.GravityFlags.Right;
+			//_txtCursoN.TextAlignment = Android.Views.TextAlignment.Gravity;
 				
 				
-			//_fondo2.AddView (infoCursoUnidad);
-			infoCursoUnidad.SetX (Configuration.getWidth (300));
-			infoCursoUnidad.SetY (Configuration.getWidth (500));
+			_fondo2.AddView (infoCursoUnidad);
+			//infoCursoUnidad.SetX (Configuration.getWidth (300));
+			infoCursoUnidad.SetY (Configuration.getWidth (420));
 
 			//actualizar titulo, nombreAuthor, capitulo, imAuthor
-			_txtTitle_S1.Text = imView.Title;
-			_txtAuthor_S1.Text = imView.Author;
-			_txtChapter_S1.Text = imView.Chapter;
-			_imAuthor_S1.SetImageBitmap (imView.ImagenUsuario);
-
-
 		}
 
 		//section_3
@@ -271,10 +272,9 @@ namespace MLearning.Droid
 
 
 			_txtCursoN = new TextView (context);
+			_txtCursoN.LayoutParameters = new LinearLayout.LayoutParams (-1, -2);
 			_txtUnidadN = new TextView (context);
 			_mainLayout = new RelativeLayout (context);
-
-		
 
 			linearGradiente = new LinearLayout (context);
 			linearGradiente.LayoutParameters = new LinearLayout.LayoutParams (-1, Configuration.getHeight (310));
@@ -285,15 +285,17 @@ namespace MLearning.Droid
 
 			_mainLayout.LayoutParameters = new RelativeLayout.LayoutParams (-1, -1);
 
-
-
-
-
 			_scrollSpace = new VerticalScrollView (context);
 			_scrollSpace.LayoutParameters = new VerticalScrollView.LayoutParams (-1, Configuration.getHeight(1015));
 			_scrollSpace.SetY (Configuration.getHeight (125));
 			//_scrollSpace.SetBackgroundColor (Color.ParseColor ("#FF0000"));
 			_mainLayout.AddView (_scrollSpace);
+
+			_mapSpace = new LinearLayout (context);
+
+			_mapSpace.LayoutParameters = new LinearLayout.LayoutParams (-1, Configuration.getHeight (1015));
+			_mapSpace.SetY(Configuration.getHeight (125));
+			_mainLayout.AddView (_mapSpace);
 
 
 			LinearLayout _mainSpace = new LinearLayout (context);
@@ -311,6 +313,13 @@ namespace MLearning.Droid
 			dr1 = null;
 
 			_mainSpace.AddView (_fondo2);
+
+			infoCursoUnidad = new LinearLayout (context);
+			infoCursoUnidad.LayoutParameters = new LinearLayout.LayoutParams (-1, Configuration.getHeight(250));
+			infoCursoUnidad.Orientation = Orientation.Vertical;
+			infoCursoUnidad.SetGravity(Android.Views.GravityFlags.Right);
+			infoCursoUnidad.SetPadding (Configuration.getWidth(30), Configuration.getWidth (25), Configuration.getWidth(30), Configuration.getWidth (25));
+			infoCursoUnidad.SetBackgroundColor (Color.ParseColor ("#40000000"));
 
 			TextView _txtCurso = new TextView (context);
 			_txtCurso.Text = "LAS RUTAS";
@@ -636,6 +645,7 @@ namespace MLearning.Droid
 			var textFormat = Android.Util.ComplexUnitType.Px;
 			_spaceUnidades.RemoveAllViews ();
 			_listLinearUnidades.Clear ();
+			_listIconMap.Clear ();
 			int numUnidades = _listUnidades.Count;
 			for (int i = 0; i < numUnidades; i++) 
 			{
@@ -644,13 +654,17 @@ namespace MLearning.Droid
 				linearUnidad.Orientation = Orientation.Horizontal;
 				linearUnidad.SetGravity (Android.Views.GravityFlags.CenterVertical);
 
-				ImageView icon = new ImageView (context);
+				IconImageMap icon = new IconImageMap (context);
+				icon.indexCurso = indexCurso;
+				icon.indexUnidad = indexUnidad;
+				icon.indexLO = i;
 
 				icon.SetImageBitmap(Bitmap.CreateScaledBitmap (getBitmapFromAsset("icons/iconmap.png"), Configuration.getWidth (60), Configuration.getWidth (80), true));
 				icon.SetX (Configuration.getWidth (60));
 
 				if (indexCurso == 0) {
 					linearUnidad.AddView (icon);
+					_listIconMap.Add (icon);
 				}
 
 				LinearLayout linearContenido = new LinearLayout (context);

@@ -34,16 +34,13 @@ namespace MLearning.Droid.Views
 		private DrawerLayout mDrawerLayout;
 
 		private LinearLayout mLeftDrawer;
-		private LinearLayout mRightDrawer;
+
 
 		private List<ChatDataRow> mItemsChat;
-		private ListView mListViewChat;
+
 		private LOContainerView _foro;
 
-		TextView title_view;
-		TextView title_list;
-		TextView info1;
-		TextView info2;
+
 		List<ImageLOView> list = new List<ImageLOView> ();
 
 		//private SupportToolbar mToolbar;
@@ -127,6 +124,7 @@ namespace MLearning.Droid.Views
 		public int _currentCurso;
 		public int _currentUnidad;
 		public bool _lectorOpen;
+		public bool _mapOpen;
 
 		protected override void OnCreate(Bundle bundle)
 		{
@@ -136,6 +134,7 @@ namespace MLearning.Droid.Views
 
 			_currentCurso = -1;
 			_lectorOpen = false;
+			_mapOpen = false;
 
 			headersDR.Add (new BitmapDrawable (getBitmapFromAsset("images/header1.png")));
 			headersDR.Add (new BitmapDrawable (getBitmapFromAsset("images/header2.png")));
@@ -177,64 +176,31 @@ namespace MLearning.Droid.Views
 
 			mDrawerLayout = FindViewById<DrawerLayout>(Resource.Id.drawer_layout);
 			mLeftDrawer = FindViewById<LinearLayout>(Resource.Id.left_drawer);
-			mRightDrawer = FindViewById<LinearLayout>(Resource.Id.right_drawer);
+			//mRightDrawer = FindViewById<LinearLayout>(Resource.Id.right_drawer);
 
 			mLeftDrawer.Tag = 0;
-			mRightDrawer.Tag = 1;
+			//mRightDrawer.Tag = 1;
 
 			frameLayout = FindViewById<FrameLayout> (Resource.Id.content_frame);
 
 			main_ContentView = new RelativeLayout (this);
 			main_ContentView.LayoutParameters = new RelativeLayout.LayoutParams (-1, -1);
 
-			LOContainerView LOContainer = new LOContainerView (this);
 
-			lo.OpenChat.Click += imBtn_Chat_Click;
-			lo.OpenUnits.Click += imBtn_Units_Click;
 
 			main_ContentView.AddView (lo);
 			lo.getWorkSpaceLayout.AddView (frontView);
 
 			frameLayout.AddView (main_ContentView);
 
-			RelativeLayout RL = FindViewById<RelativeLayout> (Resource.Id.main_view_relativeLayoutCL);
 
-			Drawable dr = new BitmapDrawable (Bitmap.CreateScaledBitmap (getBitmapFromAsset ("icons/nubeactivity.png"), 768, 1024, true));
-			RL.SetBackgroundDrawable (dr);
+			//RL.SetBackgroundDrawable (dr);
 
 			//seting up chat view content
 
-			title_view = FindViewById<TextView> (Resource.Id.chat_view_title);
+			//title_view = FindViewById<TextView> (Resource.Id.chat_view_title);
 
 
-			info1= FindViewById<TextView> (Resource.Id.chat_view_info1);
-			info2 = FindViewById<TextView> (Resource.Id.chat_view_info2);
-			title_list = FindViewById<TextView> (Resource.Id.chat_list_title);
-
-			mListViewChat = FindViewById<ListView> (Resource.Id.chat_list_view);
-
-			title_view.SetX (Configuration.getWidth(74));
-			title_view.SetY (Configuration.getHeight (202));
-
-			title_view.Typeface =  Typeface.CreateFromAsset(this.Assets, "fonts/HelveticaNeue.ttf");
-			title_view.SetTypeface (null, TypefaceStyle.Bold);
-
-			info1.SetX (Configuration.getWidth (76));
-			info1.SetY (Configuration.getHeight (250));
-			info1.Typeface =  Typeface.CreateFromAsset(this.Assets, "fonts/HelveticaNeue.ttf");
-
-			info2.SetX (Configuration.getWidth (76));
-			info2.SetY (Configuration.getHeight (285));
-			info2.Typeface =  Typeface.CreateFromAsset(this.Assets, "fonts/HelveticaNeue.ttf");
-
-			title_list.SetX (Configuration.getWidth (76));
-			title_list.SetY (Configuration.getHeight (391));
-
-			title_list.Typeface =  Typeface.CreateFromAsset(this.Assets, "fonts/HelveticaNeue.ttf");
-			title_list.SetTypeface (null, TypefaceStyle.Bold);
-
-			mListViewChat.SetX (0);
-			mListViewChat.SetY (Configuration.getHeight (440));
 
 
 			linearMainLayout.AddView (mainLayout);
@@ -542,7 +508,7 @@ namespace MLearning.Droid.Views
 			imgChat.SetX (Configuration.getWidth(59)); imgChat.SetY (Configuration.getHeight(145));
 			imgChat.Click += delegate {
 				mDrawerLayout.CloseDrawer (mLeftDrawer);
-				mDrawerLayout.OpenDrawer (mRightDrawer);
+				//mDrawerLayout.OpenDrawer (mRightDrawer);
 			};
 
 			imgNotificacion.SetX (Configuration.getWidth(59));  imgNotificacion.SetY (Configuration.getHeight(233)); 
@@ -647,8 +613,8 @@ namespace MLearning.Droid.Views
 
 
 			case "UsersList":
-				populatePeopleScroll(0);
-				(ViewModel as MainViewModel).UsersList.CollectionChanged+=  UsersList_CollectionChanged;
+				//populatePeopleScroll(0);
+				//(ViewModel as MainViewModel).UsersList.CollectionChanged+=  UsersList_CollectionChanged;
 				break;
 
 			case "PendingQuizzesList":
@@ -757,8 +723,8 @@ namespace MLearning.Droid.Views
 					mItemsChat.Add(newinfo);
 				}
 
-				mListViewChat.Adapter = new ChatListViewAdapter(this, mItemsChat);
-				mListViewChat.DividerHeight = 0;
+				//mListViewChat.Adapter = new ChatListViewAdapter(this, mItemsChat);
+				//mListViewChat.DividerHeight = 0;
 
 			}
 
@@ -825,8 +791,8 @@ namespace MLearning.Droid.Views
 		void Lo_OpenChat_Click (object sender, EventArgs e)
 		{
 			mDrawerLayout.CloseDrawer (mLeftDrawer);
-			mDrawerLayout.CloseDrawer (mRightDrawer);
-			mDrawerLayout.OpenDrawer (mRightDrawer);
+			//mDrawerLayout.CloseDrawer (mRightDrawer);
+			//mDrawerLayout.OpenDrawer (mRightDrawer);
 		}
 
 		void Lo_OpenTasks_Click (object sender, EventArgs e)
@@ -886,7 +852,7 @@ namespace MLearning.Droid.Views
 				showHome ();
 				mDrawerLayout.CloseDrawer (mLeftDrawer);
 			}
-			else if(e.Position == 2)//rutas
+			else if(e.Position == 2 && _currentCurso!=0)//rutas
 			{
 				showRutas ();
 			}
@@ -895,15 +861,15 @@ namespace MLearning.Droid.Views
 
 		void _listTaskItemBotton_Click (object sender, AdapterView.ItemClickEventArgs e)
 		{
-			if (e.Position == 0)//servicios
+			if (e.Position == 0 && _currentCurso!=1)//servicios
 			{
 				showServicios ();
 			}
-			else if(e.Position == 1)//silvestre
+			else if(e.Position == 1 && _currentCurso!=2)//silvestre
 			{
 				showGuiaSilvestre ();
 			}
-			else if(e.Position == 2)//otros
+			else if(e.Position == 2 && _currentCurso!=3)//otros
 			{
 				showCifras ();
 			}
@@ -994,24 +960,53 @@ namespace MLearning.Droid.Views
 		public void showCurso(int index)
 		{
 			try{
+				switch(index)
+				{
+				case 0:
+					lo._txtCursoN.Text = "Las Rutas";
+					break;
+				case 1:
+					lo._txtCursoN.Text = "Guía de Servicios";
+					break;
+				case 2:
+					lo._txtCursoN.Text = "Guía de Identificación de Vida Silvestre";
+					break;
+				
+					default:
+					lo._txtCursoN.Text = "";
+					break;
+				}
+
+				//lo._txtCursoN.Text = "";
+				lo._txtUnidadN.Text = "";
 				_currentCurso = index;
 				
 				lo.getWorkSpaceLayout.SetBackgroundColor (Color.Transparent);
 				lo.getWorkSpaceLayout.RemoveAllViews ();
+				Console.WriteLine("show_curso : INI");
 
-				if (vm.CirclesList.Count >= index || vm.CirclesList[index]==null) {
+				if (vm.CirclesList.Count > index || vm.CirclesList[index]!=null) {
 					vm.SelectCircleCommand.Execute (vm.CirclesList [index]);
+					Console.WriteLine("show_curso : CIRCLE_EXECUTE");
 				}else{
 					return;
 				}
-						
-				vm.OpenLOCommand.Execute(vm.LearningOjectsList[index]);
-				mDrawerLayout.CloseDrawer (mLeftDrawer);
-				resetMLOs ();
-				lo._spaceUnidades.RemoveAllViews();
+			
+				if(vm.LearningOjectsList!=null || vm.LearningOjectsList.Count>index || vm.LearningOjectsList[index]!=null)
+				{
+					Console.WriteLine("show_curso : LEARNINGOBJECT_EXECUTE");
+					vm.OpenLOCommand.Execute(vm.LearningOjectsList[index]);
+					mDrawerLayout.CloseDrawer (mLeftDrawer);
+					resetMLOs ();
+					lo._spaceUnidades.RemoveAllViews();
+				}else{
+					return;
+				}
 			}catch{
 				
 			}
+			Console.WriteLine("show_curso : FIN");
+
 		}
 
 		public void showRutas()			{showCurso (0);lo.header.SetBackgroundDrawable (headersDR[0]);lo._contentScrollView_S2.SetBackgroundColor (Color.ParseColor ("#FFBF00"));}
@@ -1254,8 +1249,8 @@ namespace MLearning.Droid.Views
 
 
 			mDrawerLayout.CloseDrawer (mLeftDrawer);
-			mDrawerLayout.CloseDrawer (mRightDrawer);
-			mDrawerLayout.OpenDrawer (mRightDrawer);
+			//mDrawerLayout.CloseDrawer (mRightDrawer);
+			//mDrawerLayout.OpenDrawer (mRightDrawer);
 		}
 
 
@@ -1299,8 +1294,8 @@ namespace MLearning.Droid.Views
 				}
 
 				lo.initUnidades (_currentCurso,_currentUnidad);
-				//lo._txtCursoN.Text = vm.CirclesList[_currentCurso].name;
-				//lo._txtUnidadN.Text = vm.LOsInCircle[imView.index].lo.title;
+				lo._txtCursoN.Text = vm.CirclesList[_currentCurso].name;
+				lo._txtUnidadN.Text = vm.LOsInCircle[imView.index].lo.title;
 
 				if (_currentCurso == 0) {
 
@@ -1310,6 +1305,9 @@ namespace MLearning.Droid.Views
 						lo._listLinearUnidades [i].Click += delegate {
 							LoadPagesDataSource (i);
 						};
+
+						lo._listIconMap [i].Click += showMapInit;
+
 					}
 				}
 
@@ -1336,7 +1334,7 @@ namespace MLearning.Droid.Views
 			case Android.Resource.Id.Home:
 				//The hamburger icon was clicked which means the drawer toggle will handle the event
 				//all we need to do is ensure the right drawer is closed so the don't overlap
-				mDrawerLayout.CloseDrawer (mRightDrawer);
+				//mDrawerLayout.CloseDrawer (mRightDrawer);
 				mDrawerToggle.OnOptionsItemSelected(item);
 				return true;
 
@@ -1392,15 +1390,29 @@ namespace MLearning.Droid.Views
 
 				// Register for push notifications
 				System.Diagnostics.Debug.WriteLine("Registering...");
-
-
 				GcmClient.Register(this, Core.Configuration.Constants.SenderID);
-
 			}
+		}
 
 
+		void showMapInit (object sender, EventArgs e)
+		{
+
+			var imView = sender as IconImageMap;
 
 
+			//lo.getWorkSpaceLayout.SetBackgroundColor (Color.Transparent);
+			//lo.getWorkSpaceLayout.RemoveAllViews ();
+
+
+			ScaleImageView map = new ScaleImageView (this,null);
+			map.LayoutParameters = new LinearLayout.LayoutParams (-1, Configuration.getHeight (1015));
+			map.SetImageBitmap(getBitmapFromAsset("icons/fondo.png"));
+			lo.getMapSpaceLayout.SetBackgroundColor (Color.ParseColor ("#000000"));
+			lo.getMapSpaceLayout.AddView (map);
+			//lo.header.SetBackgroundDrawable (headersDR [0]);
+
+			_mapOpen = true;
 
 		}
 
@@ -1415,6 +1427,7 @@ namespace MLearning.Droid.Views
 			{
 				var s_listp = vm.LOsInCircle[i].stack.StacksList;
 				int indice = 0;
+
 
 				for (int j = 0; j < s_listp.Count; j++) 
 				{						
@@ -1605,7 +1618,11 @@ namespace MLearning.Droid.Views
 			if (_lectorOpen) {
 				_lectorOpen = false;
 				showRutas ();
-			} else if (_currentCurso == 0) {
+			}else if (_mapOpen){
+				_mapOpen = false;
+				lo.getMapSpaceLayout.RemoveAllViews ();
+				lo.getMapSpaceLayout.SetBackgroundColor (Color.Transparent);
+			}else if (_currentCurso == 0) {
 				showHome ();
 			} else if (_currentCurso == 1) {
 				showHome ();
@@ -1613,7 +1630,7 @@ namespace MLearning.Droid.Views
 				showHome ();
 			} else if (_currentCurso == 3) {
 				showHome ();
-			}
+			} 
 
 
 		}

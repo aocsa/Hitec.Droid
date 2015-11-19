@@ -1,7 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" android:versionName="1.0" android:installLocation="auto" package="hitec.Droid">
   <uses-sdk android:minSdkVersion="15" android:targetSdkVersion="21" />
-  <application android:theme="@style/MyTheme" android:largeHeap="true" android:debuggable="true" android:hardwareAccelerated="false" android:icon="@drawable/icon" android:label="Camino Inca" android:name="mono.android.app.Application">
+  <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+  <permission android:name="hitec.Droid.permission.C2D_MESSAGE" />
+  <uses-permission android:name="android.permission.WAKE_LOCK" />
+  <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+  <uses-permission android:name="hitec.Droid.permission.C2D_MESSAGE" />
+  <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+  <uses-permission android:name="android.permission.INTERNET" />
+  <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+  <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+  <application android:theme="@style/MyTheme" android:largeHeap="true" android:debuggable="true" android:hardwareAccelerated="false" android:icon="@drawable/icon" android:label="Camino Inca" android:name="mono.android.app.Application" android:allowBackup="true">
     <receiver android:permission="com.google.android.c2dm.permission.SEND" android:name="md524accb007a7a9d075e3aefd8a44db6e7.MyBroadcastReceiver">
       <intent-filter>
         <action android:name="com.google.android.c2dm.intent.RECEIVE" />
@@ -39,6 +48,7 @@
     <activity android:label="Web Authenticator" android:name="md588920fb9403ed228b036d6919cddd329.FormAuthenticatorActivity" />
     <activity android:label="Web Authenticator" android:name="md588920fb9403ed228b036d6919cddd329.WebAuthenticatorActivity" />
     <provider android:name="mono.MonoRuntimeProvider" android:exported="false" android:initOrder="2147483647" android:authorities="hitec.Droid.mono.MonoRuntimeProvider.__mono_init__" />
+    <!--suppress ExportedReceiver-->
     <receiver android:name="mono.android.Seppuku">
       <intent-filter>
         <action android:name="mono.android.intent.action.SEPPUKU" />
@@ -46,13 +56,4 @@
       </intent-filter>
     </receiver>
   </application>
-  <uses-permission android:name="android.permission.INTERNET" />
-  <uses-permission android:name="android.permission.WRITE_SETTINGS" />
-  <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-  <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-  <permission android:name="hitec.Droid.permission.C2D_MESSAGE" />
-  <uses-permission android:name="android.permission.WAKE_LOCK" />
-  <uses-permission android:name="android.permission.GET_ACCOUNTS" />
-  <uses-permission android:name="hitec.Droid.permission.C2D_MESSAGE" />
-  <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
 </manifest>

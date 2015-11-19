@@ -330,7 +330,6 @@ C:\Users\ImBonus\Documents\GitHub\Hitec\Hitec.Droid\mLearningCore\MLearning.Droi
 C:\Users\ImBonus\Documents\GitHub\Hitec\Hitec.Droid\mLearningCore\MLearning.Droid\bin\Debug\Xamarin.Android.Support.v7.RecyclerView.dll
 C:\Users\ImBonus\Documents\GitHub\Hitec\Hitec.Droid\mLearningCore\MLearning.Droid\bin\Debug\System.Net.Requests.dll
 C:\Users\ImBonus\Documents\GitHub\Hitec\Hitec.Droid\mLearningCore\MLearning.Droid\bin\Debug\MLearning.Core.pdb
-C:\Users\ImBonus\Documents\GitHub\Hitec\Hitec.Droid\mLearningCore\MLearning.Droid\bin\Debug\MLearning.Core.dll.mdb
 C:\Users\ImBonus\Documents\GitHub\Hitec\Hitec.Droid\mLearningCore\MLearning.Droid\bin\Debug\Microsoft.WindowsAzure.Mobile.xml
 C:\Users\ImBonus\Documents\GitHub\Hitec\Hitec.Droid\mLearningCore\MLearning.Droid\bin\Debug\Microsoft.WindowsAzure.Mobile.Ext.xml
 C:\Users\ImBonus\Documents\GitHub\Hitec\Hitec.Droid\mLearningCore\MLearning.Droid\bin\Debug\Newtonsoft.Json.xml
@@ -388,3 +387,6 @@ C:\Users\ImBonus\Documents\GitHub\Hitec\Hitec.Droid\mLearningCore\MLearning.Droi
 C:\Users\ImBonus\Documents\GitHub\Hitec\Hitec.Droid\mLearningCore\MLearning.Droid\obj\Debug\res\drawable\splash.png
 C:\Users\ImBonus\Documents\GitHub\Hitec\Hitec.Droid\mLearningCore\MLearning.Droid\obj\Debug\R.cs.flag
 C:\Users\ImBonus\Documents\GitHub\Hitec\Hitec.Droid\mLearningCore\MLearning.Droid\obj\Debug\uploadflags.txt
+C:\Users\ImBonus\Documents\GitHub\Hitec\Hitec.Droid\mLearningCore\MLearning.Droid\bin\Debug\MLearning.Core.dll.mdb
+C:\Users\ImBonus\Documents\GitHub\Hitec\Hitec.Droid\mLearningCore\MLearning.Droid\obj\Debug\CaminoInca.dll.mdb
+C:\Users\ImBonus\Documents\GitHub\Hitec\Hitec.Droid\mLearningCore\MLearning.Droid\bin\Debug\CaminoInca.dll.mdb

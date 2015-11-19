@@ -91,6 +91,7 @@ C:\Users\ImBonus\Documents\GitHub\Hitec\Hitec.Droid\mLearningCore\MLearning.Droi
 C:\Users\ImBonus\Documents\GitHub\Hitec\Hitec.Droid\mLearningCore\MLearning.Droid\obj\Debug\assemblies\System.Web.Services.dll
 C:\Users\ImBonus\Documents\GitHub\Hitec\Hitec.Droid\mLearningCore\MLearning.Droid\obj\Debug\assemblies\System.Data.Services.Client.dll
 C:\Users\ImBonus\Documents\GitHub\Hitec\Hitec.Droid\mLearningCore\MLearning.Droid\obj\Debug\assemblies\System.Runtime.Serialization.dll
+C:\Users\ImBonus\Documents\GitHub\Hitec\Hitec.Droid\mLearningCore\MLearning.Droid\obj\Debug\assemblies\System.ServiceModel.Internals.dll
 C:\Users\ImBonus\Documents\GitHub\Hitec\Hitec.Droid\mLearningCore\MLearning.Droid\obj\Debug\assemblies\System.ServiceModel.dll
 C:\Users\ImBonus\Documents\GitHub\Hitec\Hitec.Droid\mLearningCore\MLearning.Droid\obj\Debug\assemblies\System.ComponentModel.DataAnnotations.dll
 C:\Users\ImBonus\Documents\GitHub\Hitec\Hitec.Droid\mLearningCore\MLearning.Droid\obj\Debug\assemblies\System.ComponentModel.Composition.dll

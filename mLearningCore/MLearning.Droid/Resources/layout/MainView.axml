@@ -36,45 +36,5 @@
             android:layout_height="match_parent"
             android:layout_gravity="start"
             android:background="#111" />
-        <LinearLayout
-            android:id="@+id/right_drawer"
-            android:divider="@android:color/transparent"
-            android:dividerHeight="0dp"
-            android:choiceMode="singleChoice"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="end"
-            android:background="#00ffffff">
-            <RelativeLayout
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:background="@android:color/darker_gray"
-                android:id="@+id/main_view_relativeLayoutCL">
-                <TextView
-                    android:text="ACTIVITY"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/chat_view_title" />
-                <TextView
-                    android:text="15 people online today"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/chat_view_info1" />
-                <TextView
-                    android:text="32 people online this week"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/chat_view_info2" />
-                <TextView
-                    android:text="PERSONAS"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/chat_list_title" />
-                <ListView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:id="@+id/chat_list_view" />
-            </RelativeLayout>
-        </LinearLayout>
     </android.support.v4.widget.DrawerLayout>
 </LinearLayout>

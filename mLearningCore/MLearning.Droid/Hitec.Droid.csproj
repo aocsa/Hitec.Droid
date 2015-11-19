@@ -217,6 +217,8 @@
     <Compile Include="Views\UnidadItem.cs" />
     <Compile Include="Views\UnidadAdapter.cs" />
     <Compile Include="Views\WallView.cs" />
+    <Compile Include="Views\TouchImageView.cs" />
+    <Compile Include="Views\IconImageMap.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
