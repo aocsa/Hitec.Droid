@@ -221,6 +221,8 @@
     <Compile Include="Views\IconImageMap.cs" />
     <Compile Include="Views\MapView.cs" />
     <Compile Include="Views\MapItemInfo.cs" />
+    <Compile Include="Views\PlaceItem.cs" />
+    <Compile Include="Views\PlaceAdapter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

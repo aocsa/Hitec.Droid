@@ -120,11 +120,13 @@ namespace MLearning.Droid.Views
 		MainViewModel vm;
 		frontView frontView;
 		WallView lo;
+		MapView map;
 		FrontContainerViewPager lector;
 		public int _currentCurso;
 		public int _currentUnidad;
 		public bool _lectorOpen;
 		public bool _mapOpen;
+		public bool _placesOpen;
 
 		protected override void OnCreate(Bundle bundle)
 		{
@@ -147,6 +149,7 @@ namespace MLearning.Droid.Views
 			lo = new WallView(this);
 			frontView = new frontView (this);
 			lector = new FrontContainerViewPager (this);
+			map = new MapView (this);
 
 
 			frontView._listLinearItem [0].Click += delegate {showRutas ();};
@@ -1412,7 +1415,7 @@ namespace MLearning.Droid.Views
 			info.SetBackgroundColor (Color.Aqua);
 
 
-			MapView map = new MapView (this);
+
 
 			//LinearLayout map = new LinearLayout (this);
 			//map.LayoutParameters = new LinearLayout.LayoutParams (-1, Configuration.getHeight (1015));
@@ -1421,13 +1424,16 @@ namespace MLearning.Droid.Views
 			//map.SetBackgroundDrawable(dr);
 
 			map.mapImage.SetImageBitmap(getBitmapFromAsset("images/mapa.png"));
-			map._placesLayout.Add (info);
+			//map._placesLayout.Add (info);
 			//map.updatePlaces ();
 
-			lo.getMapSpaceLayout.SetBackgroundColor (Color.ParseColor ("#000000"));
+			lo.getMapSpaceLayout.SetBackgroundColor (Color.ParseColor ("#E0C7BC"));
 			lo.getMapSpaceLayout.AddView (map);
 			//lo.getMapSpaceLayout.AddView (info);
 			//lo.header.SetBackgroundDrawable (headersDR [0]);
+
+			map.placesContainer.Click += map.showPLaceInfo;
+
 
 			_mapOpen = true;
 
@@ -1634,11 +1640,18 @@ namespace MLearning.Droid.Views
 
 			if (_lectorOpen) {
 				_lectorOpen = false;
+				//lo.getWorkSpaceLayout.RemoveAllViews();
 				showRutas ();
 			}else if (_mapOpen){
-				_mapOpen = false;
-				lo.getMapSpaceLayout.RemoveAllViews ();
-				lo.getMapSpaceLayout.SetBackgroundColor (Color.Transparent);
+
+				if (map.placeInfoOpen) {
+					map.placeInfoOpen = false;
+					map.hidePlaceInfo ();
+				} else {
+					_mapOpen = false;
+					lo.getMapSpaceLayout.RemoveAllViews ();
+					lo.getMapSpaceLayout.SetBackgroundColor (Color.Transparent);
+				}
 			}else if (_currentCurso == 0) {
 				showHome ();
 			} else if (_currentCurso == 1) {

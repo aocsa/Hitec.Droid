@@ -230,6 +230,10 @@ MLearning.Droid.MapView, CaminoInca;md5f410d9818bda040222c310297e0440b4.MapView
 MLearning.Droid.MapView, CaminoInca, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;md5f410d9818bda040222c310297e0440b4.MapView
 MLearning.Droid.MapView;md5f410d9818bda040222c310297e0440b4.MapView
 mlearning.droid.MapView;md5f410d9818bda040222c310297e0440b4.MapView
+MLearning.Droid.Views.PlaceAdapter, CaminoInca;md508497d9069bda639632a99abaeede3be.PlaceAdapter
+MLearning.Droid.Views.PlaceAdapter, CaminoInca, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;md508497d9069bda639632a99abaeede3be.PlaceAdapter
+MLearning.Droid.Views.PlaceAdapter;md508497d9069bda639632a99abaeede3be.PlaceAdapter
+mlearning.droid.views.PlaceAdapter;md508497d9069bda639632a99abaeede3be.PlaceAdapter
 Cirrious.CrossCore.Droid.MvxJavaContainer, Cirrious.CrossCore.Droid;md594e974f7daaa4f544d8fe5f075a74d26.MvxJavaContainer
 Cirrious.CrossCore.Droid.MvxJavaContainer, Cirrious.CrossCore.Droid, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;md594e974f7daaa4f544d8fe5f075a74d26.MvxJavaContainer
 Cirrious.CrossCore.Droid.MvxJavaContainer;md594e974f7daaa4f544d8fe5f075a74d26.MvxJavaContainer

@@ -109,6 +109,9 @@ namespace MLearning.Droid
 			}
 
 			m_GestureDetector = new GestureDetector(m_Context, new ScaleImageViewGestureDetector(this));
+
+
+
 		}
 
 		protected override bool SetFrame(int l, int t, int r, int b)
