@@ -264,11 +264,11 @@ namespace MLearning.Droid
 
 			var touchCount = e.PointerCount;
 
-			if(touchCount == 1)
+			if(touchCount == 3)
 			{
 				var myHandler = new Handler ();
 				myHandler.Post(()=>{
-					Toast.MakeText (m_Context, "Downloading...", ToastLength.Short).Show();
+					Toast.MakeText (m_Context, (int)e.GetX() +" " +(int)e.GetY(), ToastLength.Short).Show();
 				});
 
 			}

@@ -219,6 +219,8 @@
     <Compile Include="Views\WallView.cs" />
     <Compile Include="Views\TouchImageView.cs" />
     <Compile Include="Views\IconImageMap.cs" />
+    <Compile Include="Views\MapView.cs" />
+    <Compile Include="Views\MapItemInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -491,6 +493,7 @@
     <AndroidAsset Include="Assets\images\header2.png" />
     <AndroidAsset Include="Assets\images\header3.png" />
     <AndroidAsset Include="Assets\images\header4.png" />
+    <AndroidAsset Include="Assets\images\mapa.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MLearning.Core\MLearning.Core.csproj">

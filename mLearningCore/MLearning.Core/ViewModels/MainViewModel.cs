@@ -106,7 +106,7 @@ namespace MLearning.Core.ViewModels
         #region Wrappers
         //----------------------------------------------------------------Wrapper Classes
 
-		public ObservableCollection<page_collection_wrapper> info_current_page;
+
 
         public class lo_by_circle_wrapper : MvxNotifyPropertyChanged
         { 
@@ -1311,10 +1311,12 @@ namespace MLearning.Core.ViewModels
 				//  GroupedPagesList.Add(AllPagesList.Where(p => p.page.id == item.page_id).First());
 			}
 
+			Debug.WriteLine ("TEST");
 
 			LOsInCircle[loListIndex].stack.StacksList = GroupedPagesList;
 			LOsInCircle[loListIndex].stack.IsLoaded = true;
 
+			Debug.WriteLine ("___________END");
 			LOCurrentIndex = loListIndex;
 
 			UpdateExtraInfo(LOCurrentIndex); 
@@ -1391,7 +1393,7 @@ namespace MLearning.Core.ViewModels
 			LOsInCircle[loListIndex].stack.StacksList = GroupedPagesList;
 			LOsInCircle[loListIndex].stack.IsLoaded = true;
 
-			info_current_page = GroupedPagesList;
+
 
 			LOCurrentIndex = loListIndex;
 

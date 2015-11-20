@@ -665,7 +665,8 @@ namespace MLearning.Droid.Views
 			for (int i = 0; i < s_list.Count; i++) {
 				lo._listUnidades.Add(new UnidadItem{ 
 					Title = s_list[index].PagesList[i].page.title, 
-					Description = s_list[index].PagesList[i].page.description });
+					Descripti
+					on = s_list[index].PagesList[i].page.description });
 			}
 			lo.initUnidades ();
 */
@@ -1222,6 +1223,7 @@ namespace MLearning.Droid.Views
 		{
 
 
+
 			var circle = _currentCursos [e.Position];
 
 			//var vm = this.ViewModel as MainViewModel;
@@ -1404,12 +1406,27 @@ namespace MLearning.Droid.Views
 			//lo.getWorkSpaceLayout.SetBackgroundColor (Color.Transparent);
 			//lo.getWorkSpaceLayout.RemoveAllViews ();
 
+			//ScaleImageView map = new ScaleImageView (this, null);
+			LinearLayout info = new LinearLayout(this);
+			info.LayoutParameters = new LinearLayout.LayoutParams (300, 300);
+			info.SetBackgroundColor (Color.Aqua);
 
-			ScaleImageView map = new ScaleImageView (this,null);
-			map.LayoutParameters = new LinearLayout.LayoutParams (-1, Configuration.getHeight (1015));
-			map.SetImageBitmap(getBitmapFromAsset("icons/fondo.png"));
+
+			MapView map = new MapView (this);
+
+			//LinearLayout map = new LinearLayout (this);
+			//map.LayoutParameters = new LinearLayout.LayoutParams (-1, Configuration.getHeight (1015));
+			Drawable dr = new BitmapDrawable(getBitmapFromAsset("images/mapa.png"));
+			//map.SetImageBitmap(getBitmapFromAsset("images/mapa.png"));
+			//map.SetBackgroundDrawable(dr);
+
+			map.mapImage.SetImageBitmap(getBitmapFromAsset("images/mapa.png"));
+			map._placesLayout.Add (info);
+			//map.updatePlaces ();
+
 			lo.getMapSpaceLayout.SetBackgroundColor (Color.ParseColor ("#000000"));
 			lo.getMapSpaceLayout.AddView (map);
+			//lo.getMapSpaceLayout.AddView (info);
 			//lo.header.SetBackgroundDrawable (headersDR [0]);
 
 			_mapOpen = true;
