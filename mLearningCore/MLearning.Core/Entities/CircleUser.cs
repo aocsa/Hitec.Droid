@@ -14,10 +14,11 @@ namespace MLearningDB
     
     public partial class CircleUser
     {
-        public int id { get; set; }
         public int Circle_id { get; set; }
         public int User_id { get; set; }
-        public DateTime created_at { get; set; }
-        public DateTime updated_at { get; set; }
+        public System.DateTime created_at { get; set; }
+        public System.DateTime updated_at { get; set; }
+        public int id { get; set; }
+
     }
 }

@@ -16,9 +16,8 @@ namespace MLearningDB
     {
         public int id { get; set; }
         public string name { get; set; }
-        public DateTime created_at { get; set; }
-        public DateTime updated_at { get; set; }
-
+        public System.DateTime created_at { get; set; }
+        public System.DateTime updated_at { get; set; }
         public int Circle_id { get; set; }
     }
 }

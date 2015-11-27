@@ -14,15 +14,17 @@ namespace MLearningDB
     
     public partial class Publisher
     {
+
+    
         public int id { get; set; }
+        public int User_id { get; set; }
         public string title { get; set; }
         public string country { get; set; }
         public string region { get; set; }
         public string city { get; set; }
         public int telephone { get; set; }
-        public int User_id { get; set; }
-
-        public DateTime created_at { get; set; }
-        public DateTime updated_at { get; set; }
+        public System.DateTime created_at { get; set; }
+        public System.DateTime updated_at { get; set; }
+  
     }
 }

@@ -14,10 +14,12 @@ namespace MLearningDB
     
     public partial class Circle_has_LO
     {
-        public int id { get; set; }       
+        public int id { get; set; }
         public int circle_id { get; set; }
         public int lo_id { get; set; }
-        public DateTime created_at { get; set; }
-        public DateTime updated_at { get; set; }
+        public System.DateTime created_at { get; set; }
+        public System.DateTime updated_at { get; set; }
+    
+
     }
 }

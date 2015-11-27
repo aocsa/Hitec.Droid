@@ -1,9 +1,9 @@
 ﻿<Properties StartupItem="MLearning.Droid\Hitec.Droid.csproj" RefactoringSettings.EnableRefactorings="True">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Release" PreferredExecutionTarget="Android.4107ef0e0a1fcf43" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Release" PreferredExecutionTarget="Android.Api15" />
   <MonoDevelop.Ide.Workbench ActiveDocument="MLearning.Droid\Views\MainView.cs">
     <Files>
       <File FileName="MLearning.Droid\Views\MainView.cs" Line="1061" Column="3" />
-      <File FileName="MLearning.Droid\Views\WallView.cs" Line="480" Column="42" />
+      <File FileName="MLearning.Droid\Views\WallView.cs" Line="1" Column="1" />
       <File FileName="MLearning.Droid\Views\frontView.cs" Line="1" Column="1" />
       <File FileName="c:\Users\ImBonus\Desktop\Hitec.Droid-master\mLearningCore\MLearning.Droid\Views\Configuration.cs" Line="1" Column="1" />
       <File FileName="MLearning.Droid\Views\LOView.cs" Line="1" Column="1" />
@@ -16,8 +16,8 @@
       <File FileName="MLearning.Droid\Views\PlaceAdapter.cs" Line="1" Column="1" />
       <File FileName="MLearning.Droid\Views\Template1.cs" Line="1" Column="1" />
       <File FileName="MLearning.Droid\Views\MapItemInfo.cs" Line="1" Column="1" />
-      <File FileName="MLearning.Droid\Resources\drawable\progress_animation.xml" Line="4" Column="41" />
-      <File FileName="MLearning.Droid\Views\MapView.cs" Line="86" Column="26" />
+      <File FileName="MLearning.Droid\Resources\drawable\progress_animation.xml" Line="1" Column="1" />
+      <File FileName="MLearning.Droid\Views\MapView.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

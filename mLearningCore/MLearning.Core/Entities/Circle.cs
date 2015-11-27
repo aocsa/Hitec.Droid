@@ -12,16 +12,18 @@ namespace MLearningDB
     using System;
     using System.Collections.Generic;
     
-   
     public partial class Circle
     {
+
+    
         public int id { get; set; }
         public string name { get; set; }
         public int type { get; set; }
         public int? owner_id { get; set; }
+        public System.DateTime created_at { get; set; }
+        public System.DateTime updated_at { get; set; }
         public int institution_id { get; set; }
         public string code { get; set; }
-        public DateTime created_at { get; set; }
-        public DateTime updated_at { get; set; }
+    
     }
 }

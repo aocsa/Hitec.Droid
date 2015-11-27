@@ -14,17 +14,16 @@ namespace MLearningDB
     
     public partial class Question
     {
+
+    
         public int id { get; set; }
-        public int Quiz_id { get; set; }
+        public System.DateTime created_at { get; set; }
+        public System.DateTime updated_at { get; set; }
         public string title { get; set; }
-
+        public int Quiz_id { get; set; }
         public string content { get; set; }
-
-        public string answer { get; set; }
-
         public int type { get; set; }
-        public DateTime created_at { get; set; }
-        public DateTime updated_at { get; set; }
-
+        public string answer { get; set; }
+    
     }
 }

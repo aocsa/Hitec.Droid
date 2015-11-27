@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MLearning.Core.Entities
+namespace MLearningDB
 {
     public class Institution_has_User
     {

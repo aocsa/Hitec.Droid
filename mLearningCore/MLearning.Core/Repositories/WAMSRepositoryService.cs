@@ -22,637 +22,721 @@ using Core.Classes;
 using MLearning.Core.Configuration;
 using Cirrious.MvvmCross.Plugins.File;
 using MLearning.Core.Classes;
+using MLearningDB;
 
 
 
 
 namespace Core.Repositories
 {
-    public class WAMSRepositoryService : IRepositoryService
-    {
-        public  MobileServiceClient MobileService;
-        private ISQLiteConnection _liteConnection;
+	public class WAMSRepositoryService : IRepositoryService
+	{
 
+		public  MobileServiceClient MobileService;
+		private ISQLiteConnection _liteConnection;
 
-        private int _takeNRows = 500;
 
-        public bool UseLocalDBWhenOffline { get; private set; }
-       
+		private int _takeNRows = 500;
 
-        public WAMSRepositoryService(ISQLiteConnectionFactory factory)
-        {
+		public bool UseLocalDBWhenOffline { get; private set; }
 
-            UseLocalDBWhenOffline = true;
-            MobileService = new MobileServiceClient("https://mlearningservice.azure-mobile.net/", "xIAzBqsUDUutvnCTruCwpCozkkyNkj33");
-            _liteConnection = factory.Create(Constants.LocalDbName);
 
-            
-            //When App starts
+		public WAMSRepositoryService(ISQLiteConnectionFactory factory)
+		{
 
-            TryGetTableUpdates();
+			UseLocalDBWhenOffline = true;
+			MobileService = new MobileServiceClient("https://mlearningservice.azure-mobile.net/", "xIAzBqsUDUutvnCTruCwpCozkkyNkj33");
+			//	MobileService = new MobileServiceClient("https://eduticservice.azure-mobile.net/", "dbKHHcwqYgLERWaOCVSHfccSQIWSKv93");
+			_liteConnection = factory.Create(Constants.LocalDbName);
 
-           
 
-            
-        }
-        public WAMSRepositoryService()
-        {
+			//When App starts
 
-        //    CurrentPlatform.Init();
-            MobileService = new MobileServiceClient("https://mlearningservice.azure-mobile.net/", "xIAzBqsUDUutvnCTruCwpCozkkyNkj33");
+			TryGetTableUpdates();
 
-            
 
-            UseLocalDBWhenOffline = false;
 
-            //TryGetTableUpdates();
-        }
-        
 
-        public async System.Threading.Tasks.Task InsertAsync<T>(T entity)
-        {
+		}
+		public WAMSRepositoryService()
+		{
 
-            try
-            {
-                await MobileService.GetTable<T>().InsertAsync(entity);
+			//    CurrentPlatform.Init();
+			MobileService = new MobileServiceClient("https://mlearningservice.azure-mobile.net/", "xIAzBqsUDUutvnCTruCwpCozkkyNkj33");
+			//MobileService = new MobileServiceClient("https://eduticservice.azure-mobile.net/", "dbKHHcwqYgLERWaOCVSHfccSQIWSKv93");
 
 
-            }
-            catch (MobileServiceInvalidOperationException e)
-            {
 
-                throw;
-            }
-            catch (NullReferenceException nref)
-            {
-                Mvx.Trace(nref.Message);
-            }
-          
-            
-        }
+			UseLocalDBWhenOffline = false;
 
-        public async Task InsertAsync<T>(T entity, Dictionary<string, string> parameters)
-        {
-            await MobileService.GetTable<T>().InsertAsync(entity,parameters);
-        }
+			//TryGetTableUpdates();
+		}
 
-        public async System.Threading.Tasks.Task DeleteAsync<T>(T entity)
-        {
-            try
-            {         
-                
-                await MobileService.GetTable<T>().DeleteAsync(entity);
-            }
-            catch (MobileServiceInvalidOperationException e)
-            {
+		public async Task<MobileServiceUser> LoginProvider(int provider, JObject access_token)
+		{
+			if (provider == 3)
+				return await MobileService.LoginAsync(MobileServiceAuthenticationProvider.Facebook, access_token);
+			else
+				return null;
+		}
+		public void Logout()
+		{
+			MobileService.Logout();
+		}
+		public async System.Threading.Tasks.Task InsertAsync<T>(T entity)
+		{
 
-                throw e;
-            }
-        }
+			try
+			{
+				await MobileService.GetTable<T>().InsertAsync(entity);
 
 
-        public List<T> SearchForLocalTable<T>(System.Linq.Expressions.Expression<Func<T, bool>> predicate) where T:new()
-        {
-            return _liteConnection.Table<T>().Where(predicate).ToList();
-        }
+			}
+			catch (MobileServiceInvalidOperationException e)
+			{
 
-        public List<T> SearchForLocalTable<T>(System.Linq.Expressions.Expression<Func<T, bool>> predicate,int toSkip,int toTake) where T : new()
-        {
-            return _liteConnection.Table<T>().Where(predicate).Skip(toSkip).Take(toTake).ToList();
-        }
+				throw;
+			}
+			catch (NullReferenceException nref)
+			{
+				Mvx.Trace(nref.Message);
+			}
 
 
+		}
 
-        int CreateTableInLocalDB<T>()
-        {
+		public async Task InsertAsync<T>(T entity, Dictionary<string, string> parameters)
+		{
+			await MobileService.GetTable<T>().InsertAsync(entity,parameters);
+		}
 
+		public async System.Threading.Tasks.Task DeleteAsync<T>(T entity)
+		{
+			try
+			{         
 
-            bool has_property = typeof(T).HasProperty("id_pk");
-            CreateFlags flag;
+				await MobileService.GetTable<T>().DeleteAsync(entity);
+			}
+			catch (MobileServiceInvalidOperationException e)
+			{
 
-            if (has_property)
-            {
-                flag = CreateFlags.None;
-            }
-            else
-            {
-                flag = CreateFlags.ImplicitPK;
-            }
+				throw e;
+			}
+		}
 
 
-            return  _liteConnection.CreateTable<T>(flag);
-        }
+		public List<T> SearchForLocalTable<T>(System.Linq.Expressions.Expression<Func<T, bool>> predicate) where T:new()
+		{
+			return _liteConnection.Table<T>().Where(predicate).ToList();
+		}
 
-        public  bool TableExists(string tableName)
-        {
-            
-            string text = "SELECT count(*) FROM sqlite_master WHERE type = 'table' AND name = '"+tableName+"'";
-            ISQLiteCommand cmd = _liteConnection.CreateCommand(text);
-            int r = cmd.ExecuteScalar<Int32>();
-          
-            return (r != 0);
-        }
+		public List<T> SearchForLocalTable<T>(System.Linq.Expressions.Expression<Func<T, bool>> predicate,int toSkip,int toTake) where T : new()
+		{
+			return _liteConnection.Table<T>().Where(predicate).Skip(toSkip).Take(toTake).ToList();
+		}
 
 
-        //Call everytime the App starts
-        public async Task SyncTableUpdates()
-        {
-            var result = await MobileService.GetTable<table_update>().Where(t=>t.id>0).LoadAllAsync();
-           // var result = await MobileService.GetTable<table_update>().Take(_takeNRows).ToListAsync();
-            _liteConnection.DeleteAll<table_update>();
-            foreach (var item in result)
-            {
-                //Convert to UTC
-                item.updated_at = item.updated_at.ToUniversalTime();
-                _liteConnection.Insert(item);
-            }
-        }
+		public List<T> SearchForLocalTable<T>(System.Linq.Expressions.Expression<Func<T, bool>> predicate,Dictionary<string, string> p) where T : new()
+		{
+			return _liteConnection.Table<T>().Where(predicate).ToList();
+			//result = await MobileService.GetTable<T>().Take(1000).Where(predicate).WithParameters(parameters).IncludeTotalCount().ToListAsync();
+			//return _liteConnection.Table<T>().Where(predicate).Where(t=>t.id == ).ToList();
+		}
 
 
-         public async Task TryGetTableUpdates()
-        {
 
-            if (TableExists("table_update")==false)
-            {
-                int r = CreateTableInLocalDB<table_update>();
-               
-            }
+		int CreateTableInLocalDB<T>()
+		{
 
-            await SyncTableUpdates();
-          
-        }
 
+			bool has_property = typeof(T).HasProperty("id_pk");
+			CreateFlags flag;
 
-        async Task<DateTime> TableHasUpdate<T>()
-        {
-            string classname = typeof(T).Name;
+			if (has_property)
+			{
+				flag = CreateFlags.None;
+			}
+			else
+			{
+				flag = CreateFlags.ImplicitPK;
+			}
 
-            DateTime lastCloudUpdate = new DateTime();
-            DateTime lastSync = new DateTime();
 
-            
+			return  _liteConnection.CreateTable<T>(flag);
+		}
 
-            //Create table in localDB if it doesnt exist
+		public  bool TableExists(string tableName)
+		{
 
-            if(TableExists("table_sync")==false)
-                InitLocalSyncTable();
-          //  int r =  _liteConnection.CreateTable<T>(CreateFlags.ImplicitPK);
-            int r = CreateTableInLocalDB<T>();
+			string text = "SELECT count(*) FROM sqlite_master WHERE type = 'table' AND name = '"+tableName+"'";
+			ISQLiteCommand cmd = _liteConnection.CreateCommand(text);
+			int r = cmd.ExecuteScalar<Int32>();
 
-            
+			return (r != 0);
+		}
 
 
+		//Call everytime the App starts
+		public async Task SyncTableUpdates()
+		{
+			var result = await MobileService.GetTable<table_update>().Where(t=>t.id>0).LoadAllAsync();
+			// var result = await MobileService.GetTable<table_update>().Take(_takeNRows).ToListAsync();
+			_liteConnection.DeleteAll<table_update>();
+			foreach (var item in result)
+			{
+				//Convert to UTC
+				item.updated_at = item.updated_at.ToUniversalTime();
+				_liteConnection.Insert(item);
+			}
+		}
 
-         //   var result = await MobileService.GetTable<table_update>().Where(t => t.table_name == classname).ToListAsync();
 
-         //   await TryGetTableUpdates();
-            var result = _liteConnection.Table<table_update>().Where(t => t.table_name == classname).ToList();
+		public async Task TryGetTableUpdates()
+		{
 
-            if (result.Count > 0)
-            {
+			if (TableExists("table_update")==false)
+			{
+				int r = CreateTableInLocalDB<table_update>();
 
-                lastCloudUpdate = result.FirstOrDefault().updated_at;
-                
-            }
+			}
 
+			await SyncTableUpdates();
 
-            table_sync tb = _liteConnection.Table<table_sync>().Where(t => t.table_name == classname).FirstOrDefault();
+		}
 
-            if (tb != null)
-            {
-                lastSync = tb.synced_at;
-            }
 
+		async Task<DateTime> TableHasUpdate<T>()
+		{
+			string classname = typeof(T).Name;
 
+			DateTime lastCloudUpdate = new DateTime();
+			DateTime lastSync = new DateTime();
 
-            if (lastSync < lastCloudUpdate)
-                return lastSync;
+			//Create table in localDB if it doesnt exist
 
-            return DateTime.MaxValue;
-            
-        }
+			if(TableExists("table_sync")==false)
+				InitLocalSyncTable();
+			//  int r =  _liteConnection.CreateTable<T>(CreateFlags.ImplicitPK);
+			int r = CreateTableInLocalDB<T>();
 
+			//   var result = await MobileService.GetTable<table_update>().Where(t => t.table_name == classname).ToListAsync();
 
-        /// <summary>
-        /// Get Cloud rows updated since lastSync and store them in LocalDB
-        /// </summary>
-        /// <typeparam name="T">Object type</typeparam>
-        /// <param name="lastSync">Date limit</param>
-        /// <param name="getID">Function to get Template ID</param>
-        async Task SyncLocalTable<T>(DateTime lastSync,Func<T,int> getID) where T:new()
-        {
-            
-            // Trying to get all rows in the table T
-            //LastSynt Funcionality not Working YET------ Reason: Delete needs extra coding
-            var result = await MobileService.GetTable<T>().WithParameters(new Dictionary<string, string> { { "lastsync", lastSync.ToString("yyyy-MM-ddTHH:mm:sszzz", DateTimeFormatInfo.InvariantInfo) } }).LoadAllAsync();
-        //  var result = await MobileService.GetTable<T>().Take(_takeNRows).WithParameters(new Dictionary<string, string> { { "lastsync", lastSync.ToString("yyyy-MM-ddTHH:mm:sszzz", DateTimeFormatInfo.InvariantInfo) } }).ToListAsync();
+			//   await TryGetTableUpdates();
+			var result = _liteConnection.Table<table_update>().Where(t => t.table_name == classname).ToList();
 
+			if (result.Count > 0)
+			{
+				lastCloudUpdate = result.FirstOrDefault().updated_at;             
+			}
 
-            
-           
-            
+			table_sync tb = _liteConnection.Table<table_sync>().Where(t => t.table_name == classname).FirstOrDefault();
 
-            string classname = typeof(T).Name;
+			if (tb != null)
+			{
+				lastSync = tb.synced_at;
+			}
 
-            _liteConnection.DeleteAll<T>();
-         
-        /*       //If id exists in local db delete 
-            foreach (var item in result)
-            {                
-                _liteConnection.Delete(item);
-            }*/
 
-            //Insert all
+			if (lastSync < lastCloudUpdate)
+				return lastSync;
 
-           var storage = Mvx.Resolve<IMvxFileStore>();
+			return DateTime.MaxValue;
 
-            
+		}
 
-         //   _liteConnection.Execute(string.Format("PRAGMA temp_store_directory = '{0}';", storage.NativePath(string.Empty)));
-            _liteConnection.BeginTransaction();
 
+		/// <summary>
+		/// Get Cloud rows updated since lastSync and store them in LocalDB
+		/// </summary>
+		/// <typeparam name="T">Object type</typeparam>
+		/// <param name="lastSync">Date limit</param>
+		/// <param name="getID">Function to get Template ID</param>
+		async Task SyncLocalTable<T>(DateTime lastSync,Func<T,int> getID) where T:new()
+		{
 
-            foreach (var tuple in result)
-            {
-                _liteConnection.Insert(tuple);
-            }
+			// Trying to get all rows in the table T
+			//LastSynt Funcionality not Working YET------ Reason: Delete needs extra coding
+			var result = await MobileService.GetTable<T>().WithParameters(new Dictionary<string, string> { { "lastsync", lastSync.ToString("yyyy-MM-ddTHH:mm:sszzz", DateTimeFormatInfo.InvariantInfo) } }).LoadAllAsync();
+			//  var result = await MobileService.GetTable<T>().Take(_takeNRows).WithParameters(new Dictionary<string, string> { { "lastsync", lastSync.ToString("yyyy-MM-ddTHH:mm:sszzz", DateTimeFormatInfo.InvariantInfo) } }).ToListAsync();
 
-            _liteConnection.Commit();
 
-            
 
-            //Update sync table
 
 
-            var table_s = _liteConnection.Table<table_sync>().Where(t => t.table_name == classname).FirstOrDefault();
 
-            if (table_s != null)
-            {
-                table_s.synced_at = DateTime.UtcNow;
+			string classname = typeof(T).Name;
 
-                _liteConnection.Update(table_s);
-            }
-            else
-            {
-                Mvx.Trace("Table name not found in table_sync. Check SyncLocalTable Method line on WAMSRepositoryService");
-                throw new NullReferenceException();
-            }
-            
+			_liteConnection.DeleteAll<T>();
 
+			/*       //If id exists in local db delete 
+			foreach (var item in result)
+			{                
+				_liteConnection.Delete(item);
+			}*/
 
+			//Insert all
 
-        }
-        //If cacheResult is true, save the results in localDB and use synchronization 
-        public async Task<List<T>> SearchForAsync<T>(System.Linq.Expressions.Expression<Func<T, bool>> predicate, Func<T, DateTime> getLastUpdate,Func<T,int> getID, bool cacheResult) where T : new()
-        {
-            List<T> result;
+			var storage = Mvx.Resolve<IMvxFileStore>();
 
-            try
-            {
 
-                //If want to cache result
 
-                if (cacheResult)
-                {
+			//   _liteConnection.Execute(string.Format("PRAGMA temp_store_directory = '{0}';", storage.NativePath(string.Empty)));
+			_liteConnection.BeginTransaction();
 
-                    //Check synchronization dates
-                    DateTime lastSync =  await TableHasUpdate<T>();
 
-                    if (lastSync != DateTime.MaxValue)
-                    {
-                        //Have Update
-                        //Get results from lastSyncDate and save them to DB if cacheResult its true
-                        //TODO: Filter with predicate
-                                await SyncLocalTable<T>(lastSync, getID);
+			foreach (var tuple in result)
+			{
+				_liteConnection.Insert(tuple);
+			}
 
-                    }
+			_liteConnection.Commit();
 
-                    //No Update, use local
-                    result = SearchForLocalTable<T>(predicate);
 
-                }
-                else
-                {
-                    result = await MobileService.GetTable<T>().Take(_takeNRows).Where(predicate).ToListAsync();
-                
-                }
-              
-                
 
-               
-            }
-            catch (WebException e)
-            {
-                if (UseLocalDBWhenOffline)
-                {
-                    result = SearchForLocalTable<T>(predicate);
-                }
-                else
-                {
-                    throw e;
-                }
-            }
+			//Update sync table
 
 
-            return result;
-            
+			var table_s = _liteConnection.Table<table_sync>().Where(t => t.table_name == classname).FirstOrDefault();
 
-            
-        }
+			if (table_s != null)
+			{
+				table_s.synced_at = DateTime.UtcNow;
 
-        public async Task<List<T>> SearchForAsync<T>(System.Linq.Expressions.Expression<Func<T, bool>> predicate, Dictionary<string, string> parameters, bool cacheResult)
-        {
-            //MobileService.GetTable<T>().q
-            List<T> toReturn ;
-            try
-            {
-                toReturn = await MobileService.GetTable<T>().Take(1000).Where(predicate).WithParameters(parameters).IncludeTotalCount().ToListAsync();
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
+				_liteConnection.Update(table_s);
+			}
+			else
+			{
+				Mvx.Trace("Table name not found in table_sync. Check SyncLocalTable Method line on WAMSRepositoryService");
+				throw new NullReferenceException();
+			}
 
-            return toReturn;
-         
-        }
 
-        public IQueryable<T> SearchForQuery<T>(System.Linq.Expressions.Expression<Func<T, bool>> predicate, Dictionary<string, string> parameters)
-        {
-            return MobileService.GetTable<T>().Where(predicate).WithParameters(parameters).IncludeTotalCount().Query;
-        }
 
 
+		}
+		//If cacheResult is true, save the results in localDB and use synchronization 
+		public async Task<List<T>> SearchForAsync<T>(System.Linq.Expressions.Expression<Func<T, bool>> predicate, Func<T, DateTime> getLastUpdate,Func<T,int> getID, bool cacheResult) where T : new()
+		{
+			List<T> result;
 
-        public async Task<List<T>> SearchForAsync<T>(System.Linq.Expressions.Expression<Func<T, bool>> predicate, Func<T, DateTime> getLastUpdate, Func<T, int> getID, bool cacheResult,int skip,int take) where T : new()
-        {
-            List<T> result;
+			try
+			{
 
-            try
-            {
+				//If want to cache result
 
-                //If want to cache result
+				if (cacheResult)
+				{
 
-                if (cacheResult)
-                {
+					//Check synchronization dates
+					DateTime lastSync =  await TableHasUpdate<T>();
 
-                    //Check synchronization dates
-                    DateTime lastSync = await TableHasUpdate<T>();
+					if (lastSync != DateTime.MaxValue)
+					{
+						//Have Update
+						//Get results from lastSyncDate and save them to DB if cacheResult its true
+						//TODO: Filter with predicate
+						await SyncLocalTable<T>(lastSync, getID);
 
-                    if (lastSync != DateTime.MaxValue)
-                    {
-                        //Have Update
-                        //Get results from lastSyncDate and save them to DB if cacheResult its true
-                        //TODO: Filter with predicate
-                        await SyncLocalTable<T>(lastSync, getID);
+					}
 
-                    }
+					//No Update, use local
+					result = SearchForLocalTable<T>(predicate);
 
-                    //No Update, use local
-                    result = SearchForLocalTable<T>(predicate,skip,take);
+				}
+				else
+				{
+					result = await MobileService.GetTable<T>().Take(_takeNRows).Where(predicate).ToListAsync();
 
-                }
-                else
-                {
-                    result = await MobileService.GetTable<T>().Take(_takeNRows).Where(predicate).ToListAsync();
 
-                }
+				}
 
 
 
 
-            }
-            catch (WebException e)
-            {
-                if (UseLocalDBWhenOffline)
-                {
-                    result = SearchForLocalTable<T>(predicate);
-                }
-                else
-                {
-                    throw e;
-                }
-            }
+			}
+			catch (WebException e)
+			{
+				if (UseLocalDBWhenOffline)
+				{
+					result = SearchForLocalTable<T>(predicate);
+				}
+				else
+				{
+					throw e;
+				}
+			}
 
 
-            return result;
+			return result;
 
 
 
-        }
+		}
 
-        public async Task<List<T>> GetAllAsync<T>()
-        {
-           return  await MobileService.GetTable<T>().Select(x => x).ToListAsync();
-        }
 
-        public async Task<IQueryable<T>> GetAllQuery<T>()
-        {
-            var t = MobileService.GetTable<T>().IncludeTotalCount().Select(x => x);
-            var w = await t.ToEnumerableAsync();
-            //w.Start(); w.Wait();
-            var c = t.RequestTotalCount;
-            return t.Query;
-        }
+		// My IMPLEMENTATION
 
-        public async Task<T> GetByIdAsync<T>(int id)
-        {
-            return await MobileService.GetTable<T>().LookupAsync(id);
-        }
 
+		public async Task<List<T>> SearchForAsync<T> (Expression<Func<T, bool>> predicate, Dictionary<string, string> parameters, Func<T, int> getID, bool cacheResult) where T : new()
+		{
+			List<T> result;
 
-        public async System.Threading.Tasks.Task<List<T>> GetFirstNAsync<T>(int n)
-        {
-            return await MobileService.GetTable<T>().Take(n).ToListAsync();
-        }
+			try
+			{
 
-        public async System.Threading.Tasks.Task GetResource(string resourceName, string containerName)
-        {
+				//If want to cache result
 
-            try
-            {
-                List<Core.Entities.Resource> result =  await SearchForAsync<Core.Entities.Resource>(r => r.LocalPath == resourceName && r.ContainerName == containerName,(it)=>DateTime.UtcNow,it=>0,false);
-                foreach (var r in result)
-                {
-                    await DownloadResource(r.SasQueryString, r.LocalPath);
-                }
-            }
-            catch (MobileServiceInvalidOperationException e)
-            {
-                string m = e.Message;
-                                
-            }
-               
-          
+				if (cacheResult)
+				{
 
-            
+					//Check synchronization dates
+					DateTime lastSync =  await TableHasUpdate<T>();
 
-          
-        }
+					if (lastSync != DateTime.MaxValue)
+					{
+						//Have Update
+						//Get results from lastSyncDate and save them to DB if cacheResult its true
+						//TODO: Filter with predicate
+						await SyncLocalTable<T>(lastSync, getID);
 
+					}
 
-        public async Task DownloadResource(string url, string filename)
-        {          
+					//No Update, use local
+					result = SearchForLocalTable<T>(predicate,parameters);
 
-            using (var client = new HttpClient())
-            {
-                var content = await client.GetByteArrayAsync(new Uri(url));
-             //   var storage = Mvx.Resolve<IMvxFileStore>();
+				}
+				else
+				{
+					result = await MobileService.GetTable<T>().Take(1000).Where(predicate).WithParameters(parameters).IncludeTotalCount().ToListAsync();
 
-               // storage.WriteFile(filename, content);
-            }
-        }
+				}
 
 
-        public async Task<JToken> InvokeGetApi(string apiname, Dictionary<string, string> parameters)
-        {
 
 
-            return await MobileService.InvokeApiAsync(apiname, System.Net.Http.HttpMethod.Get, parameters);
+			}
+			catch (WebException e)
+			{
+				if (UseLocalDBWhenOffline)
+				{
+					result = SearchForLocalTable<T>(predicate);
+				}
+				else
+				{
+					throw e;
+				}
+			}
 
 
-            //return  await MobileService.InvokeApiAsync<T>(apiname, System.Net.Http.HttpMethod.Get, null);
+			return result;
 
-        }
 
 
-        public async Task<List<T>> SearchForWithCacheAsync<T>(System.Linq.Expressions.Expression<Func<T, bool>> predicate, string identifier) where T : new()
-        {
-            List<T> list = new List<T>() ;
-            WebException connectionError = null;
+		}
 
-            CacheService service = CacheService.Init(SessionService.GetCredentialFileName(), Constants.PreferencesFileName, Constants.LocalDbName);
-            try
-            {
-                list = await SearchForAsync<T>(predicate, (it) => DateTime.UtcNow, it => 0, false);
 
 
 
-                await service.cacheObjectList<T>(identifier, list);
-            }
-            catch (WebException e)
-            {
-                connectionError = e;
-            }
 
 
-            if (connectionError != null)
-            {
-                bool ok;
-                string localpath;
 
-                var localResource = await service.tryReadFileFromLocalCache(CacheService.GetStringWithPrefix(identifier));
-                var bytes = localResource.Bytes;
-                ok = localResource.InCache;
-                localpath = localResource.LocalPath;
+		public async Task<List<T>> SearchForAsync<T>(System.Linq.Expressions.Expression<Func<T, bool>> predicate, Dictionary<string, string> parameters, bool cacheResult)
+		{
 
-                if (ok)
-                {
-                    list = service.deserializeObjectListFromBytes<List<T>>(bytes);
-                }
-                else
-                {
-                    throw connectionError;
-                }
-            }
 
-            return list;
 
-        }
+			List<T> toReturn ;
+			try
+			{
+				toReturn = await MobileService.GetTable<T>().Take(1000).Where(predicate).WithParameters(parameters).IncludeTotalCount().ToListAsync();
+			}
+			catch (Exception e)
+			{
+				throw e;
+			}
 
+			return toReturn;
 
-        public async Task UpdateAsync<T>(T entity)
-        {
-            await MobileService.GetTable<T>().UpdateAsync(entity);
-        }
+		}
 
+		public IQueryable<T> SearchForQuery<T>(System.Linq.Expressions.Expression<Func<T, bool>> predicate, Dictionary<string, string> parameters)
+		{
+			return MobileService.GetTable<T>().Where(predicate).WithParameters(parameters).IncludeTotalCount().Query;
 
-        public async Task<List<T>> GetAllWithCacheAsync<T>(string identifier)
-        {
-            List<T> list = new List<T>();
-            WebException connectionError = null;
-            CacheService service = CacheService.Init(SessionService.GetCredentialFileName(), Constants.PreferencesFileName, Constants.LocalDbName);
-            try
-            {
-                list = await GetAllAsync<T>();
 
+		}
 
 
-                await service.cacheObjectList<T>(identifier, list);
-            }
-            catch (WebException e)
-            {
-                connectionError = e;
-            }
 
+		public async Task<List<T>> SearchForAsync<T>(System.Linq.Expressions.Expression<Func<T, bool>> predicate, Func<T, DateTime> getLastUpdate, Func<T, int> getID, bool cacheResult,int skip,int take) where T : new()
+		{
+			List<T> result;
 
-            if (connectionError != null)
-            {
-                bool ok;
-                string localpath;
-                //var localResource = await service.tryReadFileFromLocalCache(CacheService.GetStringWithPrefix(identifier));
-                var localResource = await service.tryReadFileFromLocalCache(CacheService.GetStringWithPrefix(identifier));
-                var bytes = localResource.Bytes;
-                ok = localResource.InCache;
-                localpath = localResource.LocalPath;
+			try
+			{
 
-                if (ok)
-                {
-                    list = service.deserializeObjectListFromBytes<List<T>>(bytes);
-                }
-                else
-                {
-                    throw connectionError;
-                }
-            }
+				//If want to cache result
 
-            return list;
-        }
+				if (cacheResult)
+				{
 
-        public void InitLocalSyncTable()
-        {
-            Assembly myassembly = GetType().GetTypeInfo().Assembly;
+					//Check synchronization dates
+					DateTime lastSync = await TableHasUpdate<T>();
 
+					if (lastSync != DateTime.MaxValue)
+					{
+						//Have Update
+						//Get results from lastSyncDate and save them to DB if cacheResult its true
+						//TODO: Filter with predicate
+						await SyncLocalTable<T>(lastSync, getID);
 
-           int r =   _liteConnection.CreateTable<table_sync>();
+					}
 
-          
-              
+					//No Update, use local
+					result = SearchForLocalTable<T>(predicate,skip,take);
 
-               HashSet<string> names = new HashSet<string>();
-               foreach (TypeInfo tp in myassembly.DefinedTypes)
-               {
+				}
+				else
+				{
+					result = await MobileService.GetTable<T>().Take(_takeNRows).Where(predicate).ToListAsync();
 
-                   if (tp.DeclaredProperties.Any(p => p.Name == "id"))
-                   {
-                       names.Add(tp.Name);
-                   }
+				}
 
-               }
 
-               foreach (var item in names)
-               {
-                   _liteConnection.Insert(new table_sync { table_name = item });
-               }
-      
-        }
 
-        public async Task<DataPage<T>> GetPage<T>(Expression<Func<T, bool>> predicate, int skip, int take)
-        {
-            var query = MobileService.GetTable<T>().Where(predicate).Skip(skip).Take(take).IncludeTotalCount();
-            var results = await query.ToEnumerableAsync();
-            DataPage<T> p = new DataPage<T>();
-            p.totalCount = ((ITotalCountProvider)results).TotalCount;
-            p.data = await query.ToListAsync();
-            return p;
-        }
 
-        /*public async Task<long> Count<T>()
+			}
+			catch (WebException e)
+			{
+				if (UseLocalDBWhenOffline)
+				{
+					result = SearchForLocalTable<T>(predicate);
+				}
+				else
+				{
+					throw e;
+				}
+			}
+
+
+			return result;
+
+
+
+		}
+
+		public async Task<List<T>> GetAllAsync<T>()
+		{
+			return  await MobileService.GetTable<T>().Select(x => x).ToListAsync();
+		}
+
+		public async Task<IQueryable<T>> GetAllQuery<T>()
+		{
+			var t = MobileService.GetTable<T>().IncludeTotalCount().Select(x => x);
+			var w = await t.ToEnumerableAsync();
+			//w.Start(); w.Wait();
+			var c = t.RequestTotalCount;
+			return t.Query;
+		}
+
+		public async Task<T> GetByIdAsync<T>(int id)
+		{
+			return await MobileService.GetTable<T>().LookupAsync(id);
+		}
+
+
+		public async System.Threading.Tasks.Task<List<T>> GetFirstNAsync<T>(int n)
+		{
+			return await MobileService.GetTable<T>().Take(n).ToListAsync();
+		}
+
+		public async System.Threading.Tasks.Task GetResource(string resourceName, string containerName)
+		{
+
+			try
+			{
+				List<Core.Entities.Resource> result =  await SearchForAsync<Core.Entities.Resource>(r => r.LocalPath == resourceName && r.ContainerName == containerName,(it)=>DateTime.UtcNow,it=>0,false);
+				foreach (var r in result)
+				{
+					await DownloadResource(r.SasQueryString, r.LocalPath);
+				}
+			}
+			catch (MobileServiceInvalidOperationException e)
+			{
+				string m = e.Message;
+
+			}
+
+
+
+
+
+
+		}
+
+
+		public async Task DownloadResource(string url, string filename)
+		{          
+
+			using (var client = new HttpClient())
+			{
+				var content = await client.GetByteArrayAsync(new Uri(url));
+				//   var storage = Mvx.Resolve<IMvxFileStore>();
+
+				// storage.WriteFile(filename, content);
+			}
+		}
+
+
+		public async Task<JToken> InvokeGetApi(string apiname, Dictionary<string, string> parameters)
+		{
+
+
+			return await MobileService.InvokeApiAsync(apiname, System.Net.Http.HttpMethod.Get, parameters);
+
+
+			//return  await MobileService.InvokeApiAsync<T>(apiname, System.Net.Http.HttpMethod.Get, null);
+
+		}
+
+
+		public async Task<List<T>> SearchForWithCacheAsync<T>(System.Linq.Expressions.Expression<Func<T, bool>> predicate, string identifier) where T : new()
+		{
+			List<T> list = new List<T>() ;
+			WebException connectionError = null;
+
+			CacheService service = CacheService.Init(SessionService.GetCredentialFileName(), Constants.PreferencesFileName, Constants.LocalDbName);
+			try
+			{
+				list = await SearchForAsync<T>(predicate, (it) => DateTime.UtcNow, it => 0, false);
+
+
+
+				await service.cacheObjectList<T>(identifier, list);
+			}
+			catch (WebException e)
+			{
+				connectionError = e;
+			}
+
+
+			if (connectionError != null)
+			{
+				bool ok;
+				string localpath;
+
+				var localResource = await service.tryReadFileFromLocalCache(CacheService.GetStringWithPrefix(identifier));
+				var bytes = localResource.Bytes;
+				ok = localResource.InCache;
+				localpath = localResource.LocalPath;
+
+				if (ok)
+				{
+					list = service.deserializeObjectListFromBytes<List<T>>(bytes);
+				}
+				else
+				{
+					throw connectionError;
+				}
+			}
+
+			return list;
+
+		}
+
+
+		public async Task UpdateAsync<T>(T entity)
+		{
+			await MobileService.GetTable<T>().UpdateAsync(entity);
+		}
+
+
+		public async Task<List<T>> GetAllWithCacheAsync<T>(string identifier)
+		{
+			List<T> list = new List<T>();
+			WebException connectionError = null;
+			CacheService service = CacheService.Init(SessionService.GetCredentialFileName(), Constants.PreferencesFileName, Constants.LocalDbName);
+			try
+			{
+				list = await GetAllAsync<T>();
+
+
+
+				await service.cacheObjectList<T>(identifier, list);
+			}
+			catch (WebException e)
+			{
+				connectionError = e;
+			}
+
+
+			if (connectionError != null)
+			{
+				bool ok;
+				string localpath;
+				//var localResource = await service.tryReadFileFromLocalCache(CacheService.GetStringWithPrefix(identifier));
+				var localResource = await service.tryReadFileFromLocalCache(CacheService.GetStringWithPrefix(identifier));
+				var bytes = localResource.Bytes;
+				ok = localResource.InCache;
+				localpath = localResource.LocalPath;
+
+				if (ok)
+				{
+					list = service.deserializeObjectListFromBytes<List<T>>(bytes);
+				}
+				else
+				{
+					throw connectionError;
+				}
+			}
+
+			return list;
+		}
+
+		public void InitLocalSyncTable()
+		{
+			Assembly myassembly = GetType().GetTypeInfo().Assembly;
+
+
+			int r =   _liteConnection.CreateTable<table_sync>();
+
+
+
+
+			HashSet<string> names = new HashSet<string>();
+			foreach (TypeInfo tp in myassembly.DefinedTypes)
+			{
+
+				if (tp.DeclaredProperties.Any(p => p.Name == "id"))
+				{
+					names.Add(tp.Name);
+				}
+
+			}
+
+			foreach (var item in names)
+			{
+				_liteConnection.Insert(new table_sync { table_name = item });
+			}
+
+		}
+
+		public async Task<DataPage<T>> GetPage<T>(Expression<Func<T, bool>> predicate, int skip, int take)
+		{
+			var query = MobileService.GetTable<T>().Where(predicate).Skip(skip).Take(take).IncludeTotalCount();
+			var results = await query.ToEnumerableAsync();
+			DataPage<T> p = new DataPage<T>();
+			p.totalCount = ((ITotalCountProvider)results).TotalCount;
+			p.data = await query.ToListAsync();
+			return p;
+		}
+
+		/*public async Task<long> Count<T>()
         {
             var query = MobileService.GetTable<T>().Take(1).IncludeTotalCount();
             var results = await query.ToEnumerableAsync();
             return ((ITotalCountProvider)results).TotalCount;
         }*/
-       
-    }
+
+	}
 }

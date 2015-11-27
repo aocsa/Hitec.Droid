@@ -15,10 +15,11 @@ namespace MLearningDB
     public partial class Head
     {
         public int id { get; set; }
-        public string title { get; set; }       
         public int User_id { get; set; }
+        public string title { get; set; }
+        public bool C__deleted { get; set; }
+        public System.DateTime created_at { get; set; }
+        public System.DateTime updated_at { get; set; }
 
-        public DateTime created_at { get; set; }
-        public DateTime updated_at { get; set; }
     }
 }

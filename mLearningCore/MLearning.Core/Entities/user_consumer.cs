@@ -21,11 +21,7 @@ namespace MLearningDB
         public string password { get; set; }
         public string email { get; set; }
         public string image_url { get; set; }
-        public DateTime created_at { get; set; }
-        public DateTime updated_at { get; set; }
-
-        
+        public System.DateTime created_at { get; set; }
+        public System.DateTime updated_at { get; set; }
     }
 }
-
-

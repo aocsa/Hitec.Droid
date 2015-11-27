@@ -12,19 +12,15 @@ namespace MLearningDB
     using System;
     using System.Collections.Generic;
     
-    public class QuestionOption
+    public partial class QuestionOption
     {
         public int id { get; set; }
-
         public int Question_id { get; set; }
-
         public string option { get; set; }
-
-        public DateTime created_at { get; set; }
-
-        public DateTime updated_at { get; set; }
-
-        public bool match_left { get; set; }
-        
+        public System.DateTime created_at { get; set; }
+        public System.DateTime updated_at { get; set; }
+        public int match_left { get; set; }
+        public bool C__deleted { get; set; }
+ 
     }
 }
