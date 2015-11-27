@@ -501,6 +501,7 @@ namespace MLearning.Droid
 			_contentLLayout_S3.SetGravity (Android.Views.GravityFlags.Center);
 
 
+
 			_txtInfo1_S3 = new TextView (context);
 			_txtInfo2_S3 = new TextView (context);
 			_txtInfo3_S3 = new TextView (context);
@@ -609,7 +610,7 @@ namespace MLearning.Droid
 
 			//----------------------------------------------------------
 
-			Drawable dr = new BitmapDrawable (getBitmapFromAsset("images/header1.png"));
+			Drawable dr = new BitmapDrawable (getBitmapFromAsset("images/header2.png"));
 			header = new LinearLayout(context);
 			header.LayoutParameters = new LinearLayout.LayoutParams (-1,Configuration.getHeight(125));
 			header.Orientation = Orientation.Vertical;
@@ -663,8 +664,10 @@ namespace MLearning.Droid
 				icon.SetX (Configuration.getWidth (60));
 
 				if (indexCurso == 0) {
-					linearUnidad.AddView (icon);
-					_listIconMap.Add (icon);
+					if (indexUnidad != 3) {
+						linearUnidad.AddView (icon);
+						_listIconMap.Add (icon);
+					}
 				}
 
 				LinearLayout linearContenido = new LinearLayout (context);

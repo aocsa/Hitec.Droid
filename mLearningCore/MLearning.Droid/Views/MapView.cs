@@ -23,22 +23,30 @@ namespace MLearning.Droid
 		RelativeLayout mainLayout;
 		LinearLayout mapSpace;
 		public VerticalScrollView placeSpace;
-		public ScaleImageView mapImage;
+		public ImageView mapImage;
 		public List<LinearLayout> _placesLayout = new List<LinearLayout>();
 		public List<MapItemInfo> _placesData = new List<MapItemInfo> ();
 		PopupWindow infoPopUp; 
 		LinearLayout fullInfo;
 
-		List<PlaceItem> _currentPlaces = new List<PlaceItem>();
-		ListView  listPlaces;
+		public List<PlaceItem> _currentPlaces = new List<PlaceItem>();
+		public ListView  listPlaces;
 
 		public LinearLayout placesInfoLayout;
 		public LinearLayout placesContainer;
+
+		public String titulo;
+		public String descripcion;
+		public String mapUrl;
+
+
 
 		int widthInDp;
 		int heightInDp;
 
 		Context context;
+
+		VerticalScrollView scrollPlaces;
 
 		public bool placeInfoOpen = false;
 
@@ -48,6 +56,9 @@ namespace MLearning.Droid
 			this.context = context;
 			Initialize ();
 		}
+
+
+
 
 		void Initialize ()
 		{
@@ -72,45 +83,61 @@ namespace MLearning.Droid
 			return bitmap;
 		}
 
+		public void setMapImage(String url)
+		{
+			
+			Picasso.With (context).Load (url).Resize(Configuration.WIDTH_PIXEL,Configuration.getHeight(700)).Placeholder(context.Resources.GetDrawable (Resource.Drawable.progress_animation)).CenterCrop().Into (mapImage);
+			mapImage.Click += delegate {
+				Intent lance = new Intent();
+				lance.SetAction(Intent.ActionView);
+				String typedata = "image/*";
+				lance.SetType(typedata);
+				String phuri = url;
+				Android.Net.Uri uri = Android.Net.Uri.Parse(phuri);
+
+				lance.SetDataAndType(uri,typedata);
+				context.StartActivity(lance);
+			};
+
+		}
+
 		public void ini(){
 
 			placesInfoLayout = new LinearLayout (context);
-			placesInfoLayout.LayoutParameters = new LinearLayout.LayoutParams (-1, -1);
+			placesInfoLayout.LayoutParameters = new LinearLayout.LayoutParams (-1, -2);
 			placesInfoLayout.SetPadding(30,30,30,30);
+			placesInfoLayout.Orientation = Orientation.Vertical;
 
 			mainLayout = new RelativeLayout (context);
 			mainLayout.LayoutParameters = new RelativeLayout.LayoutParams (-1,-1);
 
-			mapImage = new ScaleImageView (context,null);
-			//mapImage.SetMinimumWidth (Configuration.WIDTH_PIXEL);
-			//mapImage.LayoutParameters = new LinearLayout.LayoutParams (-1, Configuration.getHeight (500));
-
-			//mapImage.SetScaleType (ImageView.ScaleType.CenterInside);
-			//mapImage.ZoomTo(2,0,0);
-
-
+			mapImage = new ImageView (context);
 			mapSpace = new LinearLayout (context);
-			mapSpace.LayoutParameters = new LinearLayout.LayoutParams (-1, Configuration.getHeight (800));
+			mapSpace.LayoutParameters = new LinearLayout.LayoutParams (-1, Configuration.getHeight (700));
+			mapSpace.SetGravity (GravityFlags.CenterHorizontal);
 			mapSpace.AddView (mapImage);
 
 
 
 			placeSpace = new VerticalScrollView (context);
-			placeSpace.LayoutParameters = new LinearLayout.LayoutParams (-1, Configuration.getHeight(200));
-			placeSpace.SetY (Configuration.getHeight (800));
+			placeSpace.LayoutParameters = new LinearLayout.LayoutParams (-1, Configuration.getHeight(330));
+			placeSpace.SetY (Configuration.getHeight (700));
 			placeSpace.SetBackgroundColor (Color.White);
 
-			//mainLayout.AddView (mapSpace);
-			//mainLayout.AddView (placeSpace);
+			placesContainer = new LinearLayout (context);
+			placesContainer.LayoutParameters = new LinearLayout.LayoutParams (-1, Configuration.getHeight(500));
+			placesContainer.Orientation = Orientation.Vertical;
 
-			PlaceItem p1 = new PlaceItem{ titulo = "Piscacucho-Wayllabamba", detalle = "........." };
-			PlaceItem p2 = new PlaceItem{ titulo = "La arquitectura Inca", detalle = "........." };
-			PlaceItem p3 = new PlaceItem{ titulo = "Wayllabamba-Pacaymayo", detalle = "........." };
-			PlaceItem p4 = new PlaceItem{ titulo = "Llaqtapata", detalle = "........." };
-			PlaceItem p5 = new PlaceItem{ titulo = "Miskay", detalle = "........." };
-			PlaceItem p6 = new PlaceItem{ titulo = "Puesto de control Piscacucho (km 82)", detalle = "........." };
-			PlaceItem p7 = new PlaceItem{ titulo = "Campamento Wayllabamba", detalle = "........." };
-			PlaceItem p8 = new PlaceItem{ titulo = "Place", detalle = "........." };
+
+			/*
+			PlaceItem p1 = new PlaceItem{pathIcon="icons/iconcifras.png", titulo = "Piscacucho-Wayllabamba", detalle = "........." };
+			PlaceItem p2 = new PlaceItem{pathIcon="icons/iconcifras.png", titulo = "La arquitectura Inca", detalle = "........." };
+			PlaceItem p3 = new PlaceItem{pathIcon="icons/iconcifras.png", titulo = "Wayllabamba-Pacaymayo", detalle = "........." };
+			PlaceItem p4 = new PlaceItem{pathIcon="icons/iconcifras.png", titulo = "Llaqtapata", detalle = "........." };
+			PlaceItem p5 = new PlaceItem{pathIcon="icons/iconcifras.png", titulo = "Miskay", detalle = "........." };
+			PlaceItem p6 = new PlaceItem{pathIcon="icons/iconcifras.png", titulo = "Puesto de control Piscacucho (km 82)", detalle = "........." };
+			PlaceItem p7 = new PlaceItem{pathIcon="icons/iconcifras.png", titulo = "Campamento Wayllabamba", detalle = "........." };
+			PlaceItem p8 = new PlaceItem{pathIcon="icons/iconcifras.png", titulo = "Place", detalle = "........." };
 
 			_currentPlaces.Add (p1);
 			_currentPlaces.Add (p2);
@@ -120,68 +147,100 @@ namespace MLearning.Droid
 			_currentPlaces.Add (p5);
 			_currentPlaces.Add (p6);
 			_currentPlaces.Add (p7);
+			_currentPlaces.Add (p8);
+			*/
 
-
-			//listPlaces = new ListView (context);
-			//listPlaces.Adapter = new PlaceAdapter(context, _currentPlaces);
-			//listPlaces.ItemClick+= ListCursos_ItemClick;
-
-
-			//placeSpace.AddView (listPlaces);
 			mainLayout.AddView (mapSpace);
 			mainLayout.AddView (placeSpace);
-			mainLayout.AddView (placesInfoLayout);
-			iniPlancesList ();
+
+			scrollPlaces = new VerticalScrollView (context);
+			scrollPlaces.LayoutParameters = new VerticalScrollView.LayoutParams (-1, Configuration.getHeight(1015));
+			scrollPlaces.AddView (placesInfoLayout);
+
+
+			//mainLayout.AddView (placesInfoLayout);
+
+			//iniPlancesList ();
 
 		}
 
-		public void showPLaceInfo(object sender, EventArgs e)
+		public void showPLaceInfo(int position)
 		{
-
+			mainLayout.AddView(scrollPlaces);
+			scrollPlaces.SetBackgroundColor (Color.White);
 			placeInfoOpen = true;
 			placesInfoLayout.RemoveAllViews ();
-			TextView detalle = new TextView (context);
-			detalle.Text  = "Tras cruzar un puente sobre el río Urubamba usted habrá iniciado oficialmente su aventura rumbo a la ciudadela perdida de los incas. Las primeras dos horas de caminata se realizan sobre un terreno plano, en un típico valle húmedo interandino, rodeado de matas de chilca, papas silvestres, cactus, tara y coloridas flores de retama. ";
 
-			ImageView image1 = new ImageView (context);
-			image1.SetImageBitmap (getBitmapFromAsset ("images/fondounidad.png"));
+			var extraInfo = _placesData [position].placeExtraInfo;
+			for (int i = 0; i < extraInfo.Count; i++) {
+				TextView detalle = new TextView (context);
+				detalle.Text = extraInfo [i].detalle;
 
+				String url = extraInfo [i].url;
+				ImageView image = new ImageView (context);
+				Picasso.With (context).Load (url).Placeholder(context.Resources.GetDrawable (Resource.Drawable.progress_animation)).Resize(Configuration.getWidth(640),Configuration.getHeight(640)).CenterInside().Into (image);
+				placesInfoLayout.AddView (detalle);
+				placesInfoLayout.AddView (image);
 
+			}
 			placesInfoLayout.SetBackgroundColor (Color.White);
-			placesInfoLayout.AddView (detalle);
-			placesInfoLayout.AddView (image1);
-
-
-
 		}
 
 		public void hidePlaceInfo()
 		{
-			placesInfoLayout.RemoveAllViews ();
-			placesInfoLayout.SetBackgroundColor (Color.Transparent);
+			mainLayout.RemoveView (scrollPlaces);
+			//placesInfoLayout.RemoveAllViews ();
+			//placesInfoLayout.SetBackgroundColor (Color.Transparent);
 		}
 
 		public void iniPlancesList()
 		{
+			//_currentPlaces.Clear ();
+			placeSpace.RemoveAllViews ();
+			placesContainer.RemoveAllViews ();
 
-			placesContainer = new LinearLayout (context);
-			placesContainer.LayoutParameters = new LinearLayout.LayoutParams (-1, Configuration.getHeight(500));
-			placesContainer.Orientation = Orientation.Vertical;
+			listPlaces = new ListView (context);
+			listPlaces.LayoutParameters = new LinearLayout.LayoutParams (-1, Configuration.getHeight(330));
+			listPlaces.Adapter = new PlaceAdapter (context, _currentPlaces);
+			listPlaces.DividerHeight = 0;
 
+			/*
 			for (int i = 0; i < _currentPlaces.Count; i++) {
 
 				LinearLayout rowPlace = new LinearLayout (context);
 				rowPlace.LayoutParameters = new LinearLayout.LayoutParams (-1, -2);
+				rowPlace.Orientation = Orientation.Horizontal;
+				rowPlace.SetPadding (30, 20, 30, 20);
+				rowPlace.SetGravity (GravityFlags.CenterVertical);
 
 				TextView titulo = new TextView (context);
 				titulo.Text = _currentPlaces [i].titulo;
+				//titulo.SetTextColor (Color.Black);
 
+				//ImageView imgIcon = new ImageView (context);
+				//imgIcon.SetImageBitmap (Bitmap.CreateScaledBitmap (getBitmapFromAsset (_currentPlaces[i].pathIcon), Configuration.getWidth (30), Configuration.getWidth (30), true));
+
+				titulo.SetPadding (Configuration.getWidth(48), 0, 0, 0);
+				//rowPlace.AddView (imgIcon);
 				rowPlace.AddView (titulo);
+
+				if (i % 2 == 0) {
+					rowPlace.SetBackgroundColor (Color.ParseColor ("#F0AE11"));
+					titulo.SetTextColor (Color.White);
+				} else {
+					titulo.SetTextColor (Color.ParseColor("#F0AE11"));
+				}
+
+				rowPlace.Clickable = true;
 				placesContainer.AddView (rowPlace);
+				_placesLayout.Add (rowPlace);
 
-			}
+			}*/
 
-			placeSpace.AddView (placesContainer);
+
+			placesContainer.AddView (listPlaces);
+			placeSpace.AddView(placesContainer);
+
 
 		}
 

@@ -27,6 +27,8 @@ namespace MLearning.Droid
 		TextView txtTitle;
 		ImageButton imgPlay;
 
+		VideoView video;
+
 		public CustomerVideoView (Context context) :
 		base (context)
 		{
@@ -49,6 +51,7 @@ namespace MLearning.Droid
 			linearTitle = new LinearLayout (context);
 			linearButton = new LinearLayout (context);
 			imgPlay = new ImageButton (context);
+			video = new VideoView (context);
 
 			image.SetGravity (GravityFlags.Bottom);
 			background.LayoutParameters = new LinearLayout.LayoutParams (Configuration.getWidth (582), Configuration.getHeight (111));
@@ -66,13 +69,15 @@ namespace MLearning.Droid
 
 			image.LayoutParameters = new RelativeLayout.LayoutParams (Configuration.getWidth (582), Configuration.getHeight (394));
 			//image.SetGravity (GravityFlags.Bottom);
+			video.LayoutParameters = new ViewGroup.LayoutParams(Configuration.getWidth(582),Configuration.getHeight(394));
+
+
 			imgPlay.Alpha = 255.0f;
 			imgPlay.SetBackgroundColor (Color.Transparent);
 
 			txtTitle.SetTextColor (Color.ParseColor("#ffffff"));
 			txtTitle.SetPadding (Configuration.getWidth (20), 0, 0, 0);
-			//txtTitle.SetTextSize (ComplexUnitType.Px, Configuration.getHeight (40));
-			txtTitle.SetTextSize (ComplexUnitType.Dip, 21.0f);
+			txtTitle.SetTextSize (ComplexUnitType.Px, Configuration.getHeight (40));
 			txtTitle.Ellipsize = Android.Text.TextUtils.TruncateAt.End;
 			txtTitle.SetMaxLines (2);
 
@@ -102,17 +107,18 @@ namespace MLearning.Droid
 
 		}
 
-		/*
-		private String _imagen;
-		public String Imagen{
-			get{ return _imagen;}
-			set{ _imagen = value;
-				Drawable dr = new BitmapDrawable (Bitmap.CreateScaledBitmap (getBitmapFromAsset (_imagen), Configuration.getWidth (582), Configuration.getHeight (394), true));
-				image.SetBackgroundDrawable (dr);
+
+		private String _urlVideo;
+		public String UrlVideo{
+			get{ return _urlVideo;}
+			set{ _urlVideo = value;
+				//Drawable dr = new BitmapDrawable (Bitmap.CreateScaledBitmap (getBitmapFromAsset (_imagen), Configuration.getWidth (582), Configuration.getHeight (394), true));
+				//image.SetBackgroundDrawable (dr);
+
 			}
 
 
-		}*/
+		}
 
 
 		private String _imagen;

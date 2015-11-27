@@ -1336,6 +1336,7 @@ namespace MLearning.Core.ViewModels
 		async Task LoadPages2(int loListIndex,bool images)
 		{
 			var lo_obj = LOsInCircle[loListIndex];
+
 			var LOID = lo_obj.lo.id;
 
 			var sectionList = await _mLearningService.GetSectionsByLO (LOID);

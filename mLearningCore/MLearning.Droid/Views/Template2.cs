@@ -89,7 +89,7 @@ namespace MLearning.Droid
 			titleHeader.SetMaxWidth (Configuration.getWidth (583));
 
 			//content.Text = "Los factores geográficos, climáticos y evolutivos  convierten al Perú en el mejor lugar para realizar la observacion de aves(birthwaching) Tiene 1830 especies de pájaros(segun la lista oficial del SACC/CRAP), tambien es considerado el";
-		//	content.SetTextSize (textFormat, Configuration.getHeight (26));
+			//	content.SetTextSize (textFormat, Configuration.getHeight (26));
 			content.SetTextSize (textFormatdip, 12.0f);
 
 			content.SetMaxWidth (Configuration.getWidth(583));
@@ -115,13 +115,15 @@ namespace MLearning.Droid
 
 		}
 
-	
+
 
 		private string _content;
 		public string Contenido{
 			get{return _content; }
 			set{_content = value;
-				content.Text = _content;}
+				content.TextFormatted = Html.FromHtml (_content);
+				//content.Text = _content;
+			}
 
 		}
 	}

@@ -82,9 +82,11 @@ namespace MLearning.Droid.Views
 
 		//	Console.WriteLine ("DIMESIONES DEL DEVICEEEEEEEEEEEE WIDTH= "+ widthInDp + " HEIGHT = "+heightInDp);
 
-			init ();
+			var com = ((LoginViewModel)this.DataContext).LoginCommand;
+			com.Execute(null);
+			//init ();
 
-			SetContentView (mainLayout);
+			//SetContentView (mainLayout);
 			//SetContentView(Resource.Layout.LoginView);
 		}
 
@@ -519,7 +521,7 @@ namespace MLearning.Droid.Views
 		protected override void OnPause ()
 		{
 			base.OnPause ();
-			_dialog.Hide ();
+			//_dialog.Hide ();
 		}
 
 		/*public override void OnBackPressed ()

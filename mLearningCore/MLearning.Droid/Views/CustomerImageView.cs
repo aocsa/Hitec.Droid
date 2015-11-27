@@ -14,13 +14,16 @@ using Android.Widget;
 using Android.Graphics;
 using Android.Graphics.Drawables;
 using Square.Picasso;
+using Android.Text;
+using System.Threading.Tasks;
+using System.Net.Http;
 
 namespace MLearning.Droid
 {
 	public class CustomerImageView : RelativeLayout
 	{
 		Context context;
-		RelativeLayout image;
+		LinearLayout image;
 		LinearLayout background;
 		TextView txtDescription;
 		TextView txtTitle;
@@ -38,12 +41,12 @@ namespace MLearning.Droid
 
 		void Initialize ()
 		{
-			this.LayoutParameters = new RelativeLayout.LayoutParams(-1,Configuration.getHeight (412));// LinearLayout.LayoutParams (Configuration.getWidth (582), Configuration.getHeight (394));
+			this.LayoutParameters = new RelativeLayout.LayoutParams(-1,-2);// LinearLayout.LayoutParams (Configuration.getWidth (582), Configuration.getHeight (394));
 			this.SetGravity(GravityFlags.CenterHorizontal);
 
 
 			imBack = new ImageView (context);
-			image = new RelativeLayout(context);
+			image = new LinearLayout(context);
 			txtDescription = new TextView (context);
 			txtTitle = new TextView (context);
 			background = new LinearLayout (context);
@@ -52,19 +55,20 @@ namespace MLearning.Droid
 
 			//LinearLayout.LayoutParams paramL = new new LinearLayout.LayoutParams (Configuration.getWidth (530), Configuration.getHeight (356));
 
-			background.LayoutParameters = new LinearLayout.LayoutParams (Configuration.getWidth (530), Configuration.getHeight (356));
+			background.LayoutParameters = new LinearLayout.LayoutParams (Configuration.getWidth (530), -2);
 			background.Orientation = Orientation.Vertical;
 
 
 
-			background.SetBackgroundColor (Color.ParseColor ("#50000000"));
-			background.BaselineAligned = true;
+			//background.SetBackgroundColor (Color.ParseColor ("#50000000"));
+			//background.BaselineAligned = true;
 
-			image.LayoutParameters = new RelativeLayout.LayoutParams (Configuration.getWidth (582), Configuration.getHeight (394));
-			image.SetGravity (GravityFlags.Center);
+			image.LayoutParameters = new LinearLayout.LayoutParams (Configuration.getWidth (582), -2);
+			image.Orientation = Orientation.Vertical;
+			//image.SetGravity (GravityFlags.Center);
 
-			relTemp.LayoutParameters = new LinearLayout.LayoutParams (Configuration.getWidth (582), Configuration.getHeight (394));
-			relTemp.SetGravity (GravityFlags.Center);
+			relTemp.LayoutParameters = new LinearLayout.LayoutParams (Configuration.getWidth (582), -2);
+			//relTemp.SetGravity (GravityFlags.Center);
 
 			//RelativeLayout.LayoutParams param = new RelativeLayout.LayoutParams(Configuration.getWidth (530), Configuration.getHeight (356));
 
@@ -73,16 +77,16 @@ namespace MLearning.Droid
 			relTemp.AddView (background);
 
 
-			txtTitle.SetTextColor (Color.ParseColor("#ffffff"));
-			txtDescription.SetTextColor(Color.ParseColor("#ffffff"));
+			txtTitle.SetTextColor (Color.ParseColor("#424242"));
+			txtDescription.SetTextColor(Color.ParseColor("#424242"));
 			//txtTitle.SetTextSize (ComplexUnitType.Px, Configuration.getHeight (40));
 			//txtDescription.SetTextSize (ComplexUnitType.Px, Configuration.getHeight (30));
 
 			txtTitle.SetTextSize (ComplexUnitType.Dip, 21.0f);
-			txtDescription.SetTextSize (ComplexUnitType.Dip, 15.0f);
+			txtDescription.SetTextSize (ComplexUnitType.Dip, 12.0f);
 			txtDescription.Ellipsize = Android.Text.TextUtils.TruncateAt.End;
 			txtDescription.SetSingleLine (false);
-			txtDescription.SetMaxLines (9);
+			//txtDescription.SetMaxLines (9);
 			//txtDescription.line
 
 
@@ -91,10 +95,8 @@ namespace MLearning.Droid
 
 
 
-
-			image.AddView (imBack);
 			image.AddView (relTemp);
-
+			image.AddView (imBack);
 			this.AddView (image);
 			//this.AddView (background);
 
@@ -114,7 +116,8 @@ namespace MLearning.Droid
 		public String Description{
 			get{ return _description;}
 			set{ _description = value;
-				txtDescription.Text = _description;
+				txtDescription.TextFormatted = Html.FromHtml (_description);
+				//txtDescription.Text = _description;
 			}
 
 		}
@@ -127,16 +130,30 @@ namespace MLearning.Droid
 				//Drawable dr = new BitmapDrawable (Bitmap.CreateScaledBitmap (bm, Configuration.getWidth (582), Configuration.getHeight (394), true));
 
 				//image.SetBackgroundDrawable (dr);
+				//Bitmap  bm = GetImageBitmapFromUrlAsync(_imagen);
 
+				//imBack.SetImageBitmap (Bitmap.CreateScaledBitmap (bm, Configuration.getWidth (582), Configuration.getHeight (394), true));
+				//bm = null;
 
-				Picasso.With (context).Load (_imagen).Resize(Configuration.getWidth(582),Configuration.getHeight(394)).CenterCrop().Into (imBack);
+				Picasso.With (context).Load (_imagen).Resize(Configuration.getWidth(582),Configuration.getHeight(394)).CenterInside().Into (imBack);
 
-
+				/*Task task = new Task (DownloadImage);
+				task.Start();
+				task.Wait ();*/
 
 			}
 
 
 		}
+
+		public async void  DownloadImage(){
+
+			Bitmap  bm = await GetImageBitmapFromUrlAsync (_imagen);
+			imBack.SetImageBitmap (Bitmap.CreateScaledBitmap (bm, Configuration.getWidth (582), Configuration.getHeight (394), true));
+			bm = null;
+		}
+
+
 
 
 		private Bitmap _imageBitmap;
@@ -155,6 +172,23 @@ namespace MLearning.Droid
 			Bitmap bitmap = BitmapFactory.DecodeStream (s);
 
 			return bitmap;
+		}
+
+
+		public async Task<Bitmap> GetImageBitmapFromUrlAsync(string url)
+		{
+			Bitmap imageBitmap = null;
+
+			using (var httpClient = new HttpClient())
+			{
+				var imageBytes = await httpClient.GetByteArrayAsync(url);
+				if (imageBytes != null && imageBytes.Length > 0)
+				{
+					imageBitmap = BitmapFactory.DecodeByteArray(imageBytes, 0, imageBytes.Length);
+				}
+			}
+
+			return imageBitmap;
 		}
 
 

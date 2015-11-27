@@ -37,7 +37,7 @@ namespace MLearning.Droid
 		Context context;
 
 		public Template1 (Context context) :
-			base (context)
+		base (context)
 		{
 			this.context = context;
 			Initialize ();
@@ -119,15 +119,16 @@ namespace MLearning.Droid
 
 
 			mainLinearLayout.SetBackgroundResource (Resource.Drawable.border);
-//			mainLinearLayout.SetX (Configuration.getHeight (45));
+			//			mainLinearLayout.SetX (Configuration.getHeight (45));
 			//mainLinearLayout.SetY (Configuration.getWidth (500));
 
 
 
 			//titleHeader.Text = "Diferentes tipos de aves en Perú";
 			titleHeader.SetTextColor (Color.ParseColor ("#FF0080"));
-			titleHeader.SetTextSize (textFormat, Configuration.getHeight (38));
+			//titleHeader.SetTextSize (textFormat, Configuration.getHeight (38));
 			titleHeader.SetTextSize (textFormatdip, 16.0f);
+
 			titleHeader.SetMaxWidth (Configuration.getWidth (274));
 			titleHeader.SetMaxHeight (Configuration.getHeight (80));
 			//titleHeader.SetX (Configuration.getHeight (218));titleHeader.SetY (Configuration.getWidth (794-desviacion));
@@ -204,7 +205,9 @@ namespace MLearning.Droid
 		public string Contenido{
 			get{return _content; }
 			set{_content = value;
-				content.Text = _content;}
+				content.TextFormatted = Html.FromHtml (_content);
+				//	content.Text = _content;
+			}
 
 		}
 
@@ -214,7 +217,7 @@ namespace MLearning.Droid
 			set{_imageBitmap = value;
 				imHeader.SetImageBitmap (Bitmap.CreateScaledBitmap (_imageBitmap,Configuration.getWidth (60), Configuration.getHeight (60),true));
 
-				}
+			}
 		}
 
 		private string _imageUrl;
@@ -229,7 +232,7 @@ namespace MLearning.Droid
 				Picasso.With (context).Load (ImageUrl).Resize(Configuration.getWidth(124),Configuration.getHeight(124)).CenterCrop().Into (imHeader);
 				//Picasso.With (context).Load (ImageUrl).CenterCrop().Into (imHeader);
 			}
-	
+
 		}
 
 	}

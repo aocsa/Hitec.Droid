@@ -12,6 +12,7 @@ using Android.Util;
 using Android.Views;
 using Android.Widget;
 using Android.Graphics;
+using Android.Text;
 
 namespace MLearning.Droid
 {
@@ -88,7 +89,8 @@ namespace MLearning.Droid
 		public String Phrase{
 			get{ return _phrase;}
 			set{ _phrase = value;
-				txtPhrase.Text = _phrase;
+				txtPhrase.TextFormatted = Html.FromHtml (_phrase);
+				//txtPhrase.Text = _phrase;
 			}
 
 		}
@@ -117,7 +119,7 @@ namespace MLearning.Droid
 			get{ return _imagenBarra;}
 			set{ _imagenBarra = value;
 				//	int valor = Altura;// - Configuration.getHeight (30);
-			//	imgBarra.SetImageBitmap(Bitmap.CreateScaledBitmap (getBitmapFromAsset (_imagenBarra), Configuration.getWidth( 10),100, true));
+				//	imgBarra.SetImageBitmap(Bitmap.CreateScaledBitmap (getBitmapFromAsset (_imagenBarra), Configuration.getWidth( 10),100, true));
 			}
 		}
 

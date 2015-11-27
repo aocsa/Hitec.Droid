@@ -1382,19 +1382,34 @@ namespace MLearning.Droid
 			public const int Icon = 2130837570;
 			
 			// aapt resource value: 0x7f020043
-			public const int logo_icon = 2130837571;
-			
-			// aapt resource value: 0x7f020047
-			public const int notification_template_icon_bg = 2130837575;
+			public const int loading = 2130837571;
 			
 			// aapt resource value: 0x7f020044
-			public const int progressBackground = 2130837572;
+			public const int loading2 = 2130837572;
 			
 			// aapt resource value: 0x7f020045
-			public const int splash = 2130837573;
+			public const int loading3 = 2130837573;
 			
 			// aapt resource value: 0x7f020046
-			public const int transparent = 2130837574;
+			public const int loading4 = 2130837574;
+			
+			// aapt resource value: 0x7f020047
+			public const int logo_icon = 2130837575;
+			
+			// aapt resource value: 0x7f02004c
+			public const int notification_template_icon_bg = 2130837580;
+			
+			// aapt resource value: 0x7f020048
+			public const int progress_animation = 2130837576;
+			
+			// aapt resource value: 0x7f020049
+			public const int progressBackground = 2130837577;
+			
+			// aapt resource value: 0x7f02004a
+			public const int splash = 2130837578;
+			
+			// aapt resource value: 0x7f02004b
+			public const int transparent = 2130837579;
 			
 			static Drawable()
 			{

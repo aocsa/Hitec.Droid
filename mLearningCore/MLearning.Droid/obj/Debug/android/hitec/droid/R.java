@@ -1610,11 +1610,16 @@ containing a value of this type.
         public static final int gradiente=0x7f020040;
         public static final int hamburger=0x7f020041;
         public static final int icon=0x7f020042;
-        public static final int logo_icon=0x7f020043;
-        public static final int notification_template_icon_bg=0x7f020047;
-        public static final int progressbackground=0x7f020044;
-        public static final int splash=0x7f020045;
-        public static final int transparent=0x7f020046;
+        public static final int loading=0x7f020043;
+        public static final int loading2=0x7f020044;
+        public static final int loading3=0x7f020045;
+        public static final int loading4=0x7f020046;
+        public static final int logo_icon=0x7f020047;
+        public static final int notification_template_icon_bg=0x7f02004c;
+        public static final int progress_animation=0x7f020048;
+        public static final int progressbackground=0x7f020049;
+        public static final int splash=0x7f02004a;
+        public static final int transparent=0x7f02004b;
     }
     public static final class id {
         public static final int MvxBindingTagUnique=0x7f06000a;

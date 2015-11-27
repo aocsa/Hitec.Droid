@@ -23,6 +23,8 @@ namespace MLearning.Droid
 
 		LinearLayout _linearContentLayout;
 		VerticalScrollView _scrollItems;
+		LinearLayout _publicidadLayout;
+		LinearLayout _adLayout;
 
 		public List<LinearLayout> _listLinearItem = new List<LinearLayout>();
 
@@ -31,6 +33,8 @@ namespace MLearning.Droid
 		int widthInDp;
 		int heightInDp;
 
+		public List<string> adsImagesPath = new List<string>();
+		public bool adOpen = false;
 
 		Context context;
 
@@ -61,8 +65,37 @@ namespace MLearning.Droid
 			Configuration.setWidthPixel (widthInDp);
 			Configuration.setHeigthPixel (heightInDp);
 
+			adsImagesPath.Add ("images/ad1.jpg");
+			adsImagesPath.Add ("images/ad2.jpg");
+			adsImagesPath.Add ("images/ad3.jpg");
+
 			initUi ();
 			this.AddView (_mainLayout);
+		}
+
+		void showAd(int idAd)
+		{
+			adOpen = true;
+			_adLayout = new LinearLayout (context);
+			_adLayout.LayoutParameters = new LinearLayout.LayoutParams (-1, Configuration.getHeight (255));
+			Drawable dr = new BitmapDrawable (getBitmapFromAsset (adsImagesPath[idAd]));
+			_adLayout.SetBackgroundDrawable (dr);
+			_adLayout.SetY (925);
+			_mainLayout.AddView (_adLayout);
+
+			_adLayout.Click += delegate {
+				String url = "http://www.hi-tec.com/pe/";
+				Intent i = new Intent (Intent.ActionView);
+				i.SetData (Android.Net.Uri.Parse (url));
+				context.StartActivity(i);
+			};
+		}
+
+		void hideAd()
+		{
+			adOpen = false;
+			int numAd = _mainLayout.ChildCount;
+			_mainLayout.RemoveViewAt (numAd-1);
 		}
 
 		public Bitmap getBitmapFromAsset( String filePath) {
@@ -78,13 +111,31 @@ namespace MLearning.Droid
 			_mainLayout.LayoutParameters = new RelativeLayout.LayoutParams (-1, -1);
 
 			_scrollItems = new VerticalScrollView (context);
-			_scrollItems.LayoutParameters = new VerticalScrollView.LayoutParams (-1, Configuration.getHeight(1050));
+			_scrollItems.LayoutParameters = new VerticalScrollView.LayoutParams (-1, Configuration.getHeight(965));
 			_scrollItems.SetY (Configuration.getHeight (125));
 
 			initItems ();
 			_scrollItems.AddView (_linearContentLayout);
 
 			_mainLayout.AddView (_scrollItems);
+			_publicidadLayout = new LinearLayout (context);
+			_publicidadLayout.LayoutParameters = new LinearLayout.LayoutParams (-1, Configuration.getHeight (85));
+			Drawable dr = new BitmapDrawable (getBitmapFromAsset ("images/footerad.jpg"));
+			_publicidadLayout.SetBackgroundDrawable (dr);
+			_publicidadLayout.SetY (Configuration.getHeight(1060));
+			_mainLayout.AddView (_publicidadLayout);
+			_publicidadLayout.Click += delegate {
+				if (adOpen) {
+					
+
+					hideAd ();
+				} else {
+					Random rnd = new Random();
+					showAd (rnd.Next(3));
+				}
+			};
+
+
 		}
 
 		private void initItems()

@@ -20,8 +20,7 @@ namespace MLearning.Droid
 	public class MapItemInfo
 	{
 		public String titulo;
-		public String detalle;
-		public List<String> imagesUrls;
+		public List<PlaceDetalle> placeExtraInfo = new List<PlaceDetalle>();
 	}
 
 }

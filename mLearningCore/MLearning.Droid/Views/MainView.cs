@@ -20,6 +20,7 @@ using Android.Content.PM;
 using DataSource;
 using Android.Support.V4.View;
 using Android.Content;
+using Square.Picasso;
 
 namespace MLearning.Droid.Views
 {
@@ -41,7 +42,7 @@ namespace MLearning.Droid.Views
 		private LOContainerView _foro;
 
 
-		List<ImageLOView> list = new List<ImageLOView> ();
+		List<ImageLOView> list;
 
 		//private SupportToolbar mToolbar;
 
@@ -498,8 +499,9 @@ namespace MLearning.Droid.Views
 			linearListTaskBotton.AddView (_listTasksBotton);
 
 			linearList.AddView (linearListTaskTop);
-			linearList.AddView (scrollRutas);
-			linearList.AddView (linearinfo1);
+			//linearList.AddView (scrollRutas);
+			//linearList.AddView (linearinfo1);
+
 			//linearList.AddView (linearCurse);
 			//linearList.AddView (linearListCurso);
 			//linearList.AddView (linearTask);
@@ -548,10 +550,22 @@ namespace MLearning.Droid.Views
 			//mainLayout.AddView (imgChat);
 			//mainLayout.AddView (imgNotificacion);
 			//mainLayout.AddView (linearPendiente);
-			mainLayout.AddView (linearUserData);
-			mainLayout.AddView (linearBarraCurso);
-			mainLayout.AddView (linearTxtValorBarra);
+			//mainLayout.AddView (linearUserData);
+			//mainLayout.AddView (linearBarraCurso);
+			//mainLayout.AddView (linearTxtValorBarra);
 			//mainLayout.AddView (linearSchool);
+			ImageView header = new ImageView(this);
+			Bitmap iconH = Bitmap.CreateScaledBitmap (getBitmapFromAsset ("icons/logo.png"),Configuration.getWidth (320), Configuration.getHeight (205),true);
+			header.SetImageBitmap (iconH);
+
+
+			LinearLayout lheader = new LinearLayout (this);
+			lheader.LayoutParameters = new LinearLayout.LayoutParams (-1, -2);
+			lheader.SetGravity (GravityFlags.CenterHorizontal);
+			lheader.SetY (Configuration.getHeight (100));
+			lheader.AddView (header);
+
+			mainLayout.AddView (lheader);
 			mainLayout.AddView (linearList);
 
 			imgChat = null;
@@ -588,7 +602,7 @@ namespace MLearning.Droid.Views
 				txtUserName.Text = vm.UserFirstName + " " + vm.UserLastName;
 				break;
 			case "CirclesList":
-				//populateCircleScroll (0);
+				populateCircleScroll (0);
 				(ViewModel as MainViewModel).CirclesList.CollectionChanged+= CirclesList_CollectionChanged;
 				break;
 			case "UserImage":
@@ -604,14 +618,15 @@ namespace MLearning.Droid.Views
 				break;
 			case "LearningOjectsList":
 				resetMLOs ();
-				(ViewModel as MainViewModel).LearningOjectsList.CollectionChanged += _learningObjectsList_CollectionChanged;
+				//(ViewModel as MainViewModel).LearningOjectsList.CollectionChanged += _learningObjectsList_CollectionChanged;
 				break;
 
 			case  "LOsInCircle":
 				if (vm.LOsInCircle != null) {
+
+					populateLoInCircle (_currentCurso);
+					vm.LOsInCircle.CollectionChanged += Vm_LOsInCircle_CollectionChanged;
 				}
-				populateLoInCircle (0);
-				vm.LOsInCircle.CollectionChanged += Vm_LOsInCircle_CollectionChanged;
 				break;
 
 
@@ -745,11 +760,12 @@ namespace MLearning.Droid.Views
 
 			if (vm.LearningOjectsList != null) {
 
-				List<ImageLOView> list = new List<ImageLOView> ();
+				list = new List<ImageLOView> ();
 
 				for (int i = 0; i < vm.LearningOjectsList.Count; i++) {
 					ImageLOView imgLO = new ImageLOView (this);
 
+					imgLO.index = i;
 					imgLO.Title = vm.LearningOjectsList [i].lo.title;
 					imgLO.Author = vm.LearningOjectsList [i].lo.name + " " + vm.LearningOjectsList [i].lo.lastname;
 
@@ -757,7 +773,7 @@ namespace MLearning.Droid.Views
 					imgLO.sBackgoundUrl = vm.LearningOjectsList [i].lo.url_background;
 					//imgLO.ImagenUsuario = getBitmapFromAsset ("icons/imgautor.png");
 					imgLO.Chapter = "Flora y Fauna";
-					imgLO.index = i;
+
 
 
 					list.Add (imgLO);
@@ -833,7 +849,7 @@ namespace MLearning.Droid.Views
 			rutas.Asset = "icons/iconrutas.png";
 
 			_tasksTop.Add (home);
-			_tasksTop.Add (fotos);
+			//_tasksTop.Add (fotos);
 			_tasksTop.Add (rutas);
 
 			_listTasksTop.Adapter = new TaskAdapter (this, _tasksTop);
@@ -851,31 +867,47 @@ namespace MLearning.Droid.Views
 			{				
 				showHome ();
 			}
-			else if(e.Position == 1)//fotos
+			/*else if(e.Position == 1)//fotos
 			{
 				showHome ();
 				mDrawerLayout.CloseDrawer (mLeftDrawer);
-			}
-			else if(e.Position == 2 && _currentCurso!=0)//rutas
+			}*/
+			else if(e.Position == 1)//rutas
 			{
-				showRutas ();
+				if (_currentCurso == 0) {
+					mDrawerLayout.CloseDrawer (mLeftDrawer);
+				} else {
+					showRutas ();
+				}
 			}
 
 		}
 
 		void _listTaskItemBotton_Click (object sender, AdapterView.ItemClickEventArgs e)
 		{
-			if (e.Position == 0 && _currentCurso!=1)//servicios
+			if (e.Position == 0)//servicios
 			{
+				if (_currentCurso == 1) {
+					mDrawerLayout.CloseDrawer (mLeftDrawer);
+				} else {
 				showServicios ();
+				}
 			}
-			else if(e.Position == 1 && _currentCurso!=2)//silvestre
+			else if(e.Position == 1)//silvestre
 			{
+				if (_currentCurso == 2) {
+					mDrawerLayout.CloseDrawer (mLeftDrawer);
+				} else {
 				showGuiaSilvestre ();
+				}
 			}
-			else if(e.Position == 2 && _currentCurso!=3)//otros
+			else if(e.Position == 2)//cifras
 			{
+				if (_currentCurso == 3) {
+					mDrawerLayout.CloseDrawer (mLeftDrawer);
+				} else {
 				showCifras ();
+				}
 			}
 			else if(e.Position == 3)//otros
 			{
@@ -934,7 +966,7 @@ namespace MLearning.Droid.Views
 			_tasksBotton.Add (guiaServicios);
 			_tasksBotton.Add (guiaSilvestre);
 			_tasksBotton.Add (caminoCifras);
-			_tasksBotton.Add (salir);
+			//_tasksBotton.Add (salir);
 
 			_listTasksBotton.Adapter = new TaskAdapter (this, _tasksBotton);
 			_listTasksBotton.ItemClick += _listTaskItemBotton_Click;
@@ -963,53 +995,67 @@ namespace MLearning.Droid.Views
 
 		public void showCurso(int index)
 		{
-			try{
-				switch(index)
-				{
-				case 0:
-					lo._txtCursoN.Text = "Las Rutas";
-					break;
-				case 1:
-					lo._txtCursoN.Text = "Guía de Servicios";
-					break;
-				case 2:
-					lo._txtCursoN.Text = "Guía de Identificación de Vida Silvestre";
-					break;
+			//s_list = new ObservableCollection<MainViewModel.page_collection_wrapper> ();
+			if (vm.CirclesList!=null || vm.CirclesList.Count > index || vm.CirclesList [index] != null) {
 				
-					default:
-					lo._txtCursoN.Text = "";
-					break;
-				}
-
-				//lo._txtCursoN.Text = "";
-				lo._txtUnidadN.Text = "";
-				_currentCurso = index;
+			switch (index) {
+			case 0:
+				lo._txtCursoN.Text = "Las Rutas";
+				break;
+			case 1:
+				lo._txtCursoN.Text = "Guía de Servicios";
+				break;
+			case 2:
+				lo._txtCursoN.Text = "Guía de Identificación de Vida Silvestre";
+				break;
+			case 3:
+				lo._txtCursoN.Text = "Las Cifras";
+				break;
 				
-				lo.getWorkSpaceLayout.SetBackgroundColor (Color.Transparent);
-				lo.getWorkSpaceLayout.RemoveAllViews ();
-				Console.WriteLine("show_curso : INI");
+			default:
+				lo._txtCursoN.Text = "";
+				break;
+			}
 
-				if (vm.CirclesList.Count > index || vm.CirclesList[index]!=null) {
-					vm.SelectCircleCommand.Execute (vm.CirclesList [index]);
-					Console.WriteLine("show_curso : CIRCLE_EXECUTE");
-				}else{
-					return;
-				}
+			//lo._txtCursoN.Text = "";
+			lo._txtUnidadN.Text = "";
+			_currentCurso = index;
+				
+			lo.getWorkSpaceLayout.SetBackgroundColor (Color.Transparent);
+			lo.getWorkSpaceLayout.RemoveAllViews ();
+			Console.WriteLine ("show_curso : INI");
+
+
+			vm.SelectCircleCommand.Execute (vm.CirclesList [index]);
+			Console.WriteLine ("show_curso : CIRCLE_EXECUTE");
+
 			
-				if(vm.LearningOjectsList!=null || vm.LearningOjectsList.Count>index || vm.LearningOjectsList[index]!=null)
-				{
-					Console.WriteLine("show_curso : LEARNINGOBJECT_EXECUTE");
-					vm.OpenLOCommand.Execute(vm.LearningOjectsList[index]);
+				if (vm.LearningOjectsList != null) {
+						
+					vm.OpenLOCommand.Execute (vm.LearningOjectsList [index]);
 					mDrawerLayout.CloseDrawer (mLeftDrawer);
 					resetMLOs ();
-					lo._spaceUnidades.RemoveAllViews();
-				}else{
+
+
+				} else {
+					var myHandler = new Handler ();
+					myHandler.Post(()=>{
+						Toast.MakeText (this, "Las unidades se estan descargando", ToastLength.Short).Show();
+					});
 					return;
 				}
-			}catch{
-				
+
+				lo._spaceUnidades.RemoveAllViews ();
+			
+				Console.WriteLine ("show_curso : FIN");
+
+			} else {
+				var myHandler = new Handler ();
+				myHandler.Post(()=>{
+					Toast.MakeText (this, "El curso se esta descargando", ToastLength.Short).Show();
+				});
+				return;
 			}
-			Console.WriteLine("show_curso : FIN");
 
 		}
 
@@ -1265,9 +1311,11 @@ namespace MLearning.Droid.Views
 			var imView = sender as ImageLOView;
 			_currentUnidad = imView.index;
 
-			Console.WriteLine ("::::::::::::::::::::::::::: " + imView.index + " :: " +vm.LOsInCircle.Count);
+			//Console.WriteLine ("::::::::::::::::::::::::::: " + imView.index + " :: " +vm.LOsInCircle.Count);
 
-			if (vm.LOsInCircle.Count <= imView.index 
+
+			if (vm.LOsInCircle==null
+				|| vm.LOsInCircle.Count <= imView.index 
 				|| vm.LOsInCircle [imView.index].stack == null
 				|| vm.LOsInCircle [imView.index].stack.StacksList == null) {
 				
@@ -1286,23 +1334,37 @@ namespace MLearning.Droid.Views
 
 				lo._listUnidades.Clear ();
 
-				for (int j = 0; j < s_list.Count; j++) {
+				for (int j = 0; j < s_list.Count; j++) 
+				{
 					lo._listUnidades.Add (new UnidadItem { 
 						Title = s_list [j].PagesList [0].page.title, 
 						Description = s_list [j].PagesList [0].page.description,
 						ImageUrl = s_list[j].PagesList[0].page.url_img
-							
 					});
+
 					Console.WriteLine (lo._listUnidades[j].Title);
 					Console.WriteLine (lo._listUnidades[j].Description);
 					Console.WriteLine (lo._listUnidades[j].ImageUrl);
+
+
+					/*if (_currentCurso == 0 && _currentUnidad!=3 && s_list[j].PagesList.Count>1) {
+						//mapa
+						map.descripcion = s_list [j].PagesList [1].page.description;
+						map.titulo = s_list [j].PagesList [1].page.title;
+						map.mapUrl = s_list [j].PagesList [1].page.url_img;
+
+
+					}*/
+					 	
+
+
 				}
 
 				lo.initUnidades (_currentCurso,_currentUnidad);
 				lo._txtCursoN.Text = vm.CirclesList[_currentCurso].name;
 				lo._txtUnidadN.Text = vm.LOsInCircle[imView.index].lo.title;
 
-				if (_currentCurso == 0) {
+				if (_currentCurso == 0 && _currentUnidad!=3) {
 
 					for (int i = 0; i < lo._listLinearUnidades.Count; i++) {
 
@@ -1402,46 +1464,81 @@ namespace MLearning.Droid.Views
 
 		void showMapInit (object sender, EventArgs e)
 		{
-
 			var imView = sender as IconImageMap;
 
+			var s_listp = vm.LOsInCircle[_currentUnidad].stack.StacksList;
+			if (s_listp [imView.indexLO].PagesList.Count > 1) {
 
-			//lo.getWorkSpaceLayout.SetBackgroundColor (Color.Transparent);
-			//lo.getWorkSpaceLayout.RemoveAllViews ();
+			
+				LinearLayout info = new LinearLayout (this);
+				info.LayoutParameters = new LinearLayout.LayoutParams (300, 300);
+				info.SetBackgroundColor (Color.Aqua);
 
-			//ScaleImageView map = new ScaleImageView (this, null);
-			LinearLayout info = new LinearLayout(this);
-			info.LayoutParameters = new LinearLayout.LayoutParams (300, 300);
-			info.SetBackgroundColor (Color.Aqua);
+				lo.getMapSpaceLayout.SetBackgroundColor (Color.ParseColor ("#E0C7BC"));
+				lo.getMapSpaceLayout.AddView (map);
 
+				map.mapUrl = s_list [imView.indexLO].PagesList [1].page.url_img;
+				map.setMapImage (map.mapUrl);
+				loadPlacesDataSource (imView.indexLO);
+				map.iniPlancesList ();
+				map.listPlaces.ItemClick += ListPlaces_ItemClick;
 
-
-
-			//LinearLayout map = new LinearLayout (this);
-			//map.LayoutParameters = new LinearLayout.LayoutParams (-1, Configuration.getHeight (1015));
-			Drawable dr = new BitmapDrawable(getBitmapFromAsset("images/mapa.png"));
-			//map.SetImageBitmap(getBitmapFromAsset("images/mapa.png"));
-			//map.SetBackgroundDrawable(dr);
-
-			map.mapImage.SetImageBitmap(getBitmapFromAsset("images/mapa.png"));
-			//map._placesLayout.Add (info);
-			//map.updatePlaces ();
-
-			lo.getMapSpaceLayout.SetBackgroundColor (Color.ParseColor ("#E0C7BC"));
-			lo.getMapSpaceLayout.AddView (map);
-			//lo.getMapSpaceLayout.AddView (info);
-			//lo.header.SetBackgroundDrawable (headersDR [0]);
-
-			map.placesContainer.Click += map.showPLaceInfo;
+				//map.placesContainer.Click += map.showPLaceInfo;
 
 
-			_mapOpen = true;
+				_mapOpen = true;
+			} else {
+				var myHandler = new Handler ();
+				myHandler.Post(()=>{
+					Toast.MakeText (this, "No Disponible", ToastLength.Short).Show();
+				});		
+			}
+
+		}
+			
+
+		void loadPlacesDataSource(int pageIndex)
+		{
+			map._currentPlaces.Clear ();
+			map._placesData.Clear ();
+			var s_listp = vm.LOsInCircle[_currentUnidad].stack.StacksList;
+
+			var slides = s_listp [pageIndex].PagesList [1].content.lopage.loslide;
+
+
+			for (int m = 1; m < slides.Count; m++) {
+				map._currentPlaces.Add (new PlaceItem{ titulo = slides [m].lotitle });
+
+				List<PlaceDetalle> extraInfo = new List<PlaceDetalle> ();
+				for (int i = 0; i < slides [m].loitemize.loitem.Count; i++) {
+					PlaceDetalle itemPlace = new PlaceDetalle ();
+					itemPlace.detalle = slides [m].loitemize.loitem [i].lotext;
+					itemPlace.url = slides [m].loitemize.loitem [i].loimage;
+					extraInfo.Add (itemPlace);
+				}
+
+				map._placesData.Add (
+					new MapItemInfo {
+						titulo = slides [m].lotitle,
+						placeExtraInfo = extraInfo
+					}
+				);
+			}
+
+			//map.listPlaces.ItemClick += ListPlaces_ItemClick;
+
 
 		}
 
+		void ListPlaces_ItemClick (object sender, AdapterView.ItemClickEventArgs e)
+		{
+			int position = e.Position;
+			map.showPLaceInfo(position);
+		}
 
 		void LoadPagesDataSource (int pageIndex)
 		{
+
 
 			_lectorOpen = true;
 			bool is_main = true;
@@ -1451,89 +1548,105 @@ namespace MLearning.Droid.Views
 				var s_listp = vm.LOsInCircle[i].stack.StacksList;
 				int indice = 0;
 
+				if (s_listp != null) {
+					for (int j = 0; j < s_listp.Count; j++) {						
 
-				for (int j = 0; j < s_listp.Count; j++) 
-				{						
+						for (int k = 0; k < s_listp [j].PagesList.Count; k++) {
+				
+								VerticalScrollViewPager scrollPager = new VerticalScrollViewPager (this);
+								scrollPager.setOnScrollViewListener (this); 
+								LinearLayout linearScroll = new LinearLayout (this);
+								linearScroll.LayoutParameters = new LinearLayout.LayoutParams (-1, -2);
+								linearScroll.Orientation = Orientation.Vertical;
 
-						for (int k = 0; k < s_listp [j].PagesList.Count; k++) 
-						{
-							VerticalScrollViewPager scrollPager = new VerticalScrollViewPager (this);
-							scrollPager.setOnScrollViewListener (this); 
-							LinearLayout linearScroll = new LinearLayout (this);
-							linearScroll.LayoutParameters = new LinearLayout.LayoutParams (-1, -2);
-							linearScroll.Orientation = Orientation.Vertical;
-
-							var content = s_listp [j].PagesList [k].content;
-							FrontContainerViewPager front = new FrontContainerViewPager (this);
-							front.Tag = "pager";
-
-
-							front.ImageChapter = s_listp [j].PagesList[k].page.url_img;
+								var content = s_listp [j].PagesList [k].content;
+								FrontContainerViewPager front = new FrontContainerViewPager (this);
+								front.Tag = "pager";
 
 
-							front.Title = s_listp [j].PagesList [k].page.title;
-							front.Description =  s_listp [j].PagesList [k].page.description;
-							var slides = s_listp [j].PagesList [k].content.lopage.loslide;
-							front.setBack (drBack);
+								front.ImageChapter = s_listp [j].PagesList [k].page.url_img;
 
 
-							linearScroll.AddView (front);
-							listFrontPager.Add (front);
+								front.Title = s_listp [j].PagesList [k].page.title;
+								front.Description = s_listp [j].PagesList [k].page.description;
+								var slides = s_listp [j].PagesList [k].content.lopage.loslide;
+								front.setBack (drBack);
 
-							var currentpage = s_listp [j].PagesList [k];
+
+								linearScroll.AddView (front);
+								listFrontPager.Add (front);
+
+								var currentpage = s_listp [j].PagesList [k];
 			
 
-							for (int m = 1; m < slides.Count; m++) 
-							{
-								LOSlideSource slidesource = new LOSlideSource(this);
+								for (int m = 1; m < slides.Count; m++) {
+									LOSlideSource slidesource = new LOSlideSource (this);
 
-								var _id_ = vm.LOsInCircle [i].lo.color_id;
-								is_main = !is_main;
+									var _id_ = vm.LOsInCircle [i].lo.color_id;
+									is_main = !is_main;
 								
 
-								slidesource.ColorS = Configuration.ListaColores [indice % 6];
+									slidesource.ColorS = Configuration.ListaColores [indice % 6];
 
-								slidesource.Type = slides[m].lotype;
-								if (slides[m].lotitle != null) slidesource.Title = slides[m].lotitle;
-								if (slides[m].loparagraph != null) slidesource.Paragraph = slides[m].loparagraph;
-								if (slides[m].loimage != null) slidesource.ImageUrl = slides[m].loimage;
-								if (slides[m].lotext != null) slidesource.Paragraph = slides[m].lotext;
-								if (slides[m].loauthor != null) slidesource.Author = slides[m].loauthor;
-								if (slides[m].lovideo != null) slidesource.VideoUrl = slides[m].lovideo;
+									slidesource.Type = slides [m].lotype;
+									if (slides [m].lotitle != null)
+										slidesource.Title = slides [m].lotitle;
+									if (slides [m].loparagraph != null)
+										slidesource.Paragraph = slides [m].loparagraph;
+									if (slides [m].loimage != null)
+										slidesource.ImageUrl = slides [m].loimage;
+									if (slides [m].lotext != null)
+										slidesource.Paragraph = slides [m].lotext;
+									if (slides [m].loauthor != null)
+										slidesource.Author = slides [m].loauthor;
+									if (slides [m].lovideo != null)
+										slidesource.VideoUrl = slides [m].lovideo;
 
-								var c_slide = slides[m];
-
-
-								if (c_slide.loitemize != null)
-								{
-									slidesource.Itemize = new ObservableCollection<LOItemSource>();
-									var items = c_slide.loitemize.loitem;
-
-									for (int n = 0; n < items.Count; n++)
-									{ 
-										LOItemSource item = new LOItemSource();
-										if (items[n].loimage != null) item.ImageUrl = items[n].loimage;
-										if (items[n].lotext != null) item.Text = items[n].lotext;
+									var c_slide = slides [m];
 
 
-										var c_item_ize = items[n];
+									if (c_slide.loitemize != null) {
+										slidesource.Itemize = new ObservableCollection<LOItemSource> ();
+										var items = c_slide.loitemize.loitem;
 
-										slidesource.Itemize.Add(item);
+										for (int n = 0; n < items.Count; n++) { 
+											LOItemSource item = new LOItemSource ();
+											if (items [n].loimage != null)
+												item.ImageUrl = items [n].loimage;
+											if (items [n].lotext != null)
+												item.Text = items [n].lotext;
+
+
+											var c_item_ize = items [n];
+
+											slidesource.Itemize.Add (item);
+										}
 									}
-								}
 
-								linearScroll.AddView (slidesource.getViewSlide());
 
-							} 
-						scrollPager.VerticalScrollBarEnabled = false;
-						scrollPager.AddView (linearScroll);
-						listaScroll.Add (scrollPager);
-						indice++;
+									linearScroll.AddView (slidesource.getViewSlide ());
+								
+
+								} 
+							
+								scrollPager.VerticalScrollBarEnabled = false;
+							if (k == 0) {
+								scrollPager.AddView (linearScroll);
+								listaScroll.Add (scrollPager);
+								indice++;
+							}
+
+
+
+						}
+
 					}
 
 
 
 
+				} else {
+					Console.WriteLine ("ERROR");
 				}
 
 
@@ -1641,7 +1754,9 @@ namespace MLearning.Droid.Views
 			if (_lectorOpen) {
 				_lectorOpen = false;
 				//lo.getWorkSpaceLayout.RemoveAllViews();
-				showRutas ();
+				lo.getWorkSpaceLayout.RemoveAllViews ();
+				lo.getWorkSpaceLayout.SetBackgroundColor (Color.Transparent);
+				//showRutas ();
 			}else if (_mapOpen){
 
 				if (map.placeInfoOpen) {

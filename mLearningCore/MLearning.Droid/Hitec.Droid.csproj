@@ -223,6 +223,8 @@
     <Compile Include="Views\MapItemInfo.cs" />
     <Compile Include="Views\PlaceItem.cs" />
     <Compile Include="Views\PlaceAdapter.cs" />
+    <Compile Include="Views\PlaceRowView.cs" />
+    <Compile Include="Views\PlaceDetalle.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -306,6 +308,11 @@
     <AndroidResource Include="Resources\drawable\gradiente.xml" />
     <AndroidResource Include="Resources\layout\MainView.axml" />
     <AndroidResource Include="Resources\drawable\transparent.png" />
+    <AndroidResource Include="Resources\drawable\progress_animation.xml" />
+    <AndroidResource Include="Resources\drawable\loading.png" />
+    <AndroidResource Include="Resources\drawable\loading2.png" />
+    <AndroidResource Include="Resources\drawable\loading3.png" />
+    <AndroidResource Include="Resources\drawable\loading4.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\Strings.xml" />
@@ -496,6 +503,10 @@
     <AndroidAsset Include="Assets\images\header3.png" />
     <AndroidAsset Include="Assets\images\header4.png" />
     <AndroidAsset Include="Assets\images\mapa.png" />
+    <AndroidAsset Include="Assets\images\ad1.jpg" />
+    <AndroidAsset Include="Assets\images\ad2.jpg" />
+    <AndroidAsset Include="Assets\images\footerad.jpg" />
+    <AndroidAsset Include="Assets\images\ad3.jpg" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MLearning.Core\MLearning.Core.csproj">

@@ -7,6 +7,7 @@ namespace MLearning.Droid
 			public string titulo { get; set; }
 			public string detalle { get; set; }
 			public int index{ get; set; }
+			public string pathIcon{ get; set;}
 	}
 }
 

@@ -58,8 +58,6 @@ namespace MLearning.Droid
 
 
 			var textFormat = Android.Util.ComplexUnitType.Px;
-			var textFormatdip = Android.Util.ComplexUnitType.Dip;
-
 
 			mainLayout = new RelativeLayout (context);
 			mainLayout.LayoutParameters = new RelativeLayout.LayoutParams (-1,-1);
@@ -73,15 +71,14 @@ namespace MLearning.Droid
 			//LIST
 
 			contentListLayout = new LinearLayout (context);
-			contentListLayout.LayoutParameters = new LinearLayout.LayoutParams (Configuration.getWidth(583),-2);
+			contentListLayout.LayoutParameters = new LinearLayout.LayoutParams (Configuration.getWidth(583),Configuration.getHeight(300));
 			contentListLayout.Orientation = Orientation.Vertical;
 			titleHeaderList = new TextView (context);
 			contentList = new ListView (context);
 
 			//titleHeaderList.Text = "Tipos de Aves";
 			titleHeaderList.SetTextColor (Color.ParseColor ("#FF0080"));
-			//titleHeaderList.SetTextSize (textFormat, Configuration.getHeight (38));
-			titleHeaderList.SetTextSize (textFormatdip, 20.0f);
+			titleHeaderList.SetTextSize (textFormat, Configuration.getHeight (38));
 			titleHeaderList.SetMaxWidth (Configuration.getWidth (510));
 
 			contentListLayout.SetBackgroundResource (Resource.Drawable.border);
@@ -112,12 +109,13 @@ namespace MLearning.Droid
 			set{_listItems = value;
 				for (int i = 0; i < _listItems.Length; i++) {
 					_dataTemplateItem.Add (new TemplateItem (){ im_vinheta = icon, content = _listItems[i]});
-					contentList.Adapter = new TemplateAdapter (context, _dataTemplateItem);
-					contentList.SetBackgroundColor (Color.White);
-					contentList.DividerHeight = 0;
-					contentList.Clickable = false;
-					contentList.ChoiceMode = ChoiceMode.None;
+
 				}
+				contentList.Adapter = new TemplateAdapter (context, _dataTemplateItem);
+				contentList.SetBackgroundColor (Color.White);
+				contentList.DividerHeight = 0;
+				contentList.Clickable = false;
+				contentList.ChoiceMode = ChoiceMode.None;
 
 			}
 

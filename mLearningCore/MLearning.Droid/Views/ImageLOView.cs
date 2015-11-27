@@ -36,8 +36,15 @@ namespace MLearning.Droid
 			set { sUrl = value; 
 				ImageView cover = new ImageView (context);
 				//cover.LayoutParameters = new LinearLayout.LayoutParams (-1, -1);
-				Picasso.With (context).Load (Url).Resize (Configuration.getWidth (160),Configuration.getWidth (160)).CenterCrop().Into (cover);
+				Picasso.With (context).Load (Url).Resize (Configuration.getWidth (160),Configuration.getWidth (160)).Placeholder(context.Resources.GetDrawable (Resource.Drawable.progress_animation)).CenterCrop().Into (cover);
+				LinearLayout shadow = new LinearLayout (context);
+				shadow.LayoutParameters = new LinearLayout.LayoutParams (-1, -1);
+				shadow.SetBackgroundColor (Color.ParseColor("#10ffffff"));
 				this.AddView (cover);
+				if (index % 2 == 0) {
+					this.AddView (shadow);
+				}
+
 
 
 
