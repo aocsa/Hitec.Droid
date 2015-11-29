@@ -352,6 +352,7 @@
     <Folder Include="Assets\images\" />
     <Folder Include="DataSource\" />
     <Folder Include="Assets\fonts\" />
+    <Folder Include="Assets\database\" />
   </ItemGroup>
   <ItemGroup>
     <AndroidAsset Include="Assets\icons\afondo.png" />
@@ -507,11 +508,15 @@
     <AndroidAsset Include="Assets\images\ad2.jpg" />
     <AndroidAsset Include="Assets\images\footerad.jpg" />
     <AndroidAsset Include="Assets\images\ad3.jpg" />
+    <AndroidAsset Include="Assets\database\cache.db" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MLearning.Core\MLearning.Core.csproj">
       <Project>{5A3B79A2-507C-489B-9DEB-4710A75677F3}</Project>
       <Name>MLearning.Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\cache.db" />
   </ItemGroup>
 </Project>

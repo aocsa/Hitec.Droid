@@ -9,7 +9,7 @@ using Microsoft.WindowsAzure.MobileServices;
 
 using MLearning.Core.Services;
 using MLearning.Core.ViewModels;
-using MLearningDBResult;
+//using MLearningDBResult;
 using Referee.Core.Session;
 using System;
 using System.Collections.Generic;
@@ -23,6 +23,7 @@ using System.IO;
 using AzureBlobUploader;
 using Microsoft.WindowsAzure.Storage;
 using System.Net.Http;
+using MLearningDBResult;
 
 
 namespace MLearning.Core
@@ -180,7 +181,7 @@ namespace MLearning.Core
 				MLearningDB.User newuser = new MLearningDB.User { email = Email, username = RegUsername, password = EncryptionService.encrypt(RegPassword), name = Name, lastname = ":)", image_url = "http://www.clinicatorielli.com/img/icons/no-user.png" ,created_at = DateTime.Now, updated_at = DateTime.Now };
 
 
-				int idInstitution = 13;
+				int idInstitution = 34;
 				newuser.password = EncryptionService.encrypt(newuser.password);
 				bool exists = await _mLearningService.CheckIfExistsNoLocale<MLearningDB.User>
 					(usr => usr.username == newuser.username, (it) => it.updated_at, it => it.id);

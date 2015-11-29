@@ -2,6 +2,10 @@ using Android.App;
 using Android.Content.PM;
 using Cirrious.MvvmCross.Droid.Views;
 using Android.Views;
+using Android.Util;
+using System;
+
+
 
 namespace MLearning.Droid
 {
@@ -17,7 +21,11 @@ namespace MLearning.Droid
         public SplashScreen()
             : base(Resource.Layout.SplashScreen)
         {
+
 			//this.Window.AddFlags(WindowManagerFlags.Fullscreen);
+
         }
+
+
     }
 }

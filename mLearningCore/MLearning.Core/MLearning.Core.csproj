@@ -24,6 +24,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -123,10 +124,10 @@
     <Compile Include="ViewModels\ManageCirclesViewModel.cs" />
     <Compile Include="ViewModels\ManagePublishersViewModel.cs" />
     <Compile Include="ViewModels\PublisherMainViewModel.cs" />
+    <Compile Include="ViewModels\RegistrationViewModel.cs" />
     <Compile Include="ViewModels\SignUpViewModel.cs" />
     <Compile Include="ViewModels\CameraViewModel.cs" />
     <Compile Include="ViewModels\RegisterViewModel.cs" />
-    <Compile Include="ViewModels\RegistrationViewModel.cs" />
     <Compile Include="Entities\Admin.cs" />
     <Compile Include="Entities\tag_by_lo.cs" />
   </ItemGroup>
@@ -202,9 +203,4 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-  <ItemGroup>
-    <AndroidResource Include="MainView.axml">
-      <SubType>Designer</SubType>
-    </AndroidResource>
-  </ItemGroup>
 </Project>

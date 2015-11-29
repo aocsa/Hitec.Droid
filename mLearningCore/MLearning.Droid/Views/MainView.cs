@@ -1020,66 +1020,66 @@ namespace MLearning.Droid.Views
 			}
 
 
-				switch (index) {
-				case 0:
-					lo._txtCursoN.Text = "Las Rutas";
-					break;
-				case 1:
-					lo._txtCursoN.Text = "Guía de Servicios";
-					break;
-				case 2:
-					lo._txtCursoN.Text = "Guía de Identificación de Vida Silvestre";
-					break;
-				case 3:
-					lo._txtCursoN.Text = "Las Cifras";
-					break;
+			switch (index) {
+			case 0:
+				lo._txtCursoN.Text = "Las Rutas";
+				break;
+			case 1:
+				lo._txtCursoN.Text = "Guía de Servicios";
+				break;
+			case 2:
+				lo._txtCursoN.Text = "Guía de Identificación de Vida Silvestre";
+				break;
+			case 3:
+				lo._txtCursoN.Text = "Las Cifras";
+				break;
 
-				default:
-					lo._txtCursoN.Text = "";
-					break;
-				}
+			default:
+				lo._txtCursoN.Text = "";
+				break;
+			}
 
-				//lo._txtCursoN.Text = "";
-				lo._txtUnidadN.Text = "";
-				_currentCurso = index;
+			//lo._txtCursoN.Text = "";
+			lo._txtUnidadN.Text = "";
+			_currentCurso = index;
 
-				lo.getWorkSpaceLayout.SetBackgroundColor (Color.Transparent);
-				lo.getWorkSpaceLayout.RemoveAllViews ();
-				Console.WriteLine ("show_curso : INI");
-
-
-
-				vm.SelectCircleCommand.Execute (vm.CirclesList [index]);
-				Console.WriteLine ("show_curso : CIRCLE_EXECUTE");
-
-				if (vm.LearningOjectsList == null) {
-					var myHandler = new Handler ();
-					myHandler.Post(()=>{
-						Toast.MakeText (this, "Las unidades se estan descargando", ToastLength.Short).Show();
-					});
-					return;
-				}
-				if (vm.LearningOjectsList.Count <= index) {
-
-					var myHandler = new Handler ();
-					myHandler.Post(()=>{
-						Toast.MakeText (this, "Las unidades se estan descargando", ToastLength.Short).Show();
-					});
-					return;
-				}
-
-				vm.OpenLOCommand.Execute (vm.LearningOjectsList [index]);
-				mDrawerLayout.CloseDrawer (mLeftDrawer);
-				resetMLOs ();
+			lo.getWorkSpaceLayout.SetBackgroundColor (Color.Transparent);
+			lo.getWorkSpaceLayout.RemoveAllViews ();
+			Console.WriteLine ("show_curso : INI");
 
 
 
-				lo._spaceUnidades.RemoveAllViews ();
+			vm.SelectCircleCommand.Execute (vm.CirclesList [index]);
+			Console.WriteLine ("show_curso : CIRCLE_EXECUTE");
 
-				Console.WriteLine ("show_curso : FIN");
+			if (vm.LearningOjectsList == null) {
+				var myHandler = new Handler ();
+				myHandler.Post(()=>{
+					Toast.MakeText (this, "Las unidades se estan descargando", ToastLength.Short).Show();
+				});
+				return;
+			}
+			if (vm.LearningOjectsList.Count <= index) {
+
+				var myHandler = new Handler ();
+				myHandler.Post(()=>{
+					Toast.MakeText (this, "Las unidades se estan descargando", ToastLength.Short).Show();
+				});
+				return;
+			}
+
+			vm.OpenLOCommand.Execute (vm.LearningOjectsList [index]);
+			mDrawerLayout.CloseDrawer (mLeftDrawer);
+			resetMLOs ();
 
 
-				
+
+			lo._spaceUnidades.RemoveAllViews ();
+
+			Console.WriteLine ("show_curso : FIN");
+
+
+
 
 
 		}

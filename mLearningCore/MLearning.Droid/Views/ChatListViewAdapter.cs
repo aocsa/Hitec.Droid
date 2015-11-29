@@ -79,12 +79,12 @@ namespace MLearning.Droid
 			TextView state = row.FindViewById<TextView> (Resource.Id.textView_status_CL);
 			state.Typeface =  Typeface.CreateFromAsset(mContext.Assets, "fonts/HelveticaNeue.ttf");
 
-			if (mItems [position].state == true) 
+			if (mItems [position].state == 1) 
 			{
 				state.SetTextColor (Color.ParseColor ("#2ECCFA"));
 				state.Text = "online now";
 			}
-			if (mItems [position].state == false) 
+			if (mItems [position].state == 0) 
 			{
 				state.SetTextColor (Color.ParseColor ("#A4A4A4"));
 				state.Text = "offline";

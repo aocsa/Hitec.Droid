@@ -15,6 +15,9 @@ using Microsoft.WindowsAzure.MobileServices;
 using System.Threading.Tasks;
 using Core.Repositories;
 using Cirrious.CrossCore;
+using Java.IO;
+using System.IO;
+using Android.Content;
 
 namespace MLearning.Droid.Views
 {
@@ -71,14 +74,16 @@ namespace MLearning.Droid.Views
 
 		protected override void OnCreate(Bundle bundle)
 		{
-			this.Window.AddFlags(WindowManagerFlags.Fullscreen);
+			
+
 			base.OnCreate(bundle);
+			this.Window.AddFlags(WindowManagerFlags.Fullscreen);
 			var metrics = Resources.DisplayMetrics;
 			widthInDp = ((int)metrics.WidthPixels);
 			heightInDp = ((int)metrics.HeightPixels);
 			Configuration.setWidthPixel (widthInDp);
 			Configuration.setHeigthPixel (heightInDp);
-
+			copyDataBase ();
 
 		//	Console.WriteLine ("DIMESIONES DEL DEVICEEEEEEEEEEEE WIDTH= "+ widthInDp + " HEIGHT = "+heightInDp);
 
@@ -88,6 +93,29 @@ namespace MLearning.Droid.Views
 
 			//SetContentView (mainLayout);
 			//SetContentView(Resource.Layout.LoginView);
+		}
+
+		private void copyDataBase()
+		{
+
+			Stream iStream = Assets.Open("database/cache.db");
+			var oStream = new FileOutputStream ("/data/data/hitec.Droid/files/cache.db");
+			byte[] buffer = new byte[2048];
+			int length = 2048;
+			//    length = Convert.ToInt16(length2);
+
+
+
+			while (iStream.Read(buffer, 0, length) > 0)
+			{
+				oStream.Write(buffer, 0, length);
+			}
+			oStream.Flush();
+			oStream.Close();
+			iStream.Close();
+			
+		
+
 		}
 
 		public void init(){
@@ -541,7 +569,7 @@ namespace MLearning.Droid.Views
 				{
 					WAMSRepositoryService service = Mvx.Resolve<IRepositoryService>() as WAMSRepositoryService;
 					user = await service.MobileService.LoginAsync(this, provider); 
-					Console.WriteLine ("Facebook : " + user.UserId + "  " + user.MobileServiceAuthenticationToken ) ;
+					System.Console.WriteLine ("Facebook : " + user.UserId + "  " + user.MobileServiceAuthenticationToken ) ;
 				}
 				catch (InvalidOperationException e)
 				{} 

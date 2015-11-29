@@ -102,6 +102,12 @@ namespace MLearning.Core.ViewModels
 
 			var list = await _mLearningService.GetPagesByLO(LOID);
 
+
+
+
+
+
+
 			var AllPagesList = new ObservableCollection<page_wrapper>();
 
 			//Loading json content to memory
@@ -188,6 +194,8 @@ namespace MLearning.Core.ViewModels
 			//For collection al pages 
 			var pagesList = new List<Page> ();
 
+
+
 			foreach (var item in sectionList) {
 				var sectionPages = await _mLearningService.GetPagesByLOSection (item.id);
 				foreach (var page in sectionPages) {
@@ -236,9 +244,6 @@ namespace MLearning.Core.ViewModels
 			UpdateExtraInfo(LOCurrentIndex);
 
 		}
-
-
-
 
 
 		async Task LoadPageImages(int loindex)
