@@ -1479,16 +1479,29 @@ namespace MLearning.Droid.Views
 
 						Console.WriteLine ("ADD LECTOR : " + i);
 						lo._listLinearUnidades [i].Click += delegate {
+							_dialogDownload.Show ();
 							vm.OpenLOCommand.Execute(vm.LearningOjectsList[_currentUnidad]);
 						};
 
-						lo._listIconMap [i].Click += showMapInit;
+						lo._listIconMap [i].Click += map_item_click;
 
 					}
 				}
 
 
 			}
+		}
+
+		void map_item_click (object sender, EventArgs e)
+		{
+			_dialogDownload.Show ();
+			var item = sender as ImageIconMap;
+			vm._currentUnidad = _currentUnidad;
+			vm._currentCurso = _currentCurso;
+			vm._currentSection = item.index;
+			vm.OpenLOMapCommand.Execute(vm.LearningOjectsList[_currentUnidad]);
+
+
 		}
 		void loadSection(){
 			
@@ -1600,6 +1613,8 @@ namespace MLearning.Droid.Views
 
 		void showMapInit (object sender, EventArgs e)
 		{
+
+
 			/*
 			var imView = sender as IconImageMap;
 
@@ -1678,6 +1693,8 @@ namespace MLearning.Droid.Views
 
 		void LoadPagesDataSource (int pageIndex)
 		{
+
+
 			/*
 
 			_lectorOpen = true;

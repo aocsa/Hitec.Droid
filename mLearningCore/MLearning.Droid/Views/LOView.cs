@@ -32,7 +32,7 @@ namespace MLearning.Droid.Views
 		Bitmap bmLike;
 		Drawable drBack;
 
-		ProgressDialog _progresD;
+		ProgressDialog _dialogDownload;
 		//	LinearLayout layoutPanelScroll;
 		RelativeLayout mainLayout;
 		RelativeLayout mainLayoutIndice;
@@ -58,6 +58,11 @@ namespace MLearning.Droid.Views
 		async protected  override  void OnCreate(Bundle bundle)
 		{
 
+			_dialogDownload = new ProgressDialog (this);
+			_dialogDownload.SetCancelable (false);
+			_dialogDownload.SetMessage ("Downloading...");
+			_dialogDownload.Show ();
+
 			this.Window.AddFlags(WindowManagerFlags.Fullscreen);
 			base.OnCreate(bundle);
 			var metrics = Resources.DisplayMetrics;
@@ -80,6 +85,7 @@ namespace MLearning.Droid.Views
 			//LoadPagesDataSource ();
 
 			SetContentView (mainLayout);
+			_dialogDownload.Dismiss ();
 		} 
 
 
@@ -88,10 +94,6 @@ namespace MLearning.Droid.Views
 		async Task  ini(){
 
 			mainLayout = new RelativeLayout (this);
-
-			_progresD = new ProgressDialog (this);
-			_progresD.SetCancelable (false);
-			_progresD.SetMessage ("Wait please..");
 
 			mainLayout.LayoutParameters = new RelativeLayout.LayoutParams (-1,-1);	
 			mainLayout.SetBackgroundColor(Color.ParseColor("#ffffff"));
@@ -143,7 +145,6 @@ namespace MLearning.Droid.Views
 
 			//var vm = this.ViewModel as LOViewModel;
 			if (e.PropertyName == "IsWaiting") {
-				_progresD.Show ();
 			}
 
 			if (e.PropertyName == "LOsInCircle")

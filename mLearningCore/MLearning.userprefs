@@ -1,26 +1,20 @@
 ﻿<Properties StartupItem="MLearning.Droid\Hitec.Droid.csproj" RefactoringSettings.EnableRefactorings="True">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Release" PreferredExecutionTarget="Android.4107ef0e0a1fcf43" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Release" PreferredExecutionTarget="Android.4C3AWN154L014669" />
   <MonoDevelop.Ide.Workbench ActiveDocument="MLearning.Droid\Views\LOView.cs">
     <Files>
-      <File FileName="MLearning.Droid\Views\MainView.cs" Line="1794" Column="5" />
-      <File FileName="MLearning.Droid\Views\LOView.cs" Line="534" Column="5" />
+      <File FileName="MLearning.Droid\Views\MainView.cs" Line="269" Column="50" />
+      <File FileName="MLearning.Droid\Views\LOView.cs" Line="147" Column="40" />
       <File FileName="MLearning.Droid\SplashScreen.cs" Line="1" Column="1" />
       <File FileName="MLearning.Droid\Views\TouchImageView.cs" Line="1" Column="1" />
-      <File FileName="MLearning.Droid\Views\ImageLOView.cs" Line="1" Column="1" />
+      <File FileName="MLearning.Droid\Views\ImageLOView.cs" Line="38" Column="5" />
       <File FileName="MLearning.Droid\Views\CursoItem.cs" Line="1" Column="1" />
       <File FileName="MLearning.Droid\Views\PlaceItem.cs" Line="1" Column="1" />
-      <File FileName="MLearning.Droid\Views\TaskAdapter.cs" Line="1" Column="1" />
-      <File FileName="MLearning.Droid\Views\PlaceAdapter.cs" Line="1" Column="1" />
-      <File FileName="MLearning.Droid\Views\Template1.cs" Line="1" Column="1" />
-      <File FileName="MLearning.Droid\Views\MapItemInfo.cs" Line="1" Column="1" />
-      <File FileName="MLearning.Droid\Resources\drawable\progress_animation.xml" Line="1" Column="1" />
-      <File FileName="MLearning.Droid\Views\MapView.cs" Line="89" Column="182" />
-      <File FileName="MLearning.Core\ViewModels\MainViewModel.cs" Line="848" Column="37" />
-      <File FileName="MLearning.Droid\Views\LoginView.cs" Line="85" Column="33" />
       <File FileName="MLearning.Core\Repositories\WAMSRepositoryService.cs" Line="1" Column="1" />
       <File FileName="MLearning.Core\Configuration\Constants.cs" Line="1" Column="1" />
-      <File FileName="MLearning.Core\Entities\LOsection.cs" Line="16" Column="5" />
-      <File FileName="MLearning.Droid\Views\WallView.cs" Line="720" Column="1" />
+      <File FileName="MLearning.Core\Entities\LOsection.cs" Line="1" Column="1" />
+      <File FileName="MLearning.Droid\Views\WallView.cs" Line="665" Column="5" />
+      <File FileName="MLearning.Droid\Views\LOMapView.cs" Line="93" Column="31" />
+      <File FileName="MLearning.Droid\Views\MapView.cs" Line="245" Column="4" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

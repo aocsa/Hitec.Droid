@@ -698,6 +698,16 @@ namespace MLearning.Core.ViewModels
             }
         }
 
+		MvxCommand<lo_by_circle_wrapper> _openLOMapCommand;
+		public System.Windows.Input.ICommand OpenLOMapCommand
+		{
+			get
+			{
+				_openLOMapCommand = _openLOMapCommand ?? new MvxCommand<lo_by_circle_wrapper>(DoOpenLOMapCommand);
+				return _openLOMapCommand;
+			}
+		}
+
       
 
 		//Open - Download LO
@@ -771,6 +781,68 @@ namespace MLearning.Core.ViewModels
            
         }
  
+		async void DoOpenLOMapCommand(lo_by_circle_wrapper learningobj)
+		{
+			//await  _mLearningService.OpenLearningObject(learningobj.lo.id,learningobj.lo.url_package,UserID);
+
+			try
+			{
+				List<lo_by_circle> list = LearningOjectsList.Select(lo => lo.lo).ToList();
+
+
+
+				//await BlockDownload.TryLoadByteVector<MLearning.Core.ViewModels.MainViewModel.lo_by_circle_wrapper>(LearningOjectsList.ToList(),
+				//    (pos, bytes) => { },
+				//    (lo) => { return lo.lo.url_background; }
+				//    );
+
+
+				//Download all the data of the selected LO
+
+				foreach (var item in LearningOjectsList)
+				{
+					if (item.lo.id == learningobj.lo.id)
+					{
+						await FetchLOData(item.lo.id, true);
+					}
+					else
+					{
+						await FetchLOData(item.lo.id, false);
+					}
+
+
+
+				}
+
+
+				string serialized = JsonConvert.SerializeObject(list);
+				ShowViewModel<LOMapViewModel>(new { lo_id = learningobj.lo.id, 
+													serialized_los_in_circle = serialized, 
+													_currentCurso = this._currentCurso,
+													_currentUnidad = this._currentUnidad,
+													_currentSection = this._currentSection});
+			}
+			catch (WebException e)
+			{
+
+				ConnectionOK = false;
+			}
+			catch (HttpRequestException e)
+			{
+
+				ConnectionOK = false;
+			}
+			catch (MobileServiceInvalidOperationException e)
+			{
+				Mvx.Trace("MobileServiceInvalidOperationException " + e.Message);
+				OperationOK = false;
+			}
+
+
+
+
+
+		}
 
 		async void DoOpenFirstSlidePage(lo_by_circle_wrapper learningobj)
 		{
@@ -1370,7 +1442,9 @@ namespace MLearning.Core.ViewModels
 
 
 
-
+		public int _currentCurso = 0;
+		public int _currentUnidad = 0;
+		public int _currentSection = 0;
 
 
     }

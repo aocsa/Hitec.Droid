@@ -86,7 +86,7 @@ namespace MLearning.Droid
 		public void setMapImage(String url)
 		{
 			
-			Picasso.With (context).Load (url).Resize(Configuration.WIDTH_PIXEL,Configuration.getHeight(700)).Placeholder(context.Resources.GetDrawable (Resource.Drawable.progress_animation)).CenterCrop().Into (mapImage);
+			Picasso.With (context).Load (url).Resize(Configuration.WIDTH_PIXEL,Configuration.getHeight(800)).Placeholder(context.Resources.GetDrawable (Resource.Drawable.progress_animation)).CenterCrop().Into (mapImage);
 			mapImage.Click += delegate {
 				Intent lance = new Intent();
 				lance.SetAction(Intent.ActionView);
@@ -113,20 +113,21 @@ namespace MLearning.Droid
 
 			mapImage = new ImageView (context);
 			mapSpace = new LinearLayout (context);
-			mapSpace.LayoutParameters = new LinearLayout.LayoutParams (-1, Configuration.getHeight (700));
+			mapSpace.LayoutParameters = new LinearLayout.LayoutParams (-1, Configuration.getHeight(800));
 			mapSpace.SetGravity (GravityFlags.CenterHorizontal);
 			mapSpace.AddView (mapImage);
 
 
 
 			placeSpace = new VerticalScrollView (context);
-			placeSpace.LayoutParameters = new LinearLayout.LayoutParams (-1, Configuration.getHeight(330));
-			placeSpace.SetY (Configuration.getHeight (700));
+			placeSpace.LayoutParameters = new LinearLayout.LayoutParams (-1, Configuration.getHeight(345));
+			placeSpace.SetY (Configuration.getHeight (800));
 			placeSpace.SetBackgroundColor (Color.White);
 
 			placesContainer = new LinearLayout (context);
-			placesContainer.LayoutParameters = new LinearLayout.LayoutParams (-1, Configuration.getHeight(500));
+			placesContainer.LayoutParameters = new LinearLayout.LayoutParams (-1, Configuration.getHeight(345));
 			placesContainer.Orientation = Orientation.Vertical;
+
 
 
 			/*
@@ -154,7 +155,7 @@ namespace MLearning.Droid
 			mainLayout.AddView (placeSpace);
 
 			scrollPlaces = new VerticalScrollView (context);
-			scrollPlaces.LayoutParameters = new VerticalScrollView.LayoutParams (-1, Configuration.getHeight(1015));
+			scrollPlaces.LayoutParameters = new VerticalScrollView.LayoutParams (-1,-1);
 			scrollPlaces.AddView (placesInfoLayout);
 
 
@@ -200,7 +201,7 @@ namespace MLearning.Droid
 			placesContainer.RemoveAllViews ();
 
 			listPlaces = new ListView (context);
-			listPlaces.LayoutParameters = new LinearLayout.LayoutParams (-1, Configuration.getHeight(330));
+			listPlaces.LayoutParameters = new LinearLayout.LayoutParams (-1, Configuration.getHeight(345));
 			listPlaces.Adapter = new PlaceAdapter (context, _currentPlaces);
 			listPlaces.DividerHeight = 0;
 
@@ -242,7 +243,10 @@ namespace MLearning.Droid
 			placeSpace.AddView(placesContainer);
 
 
+
+
 		}
+
 
 		public void updatePlaces()
 		{

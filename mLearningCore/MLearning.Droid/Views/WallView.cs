@@ -21,7 +21,7 @@ namespace MLearning.Droid
 		public LinearLayout header;
 		public List<UnidadItem> _listUnidades = new List<UnidadItem>();
 		ListView  _listViewUnidades;
-		public List<ImageView> _listIconMap = new List<ImageView> ();
+		public List<ImageIconMap> _listIconMap = new List<ImageIconMap> ();
 
 		public LinearLayout _spaceUnidades;
 		public LinearLayout _mapSpace;
@@ -655,10 +655,10 @@ namespace MLearning.Droid
 				linearUnidad.Orientation = Orientation.Horizontal;
 				linearUnidad.SetGravity (Android.Views.GravityFlags.CenterVertical);
 
-				IconImageMap icon = new IconImageMap (context);
-				icon.indexCurso = indexCurso;
-				icon.indexUnidad = indexUnidad;
-				icon.indexLO = i;
+				ImageIconMap icon = new ImageIconMap (context);
+				//icon.indexCurso = indexCurso;
+				//icon.indexUnidad = indexUnidad;
+				icon.index = i;
 
 				icon.SetImageBitmap(Bitmap.CreateScaledBitmap (getBitmapFromAsset("icons/iconmap.png"), Configuration.getWidth (60), Configuration.getWidth (80), true));
 				icon.SetX (Configuration.getWidth (60));
