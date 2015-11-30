@@ -318,6 +318,9 @@ namespace MLearning.Core.Services
         Task<List<LOsection>> GetSectionsByLO(int lo_id);
 
         Task<List<Page>> GetPagesByLOSection(int sec_id);
+
+		Task<Page> GetFirstSlidePageByLOSection (int sec_id); 
+
         /// <summary>
         /// return institution by user id
         /// </summary>

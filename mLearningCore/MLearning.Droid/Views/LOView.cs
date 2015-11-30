@@ -57,7 +57,7 @@ namespace MLearning.Droid.Views
 
 		async protected  override  void OnCreate(Bundle bundle)
 		{
-			
+
 			this.Window.AddFlags(WindowManagerFlags.Fullscreen);
 			base.OnCreate(bundle);
 			var metrics = Resources.DisplayMetrics;
@@ -128,7 +128,8 @@ namespace MLearning.Droid.Views
 			//var vm = this.ViewModel as LOViewModel;
 
 			await vm.InitLoad();
-			loadLOsInCircle(0);
+			//loadLOsInCircle(0);
+			LoadPagesDataSource();
 
 			viewPagerIni.SetOnPageChangeListener (new MyPageChangeListener (this,listFront));
 			viewPager.SetOnPageChangeListener (new MyPageChangeListenerPager (this, listFrontPager));
@@ -148,13 +149,105 @@ namespace MLearning.Droid.Views
 			if (e.PropertyName == "LOsInCircle")
 			if (vm.LOsInCircle != null) {
 			}
-			vm.LOsInCircle.CollectionChanged+= Vm_LOsInCircle_CollectionChanged;
+			//vm.LOsInCircle.CollectionChanged+= Vm_LOsInCircle_CollectionChanged;
 		}
 
 		void Vm_LOsInCircle_CollectionChanged (object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
 		{
 
-			loadLOsInCircle (e.NewStartingIndex);		
+			//loadLOsInCircle (e.NewStartingIndex);		
+			if (e.NewItems != null) {
+				int i = 0;
+				foreach (LOViewModel.lo_by_circle_wrapper lobycircle in e.NewItems) {
+					VerticalScrollViewPager scrollPager = new VerticalScrollViewPager (this);
+					scrollPager.setOnScrollViewListener (this); 
+					LinearLayout linearScroll = new LinearLayout (this);
+					linearScroll.LayoutParameters = new LinearLayout.LayoutParams (-1, -2);
+					linearScroll.Orientation = Orientation.Vertical;
+
+					//	if(Configuration.IndiceActual==i){
+					FrontContainerView front = new FrontContainerView (this);
+					front.Tag = "indice";
+					front.Author = lobycircle.lo.name + " " + vm.LOsInCircle [i].lo.lastname;
+					front.Chapter = lobycircle.lo.description;
+					front.NameLO = lobycircle.lo.title;
+					front.Like = "10";
+					front.ImageChapter = lobycircle.lo.url_background;
+
+					listFront.Add (front);
+					listFront [i].setBack (drBack,bmLike);
+
+					lobycircle.PropertyChanged += (s1, e1) =>
+					{
+						if (e1.PropertyName == "background_bytes")
+						{
+							front.ImageChapter = lobycircle.lo.url_background;
+
+						}
+					};								
+
+					linearScroll.AddView (front);
+					if (lobycircle.stack.IsLoaded) {				
+						var s_list = lobycircle.stack.StacksList;
+						int indice = 0;
+						for (int j = 0; j < s_list.Count; j++) {				
+
+
+							for (int k = 0; k < s_list [j].PagesList.Count; k++) {
+
+								ChapterContainerView section = new ChapterContainerView (this);								
+								section.Author = lobycircle.lo.name + " " + lobycircle.lo.lastname;					
+								section.Title = s_list [j].PagesList [k].page.title;
+								section.Container = s_list [j].PagesList [k].page.description;							
+								section.ColorText = Configuration.ListaColores [indice % 6];
+								section.setDefaultProfileUserBitmap (bm_user);
+
+
+								section.Image = s_list [j].PagesList [k].page.url_img;
+								section.Indice = indice;								
+								section.Click += delegate {
+									IndiceSection = section.Indice; 										
+									mainLayoutIndice.Visibility = ViewStates.Invisible;		
+									if (ISLOADED == false) {		
+										LoadPagesDataSource();
+									} else {
+										viewPager.CurrentItem= IndiceSection;
+										mainLayoutPages.Visibility = ViewStates.Visible;
+										mainLayoutIndice.Visibility = ViewStates.Invisible;
+									}
+
+								};
+								linearScroll.AddView (section);
+								indice++;
+							}
+
+						}
+					}
+					scrollPager.VerticalScrollBarEnabled = false;
+					scrollPager.AddView (linearScroll);
+					listaScrollIni.Add (scrollPager);
+
+
+
+
+					i++;
+				}
+
+				mainLayoutIndice.RemoveAllViews ();
+				//_progresD.Hide ();
+				mainLayoutIndice.AddView (viewPagerIni);
+				mainLayoutIndice.SetX (0);
+				mainLayoutIndice.SetY (0);
+				//mainLayout.AddView (mainLayoutIndice);
+				LOViewAdapter adapter = new LOViewAdapter (this, listaScrollIni);
+				viewPagerIni.Adapter = adapter;
+
+
+
+			}
+
+
+
 
 		}
 
@@ -237,7 +330,7 @@ namespace MLearning.Droid.Views
 
 								section.Indice = indice;								
 								section.Click += delegate {
-									
+
 
 									IndiceSection = section.Indice; 										
 
@@ -247,17 +340,17 @@ namespace MLearning.Droid.Views
 
 
 
-									if (ISLOADED	 == false) {		
-									LoadPagesDataSource();
+									if (ISLOADED == false) {		
+										LoadPagesDataSource();
 									} else {
 
-									viewPager.CurrentItem= IndiceSection;
-									mainLayoutPages.Visibility = ViewStates.Visible;
-									
-									mainLayoutIndice.Visibility = ViewStates.Invisible;
+										viewPager.CurrentItem= IndiceSection;
+										mainLayoutPages.Visibility = ViewStates.Visible;
+
+										mainLayoutIndice.Visibility = ViewStates.Invisible;
 
 
-										
+
 									}
 
 								};
@@ -267,9 +360,7 @@ namespace MLearning.Droid.Views
 
 						}
 					} else {
-
 						vm.LOsInCircle [i].stack.PropertyChanged+= (s3, e3) => {
-
 							var s_list = vm.LOsInCircle [i].stack.StacksList;
 							int indice = 0;
 							for (int j = 0; j < s_list.Count; j++) {
@@ -280,38 +371,18 @@ namespace MLearning.Droid.Views
 									section.Container = s_list [j].PagesList [k].page.description;							
 									section.ColorText = Configuration.ListaColores [indice % 6];
 									section.setDefaultProfileUserBitmap (bm_user);
-
 									section.Image = s_list [j].PagesList [k].page.url_img;
-									/*
-									if (s_list [j].PagesList [k].cover_bytes != null) {
-										Bitmap bm = BitmapFactory.DecodeByteArray (s_list [j].PagesList [k].cover_bytes, 0, s_list [j].PagesList[k].cover_bytes.Length);
-										section.ImageBitmap = bm;
-										bm = null;
-									}
-									*/
 									section.Indice = indice;								
 									section.Click += delegate {
-
-
-
-
 										IndiceSection = section.Indice; 										
 										mainLayoutIndice.Visibility = ViewStates.Invisible;		
-
-
 										if (ISLOADED == false) {	
-										
-
-										LoadPagesDataSource();
-
-
+											LoadPagesDataSource();
 										} else {
 											viewPager.CurrentItem= IndiceSection;
 											mainLayoutPages.Visibility = ViewStates.Visible;
 											mainLayoutIndice.Visibility = ViewStates.Invisible;
 										}
-
-
 									};
 									linearScroll.AddView (section);
 									indice++;
@@ -354,113 +425,111 @@ namespace MLearning.Droid.Views
 
 			for (int i = 0; i < vm.LOsInCircle.Count; i++)
 			{
-				var s_list = vm.LOsInCircle[i].stack.StacksList;
-				//if (Configuration.IndiceActual == i) {
+				var s_listp = vm.LOsInCircle[i].stack.StacksList;
 				int indice = 0;
-				for (int j = 0; j < s_list.Count; j++) {						
+
+				if (s_listp != null) {
+					for (int j = 0; j < s_listp.Count; j++) {						
+
+						for (int k = 0; k < s_listp [j].PagesList.Count; k++) {
+
+							VerticalScrollViewPager scrollPager = new VerticalScrollViewPager (this);
+							scrollPager.setOnScrollViewListener (this); 
+							LinearLayout linearScroll = new LinearLayout (this);
+							linearScroll.LayoutParameters = new LinearLayout.LayoutParams (-1, -2);
+							linearScroll.Orientation = Orientation.Vertical;
+
+							var content = s_listp [j].PagesList [k].content;
+							FrontContainerViewPager front = new FrontContainerViewPager (this);
+							front.Tag = "pager";
 
 
-
-					for (int k = 0; k < s_list [j].PagesList.Count; k++) {
-						VerticalScrollViewPager scrollPager = new VerticalScrollViewPager (this);
-						scrollPager.setOnScrollViewListener (this); 
-						LinearLayout linearScroll = new LinearLayout (this);
-						linearScroll.LayoutParameters = new LinearLayout.LayoutParams (-1, -2);
-						linearScroll.Orientation = Orientation.Vertical;
-						//LOPageSource page = new LOPageSource();
-						var content = s_list [j].PagesList [k].content;
-						FrontContainerViewPager front = new FrontContainerViewPager (this);
-						front.Tag = "pager";
-
-						//front.ImageChapter = vm.LOsInCircle [i].lo.url_background;
-						front.ImageChapter = s_list [j].PagesList[k].page.url_img;
-						/*
-						Bitmap bm = BitmapFactory.DecodeByteArray (s_list [j].PagesList [k].cover_bytes, 0, s_list [j].PagesList [k].cover_bytes.Length);
-						front.ImageChapterBitmap = bm;
-						bm = null;
-						*/
-
-						front.Title = s_list [j].PagesList [k].page.title;
-						front.Description =  s_list [j].PagesList [k].page.description;
-						var slides = s_list [j].PagesList [k].content.lopage.loslide;
-						front.setBack (drBack);
-
-						//revisar si slides == null;
-
-						//vm.OpenPageCommand.Execute (s_list [j].PagesList [k]);
-						//var slides2 = s_list [j].PagesList [k].content.lopage.loslide.
-						linearScroll.AddView (front);
-						listFrontPager.Add (front);
-						//listFrontPager [i].setBack (drBack);
-						//vm.OpenPageCommand.Execute(s_list[j].PagesList[k]);
-						var currentpage = s_list [j].PagesList [k];
-						//var pagerr = s_list[j].PagesList[k].content.lopage.loslide
-
-						for (int m = 1; m < slides.Count; m++) {
-							LOSlideSource slidesource = new LOSlideSource(this);
-
-							var _id_ = vm.LOsInCircle [i].lo.color_id;
-							is_main = !is_main;
-							//Console.WriteLine ("TIPOOOOOOOOOO = " + slides [m].lotype);	
-
-							slidesource.ColorS = Configuration.ListaColores [indice % 6];
-
-							slidesource.Type = slides[m].lotype;
-							if (slides[m].lotitle != null) slidesource.Title = slides[m].lotitle;
-							if (slides[m].loparagraph != null) slidesource.Paragraph = slides[m].loparagraph;
-							if (slides[m].loimage != null) slidesource.ImageUrl = slides[m].loimage;
-							if (slides[m].lotext != null) slidesource.Paragraph = slides[m].lotext;
-							if (slides[m].loauthor != null) slidesource.Author = slides[m].loauthor;
-							if (slides[m].lovideo != null) slidesource.VideoUrl = slides[m].lovideo;
-							//if (slides[m].image_bytes != null) slidesource.ImageBytes = slides[m].image_bytes; 
+							front.ImageChapter = s_listp [j].PagesList [k].page.url_img;
 
 
-							var c_slide = slides[m];
-							/*
-							c_slide.PropertyChanged+=(s,e)=>{
-								if (e.PropertyName == "image_bytes" && c_slide.image_bytes != null)
-									slidesource.ImageBytes = c_slide.image_bytes; 
-							};
-							*/
+							front.Title = s_listp [j].PagesList [k].page.title;
+							front.Description = s_listp [j].PagesList [k].page.description;
+							var slides = s_listp [j].PagesList [k].content.lopage.loslide;
+							front.setBack (drBack);
 
-							if (c_slide.loitemize != null){
-								slidesource.Itemize = new ObservableCollection<LOItemSource>();
-								var items = c_slide.loitemize.loitem;
-								for (int n = 0; n < items.Count; n++){ 
-									LOItemSource item = new LOItemSource();
-									if (items[n].loimage != null) item.ImageUrl = items[n].loimage;
-									if (items[n].lotext != null) item.Text = items[n].lotext;
-									//imagebytes
-									//if (items[n].image_bytes != null) item.ImageBytes = items[n].image_bytes; 
 
-									var c_item_ize = items[n];
-									/*
-									c_item_ize.PropertyChanged += (s1, e1) =>{
-										if (e1.PropertyName == "image_bytes" && c_item_ize.image_bytes != null)
-											item.ImageBytes = c_item_ize.image_bytes; 
+							linearScroll.AddView (front);
+							listFrontPager.Add (front);
 
-										
-									};
-									*/
-									slidesource.Itemize.Add(item);
+							var currentpage = s_listp [j].PagesList [k];
+
+
+							for (int m = 1; m < slides.Count; m++) {
+								LOSlideSource slidesource = new LOSlideSource (this);
+
+								var _id_ = vm.LOsInCircle [i].lo.color_id;
+								is_main = !is_main;
+
+
+								slidesource.ColorS = Configuration.ListaColores [indice % 6];
+
+								slidesource.Type = slides [m].lotype;
+								if (slides [m].lotitle != null)
+									slidesource.Title = slides [m].lotitle;
+								if (slides [m].loparagraph != null)
+									slidesource.Paragraph = slides [m].loparagraph;
+								if (slides [m].loimage != null)
+									slidesource.ImageUrl = slides [m].loimage;
+								if (slides [m].lotext != null)
+									slidesource.Paragraph = slides [m].lotext;
+								if (slides [m].loauthor != null)
+									slidesource.Author = slides [m].loauthor;
+								if (slides [m].lovideo != null)
+									slidesource.VideoUrl = slides [m].lovideo;
+
+								var c_slide = slides [m];
+
+
+								if (c_slide.loitemize != null) {
+									slidesource.Itemize = new ObservableCollection<LOItemSource> ();
+									var items = c_slide.loitemize.loitem;
+
+									for (int n = 0; n < items.Count; n++) { 
+										LOItemSource item = new LOItemSource ();
+										if (items [n].loimage != null)
+											item.ImageUrl = items [n].loimage;
+										if (items [n].lotext != null)
+											item.Text = items [n].lotext;
+
+
+										var c_item_ize = items [n];
+
+										slidesource.Itemize.Add (item);
+									}
 								}
+
+
+								linearScroll.AddView (slidesource.getViewSlide ());
+
+
+							} 
+
+							scrollPager.VerticalScrollBarEnabled = false;
+							if (k == 0) {
+								scrollPager.AddView (linearScroll);
+								listaScroll.Add (scrollPager);
+								indice++;
 							}
 
-							linearScroll.AddView (slidesource.getViewSlide());
 
-						} 
-						scrollPager.VerticalScrollBarEnabled = false;
-						scrollPager.AddView (linearScroll);
-						listaScroll.Add (scrollPager);
-						indice++;
+
+						}
+
 					}
 
 
-					//}
 
+
+				} else {
+					Console.WriteLine ("ERROR");
 				}
 
-				//}
+
 
 			}
 			mainLayoutPages.RemoveAllViews ();

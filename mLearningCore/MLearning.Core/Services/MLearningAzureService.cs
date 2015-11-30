@@ -640,14 +640,10 @@ namespace MLearning.Core.Services
 			#else
 			return await _repositoryService.SearchForAsync<LOsection>(s => s.LO_id == lo_id, s => s.updated_at, s => s.id, true);
 			#endif
-
-
-/*#if (WEB)
-			return await _repositoryService.SearchForAsync<LOsection>(s => s.LO_id == lo_id, new Dictionary<String,String>(), s=>s.id, false);
-#else
-			return await _repositoryService.SearchForAsync<LOsection>(s => s.LO_id == lo_id, new Dictionary<String,String>(), s=>s.id, true);
-#endif*/
+ 
 		}
+
+
 
 
 
@@ -752,6 +748,16 @@ namespace MLearning.Core.Services
 			return await _repositoryService.SearchForAsync<Page>(s => s.LOsection_id == sec_id, s => s.updated_at, s => s.id, false);
 			#endif
         }
+
+		public async Task<Page> GetFirstSlidePageByLOSection(int sec_id)
+		{
+			#if (WEB)
+			return await _repositoryService.SearchForFirstAsync<Page>(s => s.LOsection_id == sec_id, s => s.updated_at, s => s.id, false);
+			#else
+			return await _repositoryService.SearchForFirstAsync<Page>(s => s.LOsection_id == sec_id, s => s.updated_at, s => s.id, false);
+			#endif
+		}
+
         public async Task<Institution_has_User> GetInstitutionByUser(int user_id)
         {
             var institution = await _repositoryService.SearchForAsync<Institution_has_User>(c => c.user_id == user_id, new Dictionary<string, string>(), false);

@@ -21,6 +21,7 @@ using DataSource;
 using Android.Support.V4.View;
 using Android.Content;
 using Square.Picasso;
+using MLearningDB;
 
 namespace MLearning.Droid.Views
 {
@@ -29,7 +30,7 @@ namespace MLearning.Droid.Views
 	public class MainView : MvxActionBarActivity, VerticalScrollViewPager.ScrollViewListenerPager
 	{
 
-		ObservableCollection<MLearning.Core.ViewModels.MainViewModel.page_collection_wrapper> s_list;
+		//ObservableCollection<MLearning.Core.ViewModels.MainViewModel.page_collection_wrapper> s_list;
 		private SupportToolbar mToolbar;
 		private MyActionBarDrawerToggle mDrawerToggle;
 		private DrawerLayout mDrawerLayout;
@@ -621,14 +622,6 @@ namespace MLearning.Droid.Views
 				(ViewModel as MainViewModel).LearningOjectsList.CollectionChanged += _learningObjectsList_CollectionChanged;
 				break;
 
-			case  "LOsInCircle":
-				if (vm.LOsInCircle != null) {
-
-					populateLoInCircle (_currentCurso);
-					vm.LOsInCircle.CollectionChanged += Vm_LOsInCircle_CollectionChanged;
-				}
-				break;
-
 
 			case "UsersList":
 				//populatePeopleScroll(0);
@@ -644,6 +637,12 @@ namespace MLearning.Droid.Views
 
 				break;
 
+			case "LOsectionList":
+				loadSection ();
+				break;
+			case "ContentByUnit":
+				loadContentByUnit ();
+				break;
 			case "PostsList":
 				//resetComments();
 				break;
@@ -653,7 +652,7 @@ namespace MLearning.Droid.Views
 
 			}
 		}
-
+		/*
 		void Vm_LOsInCircle_CollectionChanged (object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
 		{
 			//populateLoInCircle (e.NewStartingIndex);
@@ -676,18 +675,20 @@ namespace MLearning.Droid.Views
 			}
 
 			Console.WriteLine ("____________________>FIN");
-			//var s_list = vm.LOsInCircle [index].stack.StacksList;
 
 
-			/*
-			for (int i = 0; i < s_list.Count; i++) {
-				lo._listUnidades.Add(new UnidadItem{ 
-					Title = s_list[index].PagesList[i].page.title, 
-					Descripti
-					on = s_list[index].PagesList[i].page.description });
-			}
-			lo.initUnidades ();
-*/
+		}
+		*/
+
+		void LOsection_CollectionChanged (object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+		{
+			if (e.NewItems != null)
+				foreach (LOsection item in e.NewItems) {
+					TextView text = new TextView (this);
+					text.SetTextColor (Color.White);
+					text.Text = item.name;
+					//linearContentIndice.AddView (text);			
+				}
 
 		}
 
@@ -772,7 +773,7 @@ namespace MLearning.Droid.Views
 					imgLO.Url = vm.LearningOjectsList [i].lo.url_cover;
 					imgLO.sBackgoundUrl = vm.LearningOjectsList [i].lo.url_background;
 					//imgLO.ImagenUsuario = getBitmapFromAsset ("icons/imgautor.png");
-					imgLO.Chapter = "Flora y Fauna";
+					//imgLO.Chapter = 
 
 
 
@@ -781,7 +782,8 @@ namespace MLearning.Droid.Views
 				}
 
 				for (int i = 0; i < list.Count; i++) {
-					list [i].Click += Lo_ImagenLO_Click;
+					//list [i].Click += Lo_ImagenLO_Click;
+					list [i].Click += setIndex;
 				}
 
 				lo.ListImages = list;
@@ -792,7 +794,7 @@ namespace MLearning.Droid.Views
 
 		private void imLoClick(object sender, EventArgs eventArgs)
 		{
-			Console.WriteLine (":::::::::::::::::"+s_list [lo.currentLOImageIndex].PagesList [0].page.title);
+			//Console.WriteLine (":::::::::::::::::"+s_list [lo.currentLOImageIndex].PagesList [0].page.title);
 
 			//vm.OpenLOCommand.Execute(vm.LearningOjectsList[lo.currentLOImageIndex]);
 			//var s_list = vm.LOsInCircle [0].stack.StacksList;
@@ -1043,13 +1045,21 @@ namespace MLearning.Droid.Views
 			lo._txtUnidadN.Text = "";
 			_currentCurso = index;
 
+			vm.SelectCircleCommand.Execute(vm.CirclesList[index]);
+			PositionLO = index;
+
 			lo.getWorkSpaceLayout.SetBackgroundColor (Color.Transparent);
 			lo.getWorkSpaceLayout.RemoveAllViews ();
 			Console.WriteLine ("show_curso : INI");
 
+			mDrawerLayout.CloseDrawer (mLeftDrawer);
+			resetMLOs ();
 
 
-			vm.SelectCircleCommand.Execute (vm.CirclesList [index]);
+
+			lo._spaceUnidades.RemoveAllViews ();
+
+			/*vm.SelectCircleCommand.Execute (vm.CirclesList [index]);
 			Console.WriteLine ("show_curso : CIRCLE_EXECUTE");
 
 			if (vm.LearningOjectsList == null) {
@@ -1079,7 +1089,7 @@ namespace MLearning.Droid.Views
 			Console.WriteLine ("show_curso : FIN");
 
 
-
+		*/
 
 
 		}
@@ -1329,16 +1339,47 @@ namespace MLearning.Droid.Views
 			//mDrawerLayout.OpenDrawer (mRightDrawer);
 		}
 
+		void setIndex(object sender, EventArgs e){
+			var imgview = sender as ImageLOView;
+			_currentUnidad = imgview.index;
+			lo._txtUnidadN.Text = imgview.Title;
+
+
+
+			Console.WriteLine ("loading index for nitems  = " + vm.LearningOjectsList.Count);
+			Console.WriteLine(" position LO = "+ _currentUnidad);
+			MLearning.Core.ViewModels.MainViewModel.lo_by_circle_wrapper currentLearningObject = vm.LearningOjectsList [_currentUnidad];
+
+			int circleID = currentLearningObject.lo.Circle_id;
+
+
+			vm.OpenLOSectionListCommand.Execute(currentLearningObject);
+
+
+			Android.Util.Log.Debug("indexList", " course_id (lo_id)  = " + circleID);
+
+			//var sectionList = await _mLearningService.GetSectionsByLO (LOID);
+			//foreach (var item in sectionList) {
+			//	var sectionPages = await _mLearningService.GetPagesByLOSection (item.id);
+
+			// Debug.WriteLine(" section_id ()  = "+ unit_id);
+
+
+
+		}
+
+
 
 		void Lo_ImagenLO_Click (object sender, EventArgs e)
 		{
 
 			var imView = sender as ImageLOView;
 			_currentUnidad = imView.index;
+			vm.OpenLOCommand.Execute(vm.LearningOjectsList[_currentUnidad]);
+			Console.WriteLine ("Lo_ImagenLO_Click()");
 
-			//Console.WriteLine ("::::::::::::::::::::::::::: " + imView.index + " :: " +vm.LOsInCircle.Count);
 
-
+			/*
 			if (vm.LOsInCircle==null
 				|| vm.LOsInCircle.Count <= imView.index 
 				|| vm.LOsInCircle [imView.index].stack == null
@@ -1367,20 +1408,6 @@ namespace MLearning.Droid.Views
 						ImageUrl = s_list[j].PagesList[0].page.url_img
 					});
 
-					Console.WriteLine (lo._listUnidades[j].Title);
-					Console.WriteLine (lo._listUnidades[j].Description);
-					Console.WriteLine (lo._listUnidades[j].ImageUrl);
-
-
-					/*if (_currentCurso == 0 && _currentUnidad!=3 && s_list[j].PagesList.Count>1) {
-						//mapa
-						map.descripcion = s_list [j].PagesList [1].page.description;
-						map.titulo = s_list [j].PagesList [1].page.title;
-						map.mapUrl = s_list [j].PagesList [1].page.url_img;
-					}*/
-
-
-
 				}
 
 				lo.initUnidades (_currentCurso,_currentUnidad);
@@ -1402,6 +1429,93 @@ namespace MLearning.Droid.Views
 				}
 
 			}
+			*/
+		
+
+		}
+
+
+		void loadContentByUnit() {
+			Console.WriteLine ("loadContentByUnit");
+			if (vm.ContentByUnit != null) 
+			{
+				
+				lo._listUnidades.Clear ();
+	
+
+				foreach (var pair in vm.ContentByUnit) {
+
+					lo._listUnidades.Add (new UnidadItem { 
+						Title = pair.Value[0].title,
+						Description = pair.Value[0].description,
+						ImageUrl = pair.Value[0].url_img
+					});
+
+					lo.initUnidades (_currentCurso,_currentUnidad);
+
+
+					/*
+
+					for (int i = 0; i < pair.Value.Count; i++) {
+
+							lo._listUnidades.Add (new UnidadItem { 
+							Title = pair.Value[i].title,
+							Description = pair.Value[i].description,
+							ImageUrl = pair.Value[i].url_img
+							});
+
+					}
+					*/
+
+				}
+
+				lo._txtCursoN.Text = vm.CirclesList[_currentCurso].name;
+				//lo._txtUnidadN.Text = vm.LOsInCircle[imView.index].lo.title;
+
+
+				if (_currentCurso == 0 && _currentUnidad!=3) {
+
+					for (int i = 0; i < lo._listLinearUnidades.Count; i++) {
+
+						Console.WriteLine ("ADD LECTOR : " + i);
+						lo._listLinearUnidades [i].Click += delegate {
+							vm.OpenLOCommand.Execute(vm.LearningOjectsList[_currentUnidad]);
+						};
+
+						lo._listIconMap [i].Click += showMapInit;
+
+					}
+				}
+
+
+			}
+		}
+		void loadSection(){
+			
+			if (vm.LOsectionList != null) 
+			{
+				Console.WriteLine ("loadSection");
+				/*
+				this.loWallView._index_list.RemoveAllViews ();
+				for (int i = 0; i < vm.LOsectionList.Count; i++) {
+					TextView text = new TextView (this);
+					text.SetTextColor (Color.White);
+
+					text.Text = vm.LOsectionList [i].name ;
+
+					this.loWallView._index_list.AddView (text);		
+
+
+				}
+				*/
+
+				MLearning.Core.ViewModels.MainViewModel.lo_by_circle_wrapper currentLearningObject = vm.LearningOjectsList [_currentUnidad];
+				int circleID = currentLearningObject.lo.Circle_id;
+
+				vm.OpenFirstSlidePageCommand.Execute (currentLearningObject);
+
+			}
+
 
 		}
 
@@ -1486,6 +1600,7 @@ namespace MLearning.Droid.Views
 
 		void showMapInit (object sender, EventArgs e)
 		{
+			/*
 			var imView = sender as IconImageMap;
 
 			var s_listp = vm.LOsInCircle[_currentUnidad].stack.StacksList;
@@ -1515,12 +1630,13 @@ namespace MLearning.Droid.Views
 					Toast.MakeText (this, "No Disponible", ToastLength.Short).Show();
 				});		
 			}
-
+*/
 		}
 
 
 		void loadPlacesDataSource(int pageIndex)
 		{
+			/*
 			map._currentPlaces.Clear ();
 			map._placesData.Clear ();
 			var s_listp = vm.LOsInCircle[_currentUnidad].stack.StacksList;
@@ -1549,18 +1665,20 @@ namespace MLearning.Droid.Views
 
 			//map.listPlaces.ItemClick += ListPlaces_ItemClick;
 
-
+*/
 		}
 
 		void ListPlaces_ItemClick (object sender, AdapterView.ItemClickEventArgs e)
 		{
+			/*
 			int position = e.Position;
 			map.showPLaceInfo(position);
+			*/
 		}
 
 		void LoadPagesDataSource (int pageIndex)
 		{
-
+			/*
 
 			_lectorOpen = true;
 			bool is_main = true;
@@ -1688,6 +1806,7 @@ namespace MLearning.Droid.Views
 			viewPager.Adapter = adapter;
 			viewPager.SetCurrentItem (numUn[_currentUnidad], false);
 			//viewPager.CurrentItem = IndiceSection;
+		*/
 
 		}
 

@@ -24,6 +24,8 @@ namespace Core.Repositories
          Task<List<T>> GetAllAsync<T>();
          Task<IQueryable<T>> GetAllQuery<T>();
 
+		Task<T> SearchForFirstAsync<T> (System.Linq.Expressions.Expression<Func<T, bool>> predicate, Func<T, DateTime> getLastUpdate, Func<T,int> getID, bool cacheResult) where T : new() ;
+
         /// <summary>
         /// Obtiene todas los registros de una tabla y los almacena en cache
         /// </summary>

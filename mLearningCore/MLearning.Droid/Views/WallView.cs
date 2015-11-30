@@ -696,7 +696,7 @@ namespace MLearning.Droid
 				if (indexCurso == 2) {
 					linearContenido.RemoveViewAt (1);
 					ImageView imgUnidad = new ImageView (context);
-					Picasso.With (context).Load (_listUnidades[i].ImageUrl).Resize(Configuration.getWidth(500),Configuration.getHeight(400)).CenterInside().Into (imgUnidad);
+					Picasso.With (context).Load (_listUnidades[i].ImageUrl).Resize(Configuration.getWidth(500),Configuration.getHeight(500)).Placeholder(context.Resources.GetDrawable (Resource.Drawable.progress_animation)).CenterInside().Into (imgUnidad);
 					linearContenido.AddView (imgUnidad);
 				}
 

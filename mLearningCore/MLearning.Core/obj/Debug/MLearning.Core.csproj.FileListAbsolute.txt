@@ -1,36 +1,37 @@
-D:\MLEARNING 8-29-2015\ares242-mlearning-5f31275a4771\ares242-mlearning-5f31275a4771\MLearning.Core\bin\Debug\MLearning.Core.dll.config
-D:\MLEARNING 8-29-2015\ares242-mlearning-5f31275a4771\ares242-mlearning-5f31275a4771\MLearning.Core\bin\Debug\MLearning.Core.dll
-D:\MLEARNING 8-29-2015\ares242-mlearning-5f31275a4771\ares242-mlearning-5f31275a4771\MLearning.Core\bin\Debug\MLearning.Core.pdb
-D:\MLEARNING 8-29-2015\ares242-mlearning-5f31275a4771\ares242-mlearning-5f31275a4771\MLearning.Core\bin\Debug\Cirrious.CrossCore.dll
-D:\MLEARNING 8-29-2015\ares242-mlearning-5f31275a4771\ares242-mlearning-5f31275a4771\MLearning.Core\bin\Debug\Cirrious.MvvmCross.Community.Plugins.Sqlite.dll
-D:\MLEARNING 8-29-2015\ares242-mlearning-5f31275a4771\ares242-mlearning-5f31275a4771\MLearning.Core\bin\Debug\Cirrious.MvvmCross.dll
-D:\MLEARNING 8-29-2015\ares242-mlearning-5f31275a4771\ares242-mlearning-5f31275a4771\MLearning.Core\bin\Debug\Cirrious.MvvmCross.Localization.dll
-D:\MLEARNING 8-29-2015\ares242-mlearning-5f31275a4771\ares242-mlearning-5f31275a4771\MLearning.Core\bin\Debug\Cirrious.MvvmCross.Plugins.File.dll
-D:\MLEARNING 8-29-2015\ares242-mlearning-5f31275a4771\ares242-mlearning-5f31275a4771\MLearning.Core\bin\Debug\Cirrious.MvvmCross.Plugins.PictureChooser.dll
-D:\MLEARNING 8-29-2015\ares242-mlearning-5f31275a4771\ares242-mlearning-5f31275a4771\MLearning.Core\bin\Debug\FizzWare.NBuilder.dll
-D:\MLEARNING 8-29-2015\ares242-mlearning-5f31275a4771\ares242-mlearning-5f31275a4771\MLearning.Core\bin\Debug\Microsoft.Threading.Tasks.dll
-D:\MLEARNING 8-29-2015\ares242-mlearning-5f31275a4771\ares242-mlearning-5f31275a4771\MLearning.Core\bin\Debug\Microsoft.Threading.Tasks.Extensions.dll
-D:\MLEARNING 8-29-2015\ares242-mlearning-5f31275a4771\ares242-mlearning-5f31275a4771\MLearning.Core\bin\Debug\Microsoft.WindowsAzure.Common.dll
-D:\MLEARNING 8-29-2015\ares242-mlearning-5f31275a4771\ares242-mlearning-5f31275a4771\MLearning.Core\bin\Debug\Microsoft.WindowsAzure.Management.Storage.dll
-D:\MLEARNING 8-29-2015\ares242-mlearning-5f31275a4771\ares242-mlearning-5f31275a4771\MLearning.Core\bin\Debug\Microsoft.WindowsAzure.Mobile.dll
-D:\MLEARNING 8-29-2015\ares242-mlearning-5f31275a4771\ares242-mlearning-5f31275a4771\MLearning.Core\bin\Debug\Microsoft.WindowsAzure.Storage.dll
-D:\MLEARNING 8-29-2015\ares242-mlearning-5f31275a4771\ares242-mlearning-5f31275a4771\MLearning.Core\bin\Debug\Newtonsoft.Json.dll
-D:\MLEARNING 8-29-2015\ares242-mlearning-5f31275a4771\ares242-mlearning-5f31275a4771\MLearning.Core\bin\Debug\System.Net.Http.dll
-D:\MLEARNING 8-29-2015\ares242-mlearning-5f31275a4771\ares242-mlearning-5f31275a4771\MLearning.Core\bin\Debug\System.Net.Http.Extensions.dll
-D:\MLEARNING 8-29-2015\ares242-mlearning-5f31275a4771\ares242-mlearning-5f31275a4771\MLearning.Core\bin\Debug\System.Net.Http.Primitives.dll
-D:\MLEARNING 8-29-2015\ares242-mlearning-5f31275a4771\ares242-mlearning-5f31275a4771\MLearning.Core\bin\Debug\Microsoft.Threading.Tasks.xml
-D:\MLEARNING 8-29-2015\ares242-mlearning-5f31275a4771\ares242-mlearning-5f31275a4771\MLearning.Core\bin\Debug\Microsoft.Threading.Tasks.Extensions.xml
-D:\MLEARNING 8-29-2015\ares242-mlearning-5f31275a4771\ares242-mlearning-5f31275a4771\MLearning.Core\bin\Debug\Microsoft.WindowsAzure.Common.xml
-D:\MLEARNING 8-29-2015\ares242-mlearning-5f31275a4771\ares242-mlearning-5f31275a4771\MLearning.Core\bin\Debug\Microsoft.WindowsAzure.Management.Storage.xml
-D:\MLEARNING 8-29-2015\ares242-mlearning-5f31275a4771\ares242-mlearning-5f31275a4771\MLearning.Core\bin\Debug\Microsoft.WindowsAzure.Mobile.xml
-D:\MLEARNING 8-29-2015\ares242-mlearning-5f31275a4771\ares242-mlearning-5f31275a4771\MLearning.Core\bin\Debug\Newtonsoft.Json.xml
-D:\MLEARNING 8-29-2015\ares242-mlearning-5f31275a4771\ares242-mlearning-5f31275a4771\MLearning.Core\bin\Debug\System.Net.Http.xml
-D:\MLEARNING 8-29-2015\ares242-mlearning-5f31275a4771\ares242-mlearning-5f31275a4771\MLearning.Core\bin\Debug\System.Net.Http.Extensions.xml
-D:\MLEARNING 8-29-2015\ares242-mlearning-5f31275a4771\ares242-mlearning-5f31275a4771\MLearning.Core\bin\Debug\System.Net.Http.Primitives.xml
-D:\MLEARNING 8-29-2015\ares242-mlearning-5f31275a4771\ares242-mlearning-5f31275a4771\MLearning.Core\obj\Debug\MLearning.Core.csproj.App.config
-D:\MLEARNING 8-29-2015\ares242-mlearning-5f31275a4771\ares242-mlearning-5f31275a4771\MLearning.Core\obj\Debug\MLearning.Core.csprojResolveAssemblyReference.cache
-D:\MLEARNING 8-29-2015\ares242-mlearning-5f31275a4771\ares242-mlearning-5f31275a4771\MLearning.Core\obj\Debug\MLearning.Core.dll
-D:\MLEARNING 8-29-2015\ares242-mlearning-5f31275a4771\ares242-mlearning-5f31275a4771\MLearning.Core\obj\Debug\MLearning.Core.pdb
+C:\Users\ImBonus\Desktop\Service\MLearning.Core\bin\Debug\MLearning.Core.dll.config
+C:\Users\ImBonus\Desktop\Service\MLearning.Core\bin\Debug\MLearning.Core.dll
+C:\Users\ImBonus\Desktop\Service\MLearning.Core\bin\Debug\MLearning.Core.pdb
+C:\Users\ImBonus\Desktop\Service\MLearning.Core\bin\Debug\Cirrious.CrossCore.dll
+C:\Users\ImBonus\Desktop\Service\MLearning.Core\bin\Debug\Cirrious.MvvmCross.Community.Plugins.Sqlite.dll
+C:\Users\ImBonus\Desktop\Service\MLearning.Core\bin\Debug\Cirrious.MvvmCross.dll
+C:\Users\ImBonus\Desktop\Service\MLearning.Core\bin\Debug\Cirrious.MvvmCross.Localization.dll
+C:\Users\ImBonus\Desktop\Service\MLearning.Core\bin\Debug\Cirrious.MvvmCross.Plugins.File.dll
+C:\Users\ImBonus\Desktop\Service\MLearning.Core\bin\Debug\Cirrious.MvvmCross.Plugins.PictureChooser.dll
+C:\Users\ImBonus\Desktop\Service\MLearning.Core\bin\Debug\FizzWare.NBuilder.dll
+C:\Users\ImBonus\Desktop\Service\MLearning.Core\bin\Debug\Microsoft.Threading.Tasks.dll
+C:\Users\ImBonus\Desktop\Service\MLearning.Core\bin\Debug\Microsoft.Threading.Tasks.Extensions.dll
+C:\Users\ImBonus\Desktop\Service\MLearning.Core\bin\Debug\Microsoft.WindowsAzure.Common.dll
+C:\Users\ImBonus\Desktop\Service\MLearning.Core\bin\Debug\Microsoft.WindowsAzure.Management.Storage.dll
+C:\Users\ImBonus\Desktop\Service\MLearning.Core\bin\Debug\Microsoft.WindowsAzure.Mobile.dll
+C:\Users\ImBonus\Desktop\Service\MLearning.Core\bin\Debug\Microsoft.WindowsAzure.Storage.dll
+C:\Users\ImBonus\Desktop\Service\MLearning.Core\bin\Debug\Newtonsoft.Json.dll
+C:\Users\ImBonus\Desktop\Service\MLearning.Core\bin\Debug\System.Net.Http.dll
+C:\Users\ImBonus\Desktop\Service\MLearning.Core\bin\Debug\System.Net.Http.Extensions.dll
+C:\Users\ImBonus\Desktop\Service\MLearning.Core\bin\Debug\System.Net.Http.Primitives.dll
+C:\Users\ImBonus\Desktop\Service\MLearning.Core\bin\Debug\Microsoft.Threading.Tasks.xml
+C:\Users\ImBonus\Desktop\Service\MLearning.Core\bin\Debug\Microsoft.Threading.Tasks.Extensions.xml
+C:\Users\ImBonus\Desktop\Service\MLearning.Core\bin\Debug\Microsoft.WindowsAzure.Common.xml
+C:\Users\ImBonus\Desktop\Service\MLearning.Core\bin\Debug\Microsoft.WindowsAzure.Management.Storage.xml
+C:\Users\ImBonus\Desktop\Service\MLearning.Core\bin\Debug\Microsoft.WindowsAzure.Mobile.xml
+C:\Users\ImBonus\Desktop\Service\MLearning.Core\bin\Debug\Newtonsoft.Json.xml
+C:\Users\ImBonus\Desktop\Service\MLearning.Core\bin\Debug\System.Net.Http.xml
+C:\Users\ImBonus\Desktop\Service\MLearning.Core\bin\Debug\System.Net.Http.Extensions.xml
+C:\Users\ImBonus\Desktop\Service\MLearning.Core\bin\Debug\System.Net.Http.Primitives.xml
+C:\Users\ImBonus\Desktop\Service\MLearning.Core\obj\Debug\MLearning.Core.csproj.App.config
+C:\Users\ImBonus\Desktop\Service\MLearning.Core\obj\Debug\MLearning.Core.dll
+C:\Users\ImBonus\Desktop\Service\MLearning.Core\obj\Debug\MLearning.Core.pdb
+C:\Users\ImBonus\Desktop\Service\MLearning.Core\obj\Debug\MLearning.Core.dll.mdb
+C:\Users\ImBonus\Desktop\Service\MLearning.Core\bin\Debug\MLearning.Core.dll.mdb
 C:\Users\ImBonus\Documents\GitHub\Hitec\Hitec.Droid\mLearningCore\MLearning.Core\bin\Debug\MLearning.Core.dll.config
 C:\Users\ImBonus\Documents\GitHub\Hitec\Hitec.Droid\mLearningCore\MLearning.Core\bin\Debug\MLearning.Core.dll
 C:\Users\ImBonus\Documents\GitHub\Hitec\Hitec.Droid\mLearningCore\MLearning.Core\bin\Debug\MLearning.Core.pdb
@@ -63,10 +64,6 @@ C:\Users\ImBonus\Documents\GitHub\Hitec\Hitec.Droid\mLearningCore\MLearning.Core
 C:\Users\ImBonus\Documents\GitHub\Hitec\Hitec.Droid\mLearningCore\MLearning.Core\obj\Debug\MLearning.Core.csproj.App.config
 C:\Users\ImBonus\Documents\GitHub\Hitec\Hitec.Droid\mLearningCore\MLearning.Core\obj\Debug\MLearning.Core.dll
 C:\Users\ImBonus\Documents\GitHub\Hitec\Hitec.Droid\mLearningCore\MLearning.Core\obj\Debug\MLearning.Core.pdb
-C:\Users\ImBonus\Documents\GitHub\Hitec\Hitec.Droid\mLearningCore\MLearning.Core\obj\Debug\MLearning.Core.dll.mdb
-C:\Users\ImBonus\Documents\GitHub\Hitec\Hitec.Droid\mLearningCore\MLearning.Core\bin\Debug\MLearning.Core.dll.mdb
-C:\Users\ImBonus\Documents\GitHub\Hitec\Hitec.Droid\mLearningCore\MLearning.Core\obj\Debug\MLearning.Core.dll.mdb
-C:\Users\ImBonus\Documents\GitHub\Hitec\Hitec.Droid\mLearningCore\MLearning.Core\bin\Debug\MLearning.Core.dll.mdb
 C:\Users\ImBonus\Documents\GitHub\Hitec\Hitec.Droid\mLearningCore\MLearning.Core\obj\Debug\MLearning.Core.dll.mdb
 C:\Users\ImBonus\Documents\GitHub\Hitec\Hitec.Droid\mLearningCore\MLearning.Core\bin\Debug\MLearning.Core.dll.mdb
 C:\Users\ImBonus\Documents\GitHub\Hitec\Hitec.Droid\mLearningCore\MLearning.Core\obj\Debug\MLearning.Core.dll.mdb

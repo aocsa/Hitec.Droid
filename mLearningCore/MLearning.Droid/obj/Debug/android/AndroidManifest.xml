@@ -19,11 +19,11 @@
         <category android:name="hitec.Droid" />
       </intent-filter>
       <intent-filter>
-        <action android:name="com.google.android.gcm.intent.RETRY" />
+        <action android:name="com.google.android.c2dm.intent.RECEIVE" />
         <category android:name="hitec.Droid" />
       </intent-filter>
       <intent-filter>
-        <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+        <action android:name="com.google.android.gcm.intent.RETRY" />
         <category android:name="hitec.Droid" />
       </intent-filter>
     </receiver>

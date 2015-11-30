@@ -395,6 +395,7 @@ C:\Users\ImBonus\Desktop\Archivo comprimido\Hitec.Droid-master\mLearningCore\MLe
 C:\Users\ImBonus\Desktop\Archivo comprimido\Hitec.Droid-master\mLearningCore\MLearning.Droid\bin\Debug\MLearning.Core.dll.mdb
 C:\Users\ImBonus\Desktop\Archivo comprimido\Hitec.Droid-master\mLearningCore\MLearning.Droid\obj\Debug\CaminoInca.dll.mdb
 C:\Users\ImBonus\Desktop\Archivo comprimido\Hitec.Droid-master\mLearningCore\MLearning.Droid\bin\Debug\CaminoInca.dll.mdb
+C:\Users\ImBonus\Documents\GitHub\Hitec\Hitec.Droid\mLearningCore\MLearning.Droid\obj\Debug\Hitec.Droid.csprojResolveAssemblyReference.cache
 C:\Users\ImBonus\Documents\GitHub\Hitec\Hitec.Droid\mLearningCore\MLearning.Droid\bin\Debug\CaminoInca.dll.config
 C:\Users\ImBonus\Documents\GitHub\Hitec\Hitec.Droid\mLearningCore\MLearning.Droid\bin\Debug\CaminoInca.dll
 C:\Users\ImBonus\Documents\GitHub\Hitec\Hitec.Droid\mLearningCore\MLearning.Droid\bin\Debug\CaminoInca.pdb
@@ -440,7 +441,6 @@ C:\Users\ImBonus\Documents\GitHub\Hitec\Hitec.Droid\mLearningCore\MLearning.Droi
 C:\Users\ImBonus\Documents\GitHub\Hitec\Hitec.Droid\mLearningCore\MLearning.Droid\bin\Debug\Newtonsoft.Json.xml
 C:\Users\ImBonus\Documents\GitHub\Hitec\Hitec.Droid\mLearningCore\MLearning.Droid\bin\Debug\System.Net.Http.Extensions.xml
 C:\Users\ImBonus\Documents\GitHub\Hitec\Hitec.Droid\mLearningCore\MLearning.Droid\bin\Debug\System.Net.Http.Primitives.xml
-C:\Users\ImBonus\Documents\GitHub\Hitec\Hitec.Droid\mLearningCore\MLearning.Droid\obj\Debug\Hitec.Droid.csprojResolveAssemblyReference.cache
 C:\Users\ImBonus\Documents\GitHub\Hitec\Hitec.Droid\mLearningCore\MLearning.Droid\obj\Debug\CaminoInca.dll
 C:\Users\ImBonus\Documents\GitHub\Hitec\Hitec.Droid\mLearningCore\MLearning.Droid\obj\Debug\CaminoInca.pdb
 C:\Users\ImBonus\Documents\GitHub\Hitec\Hitec.Droid\mLearningCore\MLearning.Droid\obj\Debug\android\bin\hitec.Droid.apk

@@ -195,9 +195,9 @@ C:\Users\ImBonus\Documents\GitHub\Hitec\Hitec.Droid\mLearningCore\MLearning.Droi
 C:\Users\ImBonus\Documents\GitHub\Hitec\Hitec.Droid\mLearningCore\MLearning.Droid\obj\Release\res\drawable\loading2.png
 C:\Users\ImBonus\Documents\GitHub\Hitec\Hitec.Droid\mLearningCore\MLearning.Droid\obj\Release\res\drawable\loading3.png
 C:\Users\ImBonus\Documents\GitHub\Hitec\Hitec.Droid\mLearningCore\MLearning.Droid\obj\Release\res\drawable\loading4.png
-C:\Users\ImBonus\Documents\GitHub\Hitec\Hitec.Droid\mLearningCore\MLearning.Droid\bin\Release\MLearning.Core.dll.mdb
-C:\Users\ImBonus\Documents\GitHub\Hitec\Hitec.Droid\mLearningCore\MLearning.Droid\obj\Release\CaminoInca.dll.mdb
-C:\Users\ImBonus\Documents\GitHub\Hitec\Hitec.Droid\mLearningCore\MLearning.Droid\bin\Release\CaminoInca.dll.mdb
 C:\Users\ImBonus\Desktop\Archivo comprimido\Hitec.Droid-master\mLearningCore\MLearning.Droid\obj\Release\Hitec.Droid.csprojResolveAssemblyReference.cache
 C:\Users\ImBonus\Desktop\Archivo comprimido\Hitec.Droid-master\mLearningCore\MLearning.Droid\obj\Release\CaminoInca.dll
 C:\Users\ImBonus\Desktop\Archivo comprimido\Hitec.Droid-master\mLearningCore\MLearning.Droid\obj\Release\CaminoInca.pdb
+C:\Users\ImBonus\Documents\GitHub\Hitec\Hitec.Droid\mLearningCore\MLearning.Droid\bin\Release\MLearning.Core.dll.mdb
+C:\Users\ImBonus\Documents\GitHub\Hitec\Hitec.Droid\mLearningCore\MLearning.Droid\obj\Release\CaminoInca.dll.mdb
+C:\Users\ImBonus\Documents\GitHub\Hitec\Hitec.Droid\mLearningCore\MLearning.Droid\bin\Release\CaminoInca.dll.mdb
