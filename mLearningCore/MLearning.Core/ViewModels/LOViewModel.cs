@@ -36,13 +36,19 @@ namespace MLearning.Core.ViewModels
 		}
 
 
-
+		public int _currentCurso;
+		public int _currentUnidad;
+		public int _currentSection;
 
 		string _serialized_list;
 
-		public void Init(int lo_id,string serialized_los_in_circle)
+		public void Init(int lo_id,string serialized_los_in_circle, int _currentCurso, int _currentUnidad,int _currentSection)
 		{
 			//LoadPages(selectedLOIndex);
+
+			this._currentCurso = _currentCurso;
+			this._currentUnidad = _currentUnidad;
+			this._currentSection = _currentSection;
 
 			LOID = lo_id;
 

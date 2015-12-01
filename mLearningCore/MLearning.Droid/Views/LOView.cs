@@ -424,9 +424,9 @@ namespace MLearning.Droid.Views
 			//vm.IsLoading.Execute(null);
 			bool is_main = true;
 
-			for (int i = 0; i < vm.LOsInCircle.Count; i++)
-			{
-				var s_listp = vm.LOsInCircle[i].stack.StacksList;
+		//	for (int i = 0; i < 3; i++)
+		//	{
+			var s_listp = vm.LOsInCircle[vm._currentUnidad].stack.StacksList;
 				int indice = 0;
 
 				if (s_listp != null) {
@@ -463,7 +463,7 @@ namespace MLearning.Droid.Views
 							for (int m = 1; m < slides.Count; m++) {
 								LOSlideSource slidesource = new LOSlideSource (this);
 
-								var _id_ = vm.LOsInCircle [i].lo.color_id;
+							var _id_ = vm.LOsInCircle [vm._currentUnidad].lo.color_id;
 								is_main = !is_main;
 
 
@@ -532,7 +532,7 @@ namespace MLearning.Droid.Views
 
 
 
-			}
+		//	}
 			mainLayoutPages.RemoveAllViews ();
 			//_progresD.Hide ();
 			mainLayoutPages.AddView (viewPager);

@@ -30,11 +30,11 @@ namespace MLearning.Droid
 
 		public static int getHeight(int value){
 
-			return (HEIGHT_PIXEL)*((value*100)/DIMENSION_DESING_HEIGHT)/100;
+			return HEIGHT_PIXEL*value/DIMENSION_DESING_HEIGHT;
 		}
 
 		public static int getWidth(int value){
-			return (WIDTH_PIXEL)*((value*100)/DIMENSION_DESING_WIDTH)/100;
+			return WIDTH_PIXEL*value/DIMENSION_DESING_WIDTH;
 		}
 
 		public static void setWidthPixel(int value){

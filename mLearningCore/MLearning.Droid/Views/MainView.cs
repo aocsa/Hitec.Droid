@@ -1477,12 +1477,7 @@ namespace MLearning.Droid.Views
 
 					for (int i = 0; i < lo._listLinearUnidades.Count; i++) {
 
-						Console.WriteLine ("ADD LECTOR : " + i);
-						lo._listLinearUnidades [i].Click += delegate {
-							_dialogDownload.Show ();
-							vm.OpenLOCommand.Execute(vm.LearningOjectsList[_currentUnidad]);
-						};
-
+						lo._listLinearUnidades [i].Click += lo_item_click;
 						lo._listIconMap [i].Click += map_item_click;
 
 					}
@@ -1490,6 +1485,18 @@ namespace MLearning.Droid.Views
 
 
 			}
+		}
+
+		void lo_item_click (object sender, EventArgs e)
+		{
+			_dialogDownload.Show ();
+			var item = sender as LinearLayoutLO;
+			vm._currentUnidad = _currentUnidad;
+			vm._currentCurso = _currentCurso;
+			vm._currentSection = item.index;
+			vm.OpenLOCommand.Execute(vm.LearningOjectsList[_currentUnidad]);
+
+
 		}
 
 		void map_item_click (object sender, EventArgs e)

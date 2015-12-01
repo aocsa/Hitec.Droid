@@ -250,6 +250,14 @@ MLearning.Droid.ImageIconMap, CaminoInca;md5f410d9818bda040222c310297e0440b4.Ima
 MLearning.Droid.ImageIconMap, CaminoInca, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;md5f410d9818bda040222c310297e0440b4.ImageIconMap
 MLearning.Droid.ImageIconMap;md5f410d9818bda040222c310297e0440b4.ImageIconMap
 mlearning.droid.ImageIconMap;md5f410d9818bda040222c310297e0440b4.ImageIconMap
+MLearning.Droid.LinearLayoutLO, CaminoInca;md5f410d9818bda040222c310297e0440b4.LinearLayoutLO
+MLearning.Droid.LinearLayoutLO, CaminoInca, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;md5f410d9818bda040222c310297e0440b4.LinearLayoutLO
+MLearning.Droid.LinearLayoutLO;md5f410d9818bda040222c310297e0440b4.LinearLayoutLO
+mlearning.droid.LinearLayoutLO;md5f410d9818bda040222c310297e0440b4.LinearLayoutLO
+MLearning.Droid.JustifiedTextView, CaminoInca;md5f410d9818bda040222c310297e0440b4.JustifiedTextView
+MLearning.Droid.JustifiedTextView, CaminoInca, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;md5f410d9818bda040222c310297e0440b4.JustifiedTextView
+MLearning.Droid.JustifiedTextView;md5f410d9818bda040222c310297e0440b4.JustifiedTextView
+mlearning.droid.JustifiedTextView;md5f410d9818bda040222c310297e0440b4.JustifiedTextView
 Cirrious.CrossCore.Droid.MvxJavaContainer, Cirrious.CrossCore.Droid;md594e974f7daaa4f544d8fe5f075a74d26.MvxJavaContainer
 Cirrious.CrossCore.Droid.MvxJavaContainer, Cirrious.CrossCore.Droid, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;md594e974f7daaa4f544d8fe5f075a74d26.MvxJavaContainer
 Cirrious.CrossCore.Droid.MvxJavaContainer;md594e974f7daaa4f544d8fe5f075a74d26.MvxJavaContainer

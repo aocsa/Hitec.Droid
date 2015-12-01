@@ -80,7 +80,7 @@ namespace MLearning.Droid
 			_adLayout.LayoutParameters = new LinearLayout.LayoutParams (-1, Configuration.getHeight (255));
 			Drawable dr = new BitmapDrawable (getBitmapFromAsset (adsImagesPath[idAd]));
 			_adLayout.SetBackgroundDrawable (dr);
-			_adLayout.SetY (925);
+			_adLayout.SetY (Configuration.getHeight(1136-85-255));
 			_mainLayout.AddView (_adLayout);
 
 			_adLayout.Click += delegate {
@@ -122,7 +122,7 @@ namespace MLearning.Droid
 			_publicidadLayout.LayoutParameters = new LinearLayout.LayoutParams (-1, Configuration.getHeight (85));
 			Drawable dr = new BitmapDrawable (getBitmapFromAsset ("images/footerad.jpg"));
 			_publicidadLayout.SetBackgroundDrawable (dr);
-			_publicidadLayout.SetY (Configuration.getHeight(1060));
+			_publicidadLayout.SetY (Configuration.getHeight(1136-85));
 			_mainLayout.AddView (_publicidadLayout);
 			_publicidadLayout.Click += delegate {
 				if (adOpen) {
@@ -159,10 +159,10 @@ namespace MLearning.Droid
 			numLikes.Add ("10");
 			numLikes.Add ("10");
 
-			numTypes.Add ("2");
 			numTypes.Add ("3");
-			numTypes.Add ("10");
-			numTypes.Add ("8");
+			numTypes.Add ("7");
+			numTypes.Add ("4");
+			numTypes.Add ("1");
 
 			title.Add ("LAS RUTAS");
 			title.Add ("GUIA DE SERVICIOS");

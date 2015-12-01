@@ -46,12 +46,13 @@ namespace MLearning.Droid
 		void Initialize ()
 		{
 			var metrics = Resources.DisplayMetrics;
-			widthInDp = ((int)metrics.WidthPixels);
-			heightInDp = ((int)metrics.HeightPixels);
+			widthInDp = metrics.WidthPixels;
+			heightInDp = metrics.HeightPixels;
 			Configuration.setWidthPixel (widthInDp);
 			Configuration.setHeigthPixel (heightInDp);
 
-			ini ();
+			//ini ();
+			ini2 ();
 			//iniNotifList ();
 			this.AddView (mainLayout);
 
@@ -64,7 +65,37 @@ namespace MLearning.Droid
 
 			return bitmap;
 		}
+		public void ini2(){
 
+			mainLayout = new RelativeLayout (context);
+			mainLayout.LayoutParameters = new RelativeLayout.LayoutParams (-1,-1);
+			int space = Configuration.getWidth (30);
+			mainLayout.SetPadding (space,0,space,0);
+
+			contentLinearLayout = new LinearLayout (context);
+			contentLinearLayout.LayoutParameters = new LinearLayout.LayoutParams (-1, -2);
+			contentLinearLayout.Orientation = Orientation.Vertical;
+
+
+			imHeader = new ImageView (context);
+			titleHeader = new TextView (context);
+			AutorHeader = new TextView (context);
+			content = new TextView (context);
+
+			titleHeader.TextSize = Configuration.getHeight (18);
+			titleHeader.Typeface =  Typeface.CreateFromAsset(context.Assets, "fonts/ArcherMediumPro.otf");
+
+			content.TextSize = Configuration.getHeight (15);
+			content.Typeface = Typeface.CreateFromAsset(context.Assets, "fonts/ArcherMediumPro.otf");
+
+
+			contentLinearLayout.AddView (titleHeader);
+			contentLinearLayout.AddView (content);
+			contentLinearLayout.AddView (imHeader);
+
+			mainLayout.AddView (contentLinearLayout);
+
+		}
 		public void ini(){
 
 
@@ -205,8 +236,8 @@ namespace MLearning.Droid
 		public string Contenido{
 			get{return _content; }
 			set{_content = value;
-				content.TextFormatted = Html.FromHtml (_content);
-				//	content.Text = _content;
+				//content.TextFormatted = Html.FromHtml (_content);
+					content.Text = _content;
 			}
 
 		}
@@ -229,7 +260,8 @@ namespace MLearning.Droid
 				imHeader.SetImageBitmap (Bitmap.CreateScaledBitmap (bm,Configuration.getWidth (60), Configuration.getHeight (60),true));
 				bm = null;
 				*/
-				Picasso.With (context).Load (ImageUrl).Resize(Configuration.getWidth(124),Configuration.getHeight(124)).CenterCrop().Into (imHeader);
+				Picasso.With (context).Load (ImageUrl).Placeholder(context.Resources.GetDrawable (Resource.Drawable.progress_animation)).Resize(Configuration.getWidth(640),Configuration.getHeight(640)).CenterInside().Into (imHeader);
+				//Picasso.With (context).Load (ImageUrl).Resize(Configuration.getWidth(640),Configuration.getHeight(640)).CenterCrop().Into (imHeader);
 				//Picasso.With (context).Load (ImageUrl).CenterCrop().Into (imHeader);
 			}
 

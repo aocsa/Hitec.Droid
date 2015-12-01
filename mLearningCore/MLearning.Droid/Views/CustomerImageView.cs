@@ -55,7 +55,8 @@ namespace MLearning.Droid
 
 			//LinearLayout.LayoutParams paramL = new new LinearLayout.LayoutParams (Configuration.getWidth (530), Configuration.getHeight (356));
 
-			background.LayoutParameters = new LinearLayout.LayoutParams (Configuration.getWidth (530), -2);
+			background.LayoutParameters = new LinearLayout.LayoutParams (-1, -2);
+
 			background.Orientation = Orientation.Vertical;
 
 
@@ -67,7 +68,7 @@ namespace MLearning.Droid
 			image.Orientation = Orientation.Vertical;
 			//image.SetGravity (GravityFlags.Center);
 
-			relTemp.LayoutParameters = new LinearLayout.LayoutParams (Configuration.getWidth (582), -2);
+			relTemp.LayoutParameters = new LinearLayout.LayoutParams (-1, -2);
 			//relTemp.SetGravity (GravityFlags.Center);
 
 			//RelativeLayout.LayoutParams param = new RelativeLayout.LayoutParams(Configuration.getWidth (530), Configuration.getHeight (356));
@@ -75,19 +76,18 @@ namespace MLearning.Droid
 			//param.AddRule (LayoutRules.CenterInParent);
 
 			relTemp.AddView (background);
+			int space = Configuration.getWidth (30);
+			relTemp.SetPadding (space, 0, space, 0);
 
-
-			txtTitle.SetTextColor (Color.ParseColor("#424242"));
-			txtDescription.SetTextColor(Color.ParseColor("#424242"));
+			//txtTitle.SetTextColor (Color.ParseColor("#424242"));
+			//txtDescription.SetTextColor(Color.ParseColor("#424242"));
 			//txtTitle.SetTextSize (ComplexUnitType.Px, Configuration.getHeight (40));
 			//txtDescription.SetTextSize (ComplexUnitType.Px, Configuration.getHeight (30));
 
-			txtTitle.SetTextSize (ComplexUnitType.Dip, 21.0f);
-			txtDescription.SetTextSize (ComplexUnitType.Dip, 12.0f);
-			txtDescription.Ellipsize = Android.Text.TextUtils.TruncateAt.End;
-			txtDescription.SetSingleLine (false);
-			//txtDescription.SetMaxLines (9);
-			//txtDescription.line
+			txtTitle.TextSize = Configuration.getHeight (18);
+			txtDescription.TextSize = Configuration.getHeight (15);
+
+
 
 
 			background.AddView (txtTitle);
@@ -135,7 +135,7 @@ namespace MLearning.Droid
 				//imBack.SetImageBitmap (Bitmap.CreateScaledBitmap (bm, Configuration.getWidth (582), Configuration.getHeight (394), true));
 				//bm = null;
 
-				Picasso.With (context).Load (_imagen).Resize(Configuration.getWidth(582),Configuration.getHeight(394)).CenterInside().Into (imBack);
+				Picasso.With (context).Load (_imagen).Resize(Configuration.getWidth(640),Configuration.getHeight(640)).CenterInside().Into (imBack);
 
 				/*Task task = new Task (DownloadImage);
 				task.Start();

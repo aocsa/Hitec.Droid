@@ -26,7 +26,7 @@ namespace MLearning.Droid
 		public LinearLayout _spaceUnidades;
 		public LinearLayout _mapSpace;
 
-		public List<LinearLayout> _listLinearUnidades = new List<LinearLayout> ();
+		public List<LinearLayoutLO> _listLinearUnidades = new List<LinearLayoutLO> ();
 
 
 		RelativeLayout _mainLayout;
@@ -650,10 +650,11 @@ namespace MLearning.Droid
 			int numUnidades = _listUnidades.Count;
 			for (int i = 0; i < numUnidades; i++) 
 			{
-				LinearLayout linearUnidad = new LinearLayout (context);
+				LinearLayoutLO linearUnidad = new LinearLayoutLO (context);
 				linearUnidad.LayoutParameters = new LinearLayout.LayoutParams (-1, -2);
 				linearUnidad.Orientation = Orientation.Horizontal;
 				linearUnidad.SetGravity (Android.Views.GravityFlags.CenterVertical);
+				linearUnidad.index = i;
 
 				ImageIconMap icon = new ImageIconMap (context);
 				//icon.indexCurso = indexCurso;
@@ -677,15 +678,16 @@ namespace MLearning.Droid
 				linearContenido.SetX(Configuration.getWidth (100));
 
 				TextView titleUnidad = new TextView(context);
-				titleUnidad.Text = _listUnidades [i].Title;
+				//titleUnidad.Text = _listUnidades [i].Title;
+				titleUnidad.TextFormatted = Html.FromHtml (_listUnidades [i].Title);
 				titleUnidad.SetTextColor(Color.ParseColor (Configuration.ListaColores [i % 6]));
-				titleUnidad.Typeface =  Typeface.CreateFromAsset(context.Assets, "fonts/HelveticaNeue.ttf");
-				titleUnidad.SetTextSize (textFormat,Configuration.getHeight(40));
+				titleUnidad.Typeface =  Typeface.CreateFromAsset(context.Assets, "fonts/ArcherMediumPro.otf");
+				titleUnidad.SetTextSize (textFormat,Configuration.getHeight(45));
 
 				TextView descriptionUnidad = new TextView(context);
 				descriptionUnidad.TextFormatted = Html.FromHtml (_listUnidades [i].Description);
 				//descriptionUnidad.Text = _listUnidades [i].Description;
-				descriptionUnidad.Typeface =  Typeface.CreateFromAsset(context.Assets, "fonts/HelveticaNeue.ttf");
+				descriptionUnidad.Typeface =  Typeface.CreateFromAsset(context.Assets, "fonts/ArcherMediumPro.otf");
 				descriptionUnidad.SetTextSize (textFormat,Configuration.getHeight(30));
 				//descriptionUnidad.SetTextIsSelectable (true);
 

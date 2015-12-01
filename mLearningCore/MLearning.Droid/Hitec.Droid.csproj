@@ -27,6 +27,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AndroidLinkMode>None</AndroidLinkMode>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>full</DebugType>
@@ -36,6 +37,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AndroidUseSharedRuntime>False</AndroidUseSharedRuntime>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ByteSmith.WindowsAzure.Messaging.Android">
@@ -227,6 +229,8 @@
     <Compile Include="Views\PlaceDetalle.cs" />
     <Compile Include="Views\LOMapView.cs" />
     <Compile Include="Views\ImageIconMap.cs" />
+    <Compile Include="Views\LinearLayoutLO.cs" />
+    <Compile Include="Views\JustifiedTextView.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

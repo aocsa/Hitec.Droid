@@ -757,7 +757,12 @@ namespace MLearning.Core.ViewModels
 
 
                 string serialized = JsonConvert.SerializeObject(list);
-                ShowViewModel<LOViewModel>(new { lo_id = learningobj.lo.id, serialized_los_in_circle = serialized });
+				ShowViewModel<LOViewModel>(new { lo_id = learningobj.lo.id, 
+					serialized_los_in_circle = serialized, 
+					_currentCurso = this._currentCurso,
+					_currentUnidad = this._currentUnidad,
+					_currentSection = this._currentSection});
+			
             }
             catch (WebException e)
             {

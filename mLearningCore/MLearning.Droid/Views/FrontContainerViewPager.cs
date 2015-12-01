@@ -85,6 +85,9 @@ namespace MLearning.Droid
 			linearContainerFisrst.LayoutParameters = new LinearLayout.LayoutParams (-1, -1);
 			linearImageLO.LayoutParameters = new LinearLayout.LayoutParams (-1,Configuration.getHeight(637));
 			linearTextLO.LayoutParameters = new LinearLayout.LayoutParams (-1, Configuration.getHeight(250));
+			int space = Configuration.getWidth (30);
+			linearTextLO.SetPadding (space,0,space,0);
+
 		//	linearLike.LayoutParameters = new LinearLayout.LayoutParams (Configuration.getWidth(120), Configuration.getHeight(80));
 
 
@@ -108,10 +111,12 @@ namespace MLearning.Droid
 
 
 
-			txtTitle.SetTextSize (Android.Util.ComplexUnitType.Px, Configuration.getHeight (50));
+			txtTitle.TextSize = Configuration.getHeight (25);
+			txtTitle.Typeface = Typeface.CreateFromAsset(context.Assets, "fonts/ArcherMediumPro.otf");
+			//txtTitle.Typeface = Typeface.DefaultBold;
 
-			txtDescription.SetTextSize (Android.Util.ComplexUnitType.Px, Configuration.getHeight (30));
-			txtTitle.Typeface = Typeface.DefaultBold;
+
+
 
 
 			txtDescription.SetTextColor (Color.ParseColor("#ffffff"));
@@ -126,7 +131,7 @@ namespace MLearning.Droid
 
 			linearTextLO.AddView (txtTitle);
 		
-			linearTextLO.AddView (txtDescription);
+			//linearTextLO.AddView (txtDescription);
 
 			//linearLike.AddView (imgBack);
 			//linearLike.AddView (txtLike);
@@ -152,6 +157,15 @@ namespace MLearning.Droid
 			drBack = dr;
 			linearContainerFisrst.SetBackgroundDrawable (drBack);
 			drBack = null;
+		}
+
+		private string _color;
+		public string ColorTexto{
+			get{return _color; }
+			set{_color = value;
+				txtTitle.SetTextColor(Color.ParseColor(_color));
+			}
+
 		}
 
 		public LinearLayout Imagen{
