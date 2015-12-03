@@ -10,6 +10,8 @@ namespace MLearning.Droid
 {
     public class Setup : MvxAndroidSetup
     {
+
+
         public Setup(Context applicationContext) : base(applicationContext)
         {
         }
