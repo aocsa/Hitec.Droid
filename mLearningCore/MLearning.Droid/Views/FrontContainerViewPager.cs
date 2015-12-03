@@ -118,7 +118,6 @@ namespace MLearning.Droid
 
 
 
-
 			txtDescription.SetTextColor (Color.ParseColor("#ffffff"));
 
 			txtTitle.SetTextColor (Color.ParseColor("#ffffff"));

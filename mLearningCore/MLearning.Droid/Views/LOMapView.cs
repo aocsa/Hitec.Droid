@@ -61,10 +61,7 @@ namespace MLearning.Droid.Views
 		async protected  override  void OnCreate(Bundle bundle)
 		{
 
-			_dialogDownload = new ProgressDialog (this);
-			_dialogDownload.SetCancelable (false);
-			_dialogDownload.SetMessage ("Downloading...");
-			_dialogDownload.Show ();
+
 
 			this.Window.AddFlags(WindowManagerFlags.Fullscreen);
 			base.OnCreate(bundle);
@@ -85,6 +82,16 @@ namespace MLearning.Droid.Views
 
 			drBack = new BitmapDrawable(Bitmap.CreateScaledBitmap (getBitmapFromAsset ("images/fondocondiagonalm.png"), 640, 1136, true));
 
+			LinearLayout test = new LinearLayout (this);
+			test.LayoutParameters = new LinearLayout.LayoutParams (-1, -1);
+			//test.SetBackgroundResource (Resource.Drawable.splash);
+			test.SetBackgroundColor(Color.Black);
+			SetContentView (test);
+
+			_dialogDownload = new ProgressDialog (this);
+			_dialogDownload.SetCancelable (false);
+			_dialogDownload.SetMessage ("Cargando");
+			_dialogDownload.Show ();
 
 			await ini();
 			//LoadPagesDataSource ();

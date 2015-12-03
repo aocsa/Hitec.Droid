@@ -64,7 +64,7 @@ namespace MLearning.Droid
 			//background.SetBackgroundColor (Color.ParseColor ("#50000000"));
 			//background.BaselineAligned = true;
 
-			image.LayoutParameters = new LinearLayout.LayoutParams (Configuration.getWidth (582), -2);
+			image.LayoutParameters = new LinearLayout.LayoutParams (-1, -2);
 			image.Orientation = Orientation.Vertical;
 			//image.SetGravity (GravityFlags.Center);
 
@@ -87,7 +87,8 @@ namespace MLearning.Droid
 			txtTitle.TextSize = Configuration.getHeight (18);
 			txtDescription.TextSize = Configuration.getHeight (15);
 
-
+			txtTitle.Typeface =  Typeface.CreateFromAsset(context.Assets, "fonts/ArcherMediumPro.otf");
+			txtDescription.Typeface =  Typeface.CreateFromAsset(context.Assets, "fonts/ArcherMediumPro.otf");
 
 
 			background.AddView (txtTitle);
@@ -97,6 +98,7 @@ namespace MLearning.Droid
 
 			image.AddView (relTemp);
 			image.AddView (imBack);
+			imBack.SetPadding(space,space,space,space);
 			this.AddView (image);
 			//this.AddView (background);
 
@@ -153,7 +155,14 @@ namespace MLearning.Droid
 			bm = null;
 		}
 
+		private string _color;
+		public string ColorTexto{
+			get{return _color; }
+			set{_color = value;
+				txtTitle.SetTextColor(Color.ParseColor(_color));
+			}
 
+		}
 
 
 		private Bitmap _imageBitmap;

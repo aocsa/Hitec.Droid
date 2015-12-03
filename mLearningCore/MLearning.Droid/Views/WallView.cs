@@ -197,8 +197,8 @@ namespace MLearning.Droid
 			_fondo2.AddView(test);
 			//_txtCursoN.Text = "PROBANDO";
 			//_txtUnidadN.Text = "PROBANDO";
-			_txtCursoN.SetTextSize (textFormat,Configuration.getHeight(60));
-			_txtUnidadN.SetTextSize (textFormat,Configuration.getHeight(50));
+			_txtCursoN.TextSize = Configuration.getHeight(28);
+			_txtUnidadN.TextSize = Configuration.getHeight(25);
 
 			_txtCursoN.SetTextColor (Color.ParseColor("#ffffff"));
 			_txtCursoN.Typeface =  Typeface.CreateFromAsset(context.Assets, "fonts/ArcherMediumPro.otf");
@@ -682,13 +682,13 @@ namespace MLearning.Droid
 				titleUnidad.TextFormatted = Html.FromHtml (_listUnidades [i].Title);
 				titleUnidad.SetTextColor(Color.ParseColor (Configuration.ListaColores [i % 6]));
 				titleUnidad.Typeface =  Typeface.CreateFromAsset(context.Assets, "fonts/ArcherMediumPro.otf");
-				titleUnidad.SetTextSize (textFormat,Configuration.getHeight(45));
+				titleUnidad.SetTextSize (textFormat,Configuration.getHeight(42));
 
 				TextView descriptionUnidad = new TextView(context);
 				descriptionUnidad.TextFormatted = Html.FromHtml (_listUnidades [i].Description);
 				//descriptionUnidad.Text = _listUnidades [i].Description;
 				descriptionUnidad.Typeface =  Typeface.CreateFromAsset(context.Assets, "fonts/ArcherMediumPro.otf");
-				descriptionUnidad.SetTextSize (textFormat,Configuration.getHeight(30));
+				descriptionUnidad.SetTextSize (textFormat,Configuration.getHeight(28));
 				//descriptionUnidad.SetTextIsSelectable (true);
 
 				linearContenido.AddView (titleUnidad);

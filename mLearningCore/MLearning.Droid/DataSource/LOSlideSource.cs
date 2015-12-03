@@ -181,6 +181,7 @@ namespace DataSource
 				Template2 plantilla = new Template2 (context);
 				plantilla.Title = _title;
 				plantilla.Contenido = _paragraph;
+
 				//Console.WriteLine ("CREA PLANTILLAAAAAAAAA  222222");
 				return plantilla;
 
@@ -217,6 +218,7 @@ namespace DataSource
 				plantilla.Title = _title;
 				plantilla.Description = _paragraph;
 				plantilla.Imagen = _imageurl;//BitmapFactory.DecodeByteArray (_imagebytes, 0, _imagebytes.Length);
+				plantilla.ColorTexto = _colorS;
 				return plantilla;
 			}
 

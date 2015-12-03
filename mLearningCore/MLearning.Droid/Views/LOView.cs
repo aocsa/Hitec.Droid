@@ -20,6 +20,7 @@ using Android.Content.PM;
 using Android.Content;
 using System.Threading;
 using Android.Graphics.Drawables;
+using Android.Text;
 
 namespace MLearning.Droid.Views
 {
@@ -57,11 +58,8 @@ namespace MLearning.Droid.Views
 
 		async protected  override  void OnCreate(Bundle bundle)
 		{
+			
 
-			_dialogDownload = new ProgressDialog (this);
-			_dialogDownload.SetCancelable (false);
-			_dialogDownload.SetMessage ("Downloading...");
-			_dialogDownload.Show ();
 
 			this.Window.AddFlags(WindowManagerFlags.Fullscreen);
 			base.OnCreate(bundle);
@@ -79,12 +77,23 @@ namespace MLearning.Droid.Views
 			bmLike = Bitmap.CreateScaledBitmap (getBitmapFromAsset ("images/like.png"), Configuration.getWidth (43), Configuration.getWidth (35), true);
 
 			drBack = new BitmapDrawable(Bitmap.CreateScaledBitmap (getBitmapFromAsset ("images/fondocondiagonalm.png"), 640, 1136, true));
+			LinearLayout test = new LinearLayout (this);
+			test.LayoutParameters = new LinearLayout.LayoutParams (-1, -1);
+			//test.SetBackgroundResource (Resource.Drawable.splash);
+			test.SetBackgroundColor(Color.Black);
+			SetContentView (test);
 
+
+			_dialogDownload = new ProgressDialog (this);
+			_dialogDownload.SetCancelable (false);
+			_dialogDownload.SetMessage ("Cargando");
+			_dialogDownload.Show ();
 
 			await ini();
 			//LoadPagesDataSource ();
 
 			SetContentView (mainLayout);
+
 			_dialogDownload.Dismiss ();
 		} 
 
@@ -423,13 +432,16 @@ namespace MLearning.Droid.Views
 			//var styles = new StyleConstants();
 			//vm.IsLoading.Execute(null);
 			bool is_main = true;
-
+			int space = Configuration.getWidth (30);
 		//	for (int i = 0; i < 3; i++)
 		//	{
 			var s_listp = vm.LOsInCircle[vm._currentUnidad].stack.StacksList;
 				int indice = 0;
 
 				if (s_listp != null) {
+
+
+
 					for (int j = 0; j < s_listp.Count; j++) {						
 
 						for (int k = 0; k < s_listp [j].PagesList.Count; k++) {
@@ -455,9 +467,45 @@ namespace MLearning.Droid.Views
 
 
 							linearScroll.AddView (front);
+
+						LinearLayout descriptionLayout = new LinearLayout (this);
+						descriptionLayout.LayoutParameters = new LinearLayout.LayoutParams (-1, -2);
+						descriptionLayout.SetPadding (space, 0, space, space);
+						descriptionLayout.Orientation = Orientation.Vertical;
+						//descriptionLayout.SetPadding (0, 0, 0, space);
+						//descriptionLayout.SetBackgroundColor (Color.AliceBlue);
+
+						TextView titulo_detalle = new TextView (this);
+						titulo_detalle.Text = "Descripción";
+						titulo_detalle.Typeface =  Typeface.CreateFromAsset(this.Assets, "fonts/ArcherMediumPro.otf");
+						titulo_detalle.TextSize = Configuration.getHeight (20);
+						titulo_detalle.SetTextColor(Color.ParseColor(Configuration.ListaColores [indice % 6]));
+						titulo_detalle.SetPadding (0, 0, 0, space);
+						descriptionLayout.AddView (titulo_detalle);
+
+						TextView detalle = new TextView (this);
+						detalle.TextFormatted = Html.FromHtml (slides[0].loparagraph);
+						detalle.Typeface =  Typeface.CreateFromAsset(this.Assets, "fonts/ArcherMediumPro.otf");
+						detalle.TextSize = Configuration.getHeight (17);
+						descriptionLayout.AddView (detalle);
+
+
+
+
+						LinearLayout separationLinear = new LinearLayout (this);
+						separationLinear.LayoutParameters = new LinearLayout.LayoutParams (-1, 5);
+						separationLinear.SetBackgroundColor (Color.ParseColor ("#D8D8D8"));
+						separationLinear.Orientation = Orientation.Horizontal;
+						//separationLinear.SetPadding (0,0,0,50);
+
+						linearScroll.AddView (descriptionLayout);
+						linearScroll.AddView (separationLinear);
+
 							listFrontPager.Add (front);
 
 							var currentpage = s_listp [j].PagesList [k];
+
+				
 
 
 							for (int m = 1; m < slides.Count; m++) {
@@ -505,6 +553,7 @@ namespace MLearning.Droid.Views
 								}
 
 
+
 								linearScroll.AddView (slidesource.getViewSlide ());
 
 
@@ -541,8 +590,8 @@ namespace MLearning.Droid.Views
 			mainLayout.AddView (mainLayoutPages);
 			LOViewAdapter adapter = new LOViewAdapter (this, listaScroll);
 			viewPager.Adapter = adapter;
-			viewPager.CurrentItem = IndiceSection;
-
+			//viewPager.CurrentItem = IndiceSection;
+			viewPager.SetCurrentItem (vm._currentSection, true);
 		}
 		/*
 		public void  OnScrollChanged(VerticalScrollView scrollView, int l, int t, int oldl, int oldt) {

@@ -61,7 +61,14 @@ namespace MLearning.Droid
 
 			return bitmap;
 		}
+		private string _color;
+		public string ColorTexto{
+			get{return _color; }
+			set{_color = value;
+				titleHeader.SetTextColor(Color.ParseColor(_color));
+			}
 
+		}
 		public void ini(){
 
 			var textFormat = Android.Util.ComplexUnitType.Px;
@@ -79,26 +86,22 @@ namespace MLearning.Droid
 			titleHeader = new TextView (context);
 			content = new TextView (context);
 
-			titleHeader.Typeface =  Typeface.CreateFromAsset(context.Assets, "fonts/HelveticaNeue.ttf");
-			content.Typeface =  Typeface.CreateFromAsset(context.Assets, "fonts/HelveticaNeue.ttf");
+			titleHeader.Typeface =  Typeface.CreateFromAsset(context.Assets, "fonts/ArcherMediumPro.otf");
+			content.Typeface =  Typeface.CreateFromAsset(context.Assets, "fonts/ArcherMediumPro.otf");
 
 			//titleHeader.Text = "El Perú cuenta con mas de 357000 tipos de aves";
-			titleHeader.SetTypeface(null,TypefaceStyle.Bold);
 			//titleHeader.SetTextSize (textFormat, Configuration.getHeight (52));
-			titleHeader.SetTextSize (textFormatdip, 27.0f);
-			titleHeader.SetMaxWidth (Configuration.getWidth (583));
+			titleHeader.TextSize = Configuration.getHeight (18);
 
 			//content.Text = "Los factores geográficos, climáticos y evolutivos  convierten al Perú en el mejor lugar para realizar la observacion de aves(birthwaching) Tiene 1830 especies de pájaros(segun la lista oficial del SACC/CRAP), tambien es considerado el";
 			//	content.SetTextSize (textFormat, Configuration.getHeight (26));
-			content.SetTextSize (textFormatdip, 12.0f);
-
-			content.SetMaxWidth (Configuration.getWidth(583));
+			content.TextSize = Configuration.getHeight (15);
 
 			contenLayout.AddView (titleHeader);
 			contenLayout.AddView(content);
 
 			//contenLayout.SetX (Configuration.getHeight (45));
-			int padW = Configuration.getWidth(45);
+			int padW = Configuration.getWidth(30);
 			int padH = Configuration.getHeight (15);
 			//contenLayout.SetPadding (padW,padH,padW,padH);
 

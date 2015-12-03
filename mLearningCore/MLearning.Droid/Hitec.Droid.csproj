@@ -319,6 +319,8 @@
     <AndroidResource Include="Resources\drawable\loading2.png" />
     <AndroidResource Include="Resources\drawable\loading3.png" />
     <AndroidResource Include="Resources\drawable\loading4.png" />
+    <AndroidResource Include="Resources\drawable\loading5.png" />
+    <AndroidResource Include="Resources\drawable\loading6.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\Strings.xml" />

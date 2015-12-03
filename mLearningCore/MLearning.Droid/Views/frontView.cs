@@ -162,7 +162,7 @@ namespace MLearning.Droid
 			numTypes.Add ("3");
 			numTypes.Add ("7");
 			numTypes.Add ("4");
-			numTypes.Add ("1");
+			numTypes.Add ("9");
 
 			title.Add ("LAS RUTAS");
 			title.Add ("GUIA DE SERVICIOS");
@@ -172,7 +172,7 @@ namespace MLearning.Droid
 			type.Add ("rutas");
 			type.Add ("guias");
 			type.Add ("guias");
-			type.Add ("info");
+			type.Add ("cifras");
 
 			coverImagePath.Add ("images/fondorutas.png");
 			coverImagePath.Add ("images/fondoguias.png");
@@ -199,7 +199,7 @@ namespace MLearning.Droid
 				itemTitle.Text = title [i];
 				itemTitle.SetTextColor (Color.ParseColor("#ffffff"));
 				itemTitle.Typeface =  Typeface.CreateFromAsset(context.Assets, "fonts/ArcherMediumPro.otf");
-				itemTitle.SetTextSize (textFormat,Configuration.getHeight(50));
+				itemTitle.TextSize = Configuration.getHeight (28);
 
 				LinearLayout linearTitle = new LinearLayout (context);
 				linearTitle.LayoutParameters = new LinearLayout.LayoutParams(Configuration.getWidth(465),Configuration.getHeight(180));
@@ -223,8 +223,8 @@ namespace MLearning.Droid
 				txtnumLike.SetTextColor (Color.ParseColor ("#ffffff"));
 
 
-				linearLike.AddView (iconlike);
-				linearLike.AddView (txtnumLike);
+				//linearLike.AddView (iconlike);
+				//linearLike.AddView (txtnumLike);
 
 
 				LinearLayout linearType = new LinearLayout (context);
@@ -234,11 +234,15 @@ namespace MLearning.Droid
 
 				TextView txtnumType = new TextView (context);
 				txtnumType.Text = numTypes[i];
+				txtnumType.Typeface =  Typeface.CreateFromAsset(context.Assets, "fonts/ArcherMediumPro.otf");
+				txtnumType.TextSize = Configuration.getHeight (15);
 				txtnumType.Gravity = GravityFlags.CenterHorizontal;
 				txtnumType.SetTextColor (Color.ParseColor ("#ffffff"));
 
 				TextView txtType = new TextView (context);
 				txtType.Text = type[i];
+				txtType.Typeface =  Typeface.CreateFromAsset(context.Assets, "fonts/ArcherMediumPro.otf");
+				txtType.TextSize = Configuration.getHeight (15);
 				txtType.Gravity = GravityFlags.CenterHorizontal;
 				txtType.SetTextColor (Color.ParseColor ("#ffffff"));
 

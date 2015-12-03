@@ -69,8 +69,9 @@ namespace MLearning.Droid
 
 			mainLayout = new RelativeLayout (context);
 			mainLayout.LayoutParameters = new RelativeLayout.LayoutParams (-1,-1);
-			int space = Configuration.getWidth (30);
-			mainLayout.SetPadding (space,0,space,0);
+			int padW = Configuration.getWidth(30);
+			int padH = Configuration.getHeight (15);
+			mainLayout.SetPadding (padW,padH,padW,padH);
 
 			contentLinearLayout = new LinearLayout (context);
 			contentLinearLayout.LayoutParameters = new LinearLayout.LayoutParams (-1, -2);
@@ -87,6 +88,8 @@ namespace MLearning.Droid
 
 			content.TextSize = Configuration.getHeight (15);
 			content.Typeface = Typeface.CreateFromAsset(context.Assets, "fonts/ArcherMediumPro.otf");
+
+
 
 
 			contentLinearLayout.AddView (titleHeader);

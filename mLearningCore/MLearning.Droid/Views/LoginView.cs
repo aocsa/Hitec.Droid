@@ -87,6 +87,13 @@ namespace MLearning.Droid.Views
 
 		//	Console.WriteLine ("DIMESIONES DEL DEVICEEEEEEEEEEEE WIDTH= "+ widthInDp + " HEIGHT = "+heightInDp);
 
+
+			LinearLayout test = new LinearLayout (this);
+			test.LayoutParameters = new LinearLayout.LayoutParams (-1, -1);
+			test.SetBackgroundResource (Resource.Drawable.splash);
+			SetContentView (test);
+
+
 			var com = ((LoginViewModel)this.DataContext).LoginCommand;
 			com.Execute(null);
 			//init ();
