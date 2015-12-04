@@ -103,8 +103,8 @@ namespace MLearning.Droid
 				context.StartActivity(lance);
 				*/
 
-				mapImage.PivotX = x;
-				mapImage.PivotY = y;
+				mapImage.PivotX = 100;
+				mapImage.PivotY = 50;
 				mapImage.ScaleX = 3;
 				mapImage.ScaleY = 3;
 
