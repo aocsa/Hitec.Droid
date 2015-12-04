@@ -34,6 +34,7 @@ namespace MLearning.Droid
 		public string titulo_map_header;
 
 		public List<PlaceItem> _currentPlaces = new List<PlaceItem>();
+		public List<Tuple<int,int>> _positionCurrentPlaces = new List<Tuple<int, int>> ();
 		public ListView  listPlaces;
 
 		public LinearLayout placesInfoLayout;
@@ -44,6 +45,7 @@ namespace MLearning.Droid
 		public String mapUrl;
 
 		public List<LinearLayoutLO> _listLinearPlaces = new List<LinearLayoutLO> ();
+		public List<ImageIconMap> _listLinearPositonPlaces = new List<ImageIconMap> ();
 
 		int widthInDp;
 		int heightInDp;
@@ -102,23 +104,24 @@ namespace MLearning.Droid
 				lance.SetDataAndType(uri,typedata);
 				context.StartActivity(lance);
 				*/
-
+				/*
 				mapImage.PivotX = 100;
 				mapImage.PivotY = 50;
 				mapImage.ScaleX = 3;
 				mapImage.ScaleY = 3;
-
+				*/
 			};
 
 
 
 		}
 
-		public void focusMap(int x, int y)
+		public void showFocusMap(int position)
 		{
-			
-			mapImage.PivotX = x;
-			mapImage.PivotY = y;
+			var posXY = _positionCurrentPlaces [position];
+
+			mapImage.PivotX = posXY.Item1;
+			mapImage.PivotY = posXY.Item2;
 			mapImage.ScaleX = 3;
 			mapImage.ScaleY = 3;
 		}
@@ -250,41 +253,78 @@ namespace MLearning.Droid
 				TextView txtName = new TextView (context);
 				ImageView imgIcon = new ImageView (context);
 
+				txtName.LayoutParameters = new LinearLayout.LayoutParams (Configuration.getWidth (400), -1);
+				txtName.Gravity = GravityFlags.CenterVertical;
+
 				txtName.Text = item.titulo;
 				//txtName.SetTextColor (Color.ParseColor ("#ffffff"));
 				txtName.Typeface =  Typeface.CreateFromAsset(context.Assets, "fonts/HelveticaNeue.ttf");
-				txtName.TextSize = Configuration.getHeight (18);
+				txtName.TextSize = Configuration.getHeight (15);
 				//imgIcon.SetImageBitmap (Bitmap.CreateScaledBitmap (getBitmapFromAsset (item.Asset), Configuration.getWidth (30), Configuration.getWidth (30), true));
 
-				linearItem.LayoutParameters = new LinearLayout.LayoutParams (-1, Configuration.getHeight (120));
+				int H = 80;
+				int W = 120;
+
+				linearItem.LayoutParameters = new LinearLayout.LayoutParams (-1, Configuration.getHeight (H));
 				//linearItem.SetBackgroundDrawable (background_row);
 				linearItem.Orientation = Orientation.Horizontal;
 				linearItem.SetGravity (Android.Views.GravityFlags.CenterVertical);
 				//linearItem.AddView (imgIcon);
 
 
-				LinearLayout imageLayout = new LinearLayout (context);
-				imageLayout.LayoutParameters = new LinearLayout.LayoutParams (Configuration.getWidth (180), Configuration.getHeight (120));
+				RelativeLayout imageLayout = new RelativeLayout (context);
+				imageLayout.LayoutParameters = new LinearLayout.LayoutParams (Configuration.getWidth (W), Configuration.getHeight (H));
 				ImageView iconImage = new ImageView (context);
-				Picasso.With (context).Load (item.pathIcon).Resize(Configuration.getWidth(180),Configuration.getHeight(120)).CenterCrop().Into (iconImage);
+				Picasso.With (context).Load (item.pathIcon).Resize(Configuration.getWidth(W),Configuration.getHeight(H)).CenterCrop().Into (iconImage);
 				imageLayout.AddView (iconImage);
 
+				LinearLayout gradiente = new LinearLayout (context);
+				gradiente.LayoutParameters = new LinearLayout.LayoutParams (Configuration.getWidth (W), Configuration.getHeight (H));
+
+				imageLayout.AddView (gradiente);
+
+				ImageIconMap icon = new ImageIconMap (context);
+				icon.LayoutParameters = new LinearLayout.LayoutParams (Configuration.getWidth (W), Configuration.getHeight (H));
+				//icon.SetBackgroundResource (Resource.Drawable.mapIcon);
+				//icon.indexCurso = indexCurso;
+				//icon.indexUnidad = indexUnidad;
+				//icon.SetBackgroundResource
+				icon.index = i;
+				icon.SetImageBitmap(Bitmap.CreateScaledBitmap (getBitmapFromAsset("icons/map2.jpg"), Configuration.getWidth (W), Configuration.getWidth (H), true));
+				RelativeLayout iconLayout = new RelativeLayout (context);
+				//iconLayout.SetGravity (GravityFlags.Center);
+				iconLayout.LayoutParameters = new LinearLayout.LayoutParams (Configuration.getWidth (W), Configuration.getHeight (H));
+				//iconLayout.SetBackgroundColor (Color.White);
+				//iconLayout.SetGravity (GravityFlags.End);
+				//iconLayout.SetX(Configuration.getWidth(580));
+
+				LinearLayout gradiente2 = new LinearLayout (context);
+				gradiente2.LayoutParameters = new LinearLayout.LayoutParams (Configuration.getWidth (W), Configuration.getHeight (H));
+
+				iconLayout.AddView (icon);
+				iconLayout.AddView (gradiente2);
 
 				linearItem.AddView (imageLayout);
 				linearItem.AddView (txtName);
+				linearItem.AddView (iconLayout);
 				int space = Configuration.getWidth (30);
 				//linearItem.SetPadding (space,0,space,0);
 				//imgIcon.SetPadding (Configuration.getWidth(68), 0, 0, 0);
 				txtName.SetPadding (Configuration.getWidth(10), 0, 0, 0);
 
-				//if (position % 2 == 0) {
-				//linearItem.SetBackgroundColor (Color.ParseColor ("#F0AE11"));
-				//txtName.SetTextColor (Color.White);
-				//} else {
+				if (i % 2 == 0) {
+				gradiente.SetBackgroundResource (Resource.Drawable.gradiente2);
+				gradiente2.SetBackgroundResource (Resource.Drawable.gradiente22);
+				linearItem.SetBackgroundColor (Color.ParseColor ("#F0AE11"));
+				txtName.SetTextColor (Color.White);
+				} else {
+				gradiente.SetBackgroundResource (Resource.Drawable.gradiente1);
+				gradiente2.SetBackgroundResource (Resource.Drawable.gradiente11);
 				txtName.SetTextColor (Color.ParseColor("#F0AE11"));
-				//}
+				}
 
 				_listLinearPlaces.Add (linearItem);
+				_listLinearPositonPlaces.Add (icon);
 				listSpaceLayout.AddView (linearItem);
 
 			}

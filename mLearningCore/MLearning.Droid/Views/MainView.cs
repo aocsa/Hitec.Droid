@@ -29,7 +29,7 @@ namespace MLearning.Droid.Views
 	[Activity(Label = "View for FirstViewModel", ScreenOrientation = ScreenOrientation.Portrait)]
 	public class MainView : MvxActionBarActivity, VerticalScrollViewPager.ScrollViewListenerPager
 	{
-
+		ObservableCollection<MLearning.Core.ViewModels.MainViewModel.lo_by_circle_wrapper> _CLO;
 		//ObservableCollection<MLearning.Core.ViewModels.MainViewModel.page_collection_wrapper> s_list;
 		private SupportToolbar mToolbar;
 		private MyActionBarDrawerToggle mDrawerToggle;
@@ -136,7 +136,7 @@ namespace MLearning.Droid.Views
 			base.OnCreate(bundle);
 			SetContentView(Resource.Layout.MainView);
 
-			_currentCurso = -1;
+			_currentCurso = 0;
 			_lectorOpen = false;
 			_mapOpen = false;
 
@@ -620,6 +620,7 @@ namespace MLearning.Droid.Views
 			case "LearningOjectsList":
 				resetMLOs ();
 				(ViewModel as MainViewModel).LearningOjectsList.CollectionChanged += _learningObjectsList_CollectionChanged;
+				setIndex (lo._ListLOImages_S2 [0], new EventArgs ());
 				break;
 
 
@@ -753,11 +754,11 @@ namespace MLearning.Droid.Views
 
 
 		void resetMLOs(){
-
+			//setIndex(lo._ListLOImages_S2[0], new EventArgs());
 			main_ContentView.RemoveAllViews ();
 			main_ContentView.AddView (lo);
 			mDrawerLayout.CloseDrawer (mLeftDrawer);
-
+			_CLO = vm.LearningOjectsList;
 
 			if (vm.LearningOjectsList != null) {
 
@@ -787,6 +788,8 @@ namespace MLearning.Droid.Views
 				}
 
 				lo.ListImages = list;
+
+
 
 			}
 
@@ -826,7 +829,6 @@ namespace MLearning.Droid.Views
 
 		void _learningObjectsList_CollectionChanged (object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
 		{
-
 			resetMLOs();
 		}
 
@@ -985,7 +987,7 @@ namespace MLearning.Droid.Views
 
 		public void showHome()
 		{
-			_currentCurso = -1;
+			_currentCurso = 0;
 			try{
 				lo.getWorkSpaceLayout.SetBackgroundColor (Color.Transparent);
 				lo.getWorkSpaceLayout.RemoveAllViews ();
@@ -1024,7 +1026,7 @@ namespace MLearning.Droid.Views
 
 			switch (index) {
 			case 0:
-				lo._txtCursoN.Text = "Las Rutas";
+				lo._txtCursoN.Text = "Las rutas";
 				break;
 			case 1:
 				lo._txtCursoN.Text = "Guía de Servicios";
@@ -1045,52 +1047,26 @@ namespace MLearning.Droid.Views
 			lo._txtUnidadN.Text = "";
 			_currentCurso = index;
 
-			vm.SelectCircleCommand.Execute(vm.CirclesList[index]);
-			PositionLO = index;
+			mDrawerLayout.CloseDrawer (mLeftDrawer);
+			resetMLOs ();
 
 			lo.getWorkSpaceLayout.SetBackgroundColor (Color.Transparent);
 			lo.getWorkSpaceLayout.RemoveAllViews ();
 			Console.WriteLine ("show_curso : INI");
 
-			mDrawerLayout.CloseDrawer (mLeftDrawer);
-			resetMLOs ();
-
-
-
 			lo._spaceUnidades.RemoveAllViews ();
+			lo._listLinearUnidades.Clear ();
+			lo._listIconMap.Clear ();
 
-			/*vm.SelectCircleCommand.Execute (vm.CirclesList [index]);
-			Console.WriteLine ("show_curso : CIRCLE_EXECUTE");
-
-			if (vm.LearningOjectsList == null) {
-				var myHandler = new Handler ();
-				myHandler.Post(()=>{
-					Toast.MakeText (this, "Las unidades se estan descargando", ToastLength.Short).Show();
-				});
-				return;
-			}
-			if (vm.LearningOjectsList.Count <= index) {
-
-				var myHandler = new Handler ();
-				myHandler.Post(()=>{
-					Toast.MakeText (this, "Las unidades se estan descargando", ToastLength.Short).Show();
-				});
-				return;
-			}
-
-			vm.OpenLOCommand.Execute (vm.LearningOjectsList [index]);
-			mDrawerLayout.CloseDrawer (mLeftDrawer);
-			resetMLOs ();
+			vm.SelectCircleCommand.Execute(vm.CirclesList[index]);
+			PositionLO = index;
 
 
-
-			lo._spaceUnidades.RemoveAllViews ();
-
-			Console.WriteLine ("show_curso : FIN");
-
-
-		*/
-
+			//setIndex (lo._ListLOImages_S2 [0], new EventArgs ());
+			/*
+			MLearning.Core.ViewModels.MainViewModel.lo_by_circle_wrapper currentLearningObject = _CLO[0];
+			vm.OpenLOSectionListCommand.Execute(currentLearningObject);
+			*/
 
 		}
 
@@ -1308,13 +1284,13 @@ namespace MLearning.Droid.Views
 
 
 
-			var circle = _currentCursos [e.Position];
+			//var circle = _currentCursos [e.Position];
 
 			//var vm = this.ViewModel as MainViewModel;
 			//vm.SelectCircleCommand.Execute(vm.CirclesList[circle.Index]);
 
-			vm.SelectCircleCommand.Execute(vm.CirclesList[circle.Index]);
-			PositionLO = e.Position;
+			//vm.SelectCircleCommand.Execute(vm.CirclesList[circle.Index]);
+			//PositionLO = e.Position;
 
 
 		}
@@ -1378,60 +1354,6 @@ namespace MLearning.Droid.Views
 			vm.OpenLOCommand.Execute(vm.LearningOjectsList[_currentUnidad]);
 			Console.WriteLine ("Lo_ImagenLO_Click()");
 
-
-			/*
-			if (vm.LOsInCircle==null
-				|| vm.LOsInCircle.Count <= imView.index 
-				|| vm.LOsInCircle [imView.index].stack == null
-				|| vm.LOsInCircle [imView.index].stack.StacksList == null) {
-
-				var myHandler = new Handler ();
-				myHandler.Post(()=>{
-					Toast.MakeText (this, "Downloading...", ToastLength.Short).Show();
-				});
-				return;
-			} else {
-				Console.WriteLine ("IN");
-				try{
-					s_list = vm.LOsInCircle [imView.index].stack.StacksList;
-				}catch{
-				}
-				Console.WriteLine ("OUT");
-
-				lo._listUnidades.Clear ();
-
-				for (int j = 0; j < s_list.Count; j++) 
-				{
-					lo._listUnidades.Add (new UnidadItem { 
-						Title = s_list [j].PagesList [0].page.title, 
-						Description = s_list [j].PagesList [0].page.description,
-						ImageUrl = s_list[j].PagesList[0].page.url_img
-					});
-
-				}
-
-				lo.initUnidades (_currentCurso,_currentUnidad);
-				lo._txtCursoN.Text = vm.CirclesList[_currentCurso].name;
-				lo._txtUnidadN.Text = vm.LOsInCircle[imView.index].lo.title;
-
-				if (_currentCurso == 0 && _currentUnidad!=3) {
-
-					for (int i = 0; i < lo._listLinearUnidades.Count; i++) {
-
-						Console.WriteLine ("ADD LECTOR : " + i);
-						lo._listLinearUnidades [i].Click += delegate {
-							LoadPagesDataSource (i);
-						};
-
-						lo._listIconMap [i].Click += showMapInit;
-
-					}
-				}
-
-			}
-			*/
-		
-
 		}
 
 
@@ -1452,6 +1374,8 @@ namespace MLearning.Droid.Views
 					});
 
 					lo.initUnidades (_currentCurso,_currentUnidad);
+
+
 
 
 					/*
@@ -1515,19 +1439,6 @@ namespace MLearning.Droid.Views
 			if (vm.LOsectionList != null) 
 			{
 				Console.WriteLine ("loadSection");
-				/*
-				this.loWallView._index_list.RemoveAllViews ();
-				for (int i = 0; i < vm.LOsectionList.Count; i++) {
-					TextView text = new TextView (this);
-					text.SetTextColor (Color.White);
-
-					text.Text = vm.LOsectionList [i].name ;
-
-					this.loWallView._index_list.AddView (text);		
-
-
-				}
-				*/
 
 				MLearning.Core.ViewModels.MainViewModel.lo_by_circle_wrapper currentLearningObject = vm.LearningOjectsList [_currentUnidad];
 				int circleID = currentLearningObject.lo.Circle_id;

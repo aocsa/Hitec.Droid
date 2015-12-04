@@ -321,6 +321,11 @@
     <AndroidResource Include="Resources\drawable\loading4.png" />
     <AndroidResource Include="Resources\drawable\loading5.png" />
     <AndroidResource Include="Resources\drawable\loading6.png" />
+    <AndroidResource Include="Resources\drawable\gradiente1.xml" />
+    <AndroidResource Include="Resources\drawable\gradiente2.xml" />
+    <AndroidResource Include="Resources\drawable\mapIcon.jpg" />
+    <AndroidResource Include="Resources\drawable\gradiente11.xml" />
+    <AndroidResource Include="Resources\drawable\gradiente22.xml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\Strings.xml" />
@@ -521,6 +526,10 @@
     <AndroidAsset Include="Assets\images\3header.png" />
     <AndroidAsset Include="Assets\images\2header.png" />
     <AndroidAsset Include="Assets\images\1header.png" />
+    <AndroidAsset Include="Assets\icons\position.png" />
+    <AndroidAsset Include="Assets\icons\position2.png" />
+    <AndroidAsset Include="Assets\icons\map2.jpg" />
+    <AndroidAsset Include="Assets\icons\mapIcon.jpg" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MLearning.Core\MLearning.Core.csproj">

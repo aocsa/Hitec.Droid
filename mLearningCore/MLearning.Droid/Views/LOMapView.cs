@@ -450,6 +450,7 @@ namespace MLearning.Droid.Views
 
 			for (int m = 1; m < slides.Count; m++) {
 				map._currentPlaces.Add (new PlaceItem{ titulo = slides [m].lotitle , pathIcon = slides[m].loitemize.loitem[0].loimage});
+				map._positionCurrentPlaces.Add (new Tuple<int,int>(30*m,30*m));
 
 				List<PlaceDetalle> extraInfo = new List<PlaceDetalle> ();
 				for (int i = 0; i < slides [m].loitemize.loitem.Count; i++) {
@@ -472,6 +473,7 @@ namespace MLearning.Droid.Views
 			map.iniPlancesList ();
 			for (int i = 0; i < map._listLinearPlaces.Count; i++) {
 				map._listLinearPlaces [i].Click += showPlaceItem;
+				map._listLinearPositonPlaces [i].Click += showMapPositionPlace;
 			}
 			//map.listPlaces.ItemClick += ListPlaces_ItemClick;
 
@@ -480,7 +482,12 @@ namespace MLearning.Droid.Views
 
 //			map.listPlaces.ItemClick += ListPlaces_ItemClick;
 		}
-
+		void showMapPositionPlace(object sender, EventArgs e)
+		{
+			var item = sender as ImageIconMap;
+			map.showFocusMap(item.index);
+			_lectorOpen = true;
+		}
 		void showPlaceItem(object sender, EventArgs e)
 		{
 			var item = sender as LinearLayoutLO;

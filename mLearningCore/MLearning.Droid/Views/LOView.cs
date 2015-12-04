@@ -33,6 +33,7 @@ namespace MLearning.Droid.Views
 		Bitmap bmLike;
 		Drawable drBack;
 
+
 		ProgressDialog _dialogDownload;
 		//	LinearLayout layoutPanelScroll;
 		RelativeLayout mainLayout;

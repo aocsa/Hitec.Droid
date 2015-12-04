@@ -17,7 +17,7 @@ using Square.Picasso;
 
 namespace MLearning.Droid
 {
-	public class ImageLOView : LinearLayout
+	public class ImageLOView : RelativeLayout
 	{
 		Context context;
 

@@ -25,9 +25,9 @@ namespace MLearning.Droid
 
 		public LinearLayout _spaceUnidades;
 		public LinearLayout _mapSpace;
-
+		private int lastSelected = -1;
 		public List<LinearLayoutLO> _listLinearUnidades = new List<LinearLayoutLO> ();
-
+		public LinearLayout _mainSpace;
 
 		RelativeLayout _mainLayout;
 		RelativeLayout _fondo2;
@@ -56,7 +56,10 @@ namespace MLearning.Droid
 		List<ImageView> _imItem_S1;
 		List<TextView> _txtItem_S1;
 
-		List<ImageLOView> _ListLOImages_S2;
+		public List<ImageLOView> _ListLOImages_S2;
+
+		LinearLayout selectLayout;
+		public bool _isRemoved = false;
 
 		public void setFooterBackground(Drawable background)
 		{
@@ -129,14 +132,33 @@ namespace MLearning.Droid
 
 		public List<ImageLOView> ListImages{
 			set{ _ListLOImages_S2 = value;
+
+				selectLayout = new LinearLayout (context);
+				selectLayout.LayoutParameters = new LinearLayout.LayoutParams (-1, -1);
+				selectLayout.SetBackgroundColor (Color.ParseColor ("#20000000"));
+
 				_images_S2.RemoveAllViews ();	
 
+				lastSelected = -1;
 				for (int i = 0; i < _ListLOImages_S2.Count; i++) {
 
 					_images_S2.AddView (_ListLOImages_S2[i]);
 					_ListLOImages_S2 [i].Click += imLoClick;
 
 				}
+
+				if (_ListLOImages_S2.Count == 1) {
+					//_mainSpace.RemoveView (_contentScrollView_S2);
+					_contentScrollView_S2.LayoutParameters.Height=0;
+					_isRemoved = true;
+				} else {
+					if (_isRemoved) {
+					//	_mainSpace.AddView (_contentScrollView_S2);
+						_contentScrollView_S2.LayoutParameters.Height=Configuration.getHeight(160);
+						_isRemoved = false;
+					}
+				}
+
 			}
 
 		}
@@ -177,11 +199,21 @@ namespace MLearning.Droid
 
 		private void imLoClick(object sender, EventArgs eventArgs)
 		{
-			var textFormat = Android.Util.ComplexUnitType.Px;
 
 			var imView = sender as ImageLOView;
 			currentLOImageIndex = imView.index;
+
+			if (lastSelected != -1) {
+				_ListLOImages_S2 [lastSelected].RemoveView (selectLayout);
+			}
+			imView.AddView(selectLayout);
+			lastSelected = currentLOImageIndex;
+			var textFormat = Android.Util.ComplexUnitType.Px;
+
+
 		
+
+
 			var test = new ImageView (context);
 			test.DrawingCacheEnabled = true;
 			test.LayoutParameters = new LinearLayout.LayoutParams (-1, -1);
@@ -269,8 +301,7 @@ namespace MLearning.Droid
 		}
 
 		public void ini(){
-
-
+			
 			_txtCursoN = new TextView (context);
 			_txtCursoN.LayoutParameters = new LinearLayout.LayoutParams (-1, -2);
 			_txtUnidadN = new TextView (context);
@@ -298,7 +329,7 @@ namespace MLearning.Droid
 			_mainLayout.AddView (_mapSpace);
 
 
-			LinearLayout _mainSpace = new LinearLayout (context);
+			_mainSpace = new LinearLayout (context);
 			_mainSpace.LayoutParameters = new LinearLayout.LayoutParams (-1, -2);
 			_mainSpace.Orientation = Orientation.Vertical;
 

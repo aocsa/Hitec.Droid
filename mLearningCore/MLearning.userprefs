@@ -1,20 +1,20 @@
 ﻿<Properties StartupItem="MLearning.Droid\Hitec.Droid.csproj" RefactoringSettings.EnableRefactorings="True">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.4C3AWN154L014669" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="MLearning.Droid\Views\PlaceAdapter.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="MLearning.Droid\Views\MapView.cs">
     <Files>
-      <File FileName="MLearning.Droid\Views\MainView.cs" Line="1697" Column="21" />
-      <File FileName="MLearning.Droid\Views\LOView.cs" Line="80" Column="4" />
+      <File FileName="MLearning.Droid\Views\MainView.cs" Line="1" Column="1" />
+      <File FileName="MLearning.Droid\Views\LOView.cs" Line="1" Column="1" />
       <File FileName="MLearning.Droid\SplashScreen.cs" Line="1" Column="1" />
       <File FileName="MLearning.Core\Configuration\Constants.cs" Line="1" Column="1" />
-      <File FileName="MLearning.Droid\Views\WallView.cs" Line="192" Column="4" />
-      <File FileName="MLearning.Droid\Views\LOMapView.cs" Line="456" Column="6" />
-      <File FileName="MLearning.Droid\Views\MapView.cs" Line="195" Column="214" />
+      <File FileName="MLearning.Droid\Views\WallView.cs" Line="1" Column="1" />
+      <File FileName="MLearning.Droid\Views\LOMapView.cs" Line="1" Column="1" />
+      <File FileName="MLearning.Droid\Views\MapView.cs" Line="112" Column="4" />
       <File FileName="MLearning.Droid\Views\frontView.cs" Line="1" Column="1" />
       <File FileName="MLearning.Droid\Views\Configuration.cs" Line="1" Column="1" />
       <File FileName="MLearning.Core\ViewModels\LOMapViewModel.cs" Line="1" Column="1" />
       <File FileName="MLearning.Droid\Views\LinearLayoutLO.cs" Line="1" Column="1" />
       <File FileName="c:\Users\ImBonus\Documents\GitHub\Hitec\Hitec.Droid\mLearningCore\MLearning.Core\ViewModels\MainViewModel.cs" Line="1" Column="1" />
-      <File FileName="MLearning.Droid\Views\FrontContainerViewPager.cs" Line="63" Column="4" />
+      <File FileName="MLearning.Droid\Views\FrontContainerViewPager.cs" Line="1" Column="1" />
       <File FileName="MLearning.Droid\Views\Template1.cs" Line="1" Column="1" />
       <File FileName="MLearning.Droid\Views\CustomerImageView.cs" Line="1" Column="1" />
       <File FileName="MLearning.Droid\DataSource\LOSlideSource.cs" Line="1" Column="1" />
