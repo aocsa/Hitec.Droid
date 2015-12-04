@@ -91,11 +91,11 @@ namespace MLearning.Droid
 
 			//titleHeader.Text = "El Perú cuenta con mas de 357000 tipos de aves";
 			//titleHeader.SetTextSize (textFormat, Configuration.getHeight (52));
-			titleHeader.TextSize = Configuration.getHeight (18);
+			titleHeader.SetTextSize (ComplexUnitType.Fraction, Configuration.getHeight(38));
 
 			//content.Text = "Los factores geográficos, climáticos y evolutivos  convierten al Perú en el mejor lugar para realizar la observacion de aves(birthwaching) Tiene 1830 especies de pájaros(segun la lista oficial del SACC/CRAP), tambien es considerado el";
 			//	content.SetTextSize (textFormat, Configuration.getHeight (26));
-			content.TextSize = Configuration.getHeight (15);
+			content.SetTextSize (ComplexUnitType.Fraction, Configuration.getHeight(32));;
 
 			contenLayout.AddView (titleHeader);
 			contenLayout.AddView(content);

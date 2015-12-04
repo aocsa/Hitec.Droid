@@ -21,6 +21,7 @@ using Android.Content;
 using System.Threading;
 using Android.Graphics.Drawables;
 using Android.Text;
+using Android.Util;
 
 namespace MLearning.Droid.Views
 {
@@ -479,7 +480,7 @@ namespace MLearning.Droid.Views
 						TextView titulo_detalle = new TextView (this);
 						titulo_detalle.Text = "Descripción";
 						titulo_detalle.Typeface =  Typeface.CreateFromAsset(this.Assets, "fonts/ArcherMediumPro.otf");
-						titulo_detalle.TextSize = Configuration.getHeight (20);
+						titulo_detalle.SetTextSize (ComplexUnitType.Fraction, Configuration.getHeight(38));
 						titulo_detalle.SetTextColor(Color.ParseColor(Configuration.ListaColores [indice % 6]));
 						titulo_detalle.SetPadding (0, 0, 0, space);
 						descriptionLayout.AddView (titulo_detalle);
@@ -487,7 +488,7 @@ namespace MLearning.Droid.Views
 						TextView detalle = new TextView (this);
 						detalle.TextFormatted = Html.FromHtml (slides[0].loparagraph);
 						detalle.Typeface =  Typeface.CreateFromAsset(this.Assets, "fonts/ArcherMediumPro.otf");
-						detalle.TextSize = Configuration.getHeight (17);
+						detalle.SetTextSize (ComplexUnitType.Fraction, Configuration.getHeight(32));
 						descriptionLayout.AddView (detalle);
 
 

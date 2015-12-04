@@ -83,10 +83,10 @@ namespace MLearning.Droid
 			AutorHeader = new TextView (context);
 			content = new TextView (context);
 
-			titleHeader.TextSize = Configuration.getHeight (18);
+			titleHeader.SetTextSize (ComplexUnitType.Fraction, Configuration.getHeight(38));
 			titleHeader.Typeface =  Typeface.CreateFromAsset(context.Assets, "fonts/ArcherMediumPro.otf");
 
-			content.TextSize = Configuration.getHeight (15);
+			content.SetTextSize (ComplexUnitType.Fraction, Configuration.getHeight(32));
 			content.Typeface = Typeface.CreateFromAsset(context.Assets, "fonts/ArcherMediumPro.otf");
 
 

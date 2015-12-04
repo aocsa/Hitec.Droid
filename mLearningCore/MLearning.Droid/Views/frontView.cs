@@ -199,7 +199,7 @@ namespace MLearning.Droid
 				itemTitle.Text = title [i];
 				itemTitle.SetTextColor (Color.ParseColor("#ffffff"));
 				itemTitle.Typeface =  Typeface.CreateFromAsset(context.Assets, "fonts/ArcherMediumPro.otf");
-				itemTitle.TextSize = Configuration.getHeight (28);
+				itemTitle.SetTextSize (ComplexUnitType.Fraction, Configuration.getHeight(45));
 
 				LinearLayout linearTitle = new LinearLayout (context);
 				linearTitle.LayoutParameters = new LinearLayout.LayoutParams(Configuration.getWidth(465),Configuration.getHeight(180));

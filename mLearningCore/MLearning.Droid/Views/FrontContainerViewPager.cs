@@ -111,7 +111,7 @@ namespace MLearning.Droid
 
 
 
-			txtTitle.TextSize = Configuration.getHeight (25);
+			txtTitle.SetTextSize (ComplexUnitType.Fraction, Configuration.getHeight(40));
 			txtTitle.Typeface = Typeface.CreateFromAsset(context.Assets, "fonts/ArcherMediumPro.otf");
 			//txtTitle.Typeface = Typeface.DefaultBold;
 

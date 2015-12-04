@@ -449,8 +449,24 @@ namespace MLearning.Droid.Views
 
 
 			for (int m = 1; m < slides.Count; m++) {
-				map._currentPlaces.Add (new PlaceItem{ titulo = slides [m].lotitle , pathIcon = slides[m].loitemize.loitem[0].loimage});
-				map._positionCurrentPlaces.Add (new Tuple<int,int>(30*m,30*m));
+				
+				string pos_title = slides [m].lotitle;
+				string[] words = pos_title.Split (' ');
+
+				if (words.Length >= 2) {
+					pos_title = "";
+					for (int i = 2; i < words.Length; i++) {
+						pos_title += words [i] + " ";
+					}
+				}
+				int x = 0;
+				int y = 0;
+
+				int.TryParse(words [0], out x);
+				int.TryParse(words [1], out y);
+
+				map._currentPlaces.Add (new PlaceItem{ titulo = pos_title , pathIcon = slides[m].loitemize.loitem[0].loimage});
+				map._positionCurrentPlaces.Add (new Tuple<int,int>(x,y));
 
 				List<PlaceDetalle> extraInfo = new List<PlaceDetalle> ();
 				for (int i = 0; i < slides [m].loitemize.loitem.Count; i++) {
@@ -747,6 +763,7 @@ namespace MLearning.Droid.Views
 			if (_lectorOpen) {
 				_lectorOpen = false;
 				map.hidePlaceInfo ();
+				map.titulo_header.Text = map.titulo_map_header;
 			} else {
 				
 				if (mainLayoutIndice.Visibility == ViewStates.Visible) {

@@ -181,6 +181,7 @@ namespace DataSource
 				Template2 plantilla = new Template2 (context);
 				plantilla.Title = _title;
 				plantilla.Contenido = _paragraph;
+				plantilla.ColorTexto = _colorS;
 
 				//Console.WriteLine ("CREA PLANTILLAAAAAAAAA  222222");
 				return plantilla;

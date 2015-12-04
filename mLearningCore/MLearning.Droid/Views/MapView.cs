@@ -104,12 +104,12 @@ namespace MLearning.Droid
 				lance.SetDataAndType(uri,typedata);
 				context.StartActivity(lance);
 				*/
-				/*
-				mapImage.PivotX = 100;
-				mapImage.PivotY = 50;
-				mapImage.ScaleX = 3;
-				mapImage.ScaleY = 3;
-				*/
+
+				mapImage.PivotX = mapImage.Width/2;
+				mapImage.PivotY = mapImage.Height/2;
+				mapImage.ScaleX = 1;
+				mapImage.ScaleY = 1;
+
 			};
 
 
@@ -138,7 +138,7 @@ namespace MLearning.Droid
 
 			titulo_header = new TextView (context);
 			titulo_header.LayoutParameters = new LinearLayout.LayoutParams (-1, -2);
-			titulo_header.TextSize = Configuration.getHeight (20);
+			titulo_header.SetTextSize (ComplexUnitType.Fraction, Configuration.getHeight(38));
 			titulo_header.Typeface =  Typeface.CreateFromAsset(context.Assets, "fonts/ArcherMediumPro.otf");
 			titulo_header.SetTextColor (Color.White);
 			titulo_header.Gravity = GravityFlags.Center;
@@ -160,6 +160,7 @@ namespace MLearning.Droid
 			mapSpace.LayoutParameters = new LinearLayout.LayoutParams (-1, Configuration.getHeight(675));
 			mapSpace.SetY (Configuration.getHeight (125));
 			mapSpace.SetGravity (GravityFlags.CenterHorizontal);
+			mapSpace.SetBackgroundColor (Color.ParseColor ("#DFC6BB"));
 			mapSpace.AddView (mapImage);
 
 
@@ -202,7 +203,7 @@ namespace MLearning.Droid
 			var extraInfo = _placesData [position].placeExtraInfo;
 			for (int i = 0; i < extraInfo.Count; i++) {
 				TextView detalle = new TextView (context);
-				detalle.TextSize = Configuration.getHeight (15);
+				detalle.SetTextSize (ComplexUnitType.Fraction, Configuration.getHeight(32));
 				detalle.Typeface =  Typeface.CreateFromAsset(context.Assets, "fonts/ArcherMediumPro.otf");
 
 
@@ -239,6 +240,7 @@ namespace MLearning.Droid
 
 			VerticalScrollView listScrollPlaces = new VerticalScrollView (context);
 			listScrollPlaces.LayoutParameters = new VerticalScrollView.LayoutParams (-1, Configuration.getHeight (345));
+			listScrollPlaces.VerticalScrollBarEnabled = false;
 
 			LinearLayout listSpaceLayout = new LinearLayout(context);
 			listSpaceLayout.LayoutParameters = new LinearLayout.LayoutParams (-1, -2);
@@ -253,13 +255,13 @@ namespace MLearning.Droid
 				TextView txtName = new TextView (context);
 				ImageView imgIcon = new ImageView (context);
 
-				txtName.LayoutParameters = new LinearLayout.LayoutParams (Configuration.getWidth (400), -1);
+				txtName.LayoutParameters = new LinearLayout.LayoutParams (Configuration.getWidth (420), -1);
 				txtName.Gravity = GravityFlags.CenterVertical;
 
 				txtName.Text = item.titulo;
 				//txtName.SetTextColor (Color.ParseColor ("#ffffff"));
 				txtName.Typeface =  Typeface.CreateFromAsset(context.Assets, "fonts/HelveticaNeue.ttf");
-				txtName.TextSize = Configuration.getHeight (15);
+				txtName.SetTextSize (ComplexUnitType.Fraction, Configuration.getHeight(32));
 				//imgIcon.SetImageBitmap (Bitmap.CreateScaledBitmap (getBitmapFromAsset (item.Asset), Configuration.getWidth (30), Configuration.getWidth (30), true));
 
 				int H = 80;
@@ -290,7 +292,7 @@ namespace MLearning.Droid
 				//icon.indexUnidad = indexUnidad;
 				//icon.SetBackgroundResource
 				icon.index = i;
-				icon.SetImageBitmap(Bitmap.CreateScaledBitmap (getBitmapFromAsset("icons/map2.jpg"), Configuration.getWidth (W), Configuration.getWidth (H), true));
+				icon.SetImageBitmap(Bitmap.CreateScaledBitmap (getBitmapFromAsset("icons/map2.jpg"), Configuration.getWidth (W), Configuration.getHeight (H), true));
 				RelativeLayout iconLayout = new RelativeLayout (context);
 				//iconLayout.SetGravity (GravityFlags.Center);
 				iconLayout.LayoutParameters = new LinearLayout.LayoutParams (Configuration.getWidth (W), Configuration.getHeight (H));
