@@ -517,6 +517,10 @@
     <AndroidAsset Include="Assets\images\footerad.jpg" />
     <AndroidAsset Include="Assets\images\ad3.jpg" />
     <AndroidAsset Include="Assets\database\cache.db" />
+    <AndroidAsset Include="Assets\images\4header.png" />
+    <AndroidAsset Include="Assets\images\3header.png" />
+    <AndroidAsset Include="Assets\images\2header.png" />
+    <AndroidAsset Include="Assets\images\1header.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MLearning.Core\MLearning.Core.csproj">

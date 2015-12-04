@@ -1614,12 +1614,14 @@ containing a value of this type.
         public static int loading2=0x7f020044;
         public static int loading3=0x7f020045;
         public static int loading4=0x7f020046;
-        public static int logo_icon=0x7f020047;
-        public static int notification_template_icon_bg=0x7f02004c;
-        public static int progress_animation=0x7f020048;
-        public static int progressbackground=0x7f020049;
-        public static int splash=0x7f02004a;
-        public static int transparent=0x7f02004b;
+        public static int loading5=0x7f020047;
+        public static int loading6=0x7f020048;
+        public static int logo_icon=0x7f020049;
+        public static int notification_template_icon_bg=0x7f02004e;
+        public static int progress_animation=0x7f02004a;
+        public static int progressbackground=0x7f02004b;
+        public static int splash=0x7f02004c;
+        public static int transparent=0x7f02004d;
     }
     public static final class id {
         public static int MvxBindingTagUnique=0x7f06000a;

@@ -610,7 +610,7 @@ namespace MLearning.Droid
 
 			//----------------------------------------------------------
 
-			Drawable dr = new BitmapDrawable (getBitmapFromAsset("images/header2.png"));
+			Drawable dr = new BitmapDrawable (getBitmapFromAsset("images/header1.png"));
 			header = new LinearLayout(context);
 			header.LayoutParameters = new LinearLayout.LayoutParams (-1,Configuration.getHeight(125));
 			header.Orientation = Orientation.Vertical;

@@ -441,6 +441,7 @@ namespace MLearning.Droid.Views
 			var s_listp = vm.LOsInCircle[vm._currentUnidad].stack.StacksList;
 
 			map.mapUrl = s_listp [vm._currentSection].PagesList [1].page.url_img;
+			map.titulo_map_header = s_listp [vm._currentSection].PagesList [1].page.title;
 
 			map.setMapImage (map.mapUrl);
 
@@ -448,7 +449,7 @@ namespace MLearning.Droid.Views
 
 
 			for (int m = 1; m < slides.Count; m++) {
-				map._currentPlaces.Add (new PlaceItem{ titulo = slides [m].lotitle });
+				map._currentPlaces.Add (new PlaceItem{ titulo = slides [m].lotitle , pathIcon = slides[m].loitemize.loitem[0].loimage});
 
 				List<PlaceDetalle> extraInfo = new List<PlaceDetalle> ();
 				for (int i = 0; i < slides [m].loitemize.loitem.Count; i++) {
@@ -467,17 +468,25 @@ namespace MLearning.Droid.Views
 			}
 
 			//loadPlacesDataSource (imView.indexLO);
-			map.iniPlancesList ();
 
+			map.iniPlancesList ();
+			for (int i = 0; i < map._listLinearPlaces.Count; i++) {
+				map._listLinearPlaces [i].Click += showPlaceItem;
+			}
 			//map.listPlaces.ItemClick += ListPlaces_ItemClick;
 
 			//mainLayout.AddView (map);
 			//map.listPlaces.ItemClick += ListPlaces_ItemClick;
 
-			map.listPlaces.ItemClick += ListPlaces_ItemClick;
+//			map.listPlaces.ItemClick += ListPlaces_ItemClick;
 		}
 
-
+		void showPlaceItem(object sender, EventArgs e)
+		{
+			var item = sender as LinearLayoutLO;
+			map.showPLaceInfo(item.index);
+			_lectorOpen = true;
+		}
 		void ListPlaces_ItemClick (object sender, AdapterView.ItemClickEventArgs e)
 		{
 

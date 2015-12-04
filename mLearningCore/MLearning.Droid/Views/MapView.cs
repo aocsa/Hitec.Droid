@@ -15,6 +15,7 @@ using Android.Graphics;
 using Android.Text;
 using Square.Picasso;
 using MLearning.Droid.Views;
+using Android.Graphics.Drawables;
 
 namespace MLearning.Droid
 {
@@ -28,6 +29,9 @@ namespace MLearning.Droid
 		public List<MapItemInfo> _placesData = new List<MapItemInfo> ();
 		PopupWindow infoPopUp; 
 		LinearLayout fullInfo;
+		public LinearLayout header;
+		public TextView titulo_header;
+		public string titulo_map_header;
 
 		public List<PlaceItem> _currentPlaces = new List<PlaceItem>();
 		public ListView  listPlaces;
@@ -39,7 +43,7 @@ namespace MLearning.Droid
 		public String descripcion;
 		public String mapUrl;
 
-
+		public List<LinearLayoutLO> _listLinearPlaces = new List<LinearLayoutLO> ();
 
 		int widthInDp;
 		int heightInDp;
@@ -88,7 +92,7 @@ namespace MLearning.Droid
 			
 			Picasso.With (context).Load (url).Resize(Configuration.WIDTH_PIXEL,Configuration.getHeight(800)).Placeholder(context.Resources.GetDrawable (Resource.Drawable.progress_animation)).CenterCrop().Into (mapImage);
 			mapImage.Click += delegate {
-				Intent lance = new Intent();
+			/*	Intent lance = new Intent();
 				lance.SetAction(Intent.ActionView);
 				String typedata = "image/*";
 				lance.SetType(typedata);
@@ -97,23 +101,61 @@ namespace MLearning.Droid
 
 				lance.SetDataAndType(uri,typedata);
 				context.StartActivity(lance);
+				*/
+
+				mapImage.PivotX = x;
+				mapImage.PivotY = y;
+				mapImage.ScaleX = 3;
+				mapImage.ScaleY = 3;
+
 			};
 
+
+
+		}
+
+		public void focusMap(int x, int y)
+		{
+			
+			mapImage.PivotX = x;
+			mapImage.PivotY = y;
+			mapImage.ScaleX = 3;
+			mapImage.ScaleY = 3;
 		}
 
 		public void ini(){
 
+			Drawable dr = new BitmapDrawable (getBitmapFromAsset("images/1header.png"));
+			header = new LinearLayout(context);
+			header.LayoutParameters = new LinearLayout.LayoutParams (-1,Configuration.getHeight(125));
+			header.Orientation = Orientation.Horizontal;
+			header.SetGravity (GravityFlags.Center);
+			header.SetBackgroundDrawable (dr);
+
+
+			titulo_header = new TextView (context);
+			titulo_header.LayoutParameters = new LinearLayout.LayoutParams (-1, -2);
+			titulo_header.TextSize = Configuration.getHeight (20);
+			titulo_header.Typeface =  Typeface.CreateFromAsset(context.Assets, "fonts/ArcherMediumPro.otf");
+			titulo_header.SetTextColor (Color.White);
+			titulo_header.Gravity = GravityFlags.Center;
+			//titulo_header.TextAlignment = TextAlignment.Center;
+
 			placesInfoLayout = new LinearLayout (context);
 			placesInfoLayout.LayoutParameters = new LinearLayout.LayoutParams (-1, -2);
-			placesInfoLayout.SetPadding(30,30,30,30);
+			int space = Configuration.getWidth (30);
+			placesInfoLayout.SetPadding(space,space,space,space);
 			placesInfoLayout.Orientation = Orientation.Vertical;
 
 			mainLayout = new RelativeLayout (context);
 			mainLayout.LayoutParameters = new RelativeLayout.LayoutParams (-1,-1);
 
+			mainLayout.AddView (header);
+
 			mapImage = new ImageView (context);
 			mapSpace = new LinearLayout (context);
-			mapSpace.LayoutParameters = new LinearLayout.LayoutParams (-1, Configuration.getHeight(800));
+			mapSpace.LayoutParameters = new LinearLayout.LayoutParams (-1, Configuration.getHeight(675));
+			mapSpace.SetY (Configuration.getHeight (125));
 			mapSpace.SetGravity (GravityFlags.CenterHorizontal);
 			mapSpace.AddView (mapImage);
 
@@ -129,34 +171,13 @@ namespace MLearning.Droid
 			placesContainer.Orientation = Orientation.Vertical;
 
 
-
-			/*
-			PlaceItem p1 = new PlaceItem{pathIcon="icons/iconcifras.png", titulo = "Piscacucho-Wayllabamba", detalle = "........." };
-			PlaceItem p2 = new PlaceItem{pathIcon="icons/iconcifras.png", titulo = "La arquitectura Inca", detalle = "........." };
-			PlaceItem p3 = new PlaceItem{pathIcon="icons/iconcifras.png", titulo = "Wayllabamba-Pacaymayo", detalle = "........." };
-			PlaceItem p4 = new PlaceItem{pathIcon="icons/iconcifras.png", titulo = "Llaqtapata", detalle = "........." };
-			PlaceItem p5 = new PlaceItem{pathIcon="icons/iconcifras.png", titulo = "Miskay", detalle = "........." };
-			PlaceItem p6 = new PlaceItem{pathIcon="icons/iconcifras.png", titulo = "Puesto de control Piscacucho (km 82)", detalle = "........." };
-			PlaceItem p7 = new PlaceItem{pathIcon="icons/iconcifras.png", titulo = "Campamento Wayllabamba", detalle = "........." };
-			PlaceItem p8 = new PlaceItem{pathIcon="icons/iconcifras.png", titulo = "Place", detalle = "........." };
-
-			_currentPlaces.Add (p1);
-			_currentPlaces.Add (p2);
-			_currentPlaces.Add (p3);
-			_currentPlaces.Add (p4);
-			_currentPlaces.Add (p4);
-			_currentPlaces.Add (p5);
-			_currentPlaces.Add (p6);
-			_currentPlaces.Add (p7);
-			_currentPlaces.Add (p8);
-			*/
-
 			mainLayout.AddView (mapSpace);
 			mainLayout.AddView (placeSpace);
 
 			scrollPlaces = new VerticalScrollView (context);
-			scrollPlaces.LayoutParameters = new VerticalScrollView.LayoutParams (-1,-1);
+			scrollPlaces.LayoutParameters = new VerticalScrollView.LayoutParams (-1,Configuration.getHeight(1011));
 			scrollPlaces.AddView (placesInfoLayout);
+			scrollPlaces.SetY (Configuration.getHeight (125));
 
 
 			//mainLayout.AddView (placesInfoLayout);
@@ -168,17 +189,29 @@ namespace MLearning.Droid
 		public void showPLaceInfo(int position)
 		{
 			mainLayout.AddView(scrollPlaces);
+
+			titulo_header.Text = _currentPlaces [position].titulo;
+
 			scrollPlaces.SetBackgroundColor (Color.White);
 			placeInfoOpen = true;
 			placesInfoLayout.RemoveAllViews ();
-
+			int space = Configuration.getWidth (15);
 			var extraInfo = _placesData [position].placeExtraInfo;
 			for (int i = 0; i < extraInfo.Count; i++) {
 				TextView detalle = new TextView (context);
+				detalle.TextSize = Configuration.getHeight (15);
+				detalle.Typeface =  Typeface.CreateFromAsset(context.Assets, "fonts/ArcherMediumPro.otf");
+
+
 				detalle.Text = extraInfo [i].detalle;
 
 				String url = extraInfo [i].url;
 				ImageView image = new ImageView (context);
+				if(extraInfo [i].detalle!=null)
+				{
+					image.SetPadding (0, space, 0, space);
+				}
+
 				Picasso.With (context).Load (url).Placeholder(context.Resources.GetDrawable (Resource.Drawable.progress_animation)).Resize(Configuration.getWidth(640),Configuration.getHeight(640)).CenterInside().Into (image);
 				placesInfoLayout.AddView (detalle);
 				placesInfoLayout.AddView (image);
@@ -197,51 +230,79 @@ namespace MLearning.Droid
 		public void iniPlancesList()
 		{
 			//_currentPlaces.Clear ();
+			_listLinearPlaces.Clear();
 			placeSpace.RemoveAllViews ();
 			placesContainer.RemoveAllViews ();
 
+			VerticalScrollView listScrollPlaces = new VerticalScrollView (context);
+			listScrollPlaces.LayoutParameters = new VerticalScrollView.LayoutParams (-1, Configuration.getHeight (345));
+
+			LinearLayout listSpaceLayout = new LinearLayout(context);
+			listSpaceLayout.LayoutParameters = new LinearLayout.LayoutParams (-1, -2);
+			listSpaceLayout.Orientation = Orientation.Vertical;
+
+			for (int i = 0; i < _currentPlaces.Count; i++) {
+
+				var item = _currentPlaces [i];
+
+				LinearLayoutLO linearItem = new LinearLayoutLO (context);
+				linearItem.index = i;
+				TextView txtName = new TextView (context);
+				ImageView imgIcon = new ImageView (context);
+
+				txtName.Text = item.titulo;
+				//txtName.SetTextColor (Color.ParseColor ("#ffffff"));
+				txtName.Typeface =  Typeface.CreateFromAsset(context.Assets, "fonts/HelveticaNeue.ttf");
+				txtName.TextSize = Configuration.getHeight (18);
+				//imgIcon.SetImageBitmap (Bitmap.CreateScaledBitmap (getBitmapFromAsset (item.Asset), Configuration.getWidth (30), Configuration.getWidth (30), true));
+
+				linearItem.LayoutParameters = new LinearLayout.LayoutParams (-1, Configuration.getHeight (120));
+				//linearItem.SetBackgroundDrawable (background_row);
+				linearItem.Orientation = Orientation.Horizontal;
+				linearItem.SetGravity (Android.Views.GravityFlags.CenterVertical);
+				//linearItem.AddView (imgIcon);
+
+
+				LinearLayout imageLayout = new LinearLayout (context);
+				imageLayout.LayoutParameters = new LinearLayout.LayoutParams (Configuration.getWidth (180), Configuration.getHeight (120));
+				ImageView iconImage = new ImageView (context);
+				Picasso.With (context).Load (item.pathIcon).Resize(Configuration.getWidth(180),Configuration.getHeight(120)).CenterCrop().Into (iconImage);
+				imageLayout.AddView (iconImage);
+
+
+				linearItem.AddView (imageLayout);
+				linearItem.AddView (txtName);
+				int space = Configuration.getWidth (30);
+				//linearItem.SetPadding (space,0,space,0);
+				//imgIcon.SetPadding (Configuration.getWidth(68), 0, 0, 0);
+				txtName.SetPadding (Configuration.getWidth(10), 0, 0, 0);
+
+				//if (position % 2 == 0) {
+				//linearItem.SetBackgroundColor (Color.ParseColor ("#F0AE11"));
+				//txtName.SetTextColor (Color.White);
+				//} else {
+				txtName.SetTextColor (Color.ParseColor("#F0AE11"));
+				//}
+
+				_listLinearPlaces.Add (linearItem);
+				listSpaceLayout.AddView (linearItem);
+
+			}
+
+			/*
 			listPlaces = new ListView (context);
 			listPlaces.LayoutParameters = new LinearLayout.LayoutParams (-1, Configuration.getHeight(345));
+
 			listPlaces.Adapter = new PlaceAdapter (context, _currentPlaces);
 			listPlaces.DividerHeight = 0;
 
-			/*
-			for (int i = 0; i < _currentPlaces.Count; i++) {
-
-				LinearLayout rowPlace = new LinearLayout (context);
-				rowPlace.LayoutParameters = new LinearLayout.LayoutParams (-1, -2);
-				rowPlace.Orientation = Orientation.Horizontal;
-				rowPlace.SetPadding (30, 20, 30, 20);
-				rowPlace.SetGravity (GravityFlags.CenterVertical);
-
-				TextView titulo = new TextView (context);
-				titulo.Text = _currentPlaces [i].titulo;
-				//titulo.SetTextColor (Color.Black);
-
-				//ImageView imgIcon = new ImageView (context);
-				//imgIcon.SetImageBitmap (Bitmap.CreateScaledBitmap (getBitmapFromAsset (_currentPlaces[i].pathIcon), Configuration.getWidth (30), Configuration.getWidth (30), true));
-
-				titulo.SetPadding (Configuration.getWidth(48), 0, 0, 0);
-				//rowPlace.AddView (imgIcon);
-				rowPlace.AddView (titulo);
-
-				if (i % 2 == 0) {
-					rowPlace.SetBackgroundColor (Color.ParseColor ("#F0AE11"));
-					titulo.SetTextColor (Color.White);
-				} else {
-					titulo.SetTextColor (Color.ParseColor("#F0AE11"));
-				}
-
-				rowPlace.Clickable = true;
-				placesContainer.AddView (rowPlace);
-				_placesLayout.Add (rowPlace);
-
-			}*/
-
-
 			placesContainer.AddView (listPlaces);
+*/
+			placesContainer.AddView (listSpaceLayout);
 			placeSpace.AddView(placesContainer);
 
+			titulo_header.Text = titulo_map_header;
+			header.AddView (titulo_header);
 
 
 
