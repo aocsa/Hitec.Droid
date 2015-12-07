@@ -1,12 +1,12 @@
 ﻿<Properties StartupItem="MLearning.Droid\Hitec.Droid.csproj" RefactoringSettings.EnableRefactorings="True">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.Api15" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="MLearning.Droid\Views\WallView.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.4C3AWN154L014669" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="MLearning.Droid\Views\LoginView.cs">
     <Files>
       <File FileName="MLearning.Droid\Views\MainView.cs" Line="1" Column="1" />
       <File FileName="MLearning.Droid\Views\LOView.cs" Line="1" Column="1" />
       <File FileName="MLearning.Droid\SplashScreen.cs" Line="1" Column="1" />
       <File FileName="MLearning.Core\Configuration\Constants.cs" Line="1" Column="1" />
-      <File FileName="MLearning.Droid\Views\WallView.cs" Line="731" Column="5" />
+      <File FileName="MLearning.Droid\Views\WallView.cs" Line="1" Column="1" />
       <File FileName="MLearning.Droid\Views\LOMapView.cs" Line="1" Column="1" />
       <File FileName="MLearning.Droid\Views\MapView.cs" Line="1" Column="1" />
       <File FileName="MLearning.Droid\Views\frontView.cs" Line="1" Column="1" />
@@ -21,12 +21,21 @@
       <File FileName="MLearning.Droid\Views\PlaceItem.cs" Line="1" Column="1" />
       <File FileName="MLearning.Core\Repositories\WAMSRepositoryService.cs" Line="1" Column="1" />
       <File FileName="MLearning.Core\Repositories\IRepositoryService.cs" Line="1" Column="1" />
+      <File FileName="MLearning.Droid\Views\LoginView.cs" Line="88" Column="4" />
+      <File FileName="MLearning.Core\ViewModels\LoginViewModel.cs" Line="348" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
       <Breakpoint file="C:\Users\ImBonus\Documents\Visual Studio 2013\Projects\mLearningCore\MLearning.Droid\MvxActionBarEventSourceActivity.cs" line="89" column="1" />
       <Breakpoint file="C:\Users\ImBonus\Documents\Visual Studio 2013\Projects\mLearningCore\MLearning.Droid\MvxActionBarEventSourceActivity.cs" line="90" column="1" />
+      <Breakpoint file="C:\Users\ImBonus\Documents\GitHub\Hitec\Hitec.Droid\mLearningCore\MLearning.Droid\Views\LoginView.cs" line="102" column="1" />
+      <Breakpoint file="C:\Users\ImBonus\Documents\GitHub\Hitec\Hitec.Droid\mLearningCore\MLearning.Core\ViewModels\LoginViewModel.cs" line="410" column="1" />
+      <Breakpoint file="C:\Users\ImBonus\Documents\GitHub\Hitec\Hitec.Droid\mLearningCore\MLearning.Core\ViewModels\LoginViewModel.cs" line="439" column="1" />
+      <Breakpoint file="C:\Users\ImBonus\Documents\GitHub\Hitec\Hitec.Droid\mLearningCore\MLearning.Core\ViewModels\LoginViewModel.cs" line="436" column="1" />
+      <Breakpoint file="C:\Users\ImBonus\Documents\GitHub\Hitec\Hitec.Droid\mLearningCore\MLearning.Core\ViewModels\LoginViewModel.cs" line="449" column="1" />
+      <Breakpoint file="C:\Users\ImBonus\Documents\GitHub\Hitec\Hitec.Droid\mLearningCore\MLearning.Core\ViewModels\LoginViewModel.cs" line="485" column="1" />
+      <Breakpoint file="C:\Users\ImBonus\Documents\GitHub\Hitec\Hitec.Droid\mLearningCore\MLearning.Core\ViewModels\LoginViewModel.cs" line="455" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
