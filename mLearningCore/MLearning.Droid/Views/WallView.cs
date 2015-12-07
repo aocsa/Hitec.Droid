@@ -11,6 +11,7 @@ using Square.Picasso;
 using MLearning.Droid.Views;
 using MLearning.Core.ViewModels;
 using Android.Text;
+using Android.Text.Util;
 
 namespace MLearning.Droid
 {
@@ -33,6 +34,7 @@ namespace MLearning.Droid
 		RelativeLayout _fondo2;
 		public TextView _txtCursoN;
 		public TextView _txtUnidadN;
+		public Bitmap iconMap;
 
 		LinearLayout linearGradiente;
 
@@ -289,6 +291,7 @@ namespace MLearning.Droid
 			Configuration.setHeigthPixel (heightInDp);
 
 
+			iconMap = Bitmap.CreateScaledBitmap (getBitmapFromAsset ("icons/iconmap.png"), Configuration.getWidth (60), Configuration.getWidth (80), true);
 			ini ();
 
 
@@ -692,19 +695,17 @@ namespace MLearning.Droid
 				linearUnidad.SetGravity (Android.Views.GravityFlags.CenterVertical);
 				linearUnidad.index = i;
 
-				ImageIconMap icon = new ImageIconMap (context);
-				//icon.indexCurso = indexCurso;
-				//icon.indexUnidad = indexUnidad;
-				icon.index = i;
 
-				icon.SetImageBitmap(Bitmap.CreateScaledBitmap (getBitmapFromAsset("icons/iconmap.png"), Configuration.getWidth (60), Configuration.getWidth (80), true));
-				icon.SetX (Configuration.getWidth (60));
 
 
 				TextView titleUnidad = new TextView(context);
 				titleUnidad.SetTextSize (textFormat,Configuration.getHeight(42));
 				if (indexCurso == 0) {
 					if (indexUnidad != 3) {
+						ImageIconMap icon = new ImageIconMap (context);
+						icon.index = i;
+						icon.SetImageBitmap(iconMap);
+						icon.SetX (Configuration.getWidth (60));
 						linearUnidad.AddView (icon);
 						_listIconMap.Add (icon);
 					} else {
@@ -730,10 +731,15 @@ namespace MLearning.Droid
 
 
 				TextView descriptionUnidad = new TextView(context);
+				//descriptionUnidad.Text = _listUnidades [i].Description;
 				descriptionUnidad.TextFormatted = Html.FromHtml (_listUnidades [i].Description);
 				//descriptionUnidad.Text = _listUnidades [i].Description;
 				descriptionUnidad.Typeface =  Typeface.CreateFromAsset(context.Assets, "fonts/ArcherMediumPro.otf");
 				descriptionUnidad.SetTextSize (textFormat,Configuration.getHeight(28));
+				Linkify.AddLinks (descriptionUnidad, MatchOptions.All);
+				//descriptionUnidad.MovementMethod = Android.Text.Method.LinkMovementMethod.Instance;
+				//descriptionUnidad.LinksClickable = true;
+
 				//descriptionUnidad.SetTextIsSelectable (true);
 
 				linearContenido.AddView (titleUnidad);

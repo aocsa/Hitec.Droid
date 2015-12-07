@@ -1319,8 +1319,18 @@ namespace MLearning.Droid.Views
 		}
 
 		void setIndex(object sender, EventArgs e){
+
+
+
 			var imgview = sender as ImageLOView;
+			/*
+			if (_currentUnidad == imgview.index) {
+				return;		
+			}
+			*/
 			_currentUnidad = imgview.index;
+
+
 			lo._txtUnidadN.Text = imgview.Title;
 
 

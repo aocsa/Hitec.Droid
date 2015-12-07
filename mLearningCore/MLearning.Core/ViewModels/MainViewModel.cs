@@ -1442,7 +1442,6 @@ namespace MLearning.Core.ViewModels
         {
             var repo = Mvx.Resolve<IRepositoryService>();
             await repo.TryGetTableUpdates();
-        
         }
 
 

@@ -83,9 +83,13 @@ namespace MLearning.Droid.Views
 			heightInDp = ((int)metrics.HeightPixels);
 			Configuration.setWidthPixel (widthInDp);
 			Configuration.setHeigthPixel (heightInDp);
-			copyDataBase ();
 
-		//	Console.WriteLine ("DIMESIONES DEL DEVICEEEEEEEEEEEE WIDTH= "+ widthInDp + " HEIGHT = "+heightInDp);
+			//START PARA COPIAR LA BASE DE DATOS LOCAL
+
+			//copyDataBase ();
+
+			//END
+		
 
 
 			LinearLayout test = new LinearLayout (this);
