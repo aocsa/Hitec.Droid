@@ -2,7 +2,7 @@ package md5f410d9818bda040222c310297e0440b4;
 
 
 public class ImageLOView
-	extends android.widget.LinearLayout
+	extends android.widget.RelativeLayout
 	implements
 		mono.android.IGCUserPeer
 {

@@ -270,7 +270,7 @@ namespace MLearning.Droid
 				linearExtraInfo.AddView (linearType);
 
 				item.AddView (linearTitle);
-				item.AddView (linearExtraInfo);
+				//item.AddView (linearExtraInfo);
 
 				_listLinearItem.Add (item);
 				_linearContentLayout.AddView (_listLinearItem [i]);

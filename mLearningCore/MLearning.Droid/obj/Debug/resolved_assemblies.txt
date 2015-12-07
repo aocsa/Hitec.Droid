@@ -36,6 +36,7 @@ C:\Users\ImBonus\Documents\GitHub\Hitec\Hitec.Droid\mLearningCore\MLearning.Droi
 C:\Users\ImBonus\Documents\GitHub\Hitec\Hitec.Droid\mLearningCore\MLearning.Droid\obj\Debug\assemblies\System.Xml.dll
 C:\Users\ImBonus\Documents\GitHub\Hitec\Hitec.Droid\mLearningCore\MLearning.Droid\obj\Debug\assemblies\System.Xml.Linq.dll
 C:\Users\ImBonus\Documents\GitHub\Hitec\Hitec.Droid\mLearningCore\MLearning.Droid\obj\Debug\assemblies\System.Xml.Serialization.dll
+C:\Users\ImBonus\Documents\GitHub\Hitec\Hitec.Droid\mLearningCore\MLearning.Droid\obj\Debug\assemblies\UrlImageViewHelper.dll
 C:\Users\ImBonus\Documents\GitHub\Hitec\Hitec.Droid\mLearningCore\MLearning.Droid\obj\Debug\assemblies\Xamarin.Android.Support.v4.dll
 C:\Users\ImBonus\Documents\GitHub\Hitec\Hitec.Droid\mLearningCore\MLearning.Droid\obj\Debug\assemblies\Xamarin.Android.Support.v7.AppCompat.dll
 C:\Users\ImBonus\Documents\GitHub\Hitec\Hitec.Droid\mLearningCore\MLearning.Droid\obj\Debug\assemblies\Xamarin.Android.Support.v7.RecyclerView.dll

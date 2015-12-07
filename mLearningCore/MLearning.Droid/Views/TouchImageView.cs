@@ -88,6 +88,8 @@ namespace MLearning.Droid
 		{
 			base.SetImageBitmap(bm);
 			this.Initialize();
+			//this.SetScaleType (ImageView.ScaleType.Center);
+			//ZoomTo ((float)1.5, 100, 50);
 		}
 
 		public override void SetImageResource(int resId)

@@ -25,7 +25,7 @@ namespace MLearning.Droid
 
 		public LinearLayout _spaceUnidades;
 		public LinearLayout _mapSpace;
-		private int lastSelected = -1;
+		public int lastSelected = -1;
 		public List<LinearLayoutLO> _listLinearUnidades = new List<LinearLayoutLO> ();
 		public LinearLayout _mainSpace;
 
@@ -58,7 +58,7 @@ namespace MLearning.Droid
 
 		public List<ImageLOView> _ListLOImages_S2;
 
-		LinearLayout selectLayout;
+		public LinearLayout selectLayout;
 		public bool _isRemoved = false;
 
 		public void setFooterBackground(Drawable background)
@@ -145,7 +145,10 @@ namespace MLearning.Droid
 					_images_S2.AddView (_ListLOImages_S2[i]);
 					_ListLOImages_S2 [i].Click += imLoClick;
 
+
 				}
+
+
 
 				if (_ListLOImages_S2.Count == 1) {
 					//_mainSpace.RemoveView (_contentScrollView_S2);
@@ -158,6 +161,8 @@ namespace MLearning.Droid
 						_isRemoved = false;
 					}
 				}
+
+
 
 			}
 
@@ -641,17 +646,17 @@ namespace MLearning.Droid
 
 			//----------------------------------------------------------
 
-			Drawable dr = new BitmapDrawable (getBitmapFromAsset("images/header1.png"));
+			//Drawable dr = new BitmapDrawable (getBitmapFromAsset("images/header1.png"));
 			header = new LinearLayout(context);
 			header.LayoutParameters = new LinearLayout.LayoutParams (-1,Configuration.getHeight(125));
 			header.Orientation = Orientation.Vertical;
 
-			header.SetBackgroundDrawable (dr);
+			//header.SetBackgroundDrawable (dr);
 
 
 			//_mainLayout.SetBackgroundDrawable (dr);
 			_mainLayout.AddView(header);
-			dr = null;
+			//dr = null;
 
 
 
@@ -695,11 +700,20 @@ namespace MLearning.Droid
 				icon.SetImageBitmap(Bitmap.CreateScaledBitmap (getBitmapFromAsset("icons/iconmap.png"), Configuration.getWidth (60), Configuration.getWidth (80), true));
 				icon.SetX (Configuration.getWidth (60));
 
+
+				TextView titleUnidad = new TextView(context);
+				titleUnidad.SetTextSize (textFormat,Configuration.getHeight(42));
 				if (indexCurso == 0) {
 					if (indexUnidad != 3) {
 						linearUnidad.AddView (icon);
 						_listIconMap.Add (icon);
+					} else {
+						titleUnidad.SetTextSize (textFormat,Configuration.getHeight(55));
 					}
+
+				}
+				if (indexCurso == 3) {
+					titleUnidad.SetTextSize (textFormat,Configuration.getHeight(55));
 				}
 
 				LinearLayout linearContenido = new LinearLayout (context);
@@ -708,12 +722,12 @@ namespace MLearning.Droid
 				linearContenido.SetGravity (Android.Views.GravityFlags.Center);
 				linearContenido.SetX(Configuration.getWidth (100));
 
-				TextView titleUnidad = new TextView(context);
+				//TextView titleUnidad = new TextView(context);
 				//titleUnidad.Text = _listUnidades [i].Title;
 				titleUnidad.TextFormatted = Html.FromHtml (_listUnidades [i].Title);
 				titleUnidad.SetTextColor(Color.ParseColor (Configuration.ListaColores [i % 6]));
 				titleUnidad.Typeface =  Typeface.CreateFromAsset(context.Assets, "fonts/ArcherMediumPro.otf");
-				titleUnidad.SetTextSize (textFormat,Configuration.getHeight(42));
+
 
 				TextView descriptionUnidad = new TextView(context);
 				descriptionUnidad.TextFormatted = Html.FromHtml (_listUnidades [i].Description);

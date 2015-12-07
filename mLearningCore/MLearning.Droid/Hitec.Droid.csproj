@@ -143,6 +143,9 @@
     <Reference Include="Square.Picasso">
       <HintPath>..\packages\Square.Picasso.2.5.2.1\lib\MonoAndroid\Square.Picasso.dll</HintPath>
     </Reference>
+    <Reference Include="UrlImageViewHelper">
+      <HintPath>..\Components\urlimageviewhelper-1.0.4.1\lib\android\UrlImageViewHelper.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AsyncStorage\DroidAsyncStorageService.cs" />
@@ -343,6 +346,10 @@
   <ItemGroup>
     <XamarinComponentReference Include="GCMClient">
       <Version>1.0</Version>
+      <Visible>False</Visible>
+    </XamarinComponentReference>
+    <XamarinComponentReference Include="urlimageviewhelper">
+      <Version>1.0.4.1</Version>
       <Visible>False</Visible>
     </XamarinComponentReference>
   </ItemGroup>

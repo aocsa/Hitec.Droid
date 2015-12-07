@@ -443,7 +443,7 @@ namespace MLearning.Droid.Views
 			map.mapUrl = s_listp [vm._currentSection].PagesList [1].page.url_img;
 			map.titulo_map_header = s_listp [vm._currentSection].PagesList [1].page.title;
 
-			map.setMapImage (map.mapUrl);
+			map.setMapImage (map.mapUrl,vm._currentCurso,vm._currentUnidad,vm._currentSection);
 
 			var slides = s_listp [vm._currentSection].PagesList [1].content.lopage.loslide;
 
@@ -453,19 +453,21 @@ namespace MLearning.Droid.Views
 				string pos_title = slides [m].lotitle;
 				string[] words = pos_title.Split (' ');
 
-				if (words.Length >= 2) {
+				if (words.Length >= 3) {
 					pos_title = "";
-					for (int i = 2; i < words.Length; i++) {
+					for (int i = 3; i < words.Length; i++) {
 						pos_title += words [i] + " ";
 					}
 				}
 				int x = 0;
 				int y = 0;
+				int tipo = 0;
 
-				int.TryParse(words [0], out x);
-				int.TryParse(words [1], out y);
+				int.TryParse(words [0], out tipo);
+				int.TryParse(words [1], out x);
+				int.TryParse(words [2], out y);
 
-				map._currentPlaces.Add (new PlaceItem{ titulo = pos_title , pathIcon = slides[m].loitemize.loitem[0].loimage});
+				map._currentPlaces.Add (new PlaceItem{ titulo = pos_title , pathIcon = slides[m].loitemize.loitem[0].loimage, tipoIndex=tipo});
 				map._positionCurrentPlaces.Add (new Tuple<int,int>(x,y));
 
 				List<PlaceDetalle> extraInfo = new List<PlaceDetalle> ();
@@ -508,6 +510,7 @@ namespace MLearning.Droid.Views
 		{
 			var item = sender as LinearLayoutLO;
 			map.showPLaceInfo(item.index);
+
 			_lectorOpen = true;
 		}
 		void ListPlaces_ItemClick (object sender, AdapterView.ItemClickEventArgs e)
@@ -764,6 +767,7 @@ namespace MLearning.Droid.Views
 				_lectorOpen = false;
 				map.hidePlaceInfo ();
 				map.titulo_header.Text = map.titulo_map_header;
+				map.header.AddView (map._leyendaMap);
 			} else {
 				
 				if (mainLayoutIndice.Visibility == ViewStates.Visible) {

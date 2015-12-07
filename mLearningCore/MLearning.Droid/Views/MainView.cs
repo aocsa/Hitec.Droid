@@ -192,7 +192,7 @@ namespace MLearning.Droid.Views
 			main_ContentView.LayoutParameters = new RelativeLayout.LayoutParams (-1, -1);
 
 
-
+			lo.header.SetBackgroundDrawable (headersDR[1]);
 			main_ContentView.AddView (lo);
 			lo.getWorkSpaceLayout.AddView (frontView);
 
@@ -621,6 +621,8 @@ namespace MLearning.Droid.Views
 				resetMLOs ();
 				(ViewModel as MainViewModel).LearningOjectsList.CollectionChanged += _learningObjectsList_CollectionChanged;
 				setIndex (lo._ListLOImages_S2 [0], new EventArgs ());
+				lo._ListLOImages_S2 [0].AddView (lo.selectLayout);
+				lo.lastSelected = 0;
 				break;
 
 
@@ -992,6 +994,7 @@ namespace MLearning.Droid.Views
 				lo.getWorkSpaceLayout.SetBackgroundColor (Color.Transparent);
 				lo.getWorkSpaceLayout.RemoveAllViews ();
 				lo.getWorkSpaceLayout.AddView (frontView);
+				lo.header.SetBackgroundDrawable (headersDR[1]);
 				mDrawerLayout.CloseDrawer (mLeftDrawer);
 			}catch{
 			}

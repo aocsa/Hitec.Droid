@@ -16,6 +16,8 @@ using Android.Text;
 using Square.Picasso;
 using MLearning.Droid.Views;
 using Android.Graphics.Drawables;
+using Koush;
+using Android.Views.Animations;
 
 namespace MLearning.Droid
 {
@@ -24,7 +26,7 @@ namespace MLearning.Droid
 		RelativeLayout mainLayout;
 		LinearLayout mapSpace;
 		public VerticalScrollView placeSpace;
-		public ImageView mapImage;
+		public ScaleImageView mapImage;
 		public List<LinearLayout> _placesLayout = new List<LinearLayout>();
 		public List<MapItemInfo> _placesData = new List<MapItemInfo> ();
 		PopupWindow infoPopUp; 
@@ -32,6 +34,13 @@ namespace MLearning.Droid
 		public LinearLayout header;
 		public TextView titulo_header;
 		public string titulo_map_header;
+		public int _cC;
+		public int _cU;
+		public int _cS;
+		public ImageView _leyendaMap;
+		public ImageView _leyendaMapBack;
+		public ImageView _leyendaImage;
+		public List<Bitmap> _leyendaIcon;
 
 		public List<PlaceItem> _currentPlaces = new List<PlaceItem>();
 		public List<Tuple<int,int>> _positionCurrentPlaces = new List<Tuple<int, int>> ();
@@ -39,13 +48,19 @@ namespace MLearning.Droid
 
 		public LinearLayout placesInfoLayout;
 		public LinearLayout placesContainer;
+		public RelativeLayout leyendaLayout;
 
 		public String titulo;
 		public String descripcion;
 		public String mapUrl;
+		public int _currentUnidad;
+		public int _currentSection;
+		public int _currentCurso;
+		public bool _leyendaShowed = false;
 
 		public List<LinearLayoutLO> _listLinearPlaces = new List<LinearLayoutLO> ();
 		public List<ImageIconMap> _listLinearPositonPlaces = new List<ImageIconMap> ();
+		public List<List<Bitmap>> _listMapPaths = new List<List<Bitmap>>();
 
 		int widthInDp;
 		int heightInDp;
@@ -64,7 +79,29 @@ namespace MLearning.Droid
 		}
 
 
+		public void showLeyenda()
+		{
 
+			int xi;
+			int xf;
+			if (_leyendaShowed) {
+
+				xf = 0;
+				xi = Configuration.getWidth (640);
+				//leyendaLayout.SetX (0);
+				_leyendaShowed = false;
+
+			} else {
+				xf = -Configuration.getWidth (640);
+				xi = 0;
+				_leyendaShowed = true;
+			}
+
+			TranslateAnimation transAnimation = new TranslateAnimation (xi,xf, 0, 0);
+			transAnimation.Duration = 500;
+			transAnimation.FillAfter = true;
+			leyendaLayout.StartAnimation (transAnimation);
+		}
 
 		void Initialize ()
 		{
@@ -74,13 +111,101 @@ namespace MLearning.Droid
 			Configuration.setWidthPixel (widthInDp);
 			Configuration.setHeigthPixel (heightInDp);
 
+			_leyendaMap = new ImageView(context);
+			_leyendaMapBack = new ImageView(context);
+			int w = Configuration.getWidth (25);
+			int h = Configuration.getHeight (45);
 
+			_leyendaMap.SetImageBitmap (Bitmap.CreateScaledBitmap (getBitmapFromAsset ("icons/atras.png"), w, h, true));
+			_leyendaMap.SetPadding (w, 0, 0, 0);
+			_leyendaMap.Click += delegate {
+				showLeyenda ();
+			};
+
+
+			leyendaLayout = new RelativeLayout (context);
+			leyendaLayout.LayoutParameters = new LinearLayout.LayoutParams (Configuration.getWidth(640),-1);
+			//leyendaLayout.SetBackgroundColor (Color.ParseColor("#40000000"));
+			leyendaLayout.SetX (Configuration.getWidth (640));
+			leyendaLayout.Click += delegate {
+				showLeyenda();
+			};
+			_leyendaImage = new ImageView (context);
+			_leyendaImage.LayoutParameters = new LinearLayout.LayoutParams (Configuration.getWidth (500), -1);
+			_leyendaImage.SetX (Configuration.getWidth (141));
+			_leyendaImage.SetBackgroundColor (Color.Black);
+
+
+
+			_leyendaMapBack.SetImageBitmap (Bitmap.CreateScaledBitmap (getBitmapFromAsset ("icons/atras.png"), w, h, true));
+			_leyendaMapBack.Rotation = 180;
+			_leyendaMapBack.SetPadding (w, 0, 0, 0);
+			_leyendaMapBack.SetX (Configuration.getWidth (605));
+			_leyendaMapBack.SetY (Configuration.getHeight (40));
+			_leyendaMapBack.Click += delegate {
+				showLeyenda ();
+			};
+
+
+			leyendaLayout.AddView (_leyendaImage);
+			leyendaLayout.AddView (_leyendaMapBack);
+
+
+
+			loadIcons ();
+			loadMapas ();
 			ini ();
 			//iniNotifList ();
 			this.AddView (mainLayout);
 
 		}
+		public void loadIcons()
+		{
+			int w = Configuration.getWidth (60);
 
+			_leyendaIcon = new List<Bitmap> ();
+			_leyendaIcon.Add(Bitmap.CreateScaledBitmap (getBitmapFromAsset ("icons/playa.png"), w, w, true));
+			_leyendaIcon.Add(Bitmap.CreateScaledBitmap (getBitmapFromAsset ("icons/playb.png"), w, w, true));
+			_leyendaIcon.Add(Bitmap.CreateScaledBitmap (getBitmapFromAsset ("icons/playc.png"), w, w, true));
+			_leyendaIcon.Add(Bitmap.CreateScaledBitmap (getBitmapFromAsset ("icons/playd.png"), w, w, true));
+			_leyendaIcon.Add(Bitmap.CreateScaledBitmap (getBitmapFromAsset ("icons/playe.png"), w, w, true));
+
+			_leyendaIcon.Add(Bitmap.CreateScaledBitmap (getBitmapFromAsset ("icons/playa.png"), w, w, true));
+			_leyendaIcon.Add(Bitmap.CreateScaledBitmap (getBitmapFromAsset ("icons/playb.png"), w, w, true));
+			_leyendaIcon.Add(Bitmap.CreateScaledBitmap (getBitmapFromAsset ("icons/playc.png"), w, w, true));
+			_leyendaIcon.Add(Bitmap.CreateScaledBitmap (getBitmapFromAsset ("icons/playd.png"), w, w, true));
+			_leyendaIcon.Add(Bitmap.CreateScaledBitmap (getBitmapFromAsset ("icons/playe.png"), w, w, true));
+
+			_leyendaIcon.Add(Bitmap.CreateScaledBitmap (getBitmapFromAsset ("icons/playa.png"), w, w, true));
+		}
+		public void loadMapas()
+		{
+			List<Bitmap> unidad1 = new List<Bitmap> ();
+			List<Bitmap> unidad2 = new List<Bitmap> ();
+			List<Bitmap> unidad3 = new List<Bitmap> ();
+
+			unidad1.Add (getBitmapFromAsset ("images/mapa.png"));
+			unidad1.Add (getBitmapFromAsset ("images/mapa.png"));
+			unidad1.Add (getBitmapFromAsset ("images/mapa.png"));
+			unidad1.Add (getBitmapFromAsset ("images/mapa.png"));
+
+			unidad2.Add (getBitmapFromAsset ("images/mapa.png"));
+			unidad2.Add (getBitmapFromAsset ("images/mapa.png"));
+			unidad2.Add (getBitmapFromAsset ("images/mapa.png"));
+			unidad2.Add (getBitmapFromAsset ("images/mapa.png"));
+			unidad2.Add (getBitmapFromAsset ("images/mapa.png"));
+
+			unidad3.Add (getBitmapFromAsset ("images/mapa.png"));
+			unidad3.Add (getBitmapFromAsset ("images/mapa.png"));
+			unidad3.Add (getBitmapFromAsset ("images/mapa.png"));
+			unidad3.Add (getBitmapFromAsset ("images/mapa.png"));
+			unidad3.Add (getBitmapFromAsset ("images/mapa.png"));
+
+
+			_listMapPaths.Add (unidad1);
+			_listMapPaths.Add (unidad2);
+			_listMapPaths.Add (unidad3);
+		}
 
 		public Bitmap getBitmapFromAsset( String filePath) {
 			System.IO.Stream s = context.Assets.Open (filePath);
@@ -89,12 +214,15 @@ namespace MLearning.Droid
 			return bitmap;
 		}
 
-		public void setMapImage(String url)
+		public void setMapImage(String url,int c,int u,int s)
 		{
-			
-			Picasso.With (context).Load (url).Resize(Configuration.WIDTH_PIXEL,Configuration.getHeight(800)).Placeholder(context.Resources.GetDrawable (Resource.Drawable.progress_animation)).CenterCrop().Into (mapImage);
-			mapImage.Click += delegate {
-			/*	Intent lance = new Intent();
+
+			//UrlImageViewHelper.SetUrlDrawable(mapImage, url);
+			//Picasso.With (context).Load (url).Resize(Configuration.WIDTH_PIXEL, Configuration.getHeight(675)).Placeholder(context.Resources.GetDrawable (Resource.Drawable.progress_animation)).CenterCrop().Into (mapImage);
+			//mapImage.SetScaleType (ImageView.ScaleType.Center);
+			//mapImage.SetAdjustViewBounds (true);
+
+			/*Intent lance = new Intent();
 				lance.SetAction(Intent.ActionView);
 				String typedata = "image/*";
 				lance.SetType(typedata);
@@ -104,6 +232,9 @@ namespace MLearning.Droid
 				lance.SetDataAndType(uri,typedata);
 				context.StartActivity(lance);
 				*/
+			/*
+			mapImage.Click += delegate {
+
 
 				mapImage.PivotX = mapImage.Width/2;
 				mapImage.PivotY = mapImage.Height/2;
@@ -111,19 +242,29 @@ namespace MLearning.Droid
 				mapImage.ScaleY = 1;
 
 			};
-
-
-
+			*/
+			_currentCurso = c;
+			_currentUnidad = u;
+			_currentSection = s;
+			mapImage.SetImageBitmap (_listMapPaths[u][s]);
+			//mapImage.MaxZoomTo (mapImage.Width / 2, mapImage.Height / 2);
+			//mapImage.ZoomTo (4, mapImage.Width / 2, mapImage.Height / 2);
+			//mapImage.SetScaleType (ImageView.ScaleType.FitStart);
+			//showFocusMap(0);
 		}
 
 		public void showFocusMap(int position)
 		{
+			//mapImage.ZoomTo(0,Configuration.getWidth(320),Configuration.getWidth(320));
+			mapImage.SetImageBitmap (_listMapPaths[_currentUnidad][_currentSection]);
 			var posXY = _positionCurrentPlaces [position];
 
-			mapImage.PivotX = posXY.Item1;
-			mapImage.PivotY = posXY.Item2;
-			mapImage.ScaleX = 3;
-			mapImage.ScaleY = 3;
+			//mapImage.PivotX = posXY.Item1;
+			//mapImage.PivotY = posXY.Item2;
+			//mapImage.ScaleX = 3;
+			//mapImage.ScaleY = 3;
+			mapImage.ZoomTo(2,posXY.Item1,posXY.Item2);
+			mapImage.Cutting ();
 		}
 
 		public void ini(){
@@ -137,7 +278,7 @@ namespace MLearning.Droid
 
 
 			titulo_header = new TextView (context);
-			titulo_header.LayoutParameters = new LinearLayout.LayoutParams (-1, -2);
+			titulo_header.LayoutParameters = new LinearLayout.LayoutParams (Configuration.getWidth(550), -1);
 			titulo_header.SetTextSize (ComplexUnitType.Fraction, Configuration.getHeight(38));
 			titulo_header.Typeface =  Typeface.CreateFromAsset(context.Assets, "fonts/ArcherMediumPro.otf");
 			titulo_header.SetTextColor (Color.White);
@@ -155,28 +296,33 @@ namespace MLearning.Droid
 
 			mainLayout.AddView (header);
 
-			mapImage = new ImageView (context);
+			mapImage = new ScaleImageView (context, null);
 			mapSpace = new LinearLayout (context);
-			mapSpace.LayoutParameters = new LinearLayout.LayoutParams (-1, Configuration.getHeight(675));
+			mapSpace.LayoutParameters = new LinearLayout.LayoutParams (Configuration.getWidth(640), Configuration.getWidth(640));
 			mapSpace.SetY (Configuration.getHeight (125));
-			mapSpace.SetGravity (GravityFlags.CenterHorizontal);
+			mapSpace.SetGravity (GravityFlags.Left);
 			mapSpace.SetBackgroundColor (Color.ParseColor ("#DFC6BB"));
 			mapSpace.AddView (mapImage);
 
-
-
+			/*
+			mapImage.PivotX = mapImage.Width/2;
+			mapImage.PivotY = mapImage.Height/2;
+			mapImage.ScaleX = (float)1.5;
+			mapImage.ScaleY = (float)1.5;
+*/
 			placeSpace = new VerticalScrollView (context);
-			placeSpace.LayoutParameters = new LinearLayout.LayoutParams (-1, Configuration.getHeight(345));
-			placeSpace.SetY (Configuration.getHeight (800));
+			placeSpace.LayoutParameters = new LinearLayout.LayoutParams (-1, Configuration.getHeight(375));
+			placeSpace.SetY (Configuration.getHeight (765));
 			placeSpace.SetBackgroundColor (Color.White);
 
 			placesContainer = new LinearLayout (context);
-			placesContainer.LayoutParameters = new LinearLayout.LayoutParams (-1, Configuration.getHeight(345));
+			placesContainer.LayoutParameters = new LinearLayout.LayoutParams (-1, Configuration.getHeight(375));
 			placesContainer.Orientation = Orientation.Vertical;
 
 
 			mainLayout.AddView (mapSpace);
 			mainLayout.AddView (placeSpace);
+			mainLayout.AddView (leyendaLayout);
 
 			scrollPlaces = new VerticalScrollView (context);
 			scrollPlaces.LayoutParameters = new VerticalScrollView.LayoutParams (-1,Configuration.getHeight(1011));
@@ -192,6 +338,13 @@ namespace MLearning.Droid
 
 		public void showPLaceInfo(int position)
 		{
+
+			if (_leyendaShowed) {
+				showLeyenda ();
+
+			}
+			header.RemoveView (_leyendaMap);
+
 			mainLayout.AddView(scrollPlaces);
 
 			titulo_header.Text = _currentPlaces [position].titulo;
@@ -286,19 +439,16 @@ namespace MLearning.Droid
 				imageLayout.AddView (gradiente);
 
 				ImageIconMap icon = new ImageIconMap (context);
-				icon.LayoutParameters = new LinearLayout.LayoutParams (Configuration.getWidth (W), Configuration.getHeight (H));
-				//icon.SetBackgroundResource (Resource.Drawable.mapIcon);
-				//icon.indexCurso = indexCurso;
-				//icon.indexUnidad = indexUnidad;
-				//icon.SetBackgroundResource
+				icon.LayoutParameters = new LinearLayout.LayoutParams (Configuration.getWidth (60), Configuration.getWidth (60));
 				icon.index = i;
-				icon.SetImageBitmap(Bitmap.CreateScaledBitmap (getBitmapFromAsset("icons/map2.jpg"), Configuration.getWidth (W), Configuration.getHeight (H), true));
+				icon.SetImageBitmap(_leyendaIcon[item.tipoIndex]);
+				//icon.SetPadding (Configuration.getWidth (20), ,0,0);
+				icon.SetX(Configuration.getWidth (30));
+				icon.SetY(Configuration.getHeight (10));
+
 				RelativeLayout iconLayout = new RelativeLayout (context);
-				//iconLayout.SetGravity (GravityFlags.Center);
 				iconLayout.LayoutParameters = new LinearLayout.LayoutParams (Configuration.getWidth (W), Configuration.getHeight (H));
-				//iconLayout.SetBackgroundColor (Color.White);
-				//iconLayout.SetGravity (GravityFlags.End);
-				//iconLayout.SetX(Configuration.getWidth(580));
+				iconLayout.SetGravity (GravityFlags.Center);
 
 				LinearLayout gradiente2 = new LinearLayout (context);
 				gradiente2.LayoutParameters = new LinearLayout.LayoutParams (Configuration.getWidth (W), Configuration.getHeight (H));
@@ -345,7 +495,7 @@ namespace MLearning.Droid
 
 			titulo_header.Text = titulo_map_header;
 			header.AddView (titulo_header);
-
+			header.AddView (_leyendaMap);
 
 
 		}
