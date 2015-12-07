@@ -10,6 +10,7 @@
 
 # Generated files
 bin/
+obj/
 gen/
 .vs/
 
@@ -83,7 +84,11 @@ $RECYCLE.BIN/
 *.csproj
 *.sln
 
-/bin/
-/obj/
-/Release/
-/Debug/
+packages/
+[Bb]uild/
+*/bin/*
+*/obj/*
+*/*/bin/*
+*/*/obj/*
+*/*/*/bin/*
+*/*/*/obj/*
