@@ -132,8 +132,10 @@ namespace MLearning.Droid
 			};
 			_leyendaImage = new ImageView (context);
 			_leyendaImage.LayoutParameters = new LinearLayout.LayoutParams (Configuration.getWidth (500), -1);
+			_leyendaImage.SetImageBitmap(Bitmap.CreateScaledBitmap(getBitmapFromAsset("images/leyenda.png"),Configuration.getWidth (500),Configuration.getWidth(500),true));
 			_leyendaImage.SetX (Configuration.getWidth (141));
-			_leyendaImage.SetBackgroundColor (Color.Black);
+
+			_leyendaImage.SetBackgroundColor (Color.White);
 
 
 
