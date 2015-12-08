@@ -112,7 +112,7 @@ namespace MLearning.Droid
 			leyendaLayout.StartAnimation (transAnimation);
 		}
 
-		private void Initialize ()
+		void Initialize ()
 		{
 			var metrics = Resources.DisplayMetrics;
 			widthInDp = ((int)metrics.WidthPixels);
@@ -207,7 +207,6 @@ namespace MLearning.Droid
 		}
 		public void loadMapas()
 		{
-<<<<<<< HEAD
 			List<String> unidad1 = new List<String> ();
 			List<String> unidad2 = new List<String> ();
 			List<String> unidad3 = new List<String> ();
@@ -228,29 +227,6 @@ namespace MLearning.Droid
 			unidad3.Add ("images/mapa.png");
 			unidad3.Add ("images/mapa.png");
 			unidad3.Add ("images/mapa.png");
-=======
-			List<Bitmap> unidad1 = new List<Bitmap> ();
-			List<Bitmap> unidad2 = new List<Bitmap> ();
-			List<Bitmap> unidad3 = new List<Bitmap> ();
-			Bitmap bmp = getBitmapFromAsset ("images/mapa.png");
-
-			unidad1.Add (bmp);
-			unidad1.Add (bmp);
-			unidad1.Add (bmp);
-			unidad1.Add (bmp);
-
-			unidad2.Add (bmp);
-			unidad2.Add (bmp);
-			unidad2.Add (bmp);
-			unidad2.Add (bmp);
-			unidad2.Add (bmp);
-
-			unidad3.Add (bmp);
-			unidad3.Add (bmp);
-			unidad3.Add (bmp);
-			unidad3.Add (bmp);
-			unidad3.Add (bmp);
->>>>>>> f303df8efe4b2afc2d0512d65bc0e7a1e0704fb9
 
 
 			_listMapPaths.Add (unidad1);
@@ -259,12 +235,10 @@ namespace MLearning.Droid
 		}
 
 		public Bitmap getBitmapFromAsset( String filePath) {
-			using (System.IO.Stream s = context.Assets.Open (filePath)) {
-				Bitmap bitmap = BitmapFactory.DecodeStream (s);
-					return bitmap;
- 				}
-			return null;
+			System.IO.Stream s = context.Assets.Open (filePath);
+			Bitmap bitmap = BitmapFactory.DecodeStream (s);
 
+			return bitmap;
 		}
 
 		void showAd(int idAd)
@@ -335,7 +309,6 @@ namespace MLearning.Droid
 			//mapImage.ZoomTo (4, mapImage.Width / 2, mapImage.Height / 2);
 			//mapImage.SetScaleType (ImageView.ScaleType.FitStart);
 			//showFocusMap(0);
-
 
 
 		}

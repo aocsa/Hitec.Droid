@@ -768,7 +768,7 @@ namespace MLearning.Droid.Views
 				map.hidePlaceInfo ();
 
 				map.titulo_header.Text = map.titulo_map_header;
-				map.header.RemoveAllViews ();
+				//map.header.RemoveAllViews ();
 				map.header.AddView (map._leyendaMap);
 			} else {
 				
