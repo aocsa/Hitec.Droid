@@ -155,7 +155,7 @@ namespace MLearning.Droid
 
 
 			loadIcons ();
-			loadMapas ();
+	//		loadMapas ();
 			ini ();
 			//iniNotifList ();
 			this.AddView (mainLayout);

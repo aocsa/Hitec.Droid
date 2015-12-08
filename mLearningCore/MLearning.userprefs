@@ -1,6 +1,44 @@
-﻿<Properties StartupItem="MLearning.Droid/Hitec.Droid.csproj" RefactoringSettings.EnableRefactorings="True">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.3004c65a87462200" />
-  <MonoDevelop.Ide.Workbench />
+﻿<Properties StartupItem="MLearning.Droid\Hitec.Droid.csproj" RefactoringSettings.EnableRefactorings="True">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.169.254.76.233:5555" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="MLearning.Droid\Views\MapView.cs">
+    <Files>
+      <File FileName="MLearning.Droid\Views\MainView.cs" Line="193" Column="4" />
+      <File FileName="MLearning.Droid\Views\LOView.cs" Line="1" Column="1" />
+      <File FileName="MLearning.Droid\SplashScreen.cs" Line="1" Column="1" />
+      <File FileName="MLearning.Core\Configuration\Constants.cs" Line="1" Column="1" />
+      <File FileName="MLearning.Droid\Views\WallView.cs" Line="1" Column="1" />
+      <File FileName="MLearning.Droid\Views\LOMapView.cs" Line="1" Column="1" />
+      <File FileName="MLearning.Droid\Views\MapView.cs" Line="196" Column="55" />
+      <File FileName="MLearning.Droid\Views\frontView.cs" Line="1" Column="1" />
+      <File FileName="MLearning.Droid\Views\Configuration.cs" Line="1" Column="1" />
+      <File FileName="MLearning.Droid\Views\LinearLayoutLO.cs" Line="1" Column="1" />
+      <File FileName="MLearning.Droid\Views\FrontContainerViewPager.cs" Line="1" Column="1" />
+      <File FileName="MLearning.Droid\Views\CustomerImageView.cs" Line="1" Column="1" />
+      <File FileName="MLearning.Droid\DataSource\LOSlideSource.cs" Line="1" Column="1" />
+      <File FileName="MLearning.Droid\Views\Template1.cs" Line="1" Column="1" />
+      <File FileName="MLearning.Droid\Views\Template2.cs" Line="1" Column="1" />
+      <File FileName="MLearning.Droid\Views\PlaceItem.cs" Line="1" Column="1" />
+      <File FileName="MLearning.Core\Repositories\WAMSRepositoryService.cs" Line="1" Column="1" />
+      <File FileName="MLearning.Core\Repositories\IRepositoryService.cs" Line="1" Column="1" />
+      <File FileName="MLearning.Droid\Views\LoginView.cs" Line="179" Column="4" />
+      <File FileName="MLearning.Core\ViewModels\LoginViewModel.cs" Line="1" Column="1" />
+      <File FileName="MLearning.Droid\packages.config" Line="1" Column="1" />
+      <File FileName="MLearning.Droid\app.config" Line="14" Column="13" />
+      <File FileName="MLearning.Droid\Setup.cs" Line="1" Column="1" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="MLearning" expanded="True">
+            <Node name="Hitec.Droid" selected="True" />
+          </Node>
+        </State>
+      </Pad>
+      <Pad Id="MonoDevelop.Debugger.WatchPad">
+        <State />
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
       <Breakpoint file="C:\Users\ImBonus\Documents\Visual Studio 2013\Projects\mLearningCore\MLearning.Droid\MvxActionBarEventSourceActivity.cs" line="89" column="1" />
@@ -16,5 +54,4 @@
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <AuthorInfo Name="ImBonus" Email="" Copyright="ImBonus.org" Company="" Trademark="" />
-  <MonoDevelop.Ide.ItemProperties.Hitec.Droid AndroidDesignerPreferredDevice="Nexus 4" AndroidDesignerPreferredTheme="Theme.DeviceDefault.Dialog.NoActionBar" />
 </Properties>

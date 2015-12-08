@@ -86,7 +86,7 @@ namespace MLearning.Droid.Views
 
 			//START PARA COPIAR LA BASE DE DATOS LOCAL
 
-			copyDataBase ();
+			//copyDataBase ();
 
 			//END
 		

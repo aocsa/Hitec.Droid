@@ -329,8 +329,7 @@ namespace Core.Repositories
                 if (cacheResult)
                 {
 
-					if (false){
-	                    //Check synchronization dates
+ 	                    //Check synchronization dates
 	                    DateTime lastSync =  await TableHasUpdate<T>();
 
 	                    if (lastSync != DateTime.MaxValue)
@@ -341,7 +340,7 @@ namespace Core.Repositories
 	                                await SyncLocalTable<T>(lastSync, getID);
 
 						}
-					}
+				 
 
                     //No Update, use local
                     result = SearchForLocalTable<T>(predicate);
@@ -392,21 +391,19 @@ namespace Core.Repositories
 
 				if (cacheResult)
 				{
-					if (false){
+ 
+					//Check synchronization dates
+					DateTime lastSync =  await TableHasUpdate<T>();
 
-						//Check synchronization dates
-						DateTime lastSync =  await TableHasUpdate<T>();
+					if (lastSync != DateTime.MaxValue)
+					{
+						//Have Update
+						//Get results from lastSyncDate and save them to DB if cacheResult its true
+						//TODO: Filter with predicate
+						await SyncLocalTable<T>(lastSync, getID);
 
-						if (lastSync != DateTime.MaxValue)
-						{
-							//Have Update
-							//Get results from lastSyncDate and save them to DB if cacheResult its true
-							//TODO: Filter with predicate
-							await SyncLocalTable<T>(lastSync, getID);
-
-						}
 					}
-					//No Update, use local
+ 					//No Update, use local
 					result = SearchForLocalTable<T>(predicate);
 
 				}

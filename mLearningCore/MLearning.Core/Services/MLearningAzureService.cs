@@ -745,7 +745,7 @@ namespace MLearning.Core.Services
 			#if (WEB)
 			return await _repositoryService.SearchForAsync<Page>(s => s.LOsection_id == sec_id, s => s.updated_at, s => s.id, false);
 			#else
-			return await _repositoryService.SearchForAsync<Page>(s => s.LOsection_id == sec_id, s => s.updated_at, s => s.id, false);
+			return await _repositoryService.SearchForAsync<Page>(s => s.LOsection_id == sec_id, s => s.updated_at, s => s.id, true);
 			#endif
         }
 
