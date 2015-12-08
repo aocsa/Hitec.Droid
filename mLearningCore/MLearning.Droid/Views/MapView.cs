@@ -103,7 +103,7 @@ namespace MLearning.Droid
 			leyendaLayout.StartAnimation (transAnimation);
 		}
 
-		void Initialize ()
+		private void Initialize ()
 		{
 			var metrics = Resources.DisplayMetrics;
 			widthInDp = ((int)metrics.WidthPixels);
@@ -186,23 +186,24 @@ namespace MLearning.Droid
 			List<Bitmap> unidad1 = new List<Bitmap> ();
 			List<Bitmap> unidad2 = new List<Bitmap> ();
 			List<Bitmap> unidad3 = new List<Bitmap> ();
+			Bitmap bmp = getBitmapFromAsset ("images/mapa.png");
 
-			unidad1.Add (getBitmapFromAsset ("images/mapa.png"));
-			unidad1.Add (getBitmapFromAsset ("images/mapa.png"));
-			unidad1.Add (getBitmapFromAsset ("images/mapa.png"));
-			unidad1.Add (getBitmapFromAsset ("images/mapa.png"));
+			unidad1.Add (bmp);
+			unidad1.Add (bmp);
+			unidad1.Add (bmp);
+			unidad1.Add (bmp);
 
-			unidad2.Add (getBitmapFromAsset ("images/mapa.png"));
-			unidad2.Add (getBitmapFromAsset ("images/mapa.png"));
-			unidad2.Add (getBitmapFromAsset ("images/mapa.png"));
-			unidad2.Add (getBitmapFromAsset ("images/mapa.png"));
-			unidad2.Add (getBitmapFromAsset ("images/mapa.png"));
+			unidad2.Add (bmp);
+			unidad2.Add (bmp);
+			unidad2.Add (bmp);
+			unidad2.Add (bmp);
+			unidad2.Add (bmp);
 
-			unidad3.Add (getBitmapFromAsset ("images/mapa.png"));
-			unidad3.Add (getBitmapFromAsset ("images/mapa.png"));
-			unidad3.Add (getBitmapFromAsset ("images/mapa.png"));
-			unidad3.Add (getBitmapFromAsset ("images/mapa.png"));
-			unidad3.Add (getBitmapFromAsset ("images/mapa.png"));
+			unidad3.Add (bmp);
+			unidad3.Add (bmp);
+			unidad3.Add (bmp);
+			unidad3.Add (bmp);
+			unidad3.Add (bmp);
 
 
 			_listMapPaths.Add (unidad1);
@@ -211,10 +212,12 @@ namespace MLearning.Droid
 		}
 
 		public Bitmap getBitmapFromAsset( String filePath) {
-			System.IO.Stream s = context.Assets.Open (filePath);
-			Bitmap bitmap = BitmapFactory.DecodeStream (s);
+			using (System.IO.Stream s = context.Assets.Open (filePath)) {
+				Bitmap bitmap = BitmapFactory.DecodeStream (s);
+					return bitmap;
+ 				}
+			return null;
 
-			return bitmap;
 		}
 
 		public void setMapImage(String url,int c,int u,int s)

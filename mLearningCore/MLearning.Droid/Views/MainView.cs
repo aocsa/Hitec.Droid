@@ -153,7 +153,7 @@ namespace MLearning.Droid.Views
 			lo = new WallView(this);
 			frontView = new frontView (this);
 			lector = new FrontContainerViewPager (this);
-			map = new MapView (this);
+			//map = new MapView (this);
 
 
 			frontView._listLinearItem [0].Click += delegate {showRutas ();};
@@ -1878,7 +1878,8 @@ namespace MLearning.Droid.Views
 				lo.getWorkSpaceLayout.RemoveAllViews ();
 				lo.getWorkSpaceLayout.SetBackgroundColor (Color.Transparent);
 				//showRutas ();
-			}else if (_mapOpen){
+			}
+			/*else if (_mapOpen){
 
 				if (map.placeInfoOpen) {
 					map.placeInfoOpen = false;
@@ -1888,7 +1889,8 @@ namespace MLearning.Droid.Views
 					lo.getMapSpaceLayout.RemoveAllViews ();
 					lo.getMapSpaceLayout.SetBackgroundColor (Color.Transparent);
 				}
-			}else if (_currentCurso == 0) {
+			}*/
+			else if (_currentCurso == 0) {
 				showHome ();
 			} else if (_currentCurso == 1) {
 				showHome ();
