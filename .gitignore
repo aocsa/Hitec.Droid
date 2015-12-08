@@ -92,3 +92,13 @@ packages/
 */*/obj/*
 */*/*/bin/*
 */*/*/obj/*
+
+
+
+
+mLearningCore/MLearning.Droid/bin/
+mLearningCore/MLearning.Droid/bin/
+mLearningCore/MLearning.Core/bin/
+mLearningCore/MLearning.Core/obj/
+
+
