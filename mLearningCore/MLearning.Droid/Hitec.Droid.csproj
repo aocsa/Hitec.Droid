@@ -539,6 +539,17 @@
     <AndroidAsset Include="Assets\icons\map2.jpg" />
     <AndroidAsset Include="Assets\icons\mapIcon.jpg" />
     <AndroidAsset Include="Assets\images\leyenda.png" />
+    <AndroidAsset Include="Assets\icons\iconmap11.png" />
+    <AndroidAsset Include="Assets\icons\iconmap10.png" />
+    <AndroidAsset Include="Assets\icons\iconmap9.png" />
+    <AndroidAsset Include="Assets\icons\iconmap8.png" />
+    <AndroidAsset Include="Assets\icons\iconmap7.png" />
+    <AndroidAsset Include="Assets\icons\iconmap6.png" />
+    <AndroidAsset Include="Assets\icons\iconmap5.png" />
+    <AndroidAsset Include="Assets\icons\iconmap4.png" />
+    <AndroidAsset Include="Assets\icons\iconmap3.png" />
+    <AndroidAsset Include="Assets\icons\iconmap2.png" />
+    <AndroidAsset Include="Assets\icons\iconmap1.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MLearning.Core\MLearning.Core.csproj">

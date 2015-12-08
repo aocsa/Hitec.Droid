@@ -22,6 +22,7 @@ using Android.Support.V4.View;
 using Android.Content;
 using Square.Picasso;
 using MLearningDB;
+using Android.Text;
 
 namespace MLearning.Droid.Views
 {
@@ -41,6 +42,7 @@ namespace MLearning.Droid.Views
 		private List<ChatDataRow> mItemsChat;
 
 		private LOContainerView _foro;
+		public Android.Media.MediaPlayer player;
 
 
 		List<ImageLOView> list;
@@ -135,7 +137,7 @@ namespace MLearning.Droid.Views
 			this.Window.AddFlags(WindowManagerFlags.Fullscreen);
 			base.OnCreate(bundle);
 			SetContentView(Resource.Layout.MainView);
-
+			player = new Android.Media.MediaPlayer();
 			_currentCurso = 0;
 			_lectorOpen = false;
 			_mapOpen = false;
@@ -1374,9 +1376,9 @@ namespace MLearning.Droid.Views
 			Console.WriteLine ("loadContentByUnit");
 			if (vm.ContentByUnit != null) 
 			{
-				
+
 				lo._listUnidades.Clear ();
-	
+
 
 				foreach (var pair in vm.ContentByUnit) {
 
@@ -1420,6 +1422,14 @@ namespace MLearning.Droid.Views
 					}
 				}
 
+				if(_currentCurso==2 && _currentUnidad==3)
+				{
+					for (int i = 0; i < lo._listLinearUnidades.Count; i++) {
+
+						lo._listIconMap [i].Click += playSound;
+					}
+				}
+
 
 			}
 		}
@@ -1445,10 +1455,32 @@ namespace MLearning.Droid.Views
 			vm._currentSection = item.index;
 			vm.OpenLOMapCommand.Execute(vm.LearningOjectsList[_currentUnidad]);
 
-
 		}
+
+		void playSound(object sender, EventArgs e)
+		{
+			var item = sender as ImageIconMap;
+			vm._currentUnidad = _currentUnidad;
+			vm._currentCurso = _currentCurso;
+			vm._currentSection = item.index;
+			StartPlayer (lo._listUnidades[item.index].Description);
+		}
+
+		public void StartPlayer(String  filePath)
+		{
+			if (player == null) {
+				player = new Android.Media.MediaPlayer();
+			} else {
+				player.Reset();
+				String url = Html.FromHtml (filePath).ToString();
+				player.SetDataSource(url);
+				player.Prepare();
+				player.Start();
+			}
+		}
+
 		void loadSection(){
-			
+
 			if (vm.LOsectionList != null) 
 			{
 				Console.WriteLine ("loadSection");

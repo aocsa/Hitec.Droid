@@ -166,19 +166,20 @@ namespace MLearning.Droid
 			int w = Configuration.getWidth (60);
 
 			_leyendaIcon = new List<Bitmap> ();
-			_leyendaIcon.Add(Bitmap.CreateScaledBitmap (getBitmapFromAsset ("icons/playa.png"), w, w, true));
-			_leyendaIcon.Add(Bitmap.CreateScaledBitmap (getBitmapFromAsset ("icons/playb.png"), w, w, true));
-			_leyendaIcon.Add(Bitmap.CreateScaledBitmap (getBitmapFromAsset ("icons/playc.png"), w, w, true));
-			_leyendaIcon.Add(Bitmap.CreateScaledBitmap (getBitmapFromAsset ("icons/playd.png"), w, w, true));
-			_leyendaIcon.Add(Bitmap.CreateScaledBitmap (getBitmapFromAsset ("icons/playe.png"), w, w, true));
+			_leyendaIcon = new List<Bitmap> ();
+			_leyendaIcon.Add(Bitmap.CreateScaledBitmap (getBitmapFromAsset ("icons/iconmap1.png"), w, w, true));
+			_leyendaIcon.Add(Bitmap.CreateScaledBitmap (getBitmapFromAsset ("icons/iconmap2.png"), w, w, true));
+			_leyendaIcon.Add(Bitmap.CreateScaledBitmap (getBitmapFromAsset ("icons/iconmap3.png"), w, w, true));
+			_leyendaIcon.Add(Bitmap.CreateScaledBitmap (getBitmapFromAsset ("icons/iconmap4.png"), w, w, true));
+			_leyendaIcon.Add(Bitmap.CreateScaledBitmap (getBitmapFromAsset ("icons/iconmap5.png"), w, w, true));
 
-			_leyendaIcon.Add(Bitmap.CreateScaledBitmap (getBitmapFromAsset ("icons/playa.png"), w, w, true));
-			_leyendaIcon.Add(Bitmap.CreateScaledBitmap (getBitmapFromAsset ("icons/playb.png"), w, w, true));
-			_leyendaIcon.Add(Bitmap.CreateScaledBitmap (getBitmapFromAsset ("icons/playc.png"), w, w, true));
-			_leyendaIcon.Add(Bitmap.CreateScaledBitmap (getBitmapFromAsset ("icons/playd.png"), w, w, true));
-			_leyendaIcon.Add(Bitmap.CreateScaledBitmap (getBitmapFromAsset ("icons/playe.png"), w, w, true));
+			_leyendaIcon.Add(Bitmap.CreateScaledBitmap (getBitmapFromAsset ("icons/iconmap6.png"), w, w, true));
+			_leyendaIcon.Add(Bitmap.CreateScaledBitmap (getBitmapFromAsset ("icons/iconmap7.png"), w, w, true));
+			_leyendaIcon.Add(Bitmap.CreateScaledBitmap (getBitmapFromAsset ("icons/iconmap8.png"), w, w, true));
+			_leyendaIcon.Add(Bitmap.CreateScaledBitmap (getBitmapFromAsset ("icons/iconmap9.png"), w, w, true));
+			_leyendaIcon.Add(Bitmap.CreateScaledBitmap (getBitmapFromAsset ("icons/iconmap10.png"), w, w, true));
 
-			_leyendaIcon.Add(Bitmap.CreateScaledBitmap (getBitmapFromAsset ("icons/playa.png"), w, w, true));
+			_leyendaIcon.Add(Bitmap.CreateScaledBitmap (getBitmapFromAsset ("icons/iconmap11.png"), w, w, true));
 		}
 		public void loadMapas()
 		{

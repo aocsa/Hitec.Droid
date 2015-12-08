@@ -35,6 +35,7 @@ namespace MLearning.Droid
 		public TextView _txtCursoN;
 		public TextView _txtUnidadN;
 		public Bitmap iconMap;
+		public Bitmap iconPlay;
 
 		LinearLayout linearGradiente;
 
@@ -110,8 +111,8 @@ namespace MLearning.Droid
 				_imAuthor_S1.SetImageBitmap (_imageAuthor);
 				//_imageAuthor.Recycle ();
 				_imageAuthor = null;
-				}
-		
+			}
+
 		}
 
 		string _info1;
@@ -158,7 +159,7 @@ namespace MLearning.Droid
 					_isRemoved = true;
 				} else {
 					if (_isRemoved) {
-					//	_mainSpace.AddView (_contentScrollView_S2);
+						//	_mainSpace.AddView (_contentScrollView_S2);
 						_contentScrollView_S2.LayoutParameters.Height=Configuration.getHeight(160);
 						_isRemoved = false;
 					}
@@ -218,7 +219,7 @@ namespace MLearning.Droid
 			var textFormat = Android.Util.ComplexUnitType.Px;
 
 
-		
+
 
 
 			var test = new ImageView (context);
@@ -247,8 +248,8 @@ namespace MLearning.Droid
 			_txtCursoN.Gravity = Android.Views.GravityFlags.Right;
 			_txtUnidadN.Gravity = Android.Views.GravityFlags.Right;
 			//_txtCursoN.TextAlignment = Android.Views.TextAlignment.Gravity;
-				
-				
+
+
 			_fondo2.AddView (infoCursoUnidad);
 			//infoCursoUnidad.SetX (Configuration.getWidth (300));
 			infoCursoUnidad.SetY (Configuration.getWidth (420));
@@ -292,6 +293,7 @@ namespace MLearning.Droid
 
 
 			iconMap = Bitmap.CreateScaledBitmap (getBitmapFromAsset ("icons/iconmap.png"), Configuration.getWidth (60), Configuration.getWidth (80), true);
+			iconPlay = Bitmap.CreateScaledBitmap (getBitmapFromAsset ("icons/playc.png"), Configuration.getWidth (60), Configuration.getWidth (60), true);
 			ini ();
 
 
@@ -309,7 +311,7 @@ namespace MLearning.Droid
 		}
 
 		public void ini(){
-			
+
 			_txtCursoN = new TextView (context);
 			_txtCursoN.LayoutParameters = new LinearLayout.LayoutParams (-1, -2);
 			_txtUnidadN = new TextView (context);
@@ -411,9 +413,9 @@ namespace MLearning.Droid
 			//_txtTitle_S1.SetX (Configuration.getWidth (245));_txtTitle_S1.SetY (Configuration.getHeight (60));
 
 			//Bitmap newbm = Configuration.getRoundedShape(Bitmap.CreateScaledBitmap( getBitmapFromAsset("icons/imgautor.png"), Configuration.getWidth(170), Configuration.getWidth(170), true),Configuration.getWidth(170),Configuration.getHeight(170));
-		
+
 			//_imAuthor_S1.SetImageBitmap (newbm);
-		//	newbm.Recycle ();
+			//	newbm.Recycle ();
 			//newbm = null;
 
 			//_imAuthor_S1.SetX (Configuration.getWidth (240));_imAuthor_S1.SetY (Configuration.getHeight (189));
@@ -480,7 +482,7 @@ namespace MLearning.Droid
 			int inixLinea = Configuration.getWidth (93);
 
 			for (int i = 0; i < item_path.Count; i++) {
-				
+
 				_imItem_S1.Add(new ImageView(context));
 				_imItem_S1[i].SetImageBitmap(Bitmap.CreateScaledBitmap (getBitmapFromAsset(item_path[i]), Configuration.getWidth (30), Configuration.getWidth (30), true));
 				//_mainLayout.AddView (_imItem_S1 [i]);
@@ -573,7 +575,7 @@ namespace MLearning.Droid
 
 			//Drawable dr3 = new BitmapDrawable (getBitmapFromAsset("icons/fondonotif.png"));
 			//_contentLLayout_S3.SetBackgroundDrawable(dr3);
-				//_contentLLayout_S3.SetBackgroundColor(Color.ParseColor("#80000000"));
+			//_contentLLayout_S3.SetBackgroundColor(Color.ParseColor("#80000000"));
 			//_mainLayout.AddView (_contentLLayout_S3);
 
 			//_mainLayout.AddView (_contentScrollView_S2);
@@ -665,7 +667,7 @@ namespace MLearning.Droid
 
 
 
-		
+
 			_workspace = new LinearLayout (context);
 			_workspace.LayoutParameters = new LinearLayout.LayoutParams (-1, -1);
 			//_workspace.SetBackgroundColor (Color.ParseColor ("#ffffff"));
@@ -713,6 +715,18 @@ namespace MLearning.Droid
 					}
 
 				}
+
+				if (indexCurso == 2) {
+					if (indexUnidad == 3) {
+						ImageIconMap icon = new ImageIconMap (context);
+						icon.index = i;
+						icon.SetImageBitmap(iconPlay);
+						icon.SetX (Configuration.getWidth (60));
+						linearUnidad.AddView (icon);
+						_listIconMap.Add (icon);
+					}
+				}
+
 				if (indexCurso == 3) {
 					titleUnidad.SetTextSize (textFormat,Configuration.getHeight(55));
 				}
@@ -732,6 +746,7 @@ namespace MLearning.Droid
 
 				TextView descriptionUnidad = new TextView(context);
 				//descriptionUnidad.Text = _listUnidades [i].Description;
+
 				descriptionUnidad.TextFormatted = Html.FromHtml (_listUnidades [i].Description);
 				//descriptionUnidad.Text = _listUnidades [i].Description;
 				descriptionUnidad.Typeface =  Typeface.CreateFromAsset(context.Assets, "fonts/ArcherMediumPro.otf");
