@@ -766,7 +766,9 @@ namespace MLearning.Droid.Views
 			if (_lectorOpen) {
 				_lectorOpen = false;
 				map.hidePlaceInfo ();
+
 				map.titulo_header.Text = map.titulo_map_header;
+				map.header.RemoveAllViews ();
 				map.header.AddView (map._leyendaMap);
 			} else {
 				
