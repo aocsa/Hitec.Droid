@@ -37,7 +37,7 @@ namespace MLearning.Droid.Views
 
 		ProgressDialog _progresD;
 		//	LinearLayout layoutPanelScroll;
-		RelativeLayout mainLayout;
+		RelativeLayout _mainLayout;
 		RelativeLayout mainLayoutIndice;
 		RelativeLayout mainLayoutPages;
 
@@ -105,14 +105,14 @@ namespace MLearning.Droid.Views
 
 		async Task  ini(){
 
-			mainLayout = new RelativeLayout (this);
+			_mainLayout = new RelativeLayout (this);
 
 			_progresD = new ProgressDialog (this);
 			_progresD.SetCancelable (false);
 			_progresD.SetMessage ("Wait please..");
 
-			mainLayout.LayoutParameters = new RelativeLayout.LayoutParams (-1,-1);	
-			mainLayout.SetBackgroundColor(Color.ParseColor("#ffffff"));
+			_mainLayout.LayoutParameters = new RelativeLayout.LayoutParams (-1,-1);	
+			_mainLayout.SetBackgroundColor(Color.ParseColor("#ffffff"));
 
 			mainLayoutIndice = new RelativeLayout (this);
 			mainLayoutIndice.LayoutParameters = new RelativeLayout.LayoutParams (-1,-1);	
@@ -644,7 +644,7 @@ namespace MLearning.Droid.Views
 			mainLayoutPages.AddView (viewPager);
 			mainLayoutPages.SetX (0);
 			mainLayoutPages.SetY (0);
-			mainLayout.AddView (mainLayoutPages);
+			_mainLayout.AddView (mainLayoutPages);
 			LOViewAdapter adapter = new LOViewAdapter (this, listaScroll);
 			viewPager.Adapter = adapter;
 			viewPager.CurrentItem = IndiceSection;

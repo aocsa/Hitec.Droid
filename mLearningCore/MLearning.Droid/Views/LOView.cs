@@ -37,7 +37,7 @@ namespace MLearning.Droid.Views
 
 		ProgressDialog _dialogDownload;
 		//	LinearLayout layoutPanelScroll;
-		RelativeLayout mainLayout;
+		RelativeLayout _mainLayout;
 		RelativeLayout mainLayoutIndice;
 		RelativeLayout mainLayoutPages;
 
@@ -57,6 +57,12 @@ namespace MLearning.Droid.Views
 
 		ViewPager viewPager;
 		ViewPager viewPagerIni;
+
+		public List<string> adsImagesPath = new List<string>();
+		public LinearLayout selectLayout;
+		public LinearLayout _publicidadLayout;
+		public LinearLayout _adLayout;
+		public bool adOpen = false;
 
 		async protected  override  void OnCreate(Bundle bundle)
 		{
@@ -91,30 +97,58 @@ namespace MLearning.Droid.Views
 			_dialogDownload.SetMessage ("Cargando");
 			_dialogDownload.Show ();
 
+			adsImagesPath.Add ("images/ad1.jpg");
+			adsImagesPath.Add ("images/ad2.jpg");
+			adsImagesPath.Add ("images/ad3.jpg");
+
 			await ini();
 			//LoadPagesDataSource ();
 
-			SetContentView (mainLayout);
+			SetContentView (_mainLayout);
 
 			_dialogDownload.Dismiss ();
 		} 
 
+		void showAd(int idAd)
+		{
+			adOpen = true;
+			_adLayout = new LinearLayout (this);
+			_adLayout.LayoutParameters = new LinearLayout.LayoutParams (-1, Configuration.getHeight (255));
+			Drawable dr = new BitmapDrawable (getBitmapFromAsset (adsImagesPath[idAd]));
+			_adLayout.SetBackgroundDrawable (dr);
+			_adLayout.SetY (Configuration.getHeight(1136-85-255));
+			_mainLayout.AddView (_adLayout);
+
+			_adLayout.Click += delegate {
+				String url = "http://www.hi-tec.com/pe/";
+				Intent i = new Intent (Intent.ActionView);
+				i.SetData (Android.Net.Uri.Parse (url));
+				this.StartActivity(i);
+			};
+		}
+
+		void hideAd()
+		{
+			adOpen = false;
+			int numAd = _mainLayout.ChildCount;
+			_mainLayout.RemoveView (_adLayout);
+		}
 
 
 
 		async Task  ini(){
 
-			mainLayout = new RelativeLayout (this);
+			_mainLayout = new RelativeLayout (this);
 
-			mainLayout.LayoutParameters = new RelativeLayout.LayoutParams (-1,-1);	
-			mainLayout.SetBackgroundColor(Color.ParseColor("#ffffff"));
+			_mainLayout.LayoutParameters = new RelativeLayout.LayoutParams (-1,-1);	
+			_mainLayout.SetBackgroundColor(Color.ParseColor("#ffffff"));
 
 			mainLayoutIndice = new RelativeLayout (this);
 			mainLayoutIndice.LayoutParameters = new RelativeLayout.LayoutParams (-1,-1);	
 			mainLayoutIndice.SetBackgroundColor(Color.ParseColor("#ffffff"));
 
 			mainLayoutPages = new RelativeLayout (this);
-			mainLayoutPages.LayoutParameters = new RelativeLayout.LayoutParams (-1,-1);	
+			mainLayoutPages.LayoutParameters = new RelativeLayout.LayoutParams (-1,Configuration.getWidth(1136-85));	
 			mainLayoutPages.SetBackgroundColor(Color.ParseColor("#ffffff"));
 			viewPager = new ViewPager (this);
 			viewPagerIni = new ViewPager (this);
@@ -135,7 +169,7 @@ namespace MLearning.Droid.Views
 			scrollVertical.AddView (layoutPanelScroll);*/
 			//mainLayoutIndice.AddView (scrollVertical);
 			mainLayoutIndice.SetX (0); mainLayoutIndice.SetY (0);
-			mainLayout.AddView (mainLayoutIndice);
+			_mainLayout.AddView (mainLayoutIndice);
 			//mainLayout.AddView (scrollVertical);
 
 			//var vm = this.ViewModel as LOViewModel;
@@ -589,7 +623,26 @@ namespace MLearning.Droid.Views
 			mainLayoutPages.AddView (viewPager);
 			mainLayoutPages.SetX (0);
 			mainLayoutPages.SetY (0);
-			mainLayout.AddView (mainLayoutPages);
+			_mainLayout.AddView (mainLayoutPages);
+
+			_publicidadLayout = new LinearLayout (this);
+			_publicidadLayout.LayoutParameters = new LinearLayout.LayoutParams (-1, Configuration.getHeight (85));
+			Drawable drp = new BitmapDrawable (getBitmapFromAsset ("images/footerad.jpg"));
+			_publicidadLayout.SetBackgroundDrawable (drp);
+			_publicidadLayout.SetY (Configuration.getHeight(1136-85));
+			_mainLayout.AddView (_publicidadLayout);
+			_publicidadLayout.Click += delegate {
+				if (adOpen) {
+
+
+					hideAd ();
+				} else {
+					Random rnd = new Random();
+					showAd (rnd.Next(3));
+				}
+			};
+
+
 			LOViewAdapter adapter = new LOViewAdapter (this, listaScroll);
 			viewPager.Adapter = adapter;
 			//viewPager.CurrentItem = IndiceSection;
