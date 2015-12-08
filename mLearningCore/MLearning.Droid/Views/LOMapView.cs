@@ -20,6 +20,7 @@ using Android.Content.PM;
 using Android.Content;
 using System.Threading;
 using Android.Graphics.Drawables;
+using System.Text.RegularExpressions;
 
 namespace MLearning.Droid.Views
 {
@@ -440,6 +441,15 @@ namespace MLearning.Droid.Views
 			map._placesData.Clear ();
 			var s_listp = vm.LOsInCircle[vm._currentUnidad].stack.StacksList;
 
+			if (s_listp [vm._currentSection].PagesList.Count ==1) {
+				var myHandler = new Handler ();
+				myHandler.Post(()=>{
+					Toast.MakeText (this, "No Disponible", ToastLength.Short).Show();
+				});	
+				OnBackPressed ();
+				return;
+			}
+
 			map.mapUrl = s_listp [vm._currentSection].PagesList [1].page.url_img;
 			map.titulo_map_header = s_listp [vm._currentSection].PagesList [1].page.title;
 
@@ -458,14 +468,31 @@ namespace MLearning.Droid.Views
 					for (int i = 3; i < words.Length; i++) {
 						pos_title += words [i] + " ";
 					}
+				} else {
+					var myHandler = new Handler ();
+					myHandler.Post(()=>{
+						Toast.MakeText (this, "No Disponible", ToastLength.Short).Show();
+					});	
+					OnBackPressed ();
+					return;
 				}
 				int x = 0;
 				int y = 0;
 				int tipo = 0;
 
-				int.TryParse(words [0], out tipo);
-				int.TryParse(words [1], out x);
-				int.TryParse(words [2], out y);
+				if (Regex.IsMatch (words [0], @"^\d+$") && Regex.IsMatch (words [1], @"^\d+$") && Regex.IsMatch (words [2], @"^\d+$")) {
+
+					int.TryParse (words [0], out tipo);
+					int.TryParse (words [1], out x);
+					int.TryParse (words [2], out y);
+				} else {
+					var myHandler = new Handler ();
+					myHandler.Post(()=>{
+						Toast.MakeText (this, "No Disponible", ToastLength.Short).Show();
+					});	
+					OnBackPressed ();
+					return;
+				}
 
 				map._currentPlaces.Add (new PlaceItem{ titulo = pos_title , pathIcon = slides[m].loitemize.loitem[0].loimage, tipoIndex=tipo});
 				map._positionCurrentPlaces.Add (new Tuple<int,int>(x,y));
