@@ -76,15 +76,18 @@ namespace MLearning.Core.ViewModels
 				bool images = item.id == LOID;
 
 				//await LoadPages(i++, images);
-
-				await LoadPages2 (i++, images);
+				 
+				if (LOID == item.id)
+					await LoadPages2 (i, images);
+				i++;
 			}
 
 
 
 			var selectedLOIndex = LOsInCircle.IndexOf(LOsInCircle.Where(lo => lo.lo.id == LOID).First());
 
-			await LoadBackgroundImages();
+			// todo: descomentar? 
+			//await LoadBackgroundImages();
 		}
 
 
@@ -233,8 +236,9 @@ namespace MLearning.Core.ViewModels
 
 				GroupedPagesList.Add (collectionWrapper);
 
-				if (images)
-					UpdatePagesImages (0, collectionWrapper.PagesList);
+				if (this.LOID == item.LO_id)
+					if (images)
+						UpdatePagesImages (0, collectionWrapper.PagesList);
 			}
 
 
@@ -678,11 +682,12 @@ namespace MLearning.Core.ViewModels
 
 
 
+		//todo:  UpdatePagesImages
 		async Task UpdatePagesImages(int index,ObservableCollection<page_wrapper> list)
 		{
 
 
-			IncrementalDownload _manager = new IncrementalDownload(); ;
+			/* IncrementalDownload _manager = new IncrementalDownload(); ;
 
 			_manager.TryLoadByteVector<page_wrapper>(index, list.ToList()
 				, (pos, bytes) =>
@@ -693,7 +698,7 @@ namespace MLearning.Core.ViewModels
 				{
 					return page.page.url_img;
 				});
-
+			*/
 
 		}
 
