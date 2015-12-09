@@ -745,6 +745,7 @@ namespace MLearning.Core.ViewModels
                     if (item.lo.id == learningobj.lo.id)
                     {
                         await FetchLOData(item.lo.id, true);
+						break;
                     }
                     else
                     {
