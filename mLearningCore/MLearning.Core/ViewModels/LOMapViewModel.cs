@@ -86,7 +86,7 @@ namespace MLearning.Core.ViewModels
 
 			var selectedLOIndex = LOsInCircle.IndexOf(LOsInCircle.Where(lo => lo.lo.id == LOID).First());
 
-			await LoadBackgroundImages();
+			//await LoadBackgroundImages();
 		}
 
 
@@ -684,7 +684,7 @@ namespace MLearning.Core.ViewModels
 		{
 
 
-			IncrementalDownload _manager = new IncrementalDownload(); ;
+			/* IncrementalDownload _manager = new IncrementalDownload(); ;
 
 			_manager.TryLoadByteVector<page_wrapper>(index, list.ToList()
 				, (pos, bytes) =>
@@ -694,7 +694,7 @@ namespace MLearning.Core.ViewModels
 				, (page) =>
 				{
 					return page.page.url_img;
-				});
+				}); */
 
 
 		}
