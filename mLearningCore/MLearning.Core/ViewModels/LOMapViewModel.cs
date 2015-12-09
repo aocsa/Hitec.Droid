@@ -70,16 +70,19 @@ namespace MLearning.Core.ViewModels
 			int i = 0;
 			foreach (var item in los_in_Circle)
 			{
-
-				LOsInCircle.Add(new lo_by_circle_wrapper { lo = item,stack =new stack_wrapper { IsLoaded = false }  });
-
+				bool images = item.id == LOID;
+			
+				if (LOID == item.id)
+				{
+					LOsInCircle.Add(new lo_by_circle_wrapper { lo = item,stack =new stack_wrapper { IsLoaded = false }  });
+					await LoadPages2(i++, images);
+				} 
 
 				//Load images if its the selected LO
-				bool images = item.id == LOID;
+			
 
 				//await LoadPages(i++, images);
 
-				await LoadPages2 (i++, images);
 			}
 
 
@@ -235,8 +238,9 @@ namespace MLearning.Core.ViewModels
 
 				GroupedPagesList.Add (collectionWrapper);
 
-				if (images)
-					UpdatePagesImages (0, collectionWrapper.PagesList);
+				if (this.LOID == item.LO_id)
+					if (images)
+						UpdatePagesImages (0, collectionWrapper.PagesList);
 			}
 
 
