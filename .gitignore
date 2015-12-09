@@ -106,3 +106,5 @@ mLearningCore/MLearning.Core/obj/
 mLearningCore/MLearning.Droid/Resources/Resource.Designer.cs
 
 mLearningCore/MLearning.Droid/Resources/Resource.Designer.cs
+
+*.userprefs

@@ -211,22 +211,22 @@ namespace MLearning.Droid
 			List<String> unidad2 = new List<String> ();
 			List<String> unidad3 = new List<String> ();
 
-			unidad1.Add ("images/mapa.png");
-			unidad1.Add ("images/mapa.png");
-			unidad1.Add ("images/mapa.png");
-			unidad1.Add ("images/mapa.png");
+			unidad1.Add ("images/camino0.png");
+			unidad1.Add ("images/camino1.png");
+			unidad1.Add ("images/camino2.png");
+			unidad1.Add ("images/camino3.png");
 
-			unidad2.Add ("images/mapa.png");
-			unidad2.Add ("images/mapa.png");
-			unidad2.Add ("images/mapa.png");
-			unidad2.Add ("images/mapa.png");
-			unidad2.Add ("images/mapa.png");
+			unidad2.Add ("images/salkantay0.png");
+			unidad2.Add ("images/salkantay1.png");
+			unidad2.Add ("images/salkantay2.png");
+			unidad2.Add ("images/salkantay3.png");
+			unidad2.Add ("images/salkantay4.png");
 
-			unidad3.Add ("images/mapa.png");
-			unidad3.Add ("images/mapa.png");
-			unidad3.Add ("images/mapa.png");
-			unidad3.Add ("images/mapa.png");
-			unidad3.Add ("images/mapa.png");
+			unidad3.Add ("images/caminoreal.png");
+			unidad3.Add ("images/choquequirao.png");
+			unidad3.Add ("images/caminoreal.png");
+			unidad3.Add ("images/caminoreal.png");
+			unidad3.Add ("images/caminoreal.png");
 
 
 			_listMapPaths.Add (unidad1);
@@ -323,7 +323,7 @@ namespace MLearning.Droid
 			//mapImage.PivotY = posXY.Item2;
 			//mapImage.ScaleX = 3;
 			//mapImage.ScaleY = 3;
-			mapImage.ZoomTo(2,posXY.Item1,posXY.Item2);
+			mapImage.ZoomTo ((float)1.5, posXY.Item1, posXY.Item2);
 			mapImage.Cutting ();
 		}
 
