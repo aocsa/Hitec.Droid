@@ -23,6 +23,7 @@ namespace MLearning.Droid
 		public List<UnidadItem> _listUnidades = new List<UnidadItem>();
 		ListView  _listViewUnidades;
 		public List<ImageIconMap> _listIconMap = new List<ImageIconMap> ();
+		public List<LinearLayout> _listIconVerMap = new List<LinearLayout> ();
 
 		public LinearLayout _spaceUnidades;
 		public LinearLayout _mapSpace;
@@ -745,12 +746,13 @@ namespace MLearning.Droid
 			_spaceUnidades.RemoveAllViews ();
 			_listLinearUnidades.Clear ();
 			_listIconMap.Clear ();
+			_listIconVerMap.Clear ();
 			int numUnidades = _listUnidades.Count;
 			for (int i = 0; i < numUnidades; i++) 
 			{
 				LinearLayoutLO linearUnidad = new LinearLayoutLO (context);
 				linearUnidad.LayoutParameters = new LinearLayout.LayoutParams (-1, -2);
-				linearUnidad.Orientation = Orientation.Horizontal;
+				linearUnidad.Orientation = Orientation.Vertical;
 				linearUnidad.SetGravity (Android.Views.GravityFlags.CenterVertical);
 				linearUnidad.index = i;
 
@@ -759,19 +761,7 @@ namespace MLearning.Droid
 
 				TextView titleUnidad = new TextView(context);
 				titleUnidad.SetTextSize (textFormat,Configuration.getHeight(42));
-				if (indexCurso == 0) {
-					if (indexUnidad != 3) {
-						ImageIconMap icon = new ImageIconMap (context);
-						icon.index = i;
-						icon.SetImageBitmap(iconMap);
-						icon.SetX (Configuration.getWidth (60));
-						linearUnidad.AddView (icon);
-						_listIconMap.Add (icon);
-					} else {
-						titleUnidad.SetTextSize (textFormat,Configuration.getHeight(55));
-					}
 
-				}
 
 				if (indexCurso == 2) {
 					if (indexUnidad == 3) {
@@ -826,6 +816,38 @@ namespace MLearning.Droid
 				}
 
 				linearUnidad.AddView (linearContenido);
+
+				if (indexCurso == 0) {
+					if (indexUnidad != 3) {
+						
+						if (indexUnidad == 2 && i > 1 ) {
+							
+						} else {
+							
+							LinearLayout test = new LinearLayout (context);
+							test.LayoutParameters = new LinearLayout.LayoutParams (-1, -2);
+							test.SetGravity (Android.Views.GravityFlags.Center);
+							test.Tag = i;
+
+							TextView verMapa = new TextView (context);
+							verMapa.Text = "Ver Mapa";
+							verMapa.Typeface = Typeface.CreateFromAsset (context.Assets, "fonts/ArcherMediumPro.otf");
+							verMapa.SetTextSize (ComplexUnitType.Fraction, Configuration.getHeight (35));
+							verMapa.SetTextColor (Color.ParseColor (Configuration.ListaColores [i % 6]));
+
+							test.AddView (verMapa);
+							linearUnidad.AddView (test);
+							_listIconVerMap.Add (test);
+						}
+
+					} else {
+						titleUnidad.SetTextSize (textFormat,Configuration.getHeight(55));
+					}
+
+
+
+				}
+
 
 				_listLinearUnidades.Add (linearUnidad);
 				LinearLayout separationLinear = new LinearLayout (context);

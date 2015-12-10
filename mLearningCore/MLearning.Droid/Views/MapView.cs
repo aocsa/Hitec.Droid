@@ -323,7 +323,10 @@ namespace MLearning.Droid
 			//mapImage.PivotY = posXY.Item2;
 			//mapImage.ScaleX = 3;
 			//mapImage.ScaleY = 3;
-			mapImage.ZoomTo ((float)1.5, posXY.Item1, posXY.Item2);
+			int x =  950*posXY.Item1/2000;
+			int y =  910*posXY.Item2/2000;
+
+			mapImage.ZoomTo ((float)1.5,x,y );
 			mapImage.Cutting ();
 		}
 

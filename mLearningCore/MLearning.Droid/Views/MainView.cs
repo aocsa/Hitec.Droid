@@ -1415,11 +1415,13 @@ namespace MLearning.Droid.Views
 				if (_currentCurso == 0 && _currentUnidad!=3) {
 
 					for (int i = 0; i < lo._listLinearUnidades.Count; i++) {
-
 						lo._listLinearUnidades [i].Click += lo_item_click;
-						lo._listIconMap [i].Click += map_item_click;
-
 					}
+
+					for (int i = 0; i < lo._listIconVerMap.Count; i++) {
+						lo._listIconVerMap [i].Click += map_item_click;
+					}
+
 				}
 
 				if(_currentCurso==2 && _currentUnidad==3)
@@ -1449,10 +1451,10 @@ namespace MLearning.Droid.Views
 		void map_item_click (object sender, EventArgs e)
 		{
 			_dialogDownload.Show ();
-			var item = sender as ImageIconMap;
+			var item = sender as LinearLayout;
 			vm._currentUnidad = _currentUnidad;
 			vm._currentCurso = _currentCurso;
-			vm._currentSection = item.index;
+			vm._currentSection = (int)item.Tag;
 			vm.OpenLOMapCommand.Execute(vm.LearningOjectsList[_currentUnidad]);
 
 		}
