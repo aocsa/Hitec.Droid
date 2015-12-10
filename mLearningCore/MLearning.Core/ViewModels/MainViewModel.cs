@@ -806,7 +806,7 @@ namespace MLearning.Core.ViewModels
 
 				//Download all the data of the selected LO
 
-				foreach (var item in LearningOjectsList)
+				/*foreach (var item in LearningOjectsList)
 				{
 					if (item.lo.id == learningobj.lo.id)
 					{
@@ -819,7 +819,7 @@ namespace MLearning.Core.ViewModels
 
 
 
-				}
+				}*/
 
 
 				string serialized = JsonConvert.SerializeObject(list);

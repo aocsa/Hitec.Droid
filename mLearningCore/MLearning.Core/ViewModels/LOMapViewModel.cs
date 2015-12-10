@@ -70,23 +70,26 @@ namespace MLearning.Core.ViewModels
 			int i = 0;
 			foreach (var item in los_in_Circle)
 			{
-
-				LOsInCircle.Add(new lo_by_circle_wrapper { lo = item,stack =new stack_wrapper { IsLoaded = false }  });
-
+				bool images = item.id == LOID;
+			
+				if (LOID == item.id)
+				{
+					LOsInCircle.Add(new lo_by_circle_wrapper { lo = item,stack =new stack_wrapper { IsLoaded = false }  });
+					await LoadPages2(i++, images);
+				} 
 
 				//Load images if its the selected LO
-				bool images = item.id == LOID;
+			
 
 				//await LoadPages(i++, images);
 
-				await LoadPages2 (i++, images);
 			}
 
 
 
 			var selectedLOIndex = LOsInCircle.IndexOf(LOsInCircle.Where(lo => lo.lo.id == LOID).First());
 
-			await LoadBackgroundImages();
+			//await LoadBackgroundImages();
 		}
 
 
@@ -235,8 +238,9 @@ namespace MLearning.Core.ViewModels
 
 				GroupedPagesList.Add (collectionWrapper);
 
-				if (images)
-					UpdatePagesImages (0, collectionWrapper.PagesList);
+				if (this.LOID == item.LO_id)
+					if (images)
+						UpdatePagesImages (0, collectionWrapper.PagesList);
 			}
 
 
@@ -684,7 +688,7 @@ namespace MLearning.Core.ViewModels
 		{
 
 
-			IncrementalDownload _manager = new IncrementalDownload(); ;
+			/* IncrementalDownload _manager = new IncrementalDownload(); ;
 
 			_manager.TryLoadByteVector<page_wrapper>(index, list.ToList()
 				, (pos, bytes) =>
@@ -694,7 +698,7 @@ namespace MLearning.Core.ViewModels
 				, (page) =>
 				{
 					return page.page.url_img;
-				});
+				}); */
 
 
 		}
