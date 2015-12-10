@@ -531,7 +531,7 @@ namespace MLearning.Droid.Views
 		{
 			var item = sender as ImageIconMap;
 			map.showFocusMap(item.index);
-			_lectorOpen = true;
+			_lectorOpen = false;
 		}
 		void showPlaceItem(object sender, EventArgs e)
 		{

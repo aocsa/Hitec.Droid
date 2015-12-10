@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿<Properties StartupItem="MLearning.Droid/Hitec.Droid.csproj" RefactoringSettings.EnableRefactorings="True">
   <MonoDevelop.Ide.Workbench ActiveDocument="MLearning.Core/ViewModels/LOMapViewModel.cs">
     <Files>
@@ -11,6 +12,21 @@
       <File FileName="MLearning.Core/Configuration/Constants.cs" Line="44" Column="32" />
       <File FileName="MLearning.Droid/Views/CustomerImageView.cs" Line="120" Column="1" />
       <File FileName="MLearning.Droid/Views/LOView.cs" Line="516" Column="1" />
+=======
+﻿<Properties StartupItem="MLearning.Droid\Hitec.Droid.csproj" RefactoringSettings.EnableRefactorings="True">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.4C3AWN154L014669" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="MLearning.Core\Services\MLearningAzureService.cs">
+    <Files>
+      <File FileName="MLearning.Droid\Views\MainView.cs" Line="1" Column="1" />
+      <File FileName="MLearning.Droid\Views\LOView.cs" Line="1" Column="1" />
+      <File FileName="MLearning.Droid\SplashScreen.cs" Line="1" Column="1" />
+      <File FileName="MLearning.Core\Configuration\Constants.cs" Line="1" Column="1" />
+      <File FileName="MLearning.Droid\Views\WallView.cs" Line="1" Column="1" />
+      <File FileName="MLearning.Droid\Views\MapView.cs" Line="1" Column="1" />
+      <File FileName="MLearning.Droid\Views\frontView.cs" Line="1" Column="1" />
+      <File FileName="c:\Users\ImBonus\Documents\GitHub\HitecFinal\Hitec.Droid\mLearningCore\MLearning.Droid\Views\LOMapView.cs" Line="451" Column="3" />
+      <File FileName="MLearning.Core\Services\MLearningAzureService.cs" Line="171" Column="22" />
+>>>>>>> origin/master
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -45,6 +61,7 @@
       <Breakpoint file="C:\Users\ImBonus\Documents\GitHub\Hitec\Hitec.Droid\mLearningCore\MLearning.Core\ViewModels\LoginViewModel.cs" line="449" column="1" />
       <Breakpoint file="C:\Users\ImBonus\Documents\GitHub\Hitec\Hitec.Droid\mLearningCore\MLearning.Core\ViewModels\LoginViewModel.cs" line="485" column="1" />
       <Breakpoint file="C:\Users\ImBonus\Documents\GitHub\Hitec\Hitec.Droid\mLearningCore\MLearning.Core\ViewModels\LoginViewModel.cs" line="455" column="1" />
+<<<<<<< HEAD
       <Breakpoint file="/Users/aocsa/Documents/proyectos/milton/Hitec.Droid dec 4/mLearningCore/MLearning.Core/ViewModels/MainViewModel.cs" line="731" column="14" />
       <Breakpoint file="/Users/aocsa/Documents/proyectos/milton/Hitec.Droid dec 4/mLearningCore/MLearning.Core/ViewModels/MainViewModel.cs" line="760" column="1" />
       <Breakpoint file="/Users/aocsa/Documents/proyectos/milton/Hitec.Droid dec 4/mLearningCore/MLearning.Core/DownloadCache/CacheService.cs" line="488" column="1" />
@@ -57,6 +74,10 @@
       <Breakpoint file="/Users/aocsa/Documents/proyectos/milton/Hitec.Droid dec 4/mLearningCore/MLearning.Core/DownloadCache/CacheService.cs" line="364" column="2" />
       <Breakpoint file="/Users/aocsa/Documents/proyectos/milton/Hitec.Droid dec 4/mLearningCore/MLearning.Core/ViewModels/LOViewModel.cs" line="191" column="3" />
       <Breakpoint file="/Users/aocsa/Documents/proyectos/milton/Hitec.Droid dec 4/mLearningCore/MLearning.Core/ViewModels/LOViewModel.cs" line="65" column="1" />
+=======
+      <Breakpoint file="c:\Users\ImBonus\Documents\GitHub\HitecFinal\Hitec.Droid\mLearningCore\MLearning.Droid\Views\LOMapView.cs" line="483" column="1" />
+      <Breakpoint file="c:\Users\ImBonus\Documents\GitHub\HitecFinal\Hitec.Droid\mLearningCore\MLearning.Droid\Views\LOMapView.cs" line="442" column="1" />
+>>>>>>> origin/master
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
