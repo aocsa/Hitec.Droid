@@ -187,11 +187,13 @@ namespace MLearning.Droid
 		}
 		public void loadIcons()
 		{
-			int w = Configuration.getWidth (60);
+			int w = Configuration.getWidth (70);
+			int h = Configuration.getWidth (70);
 
 			_leyendaIcon = new List<Bitmap> ();
 			_leyendaIcon = new List<Bitmap> ();
-			_leyendaIcon.Add(Bitmap.CreateScaledBitmap (getBitmapFromAsset ("icons/iconmap1.png"), w, w, true));
+			_leyendaIcon.Add(Bitmap.CreateScaledBitmap (getBitmapFromAsset ("icons/iconmap.png"), w, h, true));
+			/*
 			_leyendaIcon.Add(Bitmap.CreateScaledBitmap (getBitmapFromAsset ("icons/iconmap2.png"), w, w, true));
 			_leyendaIcon.Add(Bitmap.CreateScaledBitmap (getBitmapFromAsset ("icons/iconmap3.png"), w, w, true));
 			_leyendaIcon.Add(Bitmap.CreateScaledBitmap (getBitmapFromAsset ("icons/iconmap4.png"), w, w, true));
@@ -204,6 +206,7 @@ namespace MLearning.Droid
 			_leyendaIcon.Add(Bitmap.CreateScaledBitmap (getBitmapFromAsset ("icons/iconmap10.png"), w, w, true));
 
 			_leyendaIcon.Add(Bitmap.CreateScaledBitmap (getBitmapFromAsset ("icons/iconmap11.png"), w, w, true));
+			*/
 		}
 		public void loadMapas()
 		{
@@ -360,6 +363,7 @@ namespace MLearning.Droid
 			_mainLayout.AddView (header);
 
 			mapImage = new ScaleImageView (context, null);
+			mapImage.LayoutParameters = new LinearLayout.LayoutParams (-1, -1);
 			mapSpace = new LinearLayout (context);
 			mapSpace.LayoutParameters = new LinearLayout.LayoutParams (Configuration.getWidth(640), Configuration.getWidth(640));
 			mapSpace.SetY (Configuration.getHeight (125));
@@ -375,7 +379,7 @@ namespace MLearning.Droid
 */
 			placeSpace = new VerticalScrollView (context);
 			placeSpace.LayoutParameters = new LinearLayout.LayoutParams (-1, Configuration.getHeight(375-85));
-			placeSpace.SetY (Configuration.getHeight (765));
+			placeSpace.SetY (Configuration.getHeight (125)+Configuration.getWidth(640));
 			placeSpace.SetBackgroundColor (Color.White);
 
 			placesContainer = new LinearLayout (context);

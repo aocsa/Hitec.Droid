@@ -318,6 +318,7 @@
     <AndroidResource Include="Resources\drawable\mapIcon.jpg" />
     <AndroidResource Include="Resources\drawable\gradiente11.xml" />
     <AndroidResource Include="Resources\drawable\gradiente22.xml" />
+    <AndroidResource Include="Resources\drawable\transparent.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\Strings.xml" />
@@ -423,6 +424,8 @@
     <AndroidAsset Include="Assets\icons\iconrutas.png" />
     <AndroidAsset Include="Assets\icons\iconservicios.png" />
     <AndroidAsset Include="Assets\icons\iconvidasilvestre.png" />
+    <AndroidAsset Include="Assets\icons\iconmap.png" />
+    <AndroidAsset Include="Assets\icons\pause.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MLearning.Core\MLearning.Core.csproj">

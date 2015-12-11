@@ -23,6 +23,7 @@ using Android.Content;
 using Square.Picasso;
 using MLearningDB;
 using Android.Text;
+using Android.Net;
 
 namespace MLearning.Droid.Views
 {
@@ -43,7 +44,7 @@ namespace MLearning.Droid.Views
 
 		private LOContainerView _foro;
 		public Android.Media.MediaPlayer player;
-
+		public int _currentItemPlayer = -1;
 
 		List<ImageLOView> list;
 
@@ -133,6 +134,14 @@ namespace MLearning.Droid.Views
 		public bool _placesOpen;
 		public bool _playerOn;
 
+		public Bitmap pausePlayer;
+
+		public bool isOnline() {
+			ConnectivityManager connectivityManager = (ConnectivityManager) GetSystemService(ConnectivityService);
+			NetworkInfo activeConnection = connectivityManager.ActiveNetworkInfo;
+			return (activeConnection != null) && activeConnection.IsConnected;
+		}
+
 		protected override void OnCreate(Bundle bundle)
 		{
 			this.Window.AddFlags(WindowManagerFlags.Fullscreen);
@@ -144,12 +153,15 @@ namespace MLearning.Droid.Views
 			_mapOpen = false;
 			_playerOn = false;
 
+
+
 			headersDR.Add (new BitmapDrawable (getBitmapFromAsset("images/header1.png")));
 			headersDR.Add (new BitmapDrawable (getBitmapFromAsset("images/header2.png")));
 			headersDR.Add (new BitmapDrawable (getBitmapFromAsset("images/header3.png")));
 			headersDR.Add (new BitmapDrawable (getBitmapFromAsset("images/header4.png")));
 
 			drBack = new BitmapDrawable (Bitmap.CreateScaledBitmap (getBitmapFromAsset ("images/fondocondiagonalm.png"), 640, 1136, true));
+
 			vm = this.ViewModel as MainViewModel;
 
 			lo = new WallView(this);
@@ -172,6 +184,8 @@ namespace MLearning.Droid.Views
 			Configuration.setWidthPixel (widthInDp);
 			Configuration.setHeigthPixel (heightInDp);
 
+			pausePlayer = Bitmap.CreateScaledBitmap(getBitmapFromAsset("icons/pause.png"),Configuration.getWidth(60),Configuration.getWidth(60),true);
+
 			task = new TaskView (this);
 
 
@@ -181,7 +195,7 @@ namespace MLearning.Droid.Views
 
 			mToolbar = FindViewById<SupportToolbar>(Resource.Id.toolbar);
 			SetSupportActionBar(mToolbar);
-			//mToolbar.SetNavigationIcon (Resource.Drawable.transparent);
+			mToolbar.SetNavigationIcon (Resource.Drawable.transparent);
 
 			mDrawerLayout = FindViewById<DrawerLayout>(Resource.Id.drawer_layout);
 			mLeftDrawer = FindViewById<LinearLayout>(Resource.Id.left_drawer);
@@ -993,6 +1007,7 @@ namespace MLearning.Droid.Views
 
 		public void showHome()
 		{
+			player.Stop ();
 			_currentCurso = 0;
 			try{
 				lo.getWorkSpaceLayout.SetBackgroundColor (Color.Transparent);
@@ -1007,6 +1022,7 @@ namespace MLearning.Droid.Views
 		public void showCurso(int index)
 		{
 			//s_list = new ObservableCollection<MainViewModel.page_collection_wrapper> ();
+			player.Stop();
 
 			if (vm.CirclesList == null) {
 				var myHandler = new Handler ();
@@ -1443,16 +1459,43 @@ namespace MLearning.Droid.Views
 
 		void playSound(object sender, EventArgs e)
 		{
+			if (!isOnline ()) {
+				var myHandler = new Handler ();
+				myHandler.Post(()=>{
+					Toast.MakeText (this, "Sin Conexión", ToastLength.Short).Show();
+				});
+				return;
+			}
+
 			var item = sender as ImageIconMap;
 			vm._currentUnidad = _currentUnidad;
 			vm._currentCurso = _currentCurso;
 			vm._currentSection = item.index;
-			StartPlayer (lo._listUnidades[item.index].Description);
+
+			if (_playerOn) {
+				player.Stop ();
+
+				if (_currentItemPlayer == item.index) {
+					item.SetImageBitmap (lo.iconPlay);
+					_playerOn = false;
+					return;
+				}
+
+			}
+
+			if (_currentItemPlayer != -1) {
+				lo._listIconMap [_currentItemPlayer].SetImageBitmap (lo.iconPlay);
+			}
+
+			item.SetImageBitmap (pausePlayer);
+			_currentItemPlayer = item.index;
+
+			StartPlayer (lo._listUnidades[item.index].Description, item);
 		}
 
 
 
-		public void StartPlayer(String  filePath)
+		public void StartPlayer(String  filePath, ImageIconMap item)
 		{
 			if (player == null) {
 				player = new Android.Media.MediaPlayer();
@@ -1462,9 +1505,22 @@ namespace MLearning.Droid.Views
 				player.SetDataSource(url);
 				player.Prepare();
 				player.Start();
+
+				player.Completion += delegate {
+
+					item.SetImageBitmap(lo.iconPlay);
+					//setPlayerIcon();
+					_playerOn = false;
+				};
+
 				_playerOn = true;
 
 			}
+		}
+
+		public void setPlayerIcon()
+		{
+			player.Reset ();
 		}
 
 		void loadSection(){
