@@ -192,8 +192,12 @@ namespace MLearning.Droid
 
 			_leyendaIcon = new List<Bitmap> ();
 			_leyendaIcon = new List<Bitmap> ();
+<<<<<<< HEAD
 			_leyendaIcon.Add(Bitmap.CreateScaledBitmap (getBitmapFromAsset ("icons/iconmap.png"), w, h, true));
 			/*
+=======
+			_leyendaIcon.Add(Bitmap.CreateScaledBitmap (getBitmapFromAsset ("icons/iconmap.png"), w, w, true));
+>>>>>>> fa62cd5df4018282126865a5d2dafbacc754dddc
 			_leyendaIcon.Add(Bitmap.CreateScaledBitmap (getBitmapFromAsset ("icons/iconmap2.png"), w, w, true));
 			_leyendaIcon.Add(Bitmap.CreateScaledBitmap (getBitmapFromAsset ("icons/iconmap3.png"), w, w, true));
 			_leyendaIcon.Add(Bitmap.CreateScaledBitmap (getBitmapFromAsset ("icons/iconmap4.png"), w, w, true));
@@ -541,7 +545,8 @@ namespace MLearning.Droid
 
 				ImageIconMap icon = new ImageIconMap (context);
 				icon.LayoutParameters = new LinearLayout.LayoutParams (Configuration.getWidth (60), Configuration.getWidth (60));
-				icon.index = i;
+
+				icon.index = 0;
 				icon.SetImageBitmap(_leyendaIcon[item.tipoIndex]);
 				//icon.SetPadding (Configuration.getWidth (20), ,0,0);
 				icon.SetX(Configuration.getWidth (30));

@@ -438,7 +438,9 @@ namespace MLearning.Droid.Views
 			
 			map._currentPlaces.Clear ();
 			map._placesData.Clear ();
-			var s_listp = vm.LOsInCircle[vm._currentUnidad].stack.StacksList;
+			//var s_listp = vm.LOsInCircle[vm._currentUnidad].stack.StacksList;
+			var s_listp = vm.LOsInCircle[0].stack.StacksList;
+
 
 			if (s_listp [vm._currentSection].PagesList.Count ==1) {
 				var myHandler = new Handler ();
@@ -460,7 +462,7 @@ namespace MLearning.Droid.Views
 			for (int m = 1; m < slides.Count; m++) {
 				
 				string pos_title = slides [m].lotitle;
-				string[] words = pos_title.Split (' ');
+				string[] words = pos_title.Split (' ', '\t');
 
 				if (words.Length >= 3) {
 					pos_title = "";

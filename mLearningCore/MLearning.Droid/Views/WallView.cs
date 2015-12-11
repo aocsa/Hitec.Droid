@@ -829,9 +829,12 @@ namespace MLearning.Droid
 							test.LayoutParameters = new LinearLayout.LayoutParams (-1, -2);
 							test.SetGravity (Android.Views.GravityFlags.Center);
 							test.Tag = i;
+							test.SetX( Configuration.getWidth (100));
+							//test.SetPadding (Configuration.getWidth(30), Configuration.getWidth (25), Configuration.getWidth(30), Configuration.getWidth (25));
+
 
 							TextView verMapa = new TextView (context);
-							verMapa.Text = "Ver Mapa";
+							verMapa.Text = "* Ver Mapa";
 							verMapa.Typeface = Typeface.CreateFromAsset (context.Assets, "fonts/ArcherMediumPro.otf");
 							verMapa.SetTextSize (ComplexUnitType.Fraction, Configuration.getHeight (35));
 							verMapa.SetTextColor (Color.ParseColor (Configuration.ListaColores [i % 6]));
