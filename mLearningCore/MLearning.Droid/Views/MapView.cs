@@ -323,8 +323,8 @@ namespace MLearning.Droid
 			//mapImage.PivotY = posXY.Item2;
 			//mapImage.ScaleX = 3;
 			//mapImage.ScaleY = 3;
-			int x =  950*posXY.Item1/2000;
-			int y =  910*posXY.Item2/2000;
+			int x =  950*posXY.Item1/1000;
+			int y =  900*posXY.Item2/1000;
 
 			mapImage.ZoomTo ((float)1.5,x,y );
 			mapImage.Cutting ();
@@ -438,23 +438,37 @@ namespace MLearning.Droid
 			int space = Configuration.getWidth (15);
 			var extraInfo = _placesData [position].placeExtraInfo;
 			for (int i = 0; i < extraInfo.Count; i++) {
-				TextView detalle = new TextView (context);
-				detalle.SetTextSize (ComplexUnitType.Fraction, Configuration.getHeight(32));
-				detalle.Typeface =  Typeface.CreateFromAsset(context.Assets, "fonts/ArcherMediumPro.otf");
+				
 
-
-				detalle.Text = extraInfo [i].detalle;
+				bool flagSpace = false;
 
 				String url = extraInfo [i].url;
-				ImageView image = new ImageView (context);
+
 				if(extraInfo [i].detalle!=null)
 				{
-					image.SetPadding (0, space, 0, space);
+					TextView detalle = new TextView (context);
+					detalle.SetTextSize (ComplexUnitType.Fraction, Configuration.getHeight(32));
+					detalle.Typeface =  Typeface.CreateFromAsset(context.Assets, "fonts/ArcherMediumPro.otf");
+					detalle.Text = extraInfo [i].detalle;
+					placesInfoLayout.AddView (detalle);
+					flagSpace = true;
+
+				}
+				 
+				if(url!=null){
+
+
+					ImageView image = new ImageView (context);
+					Picasso.With (context).Load (url).Placeholder(context.Resources.GetDrawable (Resource.Drawable.progress_animation)).Resize(Configuration.getWidth(640),Configuration.getHeight(640)).CenterInside().Into (image);
+					placesInfoLayout.AddView (image);
+
+					if (flagSpace) {
+						image.SetPadding (0,space,0,space);
+					}
+
 				}
 
-				Picasso.With (context).Load (url).Placeholder(context.Resources.GetDrawable (Resource.Drawable.progress_animation)).Resize(Configuration.getWidth(640),Configuration.getHeight(640)).CenterInside().Into (image);
-				placesInfoLayout.AddView (detalle);
-				placesInfoLayout.AddView (image);
+
 
 			}
 			placesInfoLayout.SetBackgroundColor (Color.White);

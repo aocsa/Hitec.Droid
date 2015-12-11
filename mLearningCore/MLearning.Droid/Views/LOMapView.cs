@@ -76,10 +76,9 @@ namespace MLearning.Droid.Views
 
 
 			int tam = Configuration.getWidth (80);
-			bm_user = Configuration.getRoundedShape(Bitmap.CreateScaledBitmap(getBitmapFromAsset ("icons/nouser.png"), tam,tam, true)
-				,tam,tam);
+			//bm_user = Configuration.getRoundedShape(Bitmap.CreateScaledBitmap(getBitmapFromAsset ("icons/nouser.png"), tam,tam, true),tam,tam);
 
-			bmLike = Bitmap.CreateScaledBitmap (getBitmapFromAsset ("images/like.png"), Configuration.getWidth (43), Configuration.getWidth (35), true);
+			//bmLike = Bitmap.CreateScaledBitmap (getBitmapFromAsset ("images/like.png"), Configuration.getWidth (43), Configuration.getWidth (35), true);
 
 			drBack = new BitmapDrawable(Bitmap.CreateScaledBitmap (getBitmapFromAsset ("images/fondocondiagonalm.png"), 640, 1136, true));
 

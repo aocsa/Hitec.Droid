@@ -303,7 +303,7 @@ namespace MLearning.Droid
 			adsImagesPath.Add ("images/ad3.jpg");
 
 
-			iconMap = Bitmap.CreateScaledBitmap (getBitmapFromAsset ("icons/iconmap.png"), Configuration.getWidth (60), Configuration.getWidth (80), true);
+			//iconMap = Bitmap.CreateScaledBitmap (getBitmapFromAsset ("icons/iconmap.png"), Configuration.getWidth (60), Configuration.getWidth (80), true);
 			iconPlay = Bitmap.CreateScaledBitmap (getBitmapFromAsset ("icons/playc.png"), Configuration.getWidth (60), Configuration.getWidth (60), true);
 			ini ();
 
@@ -542,14 +542,14 @@ namespace MLearning.Droid
 			for (int i = 0; i < item_path.Count; i++) {
 
 				_imItem_S1.Add(new ImageView(context));
-				_imItem_S1[i].SetImageBitmap(Bitmap.CreateScaledBitmap (getBitmapFromAsset(item_path[i]), Configuration.getWidth (30), Configuration.getWidth (30), true));
+				//_imItem_S1[i].SetImageBitmap(Bitmap.CreateScaledBitmap (getBitmapFromAsset(item_path[i]), Configuration.getWidth (30), Configuration.getWidth (30), true));
 				//_mainLayout.AddView (_imItem_S1 [i]);
 				_imItem_S1 [i].SetX (inixItemIM+(i*crecIM));_imItem_S1 [i].SetY (Configuration.getHeight(602));
 
 
 				if (i != item_path.Count - 1) {
 					ImageView linea = new ImageView (context);
-					linea.SetImageBitmap (Bitmap.CreateScaledBitmap (getBitmapFromAsset ("icons/lineatareas.png"), 1, Configuration.getHeight (68), true));
+					//linea.SetImageBitmap (Bitmap.CreateScaledBitmap (getBitmapFromAsset ("icons/lineatareas.png"), 1, Configuration.getHeight (68), true));
 					//_mainLayout.AddView (linea);
 					linea.SetX (inixLinea + (i * crecIM));
 					linea.SetY (Configuration.getHeight (605));
@@ -672,13 +672,13 @@ namespace MLearning.Droid
 			botton_icon_path.Add ("icons/btnmap.png");
 
 			_imItems_S4.Add (new ImageView (context));
-			_imItems_S4[0].SetImageBitmap(Bitmap.CreateScaledBitmap (getBitmapFromAsset(botton_icon_path[0]), Configuration.getWidth (40), Configuration.getWidth (40), true));
+			//_imItems_S4[0].SetImageBitmap(Bitmap.CreateScaledBitmap (getBitmapFromAsset(botton_icon_path[0]), Configuration.getWidth (40), Configuration.getWidth (40), true));
 			//_mainLayout.AddView (_imItems_S4[0]);
 			_imItems_S4[0].SetX (Configuration.getWidth(58));_imItems_S4[0].SetY (Configuration.getHeight(1069));
 			_imItems_S4 [0].Visibility = Android.Views.ViewStates.Invisible;
 
 			_imItems_S4.Add (new ImageView (context));
-			_imItems_S4[1].SetImageBitmap(Bitmap.CreateScaledBitmap (getBitmapFromAsset(botton_icon_path[1]), Configuration.getWidth (78), Configuration.getWidth (55), true));
+			//_imItems_S4[1].SetImageBitmap(Bitmap.CreateScaledBitmap (getBitmapFromAsset(botton_icon_path[1]), Configuration.getWidth (78), Configuration.getWidth (55), true));
 			//_mainLayout.AddView (_imItems_S4[1]);
 			_imItems_S4[1].SetX (Configuration.getWidth(169));_imItems_S4[1].SetY (Configuration.getHeight(1069));
 			_imItems_S4 [1].Visibility = Android.Views.ViewStates.Invisible;
@@ -687,7 +687,7 @@ namespace MLearning.Droid
 
 
 			_imItems_S4.Add (new ImageView (context));
-			_imItems_S4[2].SetImageBitmap(Bitmap.CreateScaledBitmap (getBitmapFromAsset(botton_icon_path[2]), Configuration.getWidth (80), Configuration.getWidth (80), true));
+			//_imItems_S4[2].SetImageBitmap(Bitmap.CreateScaledBitmap (getBitmapFromAsset(botton_icon_path[2]), Configuration.getWidth (80), Configuration.getWidth (80), true));
 			//_mainLayout.AddView (_imItems_S4 [2]);
 			_imItems_S4[2].SetX (Configuration.getWidth(297));_imItems_S4[2].SetY (Configuration.getHeight(1050));
 			_imItems_S4 [2].Visibility = Android.Views.ViewStates.Invisible;
@@ -695,14 +695,14 @@ namespace MLearning.Droid
 
 
 			_imItems_S4.Add (new ImageView (context));
-			_imItems_S4[3].SetImageBitmap(Bitmap.CreateScaledBitmap (getBitmapFromAsset(botton_icon_path[3]), Configuration.getWidth (30), Configuration.getWidth (51), true));
+			//_imItems_S4[3].SetImageBitmap(Bitmap.CreateScaledBitmap (getBitmapFromAsset(botton_icon_path[3]), Configuration.getWidth (30), Configuration.getWidth (51), true));
 			//_mainLayout.AddView (_imItems_S4[3]);
 			_imItems_S4[3].SetX (Configuration.getWidth(421));_imItems_S4[3].SetY (Configuration.getHeight(1069));
 			_imItems_S4 [3].Visibility = Android.Views.ViewStates.Invisible;
 
 
 			_imItems_S4.Add (new ImageView (context));
-			_imItems_S4[4].SetImageBitmap(Bitmap.CreateScaledBitmap (getBitmapFromAsset(botton_icon_path[4]), Configuration.getWidth (30), Configuration.getWidth (40), true));
+			//_imItems_S4[4].SetImageBitmap(Bitmap.CreateScaledBitmap (getBitmapFromAsset(botton_icon_path[4]), Configuration.getWidth (30), Configuration.getWidth (40), true));
 			//_mainLayout.AddView (_imItems_S4 [4]);
 			_imItems_S4[4].SetX (Configuration.getWidth(540));_imItems_S4[4].SetY (Configuration.getHeight(1069));
 			_imItems_S4 [4].Visibility = Android.Views.ViewStates.Invisible;
@@ -765,6 +765,7 @@ namespace MLearning.Droid
 
 				if (indexCurso == 2) {
 					if (indexUnidad == 3) {
+						linearUnidad.Orientation = Orientation.Horizontal;
 						ImageIconMap icon = new ImageIconMap (context);
 						icon.index = i;
 						icon.SetImageBitmap(iconPlay);
