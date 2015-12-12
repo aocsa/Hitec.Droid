@@ -24,6 +24,7 @@ using Square.Picasso;
 using MLearningDB;
 using Android.Text;
 using Android.Net;
+using Android.Media;
 
 namespace MLearning.Droid.Views
 {
@@ -362,41 +363,41 @@ namespace MLearning.Droid.Views
 			linearPendiente.LayoutParameters = new LinearLayout.LayoutParams (Configuration.getWidth (30), Configuration.getWidth (30));
 			linearTxtValorBarra.LayoutParameters = new LinearLayout.LayoutParams (-1, -2);
 
-			linearBarraCurso.Orientation = Orientation.Vertical;
+			linearBarraCurso.Orientation = Android.Widget.Orientation.Vertical;
 			linearBarraCurso.SetGravity (GravityFlags.Center);
 
-			linearTxtValorBarra.Orientation = Orientation.Vertical;
+			linearTxtValorBarra.Orientation = Android.Widget.Orientation.Vertical;
 			linearTxtValorBarra.SetGravity (GravityFlags.Center);
 			txtValorBarra.Gravity = GravityFlags.Center;
 
-			linearCurse.Orientation = Orientation.Horizontal;
+			linearCurse.Orientation = Android.Widget.Orientation.Horizontal;
 			linearCurse.SetGravity (GravityFlags.CenterVertical);
 
-			linearTask.Orientation = Orientation.Horizontal;
+			linearTask.Orientation = Android.Widget.Orientation.Horizontal;
 			linearTask.SetGravity (GravityFlags.CenterVertical);
 
-			linearSchool.Orientation = Orientation.Horizontal;
+			linearSchool.Orientation = Android.Widget.Orientation.Horizontal;
 
-			linearUserData.Orientation = Orientation.Vertical;
+			linearUserData.Orientation = Android.Widget.Orientation.Vertical;
 			linearUserData.SetGravity (GravityFlags.Center);
 
-			linearUser.Orientation = Orientation.Vertical;
+			linearUser.Orientation = Android.Widget.Orientation.Vertical;
 			linearUser.SetGravity (GravityFlags.CenterHorizontal);
 
-			linearListCurso.Orientation = Orientation.Vertical;
+			linearListCurso.Orientation = Android.Widget.Orientation.Vertical;
 
-			linearListTask.Orientation = Orientation.Vertical;
+			linearListTask.Orientation = Android.Widget.Orientation.Vertical;
 
-			linearListTaskTop.Orientation = Orientation.Vertical;
-			linearListRutas.Orientation = Orientation.Horizontal;
-			linearListTaskBotton.Orientation = Orientation.Vertical;
+			linearListTaskTop.Orientation = Android.Widget.Orientation.Vertical;
+			linearListRutas.Orientation = Android.Widget.Orientation.Horizontal;
+			linearListTaskBotton.Orientation = Android.Widget.Orientation.Vertical;
 
 
 			linearListRutas.SetGravity (GravityFlags.Center);
 
-			linearList.Orientation = Orientation.Vertical;
+			linearList.Orientation = Android.Widget.Orientation.Vertical;
 
-			linearPendiente.Orientation = Orientation.Horizontal;
+			linearPendiente.Orientation = Android.Widget.Orientation.Horizontal;
 			linearPendiente.SetGravity (GravityFlags.Center);
 			//linearList.SetGravity (GravityFlags.CenterVertical);
 
@@ -1105,7 +1106,7 @@ namespace MLearning.Droid.Views
 		{
 			linearinfo1 = new LinearLayout (this);
 			linearinfo1.LayoutParameters = new LinearLayout.LayoutParams (-1, -2);
-			linearinfo1.Orientation = Orientation.Horizontal;
+			linearinfo1.Orientation = Android.Widget.Orientation.Horizontal;
 			linearinfo1.SetGravity (GravityFlags.CenterHorizontal);
 
 			List<String> items = new List<string> ();
@@ -1142,7 +1143,7 @@ namespace MLearning.Droid.Views
 
 				LinearLayout itemLayoutmp = new LinearLayout (this);
 				itemLayoutmp.LayoutParameters = new LinearLayout.LayoutParams (-2, -2);
-				itemLayoutmp.Orientation = Orientation.Horizontal;
+				itemLayoutmp.Orientation = Android.Widget.Orientation.Horizontal;
 				itemLayoutmp.SetGravity (GravityFlags.CenterVertical);
 				itemLayoutmp.SetPadding(spacing, 0, spacing, 0);
 
@@ -1502,16 +1503,24 @@ namespace MLearning.Droid.Views
 			} else {
 				player.Reset();
 				String url = Html.FromHtml (filePath).ToString();
-				player.SetDataSource(url);
-				player.Prepare();
-				player.Start();
+				//player.SetDataSource(url);
+				//player.SetDataSourceAsync(url);
 
+
+				player.SetAudioStreamType(Stream.Music);
+				player.Prepared += (sender, args) => player.Start();
+				 
 				player.Completion += delegate {
 
 					item.SetImageBitmap(lo.iconPlay);
 					//setPlayerIcon();
 					_playerOn = false;
+					player.Stop();
 				};
+
+				player.SetDataSourceAsync( url );
+
+				player.PrepareAsync();
 
 				_playerOn = true;
 

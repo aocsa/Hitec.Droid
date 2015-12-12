@@ -55,6 +55,13 @@ namespace Core.Repositories
 
 			TryGetTableUpdates();
 
+			int i = 0;
+
+			i++;
+
+
+			TryGetTableUpdates();
+
 
 		}
 		public WAMSRepositoryService()
@@ -226,7 +233,7 @@ namespace Core.Repositories
 
 			//var result = await MobileService.GetTable<table_update>().Where(t => t.table_name == classname).ToListAsync();
 
-			await TryGetTableUpdates();
+
 
 			var result = _liteConnection.Table<table_update>().Where(t => t.table_name == classname).ToList();
 
