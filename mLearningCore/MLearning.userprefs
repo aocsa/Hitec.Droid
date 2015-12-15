@@ -1,6 +1,8 @@
-﻿<Properties StartupItem="MLearning.Droid/Hitec.Droid.csproj">
+﻿<Properties StartupItem="MLearning.Droid\Hitec.Droid.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Release" PreferredExecutionTarget="Android.4C3AWN154L014669" />
   <MonoDevelop.Ide.Workbench>
     <Files>
+<<<<<<< HEAD
       <File FileName="MLearning.Droid/Views/WallView.cs" Line="845" Column="8" />
       <File FileName="MLearning.Core/ViewModels/LOMapViewModel.cs" Line="80" Column="5" />
       <File FileName="MLearning.Droid/Views/LOMapView.cs" Line="150" Column="19" />
@@ -20,12 +22,24 @@
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+=======
+      <File FileName="MLearning.Core\DownloadCache\CacheService.cs" Line="1" Column="1" />
+      <File FileName="MLearning.Droid\Views\MainView.cs" Line="1421" Column="1" />
+      <File FileName="MLearning.Droid\Views\LOMapView.cs" Line="1" Column="1" />
+      <File FileName="MLearning.Droid\Views\MapView.cs" Line="1" Column="1" />
+      <File FileName="MLearning.Core\ViewModels\LOMapViewModel.cs" Line="1" Column="1" />
+      <File FileName="MLearning.Core\Configuration\Constants.cs" Line="1" Column="1" />
+      <File FileName="MLearning.Core\Classes\PageParser.cs" Line="1" Column="1" />
+      <File FileName="MLearning.Core\ViewModels\MainViewModel.cs" Line="1" Column="1" />
+      <File FileName="MLearning.Core\Services\IMLearningService.cs" Line="1" Column="1" />
+      <File FileName="MLearning.Droid\Views\WallView.cs" Line="1" Column="1" />
+      <File FileName="MLearning.Droid\Views\CustomerImageView.cs" Line="164" Column="4" />
+      <File FileName="MLearning.Droid\Views\Template1.cs" Line="266" Column="125" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+>>>>>>> origin/master
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore>
-      <Breakpoint file="/Users/aocsa/Documents/proyectos/milton/Hitec.Droid dec 4/mLearningCore/MLearning.Droid/Views/MainView.cs" line="764" column="1" />
-      <Breakpoint file="/Users/aocsa/Documents/proyectos/milton/Hitec.Droid dec 4/mLearningCore/MLearning.Core/ViewModels/MainViewModel.cs" line="1269" column="1" />
-      <Breakpoint file="/Users/aocsa/Documents/proyectos/milton/Hitec.Droid dec 4/mLearningCore/MLearning.Core/ViewModels/MainViewModel.cs" line="1284" column="10" />
-    </BreakpointStore>
+    <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>
