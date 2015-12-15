@@ -52,8 +52,6 @@ namespace MLearning.Droid
 			background = new LinearLayout (context);
 			relTemp = new LinearLayout(context);
 
-			txtDescription.LayoutParameters = new LinearLayout.LayoutParams (-1, -2);
-			txtTitle.LayoutParameters = new LinearLayout.LayoutParams (-1, -2);
 
 			//LinearLayout.LayoutParams paramL = new new LinearLayout.LayoutParams (Configuration.getWidth (530), Configuration.getHeight (356));
 
@@ -79,7 +77,7 @@ namespace MLearning.Droid
 
 			relTemp.AddView (background);
 			int space = Configuration.getWidth (30);
-			//relTemp.SetPadding (space, 0, space, 0);
+			relTemp.SetPadding (space, 0, space, 0);
 
 			//txtTitle.SetTextColor (Color.ParseColor("#424242"));
 			//txtDescription.SetTextColor(Color.ParseColor("#424242"));
@@ -99,9 +97,8 @@ namespace MLearning.Droid
 
 			image.AddView (relTemp);
 			image.AddView (imBack);
-			//imBack.SetPadding(space,0,space,0);
+			imBack.SetPadding(space,space,space,space);
 			this.AddView (image);
-			this.SetPadding (space, 0, space, 0);
 			//this.AddView (background);
 
 
@@ -111,11 +108,7 @@ namespace MLearning.Droid
 		public String Title{
 			get{ return _title;}
 			set{ _title = value;
-				if (_title == null) {
-					background.RemoveView (txtTitle);
-				} else {
-					txtTitle.Text = _title;
-				}
+				txtTitle.Text = _title;
 			}
 
 		}
@@ -124,11 +117,7 @@ namespace MLearning.Droid
 		public String Description{
 			get{ return _description;}
 			set{ _description = value;
-				if (_description == null) {
-					background.RemoveView (txtDescription);
-				} else {
-					txtDescription.TextFormatted = Html.FromHtml (_description);
-				}
+				txtDescription.TextFormatted = Html.FromHtml (_description);
 				//txtDescription.Text = _description;
 			}
 
@@ -147,7 +136,7 @@ namespace MLearning.Droid
 				//imBack.SetImageBitmap (Bitmap.CreateScaledBitmap (bm, Configuration.getWidth (582), Configuration.getHeight (394), true));
 				//bm = null;
 
-				Picasso.With (context).Load (_imagen).Placeholder(context.Resources.GetDrawable (Resource.Drawable.progress_animation)).Resize(Configuration.getWidth(640),Configuration.getWidth(640)).CenterInside().Into (imBack);
+				Picasso.With (context).Load (_imagen).Resize(Configuration.getWidth(640),Configuration.getHeight(640)).CenterInside().Into (imBack);
 
 				/*Task task = new Task (DownloadImage);
 				task.Start();

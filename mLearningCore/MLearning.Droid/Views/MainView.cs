@@ -24,13 +24,7 @@ using Square.Picasso;
 using MLearningDB;
 using Android.Text;
 using Android.Net;
-<<<<<<< HEAD
 using Android.Media;
-=======
-using Core.DownloadCache;
-using Core.Session;
-
->>>>>>> origin/master
 
 namespace MLearning.Droid.Views
 {
@@ -1412,15 +1406,6 @@ namespace MLearning.Droid.Views
 					});
 				}
 
-				if (_currentCurso == 0 && _currentUnidad == 1) {
-					var a = lo._listUnidades[4];
-					var b = lo._listUnidades[2];
-					var c = lo._listUnidades[3];
-					lo._listUnidades [2] = a;
-					lo._listUnidades [3] = b;
-					lo._listUnidades [4] = c;
-				}
-
 
 				lo.initUnidades (_currentCurso,_currentUnidad);
 
@@ -1475,10 +1460,6 @@ namespace MLearning.Droid.Views
 
 		void playSound(object sender, EventArgs e)
 		{
-
-
-
-
 			if (!isOnline ()) {
 				var myHandler = new Handler ();
 				myHandler.Post(()=>{
@@ -1513,52 +1494,17 @@ namespace MLearning.Droid.Views
 			StartPlayer (lo._listUnidades[item.index].Description, item);
 		}
 
-		private void playMp3(byte[] mp3SoundByteArray) {
-			try {
-				// create temp file that will hold byte array
-				Java.IO.File tempMp3 = Java.IO.File.CreateTempFile("kurchina", "mp3", CacheDir);
-				tempMp3.DeleteOnExit();
-				Java.IO.FileOutputStream fos = new Java.IO.FileOutputStream(tempMp3);
-				fos.Write(mp3SoundByteArray);
-				fos.Close();
-
-				Java.IO.FileInputStream fis = new Java.IO.FileInputStream(tempMp3);
-				player.SetDataSource(fis.FD);
-
-				player.Prepare();
-				player.Start();
-			} catch (Java.IO.IOException ex) {
-				String s = ex.ToString ();
-				ex.PrintStackTrace ();
-			}
-		}
 
 
-		async public void StartPlayer(String  filePath, ImageIconMap item)
+		public void StartPlayer(String  filePath, ImageIconMap item)
 		{
-			_dialogDownload = new ProgressDialog (this);
-			_dialogDownload.SetCancelable (false);
-			_dialogDownload.SetMessage ("Descargando Audio");
-			_dialogDownload.Show ();
-			CacheService cache = CacheService.Init(SessionService.GetCredentialFileName(), "user_pref", "cache.db");
-
-
-
-			
 			if (player == null) {
 				player = new Android.Media.MediaPlayer();
 			} else {
 				player.Reset();
 				String url = Html.FromHtml (filePath).ToString();
-<<<<<<< HEAD
 				//player.SetDataSource(url);
 				//player.SetDataSourceAsync(url);
-=======
-				var bytesAndPath = await cache.tryGetResource(url);
-				_dialogDownload.Dismiss ();
-
-				playMp3 (bytesAndPath.Item1);
->>>>>>> origin/master
 
 
 				player.SetAudioStreamType(Stream.Music);
