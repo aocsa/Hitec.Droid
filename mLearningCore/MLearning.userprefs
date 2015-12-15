@@ -1,50 +1,23 @@
-﻿<Properties StartupItem="MLearning.Droid/Hitec.Droid.csproj">
+﻿<Properties StartupItem="MLearning.Droid\Hitec.Droid.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Release" PreferredExecutionTarget="Android.4C3AWN154L014669" />
   <MonoDevelop.Ide.Workbench>
     <Files>
-<<<<<<< HEAD
-      <File FileName="MLearning.Droid\Views\MapView.cs" Line="189" Column="4" />
-      <File FileName="MLearning.Droid\Views\WallView.cs" Line="1" Column="1" />
-      <File FileName="c:\Users\ImBonus\Documents\GitHub\HitecFinal\Hitec.Droid\mLearningCore\MLearning.Core\ViewModels\MainViewModel.cs" Line="1" Column="1" />
-      <File FileName="MLearning.Droid\Views\LoginView.cs" Line="1" Column="1" />
-      <File FileName="MLearning.Droid\Views\MainView.cs" Line="1" Column="1" />
-      <File FileName="c:\Users\ImBonus\Documents\GitHub\HitecFinal\Hitec.Droid\mLearningCore\MLearning.Droid\Views\ItemUser.cs" Line="1" Column="1" />
-      <File FileName="MLearning.Droid\Views\TaskAdapter.cs" Line="1" Column="1" />
-      <File FileName="c:\Users\ImBonus\Documents\GitHub\HitecFinal\Hitec.Droid\mLearningCore\MLearning.Droid\Views\LOView.cs" Line="1" Column="1" />
+      <File FileName="MLearning.Core\DownloadCache\CacheService.cs" Line="1" Column="1" />
+      <File FileName="MLearning.Droid\Views\MainView.cs" Line="1421" Column="1" />
       <File FileName="MLearning.Droid\Views\LOMapView.cs" Line="1" Column="1" />
-=======
-      <File FileName="MLearning.Droid/Views/WallView.cs" Line="845" Column="8" />
-      <File FileName="MLearning.Core/ViewModels/LOMapViewModel.cs" Line="80" Column="5" />
-      <File FileName="MLearning.Droid/Views/LOMapView.cs" Line="150" Column="19" />
-      <File FileName="MLearning.Droid/Views/Configuration.cs" Line="36" Column="21" />
-      <File FileName="MLearning.Core/ViewModels/MainViewModel.cs" Line="1284" Column="1" />
-      <File FileName="MLearning.Droid/Views/MainView.cs" Line="758" Column="4" />
->>>>>>> fa62cd5df4018282126865a5d2dafbacc754dddc
+      <File FileName="MLearning.Droid\Views\MapView.cs" Line="1" Column="1" />
+      <File FileName="MLearning.Core\ViewModels\LOMapViewModel.cs" Line="1" Column="1" />
+      <File FileName="MLearning.Core\Configuration\Constants.cs" Line="1" Column="1" />
+      <File FileName="MLearning.Core\Classes\PageParser.cs" Line="1" Column="1" />
+      <File FileName="MLearning.Core\ViewModels\MainViewModel.cs" Line="1" Column="1" />
+      <File FileName="MLearning.Core\Services\IMLearningService.cs" Line="1" Column="1" />
+      <File FileName="MLearning.Droid\Views\WallView.cs" Line="1" Column="1" />
+      <File FileName="MLearning.Droid\Views\CustomerImageView.cs" Line="164" Column="4" />
+      <File FileName="MLearning.Droid\Views\Template1.cs" Line="266" Column="125" />
     </Files>
-    <Pads>
-      <Pad Id="ProjectPad">
-        <State name="__root__">
-          <Node name="MLearning" expanded="True" selected="True">
-            <Node name="Hitec.Droid" expanded="True">
-              <Node name="Views" expanded="True" />
-            </Node>
-            <Node name="MLearning.Core" expanded="True">
-              <Node name="ViewModels" expanded="True" />
-            </Node>
-          </Node>
-        </State>
-      </Pad>
-      <Pad Id="MonoDevelop.Debugger.WatchPad">
-        <State />
-      </Pad>
-    </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Release" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore>
-      <Breakpoint file="/Users/aocsa/Documents/proyectos/milton/Hitec.Droid dec 4/mLearningCore/MLearning.Droid/Views/MainView.cs" line="764" column="1" />
-      <Breakpoint file="/Users/aocsa/Documents/proyectos/milton/Hitec.Droid dec 4/mLearningCore/MLearning.Core/ViewModels/MainViewModel.cs" line="1269" column="1" />
-      <Breakpoint file="/Users/aocsa/Documents/proyectos/milton/Hitec.Droid dec 4/mLearningCore/MLearning.Core/ViewModels/MainViewModel.cs" line="1284" column="10" />
-    </BreakpointStore>
+    <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>

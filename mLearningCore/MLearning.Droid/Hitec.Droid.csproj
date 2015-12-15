@@ -386,7 +386,6 @@
     <AndroidAsset Include="Assets\images\header2.png" />
     <AndroidAsset Include="Assets\images\header3.png" />
     <AndroidAsset Include="Assets\images\header4.png" />
-    <AndroidAsset Include="Assets\images\mapa.png" />
     <AndroidAsset Include="Assets\images\ad1.jpg" />
     <AndroidAsset Include="Assets\images\ad2.jpg" />
     <AndroidAsset Include="Assets\images\footerad.jpg" />
@@ -408,17 +407,6 @@
     <AndroidAsset Include="Assets\icons\iconmap3.png" />
     <AndroidAsset Include="Assets\icons\iconmap2.png" />
     <AndroidAsset Include="Assets\icons\iconmap1.png" />
-    <AndroidAsset Include="Assets\images\salkantay4.png" />
-    <AndroidAsset Include="Assets\images\salkantay3.png" />
-    <AndroidAsset Include="Assets\images\salkantay2.png" />
-    <AndroidAsset Include="Assets\images\choquequirao.png" />
-    <AndroidAsset Include="Assets\images\caminoreal.png" />
-    <AndroidAsset Include="Assets\images\salkantay1.png" />
-    <AndroidAsset Include="Assets\images\salkantay0.png" />
-    <AndroidAsset Include="Assets\images\camino3.png" />
-    <AndroidAsset Include="Assets\images\camino2.png" />
-    <AndroidAsset Include="Assets\images\camino1.png" />
-    <AndroidAsset Include="Assets\images\camino0.png" />
     <AndroidAsset Include="Assets\icons\iconcifras.png" />
     <AndroidAsset Include="Assets\icons\iconhome.png" />
     <AndroidAsset Include="Assets\icons\iconrutas.png" />
@@ -426,7 +414,6 @@
     <AndroidAsset Include="Assets\icons\iconvidasilvestre.png" />
     <AndroidAsset Include="Assets\icons\iconmap.png" />
     <AndroidAsset Include="Assets\icons\pause.png" />
-
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MLearning.Core\MLearning.Core.csproj">

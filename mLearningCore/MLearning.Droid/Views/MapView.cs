@@ -18,11 +18,17 @@ using MLearning.Droid.Views;
 using Android.Graphics.Drawables;
 using Koush;
 using Android.Views.Animations;
+using System.IO;
+using Core.DownloadCache;
+using Core.Session;
+using System.Threading.Tasks;
 
 namespace MLearning.Droid
 {
 	public class MapView : RelativeLayout
 	{
+
+		ProgressDialog _dialogDownload;
 		RelativeLayout _mainLayout;
 		LinearLayout mapSpace;
 		public VerticalScrollView placeSpace;
@@ -179,7 +185,7 @@ namespace MLearning.Droid
 
 
 			loadIcons ();
-			loadMapas ();
+			//loadMapas ();
 			ini ();
 			//iniNotifList ();
 			this.AddView (_mainLayout);
@@ -273,49 +279,31 @@ namespace MLearning.Droid
 		}
 
 
-
-		public void setMapImage(String url,int c,int u,int s)
+		public static Bitmap bytesToBitmap (byte[] imageBytes)
 		{
 
-			//currentMap.Recycle ();
-			//currentMap = null;
+			Bitmap bitmap = BitmapFactory.DecodeByteArray(imageBytes, 0, imageBytes.Length);
 
-			//UrlImageViewHelper.SetUrlDrawable(mapImage, url);
-			//Picasso.With (context).Load (url).Resize(Configuration.WIDTH_PIXEL, Configuration.getHeight(675)).Placeholder(context.Resources.GetDrawable (Resource.Drawable.progress_animation)).CenterCrop().Into (mapImage);
-			//mapImage.SetScaleType (ImageView.ScaleType.Center);
-			//mapImage.SetAdjustViewBounds (true);
+			return bitmap;
+		}
 
-			/*Intent lance = new Intent();
-				lance.SetAction(Intent.ActionView);
-				String typedata = "image/*";
-				lance.SetType(typedata);
-				String phuri = url;
-				Android.Net.Uri uri = Android.Net.Uri.Parse(phuri);
+		async public void setMapImage(String url,int c,int u,int s)
+		{
 
-				lance.SetDataAndType(uri,typedata);
-				context.StartActivity(lance);
-				*/
-			/*
-			mapImage.Click += delegate {
+			_dialogDownload = new ProgressDialog (context);
+			_dialogDownload.SetCancelable (false);
+			_dialogDownload.SetMessage ("Descargando Mapa");
+			_dialogDownload.Show ();
+			CacheService cache = CacheService.Init(SessionService.GetCredentialFileName(), "user_pref", "cache.db");
+			var bytesAndPath = await cache.tryGetResource(url);
 
-
-				mapImage.PivotX = mapImage.Width/2;
-				mapImage.PivotY = mapImage.Height/2;
-				mapImage.ScaleX = 1;
-				mapImage.ScaleY = 1;
-
-			};
-			*/
 			_currentCurso = c;
 			_currentUnidad = u;
 			_currentSection = s;
-			currentMap = getBitmapFromAsset (_listMapPaths[u][s]);
-			mapImage.SetImageBitmap (currentMap);
-			//mapImage.MaxZoomTo (mapImage.Width / 2, mapImage.Height / 2);
-			//mapImage.ZoomTo (4, mapImage.Width / 2, mapImage.Height / 2);
-			//mapImage.SetScaleType (ImageView.ScaleType.FitStart);
-			//showFocusMap(0);
 
+			currentMap = bytesToBitmap(bytesAndPath.Item1);
+			mapImage.SetImageBitmap (currentMap);
+			_dialogDownload.Dismiss ();
 
 		}
 
@@ -545,8 +533,8 @@ namespace MLearning.Droid
 				ImageIconMap icon = new ImageIconMap (context);
 				icon.LayoutParameters = new LinearLayout.LayoutParams (Configuration.getWidth (60), Configuration.getWidth (60));
 
-				icon.index = 0;
-				icon.SetImageBitmap(_leyendaIcon[item.tipoIndex]);
+				icon.index = i;
+				icon.SetImageBitmap(_leyendaIcon[0]);	
 				//icon.SetPadding (Configuration.getWidth (20), ,0,0);
 				icon.SetX(Configuration.getWidth (30));
 				icon.SetY(Configuration.getHeight (10));

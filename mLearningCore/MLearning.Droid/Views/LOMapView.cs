@@ -90,7 +90,7 @@ namespace MLearning.Droid.Views
 
 			_dialogDownload = new ProgressDialog (this);
 			_dialogDownload.SetCancelable (false);
-			_dialogDownload.SetMessage ("Cargando");
+			_dialogDownload.SetMessage ("Cargando Información");
 			_dialogDownload.Show ();
 
 			await ini();
@@ -453,6 +453,7 @@ namespace MLearning.Droid.Views
 
 			map.mapUrl = s_listp [vm._currentSection].PagesList [1].page.url_img;
 			map.titulo_map_header = s_listp [vm._currentSection].PagesList [1].page.title;
+
 
 			map.setMapImage (map.mapUrl,vm._currentCurso,vm._currentUnidad,vm._currentSection);
 
