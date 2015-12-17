@@ -408,17 +408,6 @@
     <AndroidAsset Include="Assets\icons\iconmap3.png" />
     <AndroidAsset Include="Assets\icons\iconmap2.png" />
     <AndroidAsset Include="Assets\icons\iconmap1.png" />
-    <AndroidAsset Include="Assets\images\salkantay4.png" />
-    <AndroidAsset Include="Assets\images\salkantay3.png" />
-    <AndroidAsset Include="Assets\images\salkantay2.png" />
-    <AndroidAsset Include="Assets\images\choquequirao.png" />
-    <AndroidAsset Include="Assets\images\caminoreal.png" />
-    <AndroidAsset Include="Assets\images\salkantay1.png" />
-    <AndroidAsset Include="Assets\images\salkantay0.png" />
-    <AndroidAsset Include="Assets\images\camino3.png" />
-    <AndroidAsset Include="Assets\images\camino2.png" />
-    <AndroidAsset Include="Assets\images\camino1.png" />
-    <AndroidAsset Include="Assets\images\camino0.png" />
     <AndroidAsset Include="Assets\icons\iconcifras.png" />
     <AndroidAsset Include="Assets\icons\iconhome.png" />
     <AndroidAsset Include="Assets\icons\iconrutas.png" />
@@ -426,6 +415,7 @@
     <AndroidAsset Include="Assets\icons\iconvidasilvestre.png" />
     <AndroidAsset Include="Assets\icons\iconmap.png" />
     <AndroidAsset Include="Assets\icons\pause.png" />
+    <AndroidAsset Include="Assets\icons\info.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MLearning.Core\MLearning.Core.csproj">

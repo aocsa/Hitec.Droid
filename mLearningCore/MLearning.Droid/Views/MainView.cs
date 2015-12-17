@@ -25,6 +25,8 @@ using MLearningDB;
 using Android.Text;
 using Android.Net;
 using Android.Media;
+using Core.DownloadCache;
+using Core.Session;
 
 namespace MLearning.Droid.Views
 {
@@ -134,6 +136,7 @@ namespace MLearning.Droid.Views
 		public bool _mapOpen;
 		public bool _placesOpen;
 		public bool _playerOn;
+		public bool _isHome;
 
 		public Bitmap pausePlayer;
 
@@ -153,7 +156,7 @@ namespace MLearning.Droid.Views
 			_lectorOpen = false;
 			_mapOpen = false;
 			_playerOn = false;
-
+			_isHome = false;
 
 
 			headersDR.Add (new BitmapDrawable (getBitmapFromAsset("images/header1.png")));
@@ -642,6 +645,9 @@ namespace MLearning.Droid.Views
 				setIndex (lo._ListLOImages_S2 [0], new EventArgs ());
 				lo._ListLOImages_S2 [0].AddView (lo.selectLayout);
 				lo.lastSelected = 0;
+
+				lo.imLoClick(lo._ListLOImages_S2 [0], new EventArgs() );
+
 				break;
 
 
@@ -813,6 +819,8 @@ namespace MLearning.Droid.Views
 
 
 			}
+
+
 
 		}
 
@@ -1010,6 +1018,7 @@ namespace MLearning.Droid.Views
 		{
 			player.Stop ();
 			_currentCurso = 0;
+			_isHome = true;
 			try{
 				lo.getWorkSpaceLayout.SetBackgroundColor (Color.Transparent);
 				lo.getWorkSpaceLayout.RemoveAllViews ();
@@ -1024,6 +1033,7 @@ namespace MLearning.Droid.Views
 		{
 			//s_list = new ObservableCollection<MainViewModel.page_collection_wrapper> ();
 			player.Stop();
+			_isHome = false;
 
 			if (vm.CirclesList == null) {
 				var myHandler = new Handler ();
@@ -1406,6 +1416,14 @@ namespace MLearning.Droid.Views
 					});
 				}
 
+				if (_currentCurso == 0 && _currentUnidad == 1) {		
+					var a = lo._listUnidades[4];		
+					var b = lo._listUnidades[2];		
+					var c = lo._listUnidades[3];		
+					lo._listUnidades [2] = a;		
+					lo._listUnidades [3] = b;		
+					lo._listUnidades [4] = c;		
+				}
 
 				lo.initUnidades (_currentCurso,_currentUnidad);
 
@@ -1496,19 +1514,47 @@ namespace MLearning.Droid.Views
 
 
 
-		public void StartPlayer(String  filePath, ImageIconMap item)
+
+		private void playMp3(byte[] mp3SoundByteArray) {		
+						try {		
+								// create temp file that will hold byte array		
+								Java.IO.File tempMp3 = Java.IO.File.CreateTempFile("kurchina", "mp3", CacheDir);		
+								tempMp3.DeleteOnExit();		
+								Java.IO.FileOutputStream fos = new Java.IO.FileOutputStream(tempMp3);		
+								fos.Write(mp3SoundByteArray);		
+								fos.Close();		
+						
+								Java.IO.FileInputStream fis = new Java.IO.FileInputStream(tempMp3);		
+								player.SetDataSource(fis.FD);		
+								player.Prepare();
+								player.Start();		
+							} catch (Java.IO.IOException ex) {		
+								String s = ex.ToString ();		
+								ex.PrintStackTrace ();		
+						}		
+				}
+		
+		async public void StartPlayer(String  filePath, ImageIconMap item)
 		{
+
+			_dialogDownload = new ProgressDialog (this);		
+			_dialogDownload.SetCancelable (false);		
+			_dialogDownload.SetMessage ("Descargando Audio");		
+			_dialogDownload.Show ();		
+			CacheService cache = CacheService.Init(SessionService.GetCredentialFileName(), "user_pref", "cache.db");
+
 			if (player == null) {
 				player = new Android.Media.MediaPlayer();
 			} else {
 				player.Reset();
 				String url = Html.FromHtml (filePath).ToString();
-				//player.SetDataSource(url);
-				//player.SetDataSourceAsync(url);
+				var bytesAndPath = await cache.tryGetResource(url);		
+				_dialogDownload.Dismiss ();		
+						
+				playMp3 (bytesAndPath.Item1);
 
-
-				player.SetAudioStreamType(Stream.Music);
-				player.Prepared += (sender, args) => player.Start();
+				//player.SetAudioStreamType(Stream.Music);
+				//player.Prepared += (sender, args) => player.Start();
 				 
 				player.Completion += delegate {
 
@@ -1518,9 +1564,9 @@ namespace MLearning.Droid.Views
 					player.Stop();
 				};
 
-				player.SetDataSourceAsync( url );
+				//player.SetDataSourceAsync( url );
 
-				player.PrepareAsync();
+				//player.PrepareAsync();
 
 				_playerOn = true;
 
@@ -1725,6 +1771,11 @@ namespace MLearning.Droid.Views
 
 		public override void OnBackPressed ()
 		{
+			if (_isHome) {
+				this.Finish ();
+			}
+		
+
 			if (_playerOn) {
 				player.Stop ();
 				_playerOn = false;
@@ -1736,19 +1787,7 @@ namespace MLearning.Droid.Views
 				lo.getWorkSpaceLayout.RemoveAllViews ();
 				lo.getWorkSpaceLayout.SetBackgroundColor (Color.Transparent);
 				//showRutas ();
-			}
-			/*else if (_mapOpen){
-
-				if (map.placeInfoOpen) {
-					map.placeInfoOpen = false;
-					map.hidePlaceInfo ();
-				} else {
-					_mapOpen = false;
-					lo.getMapSpaceLayout.RemoveAllViews ();
-					lo.getMapSpaceLayout.SetBackgroundColor (Color.Transparent);
-				}
-			}*/
-			else if (_currentCurso == 0) {
+			}else if (_currentCurso == 0) {
 				showHome ();
 			} else if (_currentCurso == 1) {
 				showHome ();
@@ -1757,6 +1796,8 @@ namespace MLearning.Droid.Views
 			} else if (_currentCurso == 3) {
 				showHome ();
 			} 
+
+
 
 
 		}

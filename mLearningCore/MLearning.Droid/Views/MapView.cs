@@ -18,11 +18,15 @@ using MLearning.Droid.Views;
 using Android.Graphics.Drawables;
 using Koush;
 using Android.Views.Animations;
+using Core.DownloadCache;
+using Core.Session;
 
 namespace MLearning.Droid
 {
 	public class MapView : RelativeLayout
 	{
+
+		ProgressDialog _dialogDownload;
 		RelativeLayout _mainLayout;
 		LinearLayout mapSpace;
 		public VerticalScrollView placeSpace;
@@ -179,7 +183,7 @@ namespace MLearning.Droid
 
 
 			loadIcons ();
-			loadMapas ();
+			//loadMapas ();
 			ini ();
 			//iniNotifList ();
 			this.AddView (_mainLayout);
@@ -272,51 +276,30 @@ namespace MLearning.Droid
 			_mainLayout.RemoveView (_adLayout);
 		}
 
+		public static Bitmap bytesToBitmap (byte[] imageBytes)		
+		{		 		
+			Bitmap bitmap = BitmapFactory.DecodeByteArray(imageBytes, 0, imageBytes.Length);
+			return bitmap;
+		}
 
 
-		public void setMapImage(String url,int c,int u,int s)
+
+		async public void setMapImage(String url,int c,int u,int s)
 		{
+			_dialogDownload = new ProgressDialog (context);
+			_dialogDownload.SetCancelable (false);
+			_dialogDownload.SetMessage ("Descargando Mapa");
+			_dialogDownload.Show ();
+			CacheService cache = CacheService.Init(SessionService.GetCredentialFileName(), "user_pref", "cache.db");
+			var bytesAndPath = await cache.tryGetResource(url);
 
-			//currentMap.Recycle ();
-			//currentMap = null;
-
-			//UrlImageViewHelper.SetUrlDrawable(mapImage, url);
-			//Picasso.With (context).Load (url).Resize(Configuration.WIDTH_PIXEL, Configuration.getHeight(675)).Placeholder(context.Resources.GetDrawable (Resource.Drawable.progress_animation)).CenterCrop().Into (mapImage);
-			//mapImage.SetScaleType (ImageView.ScaleType.Center);
-			//mapImage.SetAdjustViewBounds (true);
-
-			/*Intent lance = new Intent();
-				lance.SetAction(Intent.ActionView);
-				String typedata = "image/*";
-				lance.SetType(typedata);
-				String phuri = url;
-				Android.Net.Uri uri = Android.Net.Uri.Parse(phuri);
-
-				lance.SetDataAndType(uri,typedata);
-				context.StartActivity(lance);
-				*/
-			/*
-			mapImage.Click += delegate {
-
-
-				mapImage.PivotX = mapImage.Width/2;
-				mapImage.PivotY = mapImage.Height/2;
-				mapImage.ScaleX = 1;
-				mapImage.ScaleY = 1;
-
-			};
-			*/
 			_currentCurso = c;
 			_currentUnidad = u;
 			_currentSection = s;
-			currentMap = getBitmapFromAsset (_listMapPaths[u][s]);
+
+			currentMap = bytesToBitmap(bytesAndPath.Item1);
 			mapImage.SetImageBitmap (currentMap);
-			//mapImage.MaxZoomTo (mapImage.Width / 2, mapImage.Height / 2);
-			//mapImage.ZoomTo (4, mapImage.Width / 2, mapImage.Height / 2);
-			//mapImage.SetScaleType (ImageView.ScaleType.FitStart);
-			//showFocusMap(0);
-
-
+			_dialogDownload.Dismiss ();
 		}
 
 		public void showFocusMap(int position)

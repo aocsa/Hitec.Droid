@@ -1,25 +1,15 @@
-﻿<Properties StartupItem="MLearning.Droid/Hitec.Droid.csproj">
-  <MonoDevelop.Ide.Workbench>
+﻿<Properties StartupItem="MLearning.Droid\Hitec.Droid.csproj">
+  <MonoDevelop.Ide.Workbench ActiveDocument="MLearning.Droid\Views\WallView.cs">
     <Files>
-      <File FileName="MLearning.Droid/Views/WallView.cs" Line="845" Column="8" />
-      <File FileName="MLearning.Core/ViewModels/LOMapViewModel.cs" Line="80" Column="5" />
-      <File FileName="MLearning.Droid/Views/LOMapView.cs" Line="150" Column="19" />
-      <File FileName="MLearning.Droid/Views/Configuration.cs" Line="36" Column="21" />
-      <File FileName="MLearning.Core/ViewModels/MainViewModel.cs" Line="1444" Column="24" />
-      <File FileName="MLearning.Droid/Views/MainView.cs" Line="14" Column="30" />
-      <File FileName="MLearning.Droid/Resources/Resource.Designer.cs" Line="1515" Column="32" />
-      <File FileName="MLearning.Core/Repositories/WAMSRepositoryService.cs" Line="230" Column="4" />
-      <File FileName="MLearning.Core/Services/MLearningAzureService.cs" Line="166" Column="49" />
-      <File FileName="MLearning.Core/Services/IMLearningService.cs" Line="1" Column="1" />
-      <File FileName="MLearning.Core/ViewModels/LoginViewModel.cs" Line="64" Column="13" />
-      <File FileName="MLearning.Core/ViewModels/SignUpViewModel.cs" Line="1" Column="1" />
-      <File FileName="MLearning.Core/app.config" Line="1" Column="1" />
-      <File FileName="MLearning.Core/App.cs" Line="1" Column="1" />
-      <File FileName="MLearning.Core/Repositories/IRepositoryService.cs" Line="50" Column="36" />
-      <File FileName="MLearning.Droid/Views/LoginView.cs" Line="80" Column="1" />
+      <File FileName="MLearning.Droid\Views\WallView.cs" Line="850" Column="44" />
+      <File FileName="MLearning.Core\ViewModels\LOMapViewModel.cs" Line="1" Column="1" />
+      <File FileName="MLearning.Droid\Views\LOMapView.cs" Line="1" Column="1" />
+      <File FileName="MLearning.Core\ViewModels\MainViewModel.cs" Line="1" Column="1" />
+      <File FileName="MLearning.Droid\Views\MapView.cs" Line="1" Column="1" />
+      <File FileName="MLearning.Droid\Views\MainView.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.4C3AWN154L014669" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
       <Breakpoint file="/Users/aocsa/Documents/proyectos/milton/Hitec.Droid dec 4/mLearningCore/MLearning.Droid/Views/MainView.cs" line="764" column="1" />
