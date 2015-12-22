@@ -76,10 +76,9 @@ namespace MLearning.Droid.Views
 
 
 			int tam = Configuration.getWidth (80);
-			bm_user = Configuration.getRoundedShape(Bitmap.CreateScaledBitmap(getBitmapFromAsset ("icons/nouser.png"), tam,tam, true)
-				,tam,tam);
+			//bm_user = Configuration.getRoundedShape(Bitmap.CreateScaledBitmap(getBitmapFromAsset ("icons/nouser.png"), tam,tam, true),tam,tam);
 
-			bmLike = Bitmap.CreateScaledBitmap (getBitmapFromAsset ("images/like.png"), Configuration.getWidth (43), Configuration.getWidth (35), true);
+			//bmLike = Bitmap.CreateScaledBitmap (getBitmapFromAsset ("images/like.png"), Configuration.getWidth (43), Configuration.getWidth (35), true);
 
 			drBack = new BitmapDrawable(Bitmap.CreateScaledBitmap (getBitmapFromAsset ("images/fondocondiagonalm.png"), 640, 1136, true));
 
@@ -91,7 +90,7 @@ namespace MLearning.Droid.Views
 
 			_dialogDownload = new ProgressDialog (this);
 			_dialogDownload.SetCancelable (false);
-			_dialogDownload.SetMessage ("Cargando");
+			_dialogDownload.SetMessage ("Cargando Información");
 			_dialogDownload.Show ();
 
 			await ini();
@@ -436,10 +435,12 @@ namespace MLearning.Droid.Views
 
 		void loadPlacesDataSource(int pageIndex)
 		{
-			
+
 			map._currentPlaces.Clear ();
 			map._placesData.Clear ();
-			var s_listp = vm.LOsInCircle[vm._currentUnidad].stack.StacksList;
+			//var s_listp = vm.LOsInCircle[vm._currentUnidad].stack.StacksList;
+			var s_listp = vm.LOsInCircle[0].stack.StacksList;
+
 
 			if (s_listp [vm._currentSection].PagesList.Count ==1) {
 				var myHandler = new Handler ();
@@ -453,15 +454,16 @@ namespace MLearning.Droid.Views
 			map.mapUrl = s_listp [vm._currentSection].PagesList [1].page.url_img;
 			map.titulo_map_header = s_listp [vm._currentSection].PagesList [1].page.title;
 
+
 			map.setMapImage (map.mapUrl,vm._currentCurso,vm._currentUnidad,vm._currentSection);
 
 			var slides = s_listp [vm._currentSection].PagesList [1].content.lopage.loslide;
 
 
 			for (int m = 1; m < slides.Count; m++) {
-				
+
 				string pos_title = slides [m].lotitle;
-				string[] words = pos_title.Split (' ');
+				string[] words = pos_title.Split (' ', '\t');
 
 				if (words.Length >= 3) {
 					pos_title = "";
@@ -518,6 +520,7 @@ namespace MLearning.Droid.Views
 			map.iniPlancesList ();
 			for (int i = 0; i < map._listLinearPlaces.Count; i++) {
 				map._listLinearPlaces [i].Click += showPlaceItem;
+				map._listLinearPositonPlaces [i].index = i;
 				map._listLinearPositonPlaces [i].Click += showMapPositionPlace;
 			}
 			//map.listPlaces.ItemClick += ListPlaces_ItemClick;
@@ -525,13 +528,13 @@ namespace MLearning.Droid.Views
 			//mainLayout.AddView (map);
 			//map.listPlaces.ItemClick += ListPlaces_ItemClick;
 
-//			map.listPlaces.ItemClick += ListPlaces_ItemClick;
+			//			map.listPlaces.ItemClick += ListPlaces_ItemClick;
 		}
 		void showMapPositionPlace(object sender, EventArgs e)
 		{
 			var item = sender as ImageIconMap;
 			map.showFocusMap(item.index);
-			_lectorOpen = true;
+			_lectorOpen = false;
 		}
 		void showPlaceItem(object sender, EventArgs e)
 		{
@@ -798,7 +801,7 @@ namespace MLearning.Droid.Views
 				//map.header.RemoveAllViews ();
 				map.header.AddView (map._leyendaMap);
 			} else {
-				
+
 				if (mainLayoutIndice.Visibility == ViewStates.Visible) {
 					base.OnBackPressed ();
 				}

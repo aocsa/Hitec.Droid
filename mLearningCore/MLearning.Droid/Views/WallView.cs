@@ -23,6 +23,7 @@ namespace MLearning.Droid
 		public List<UnidadItem> _listUnidades = new List<UnidadItem>();
 		ListView  _listViewUnidades;
 		public List<ImageIconMap> _listIconMap = new List<ImageIconMap> ();
+		public List<LinearLayout> _listIconVerMap = new List<LinearLayout> ();
 
 		public LinearLayout _spaceUnidades;
 		public LinearLayout _mapSpace;
@@ -36,6 +37,7 @@ namespace MLearning.Droid
 		public TextView _txtUnidadN;
 		public Bitmap iconMap;
 		public Bitmap iconPlay;
+		public Bitmap iconInfo;
 
 		LinearLayout linearGradiente;
 
@@ -211,7 +213,7 @@ namespace MLearning.Droid
 		LinearLayout _images_S2;
 
 
-		private void imLoClick(object sender, EventArgs eventArgs)
+		public void imLoClick(object sender, EventArgs eventArgs)
 		{
 
 			var imView = sender as ImageLOView;
@@ -302,8 +304,9 @@ namespace MLearning.Droid
 			adsImagesPath.Add ("images/ad3.jpg");
 
 
-			iconMap = Bitmap.CreateScaledBitmap (getBitmapFromAsset ("icons/iconmap.png"), Configuration.getWidth (60), Configuration.getWidth (80), true);
+			//iconMap = Bitmap.CreateScaledBitmap (getBitmapFromAsset ("icons/iconmap.png"), Configuration.getWidth (60), Configuration.getWidth (80), true);
 			iconPlay = Bitmap.CreateScaledBitmap (getBitmapFromAsset ("icons/playc.png"), Configuration.getWidth (60), Configuration.getWidth (60), true);
+			iconInfo = Bitmap.CreateScaledBitmap (getBitmapFromAsset ("icons/info.png"), Configuration.getWidth (60), Configuration.getWidth (60), true);
 			ini ();
 
 
@@ -541,14 +544,14 @@ namespace MLearning.Droid
 			for (int i = 0; i < item_path.Count; i++) {
 
 				_imItem_S1.Add(new ImageView(context));
-				_imItem_S1[i].SetImageBitmap(Bitmap.CreateScaledBitmap (getBitmapFromAsset(item_path[i]), Configuration.getWidth (30), Configuration.getWidth (30), true));
+				//_imItem_S1[i].SetImageBitmap(Bitmap.CreateScaledBitmap (getBitmapFromAsset(item_path[i]), Configuration.getWidth (30), Configuration.getWidth (30), true));
 				//_mainLayout.AddView (_imItem_S1 [i]);
 				_imItem_S1 [i].SetX (inixItemIM+(i*crecIM));_imItem_S1 [i].SetY (Configuration.getHeight(602));
 
 
 				if (i != item_path.Count - 1) {
 					ImageView linea = new ImageView (context);
-					linea.SetImageBitmap (Bitmap.CreateScaledBitmap (getBitmapFromAsset ("icons/lineatareas.png"), 1, Configuration.getHeight (68), true));
+					//linea.SetImageBitmap (Bitmap.CreateScaledBitmap (getBitmapFromAsset ("icons/lineatareas.png"), 1, Configuration.getHeight (68), true));
 					//_mainLayout.AddView (linea);
 					linea.SetX (inixLinea + (i * crecIM));
 					linea.SetY (Configuration.getHeight (605));
@@ -671,13 +674,13 @@ namespace MLearning.Droid
 			botton_icon_path.Add ("icons/btnmap.png");
 
 			_imItems_S4.Add (new ImageView (context));
-			_imItems_S4[0].SetImageBitmap(Bitmap.CreateScaledBitmap (getBitmapFromAsset(botton_icon_path[0]), Configuration.getWidth (40), Configuration.getWidth (40), true));
+			//_imItems_S4[0].SetImageBitmap(Bitmap.CreateScaledBitmap (getBitmapFromAsset(botton_icon_path[0]), Configuration.getWidth (40), Configuration.getWidth (40), true));
 			//_mainLayout.AddView (_imItems_S4[0]);
 			_imItems_S4[0].SetX (Configuration.getWidth(58));_imItems_S4[0].SetY (Configuration.getHeight(1069));
 			_imItems_S4 [0].Visibility = Android.Views.ViewStates.Invisible;
 
 			_imItems_S4.Add (new ImageView (context));
-			_imItems_S4[1].SetImageBitmap(Bitmap.CreateScaledBitmap (getBitmapFromAsset(botton_icon_path[1]), Configuration.getWidth (78), Configuration.getWidth (55), true));
+			//_imItems_S4[1].SetImageBitmap(Bitmap.CreateScaledBitmap (getBitmapFromAsset(botton_icon_path[1]), Configuration.getWidth (78), Configuration.getWidth (55), true));
 			//_mainLayout.AddView (_imItems_S4[1]);
 			_imItems_S4[1].SetX (Configuration.getWidth(169));_imItems_S4[1].SetY (Configuration.getHeight(1069));
 			_imItems_S4 [1].Visibility = Android.Views.ViewStates.Invisible;
@@ -686,7 +689,7 @@ namespace MLearning.Droid
 
 
 			_imItems_S4.Add (new ImageView (context));
-			_imItems_S4[2].SetImageBitmap(Bitmap.CreateScaledBitmap (getBitmapFromAsset(botton_icon_path[2]), Configuration.getWidth (80), Configuration.getWidth (80), true));
+			//_imItems_S4[2].SetImageBitmap(Bitmap.CreateScaledBitmap (getBitmapFromAsset(botton_icon_path[2]), Configuration.getWidth (80), Configuration.getWidth (80), true));
 			//_mainLayout.AddView (_imItems_S4 [2]);
 			_imItems_S4[2].SetX (Configuration.getWidth(297));_imItems_S4[2].SetY (Configuration.getHeight(1050));
 			_imItems_S4 [2].Visibility = Android.Views.ViewStates.Invisible;
@@ -694,14 +697,14 @@ namespace MLearning.Droid
 
 
 			_imItems_S4.Add (new ImageView (context));
-			_imItems_S4[3].SetImageBitmap(Bitmap.CreateScaledBitmap (getBitmapFromAsset(botton_icon_path[3]), Configuration.getWidth (30), Configuration.getWidth (51), true));
+			//_imItems_S4[3].SetImageBitmap(Bitmap.CreateScaledBitmap (getBitmapFromAsset(botton_icon_path[3]), Configuration.getWidth (30), Configuration.getWidth (51), true));
 			//_mainLayout.AddView (_imItems_S4[3]);
 			_imItems_S4[3].SetX (Configuration.getWidth(421));_imItems_S4[3].SetY (Configuration.getHeight(1069));
 			_imItems_S4 [3].Visibility = Android.Views.ViewStates.Invisible;
 
 
 			_imItems_S4.Add (new ImageView (context));
-			_imItems_S4[4].SetImageBitmap(Bitmap.CreateScaledBitmap (getBitmapFromAsset(botton_icon_path[4]), Configuration.getWidth (30), Configuration.getWidth (40), true));
+			//_imItems_S4[4].SetImageBitmap(Bitmap.CreateScaledBitmap (getBitmapFromAsset(botton_icon_path[4]), Configuration.getWidth (30), Configuration.getWidth (40), true));
 			//_mainLayout.AddView (_imItems_S4 [4]);
 			_imItems_S4[4].SetX (Configuration.getWidth(540));_imItems_S4[4].SetY (Configuration.getHeight(1069));
 			_imItems_S4 [4].Visibility = Android.Views.ViewStates.Invisible;
@@ -745,36 +748,28 @@ namespace MLearning.Droid
 			_spaceUnidades.RemoveAllViews ();
 			_listLinearUnidades.Clear ();
 			_listIconMap.Clear ();
+			_listIconVerMap.Clear ();
 			int numUnidades = _listUnidades.Count;
 			for (int i = 0; i < numUnidades; i++) 
 			{
 				LinearLayoutLO linearUnidad = new LinearLayoutLO (context);
 				linearUnidad.LayoutParameters = new LinearLayout.LayoutParams (-1, -2);
-				linearUnidad.Orientation = Orientation.Horizontal;
+				linearUnidad.Orientation = Orientation.Vertical;
 				linearUnidad.SetGravity (Android.Views.GravityFlags.CenterVertical);
 				linearUnidad.index = i;
-
+				linearUnidad.SetPadding (Configuration.getWidth(100), Configuration.getWidth (25),0, Configuration.getWidth (25));
+				//linearUnidad.SetX (100);
 
 
 
 				TextView titleUnidad = new TextView(context);
 				titleUnidad.SetTextSize (textFormat,Configuration.getHeight(42));
-				if (indexCurso == 0) {
-					if (indexUnidad != 3) {
-						ImageIconMap icon = new ImageIconMap (context);
-						icon.index = i;
-						icon.SetImageBitmap(iconMap);
-						icon.SetX (Configuration.getWidth (60));
-						linearUnidad.AddView (icon);
-						_listIconMap.Add (icon);
-					} else {
-						titleUnidad.SetTextSize (textFormat,Configuration.getHeight(55));
-					}
+				titleUnidad.LayoutParameters = new LinearLayout.LayoutParams (Configuration.getWidth (440), -2);
 
-				}
 
 				if (indexCurso == 2) {
 					if (indexUnidad == 3) {
+						linearUnidad.Orientation = Orientation.Horizontal;
 						ImageIconMap icon = new ImageIconMap (context);
 						icon.index = i;
 						icon.SetImageBitmap(iconPlay);
@@ -788,11 +783,11 @@ namespace MLearning.Droid
 					titleUnidad.SetTextSize (textFormat,Configuration.getHeight(55));
 				}
 
-				LinearLayout linearContenido = new LinearLayout (context);
-				linearContenido.LayoutParameters = new LinearLayout.LayoutParams (Configuration.getWidth(460), -2);
-				linearContenido.Orientation = Orientation.Vertical;
+				RelativeLayout linearContenido = new RelativeLayout (context);
+				linearContenido.LayoutParameters = new LinearLayout.LayoutParams (-1, -2);
 				linearContenido.SetGravity (Android.Views.GravityFlags.Center);
-				linearContenido.SetX(Configuration.getWidth (100));
+
+
 
 				//TextView titleUnidad = new TextView(context);
 				//titleUnidad.Text = _listUnidades [i].Title;
@@ -802,6 +797,7 @@ namespace MLearning.Droid
 
 
 				TextView descriptionUnidad = new TextView(context);
+				descriptionUnidad.LayoutParameters = new LinearLayout.LayoutParams (Configuration.getWidth (440), -2);
 				//descriptionUnidad.Text = _listUnidades [i].Description;
 
 				descriptionUnidad.TextFormatted = Html.FromHtml (_listUnidades [i].Description);
@@ -814,25 +810,97 @@ namespace MLearning.Droid
 
 				//descriptionUnidad.SetTextIsSelectable (true);
 
-				linearContenido.AddView (titleUnidad);
-				linearContenido.AddView (descriptionUnidad);
+				LinearLayout linearContenidoIn = new LinearLayout (context);
+				linearContenidoIn.LayoutParameters = new LinearLayout.LayoutParams (-1, -2);
+				linearContenidoIn.Orientation = Orientation.Vertical;
+				//linearContenidoIn.SetGravity (Android.Views.GravityFlags.Center);
 
+
+
+				linearContenidoIn.AddView (titleUnidad);
+				linearContenidoIn.AddView (descriptionUnidad);
+
+				linearContenido.AddView (linearContenidoIn);
 
 				if (indexCurso == 2) {
-					linearContenido.RemoveViewAt (1);
+					linearContenidoIn.RemoveView (descriptionUnidad);
 					ImageView imgUnidad = new ImageView (context);
-					Picasso.With (context).Load (_listUnidades[i].ImageUrl).Resize(Configuration.getWidth(500),Configuration.getHeight(500)).Placeholder(context.Resources.GetDrawable (Resource.Drawable.progress_animation)).CenterInside().Into (imgUnidad);
-					linearContenido.AddView (imgUnidad);
+					Picasso.With (context).Load (_listUnidades[i].ImageUrl).Resize(Configuration.getWidth(440),Configuration.getHeight(440)).Placeholder(context.Resources.GetDrawable (Resource.Drawable.progress_animation)).CenterInside().Into (imgUnidad);
+					linearContenidoIn.AddView (imgUnidad);
+					linearContenidoIn.SetGravity (Android.Views.GravityFlags.Center);
+					linearUnidad.SetPadding (0, Configuration.getWidth (25),0, Configuration.getWidth (25));
+
 				}
 
 				linearUnidad.AddView (linearContenido);
+
+				if (indexCurso == 0) {
+					if (indexUnidad != 3) {
+
+						ImageView info = new ImageView (context);
+						info.Tag = i;
+						info.SetImageBitmap (iconInfo);
+						info.SetX (Configuration.getWidth(450));
+						info.SetY (Configuration.getHeight (10));
+
+
+						linearContenido.AddView (info);
+
+						
+						if (indexUnidad == 2 && i > 1 ) {
+							
+						} else {
+							
+							LinearLayout test = new LinearLayout (context);
+							test.LayoutParameters = new LinearLayout.LayoutParams (-1, -2);
+							test.SetGravity (Android.Views.GravityFlags.Center);
+							test.Tag = i;
+							test.SetX( Configuration.getWidth (100));
+							//test.SetPadding (Configuration.getWidth(30), Configuration.getWidth (25), Configuration.getWidth(30), Configuration.getWidth (25));
+
+
+						
+
+
+							TextView verMapa = new TextView (context);
+							verMapa.Text = "* Ver Mapa";
+							verMapa.Typeface = Typeface.CreateFromAsset (context.Assets, "fonts/ArcherMediumPro.otf");
+							verMapa.SetTextSize (ComplexUnitType.Fraction, Configuration.getHeight (35));
+							verMapa.SetTextColor (Color.ParseColor (Configuration.ListaColores [i % 6]));
+
+							test.AddView (verMapa);
+							linearUnidad.AddView (test);
+							_listIconVerMap.Add (test);
+						}
+
+					} else {
+						titleUnidad.SetTextSize (textFormat,Configuration.getHeight(55));
+					}
+
+
+
+				}
+
+				if (indexCurso == 1 && indexUnidad==7) {
+					linearContenidoIn.RemoveView (titleUnidad);
+					linearContenidoIn.RemoveView (descriptionUnidad);
+					//linearContenidoIn.LayoutParameters = new LinearLayout.LayoutParams (-2, -2);
+					linearContenidoIn.SetX(Configuration.getWidth (0));
+					ImageView imgUnidad = new ImageView (context);
+					Picasso.With (context).Load (_listUnidades[i].ImageUrl).Resize(Configuration.getWidth(640),Configuration.getHeight(2362)).Placeholder(context.Resources.GetDrawable (Resource.Drawable.progress_animation)).CenterInside().Into (imgUnidad);
+					linearContenidoIn.AddView (imgUnidad);
+					linearUnidad.SetPadding (0, 0, 0, 0);
+					linearUnidad.SetX(Configuration.getWidth (0));
+				}
+
+
 
 				_listLinearUnidades.Add (linearUnidad);
 				LinearLayout separationLinear = new LinearLayout (context);
 				separationLinear.LayoutParameters = new LinearLayout.LayoutParams (-1, 5);
 				separationLinear.SetBackgroundColor (Color.ParseColor ("#D8D8D8"));
 				separationLinear.Orientation = Orientation.Horizontal;
-				linearUnidad.SetPadding (0, Configuration.getWidth (25), 0, Configuration.getWidth (25));
+
 
 				//linearUnidad.AddView (separationLinear);
 				_spaceUnidades.AddView (linearUnidad);

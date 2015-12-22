@@ -149,11 +149,11 @@ namespace MLearning.Core.ViewModels
         {
             if (e.PropertyName == "RefreshPosts" && (sender as GlobalInfo).RefreshPosts)
             {
-                LoadPostsInCircle(CircleID);
+                //LoadPostsInCircle(CircleID);
             }
             else if (e.PropertyName == "RefreshUsers" && (sender as GlobalInfo).RefreshUsers)
             {
-                LoadUsersInCircle(CircleID);
+               // LoadUsersInCircle(CircleID);
             }
             else if (e.PropertyName == "RefreshCircles" && (sender as GlobalInfo).RefreshCircles)
             {
@@ -169,7 +169,7 @@ namespace MLearning.Core.ViewModels
             }
             else if (e.PropertyName == "RefreshLOComments" && (sender as GlobalInfo).RefreshLOComments)
             {
-                LoadLOComments(CurrentLOIDSelected);
+               // LoadLOComments(CurrentLOIDSelected);
             }
           
         }
@@ -615,10 +615,10 @@ namespace MLearning.Core.ViewModels
             {
                 var watch = Stopwatch.StartNew();
                 await LoadCircleTags(CircleID);
-                await LoadPostsInCircle(CircleID);
-                await LoadUsersInCircle(CircleID);
+                //await LoadPostsInCircle(CircleID);
+                //await LoadUsersInCircle(CircleID);
                 await LoadLearningObjects(CircleID);
-                await LoadQuizzes(CircleID);
+                //await LoadQuizzes(CircleID);
 
                 watch.Stop();
 
@@ -744,12 +744,13 @@ namespace MLearning.Core.ViewModels
                 {
                     if (item.lo.id == learningobj.lo.id)
                     {
-                        await FetchLOData(item.lo.id, true);
+                        //await FetchLOData(item.lo.id, true);
+						break;
                     }
-                    else
-                    {
-                        await FetchLOData(item.lo.id, false);
-                    }
+                    //else
+                    //{
+                    //    await FetchLOData(item.lo.id, false);
+                    //}
 
 
 
@@ -757,6 +758,7 @@ namespace MLearning.Core.ViewModels
 
 
                 string serialized = JsonConvert.SerializeObject(list);
+
 				ShowViewModel<LOViewModel>(new { lo_id = learningobj.lo.id, 
 					serialized_los_in_circle = serialized, 
 					_currentCurso = this._currentCurso,
@@ -804,7 +806,7 @@ namespace MLearning.Core.ViewModels
 
 				//Download all the data of the selected LO
 
-				foreach (var item in LearningOjectsList)
+				/*foreach (var item in LearningOjectsList)
 				{
 					if (item.lo.id == learningobj.lo.id)
 					{
@@ -817,7 +819,7 @@ namespace MLearning.Core.ViewModels
 
 
 
-				}
+				}*/
 
 
 				string serialized = JsonConvert.SerializeObject(list);
@@ -963,8 +965,6 @@ namespace MLearning.Core.ViewModels
             int LOID = lo_id;
 
             var list = await _mLearningService.GetPagesByLO(LOID);
-
-            
 
             if (images)
             {
@@ -1207,11 +1207,11 @@ namespace MLearning.Core.ViewModels
 
             CacheService cache = CacheService.Init(SessionService.GetCredentialFileName(), Constants.PreferencesFileName, Constants.LocalDbName);
 
-            if (!string.IsNullOrEmpty(image_url))
+            /*if (!string.IsNullOrEmpty(image_url))
             {
                 var tuple = await cache.tryGetResource(image_url);
                 UserImage = tuple.Item1;
-            }
+            } */
             
             
         }

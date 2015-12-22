@@ -66,10 +66,9 @@ namespace MLearning.Droid
 
 			int tam = Configuration.getWidth (85);
 
-			Bitmap newbm = Configuration.getRoundedShape(Bitmap.CreateScaledBitmap(getBitmapFromAsset (path), Configuration.getWidth(100), Configuration.getWidth(100), true)
-				,tam,tam);
+			//Bitmap newbm = Configuration.getRoundedShape(Bitmap.CreateScaledBitmap(getBitmapFromAsset (path), Configuration.getWidth(100), Configuration.getWidth(100), true),tam,tam);
 
-			imguserlist.SetImageBitmap (newbm);
+			//imguserlist.SetImageBitmap (newbm);
 
 		}
 

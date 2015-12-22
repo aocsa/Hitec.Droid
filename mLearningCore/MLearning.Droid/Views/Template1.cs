@@ -83,6 +83,11 @@ namespace MLearning.Droid
 			AutorHeader = new TextView (context);
 			content = new TextView (context);
 
+			//imHeader.LayoutParameters = new LinearLayout.LayoutParams (-2, -2);
+			titleHeader.LayoutParameters = new LinearLayout.LayoutParams (-2, -2);
+			AutorHeader.LayoutParameters = new LinearLayout.LayoutParams (-2, -2);
+			content.LayoutParameters = new LinearLayout.LayoutParams (-2, -2);
+
 			titleHeader.SetTextSize (ComplexUnitType.Fraction, Configuration.getHeight(38));
 			titleHeader.Typeface =  Typeface.CreateFromAsset(context.Assets, "fonts/ArcherMediumPro.otf");
 
@@ -223,6 +228,9 @@ namespace MLearning.Droid
 		public string Title{
 			get{return _title; }
 			set{_title = value;
+				if (_title == null) {
+					contentLinearLayout.RemoveView (titleHeader);
+				}
 				titleHeader.Text = _title;}
 
 		}
@@ -239,8 +247,12 @@ namespace MLearning.Droid
 		public string Contenido{
 			get{return _content; }
 			set{_content = value;
-				//content.TextFormatted = Html.FromHtml (_content);
-					content.Text = _content;
+
+				if (_content == null) {
+					contentLinearLayout.RemoveView (content);
+				}
+				content.TextFormatted = Html.FromHtml (_content);
+					//content.Text = _content;
 			}
 
 		}

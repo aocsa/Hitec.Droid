@@ -166,7 +166,7 @@ namespace MLearning.Droid
 			//Drawable d = new BitmapDrawable (Bitmap.CreateScaledBitmap (getBitmapFromAsset ("images/desert.jpg"), 480, 640, true));
 			//linearImageLO.SetBackgroundDrawable (d);
 
-			imgLinea.SetImageBitmap (Bitmap.CreateScaledBitmap (getBitmapFromAsset ("icons/lineatareas.png"), 4,2000 , true));
+			//imgLinea.SetImageBitmap (Bitmap.CreateScaledBitmap (getBitmapFromAsset ("icons/lineatareas.png"), 4,2000 , true));
 
 			linearTaskComplete.AddView (txtTaskComplete);
 			linearTaskIncomplete.AddView (txtTaskIncomplete);

@@ -46,6 +46,9 @@ namespace MLearning.Droid
 
 
 			imBack = new ImageView (context);
+
+			//imBack.LayoutParameters = new LinearLayout.LayoutParams (-1, -2);
+
 			image = new LinearLayout(context);
 			txtDescription = new TextView (context);
 			txtTitle = new TextView (context);
@@ -108,6 +111,9 @@ namespace MLearning.Droid
 		public String Title{
 			get{ return _title;}
 			set{ _title = value;
+				if (_title == null) {
+					background.RemoveView (txtTitle);
+				}
 				txtTitle.Text = _title;
 			}
 
@@ -117,6 +123,11 @@ namespace MLearning.Droid
 		public String Description{
 			get{ return _description;}
 			set{ _description = value;
+
+				if (_description == null) {
+					background.RemoveView (txtDescription);
+				}
+
 				txtDescription.TextFormatted = Html.FromHtml (_description);
 				//txtDescription.Text = _description;
 			}

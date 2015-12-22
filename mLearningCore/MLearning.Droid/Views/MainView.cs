@@ -23,6 +23,10 @@ using Android.Content;
 using Square.Picasso;
 using MLearningDB;
 using Android.Text;
+using Android.Net;
+using Android.Media;
+using Core.DownloadCache;
+using Core.Session;
 
 namespace MLearning.Droid.Views
 {
@@ -43,7 +47,7 @@ namespace MLearning.Droid.Views
 
 		private LOContainerView _foro;
 		public Android.Media.MediaPlayer player;
-
+		public int _currentItemPlayer = -1;
 
 		List<ImageLOView> list;
 
@@ -131,6 +135,16 @@ namespace MLearning.Droid.Views
 		public bool _lectorOpen;
 		public bool _mapOpen;
 		public bool _placesOpen;
+		public bool _playerOn;
+		public bool _isHome;
+
+		public Bitmap pausePlayer;
+
+		public bool isOnline() {
+			ConnectivityManager connectivityManager = (ConnectivityManager) GetSystemService(ConnectivityService);
+			NetworkInfo activeConnection = connectivityManager.ActiveNetworkInfo;
+			return (activeConnection != null) && activeConnection.IsConnected;
+		}
 
 		protected override void OnCreate(Bundle bundle)
 		{
@@ -141,6 +155,9 @@ namespace MLearning.Droid.Views
 			_currentCurso = 0;
 			_lectorOpen = false;
 			_mapOpen = false;
+			_playerOn = false;
+			_isHome = false;
+
 
 			headersDR.Add (new BitmapDrawable (getBitmapFromAsset("images/header1.png")));
 			headersDR.Add (new BitmapDrawable (getBitmapFromAsset("images/header2.png")));
@@ -148,6 +165,7 @@ namespace MLearning.Droid.Views
 			headersDR.Add (new BitmapDrawable (getBitmapFromAsset("images/header4.png")));
 
 			drBack = new BitmapDrawable (Bitmap.CreateScaledBitmap (getBitmapFromAsset ("images/fondocondiagonalm.png"), 640, 1136, true));
+
 			vm = this.ViewModel as MainViewModel;
 
 			lo = new WallView(this);
@@ -169,6 +187,8 @@ namespace MLearning.Droid.Views
 			heightInDp = ((int)metrics.HeightPixels);
 			Configuration.setWidthPixel (widthInDp);
 			Configuration.setHeigthPixel (heightInDp);
+
+			pausePlayer = Bitmap.CreateScaledBitmap(getBitmapFromAsset("icons/pause.png"),Configuration.getWidth(60),Configuration.getWidth(60),true);
 
 			task = new TaskView (this);
 
@@ -346,41 +366,41 @@ namespace MLearning.Droid.Views
 			linearPendiente.LayoutParameters = new LinearLayout.LayoutParams (Configuration.getWidth (30), Configuration.getWidth (30));
 			linearTxtValorBarra.LayoutParameters = new LinearLayout.LayoutParams (-1, -2);
 
-			linearBarraCurso.Orientation = Orientation.Vertical;
+			linearBarraCurso.Orientation = Android.Widget.Orientation.Vertical;
 			linearBarraCurso.SetGravity (GravityFlags.Center);
 
-			linearTxtValorBarra.Orientation = Orientation.Vertical;
+			linearTxtValorBarra.Orientation = Android.Widget.Orientation.Vertical;
 			linearTxtValorBarra.SetGravity (GravityFlags.Center);
 			txtValorBarra.Gravity = GravityFlags.Center;
 
-			linearCurse.Orientation = Orientation.Horizontal;
+			linearCurse.Orientation = Android.Widget.Orientation.Horizontal;
 			linearCurse.SetGravity (GravityFlags.CenterVertical);
 
-			linearTask.Orientation = Orientation.Horizontal;
+			linearTask.Orientation = Android.Widget.Orientation.Horizontal;
 			linearTask.SetGravity (GravityFlags.CenterVertical);
 
-			linearSchool.Orientation = Orientation.Horizontal;
+			linearSchool.Orientation = Android.Widget.Orientation.Horizontal;
 
-			linearUserData.Orientation = Orientation.Vertical;
+			linearUserData.Orientation = Android.Widget.Orientation.Vertical;
 			linearUserData.SetGravity (GravityFlags.Center);
 
-			linearUser.Orientation = Orientation.Vertical;
+			linearUser.Orientation = Android.Widget.Orientation.Vertical;
 			linearUser.SetGravity (GravityFlags.CenterHorizontal);
 
-			linearListCurso.Orientation = Orientation.Vertical;
+			linearListCurso.Orientation = Android.Widget.Orientation.Vertical;
 
-			linearListTask.Orientation = Orientation.Vertical;
+			linearListTask.Orientation = Android.Widget.Orientation.Vertical;
 
-			linearListTaskTop.Orientation = Orientation.Vertical;
-			linearListRutas.Orientation = Orientation.Horizontal;
-			linearListTaskBotton.Orientation = Orientation.Vertical;
+			linearListTaskTop.Orientation = Android.Widget.Orientation.Vertical;
+			linearListRutas.Orientation = Android.Widget.Orientation.Horizontal;
+			linearListTaskBotton.Orientation = Android.Widget.Orientation.Vertical;
 
 
 			linearListRutas.SetGravity (GravityFlags.Center);
 
-			linearList.Orientation = Orientation.Vertical;
+			linearList.Orientation = Android.Widget.Orientation.Vertical;
 
-			linearPendiente.Orientation = Orientation.Horizontal;
+			linearPendiente.Orientation = Android.Widget.Orientation.Horizontal;
 			linearPendiente.SetGravity (GravityFlags.Center);
 			//linearList.SetGravity (GravityFlags.CenterVertical);
 
@@ -441,7 +461,7 @@ namespace MLearning.Droid.Views
 			txtUserRol.Gravity = GravityFlags.CenterHorizontal;
 			txtCurse.Gravity = GravityFlags.CenterHorizontal;
 
-
+			/*
 			imgChat.SetImageBitmap (Bitmap.CreateScaledBitmap (getBitmapFromAsset("icons/chat.png"),Configuration.getWidth (45), Configuration.getWidth (40),true));
 			imgUser.SetImageBitmap (Bitmap.CreateScaledBitmap (getBitmapFromAsset("icons/user.png"),Configuration.getWidth (154), Configuration.getHeight (154),true));
 			imgSchool.SetImageBitmap (Bitmap.CreateScaledBitmap (getBitmapFromAsset("icons/colegio.png"),Configuration.getWidth (29), Configuration.getHeight (29),true));
@@ -452,7 +472,7 @@ namespace MLearning.Droid.Views
 			Drawable drPendiente = new BitmapDrawable (Bitmap.CreateScaledBitmap (getBitmapFromAsset ("icons/pendiente.png"), Configuration.getWidth(30), Configuration.getWidth(30), true));
 			linearPendiente.SetBackgroundDrawable (drPendiente);
 			drPendiente = null;
-
+*/
 			imgCurse.SetPadding (Configuration.getWidth (68), 0, 0, 0);
 			imgTask.SetPadding(Configuration.getWidth(68),0,0,0);
 
@@ -621,10 +641,13 @@ namespace MLearning.Droid.Views
 				break;
 			case "LearningOjectsList":
 				resetMLOs ();
-				(ViewModel as MainViewModel).LearningOjectsList.CollectionChanged += _learningObjectsList_CollectionChanged;
+				//(ViewModel as MainViewModel).LearningOjectsList.CollectionChanged += _learningObjectsList_CollectionChanged;
 				setIndex (lo._ListLOImages_S2 [0], new EventArgs ());
 				lo._ListLOImages_S2 [0].AddView (lo.selectLayout);
 				lo.lastSelected = 0;
+
+				lo.imLoClick(lo._ListLOImages_S2 [0], new EventArgs() );
+
 				break;
 
 
@@ -797,6 +820,8 @@ namespace MLearning.Droid.Views
 
 			}
 
+
+
 		}
 
 		private void imLoClick(object sender, EventArgs eventArgs)
@@ -934,9 +959,9 @@ namespace MLearning.Droid.Views
 			int w = Configuration.getWidth (123);
 			int h = Configuration.getWidth (136);
 
-			ruta1.SetImageBitmap (Bitmap.CreateScaledBitmap (getBitmapFromAsset ("icons/rutamachupicchu.png"), w, h, true));
-			ruta2.SetImageBitmap (Bitmap.CreateScaledBitmap (getBitmapFromAsset ("icons/rutasallkantay.png"), w, h, true));
-			ruta3.SetImageBitmap (Bitmap.CreateScaledBitmap (getBitmapFromAsset ("icons/rutasmenores.png"), w, h, true));
+			//ruta1.SetImageBitmap (Bitmap.CreateScaledBitmap (getBitmapFromAsset ("icons/rutamachupicchu.png"), w, h, true));
+			//ruta2.SetImageBitmap (Bitmap.CreateScaledBitmap (getBitmapFromAsset ("icons/rutasallkantay.png"), w, h, true));
+			//ruta3.SetImageBitmap (Bitmap.CreateScaledBitmap (getBitmapFromAsset ("icons/rutasmenores.png"), w, h, true));
 
 			ruta1.SetPadding (space, 0, space, 0);
 			ruta2.SetPadding (space, 0, space, 0);
@@ -991,7 +1016,9 @@ namespace MLearning.Droid.Views
 
 		public void showHome()
 		{
+			player.Stop ();
 			_currentCurso = 0;
+			_isHome = true;
 			try{
 				lo.getWorkSpaceLayout.SetBackgroundColor (Color.Transparent);
 				lo.getWorkSpaceLayout.RemoveAllViews ();
@@ -1005,6 +1032,8 @@ namespace MLearning.Droid.Views
 		public void showCurso(int index)
 		{
 			//s_list = new ObservableCollection<MainViewModel.page_collection_wrapper> ();
+			player.Stop();
+			_isHome = false;
 
 			if (vm.CirclesList == null) {
 				var myHandler = new Handler ();
@@ -1087,7 +1116,7 @@ namespace MLearning.Droid.Views
 		{
 			linearinfo1 = new LinearLayout (this);
 			linearinfo1.LayoutParameters = new LinearLayout.LayoutParams (-1, -2);
-			linearinfo1.Orientation = Orientation.Horizontal;
+			linearinfo1.Orientation = Android.Widget.Orientation.Horizontal;
 			linearinfo1.SetGravity (GravityFlags.CenterHorizontal);
 
 			List<String> items = new List<string> ();
@@ -1112,7 +1141,7 @@ namespace MLearning.Droid.Views
 			{
 
 				icons.Add (new ImageView (this));
-				icons [i].SetImageBitmap (Bitmap.CreateScaledBitmap (getBitmapFromAsset (iconsPath[i]), w, h, true));
+				//icons [i].SetImageBitmap (Bitmap.CreateScaledBitmap (getBitmapFromAsset (iconsPath[i]), w, h, true));
 
 				TextView title = new TextView (this);
 				title.Text = items [i];
@@ -1124,7 +1153,7 @@ namespace MLearning.Droid.Views
 
 				LinearLayout itemLayoutmp = new LinearLayout (this);
 				itemLayoutmp.LayoutParameters = new LinearLayout.LayoutParams (-2, -2);
-				itemLayoutmp.Orientation = Orientation.Horizontal;
+				itemLayoutmp.Orientation = Android.Widget.Orientation.Horizontal;
 				itemLayoutmp.SetGravity (GravityFlags.CenterVertical);
 				itemLayoutmp.SetPadding(spacing, 0, spacing, 0);
 
@@ -1376,50 +1405,40 @@ namespace MLearning.Droid.Views
 			Console.WriteLine ("loadContentByUnit");
 			if (vm.ContentByUnit != null) 
 			{
-
 				lo._listUnidades.Clear ();
-
 
 				foreach (var pair in vm.ContentByUnit) {
 
 					lo._listUnidades.Add (new UnidadItem { 
-						Title = pair.Value[0].title,
-						Description = pair.Value[0].description,
-						ImageUrl = pair.Value[0].url_img
+						Title = pair.Value [0].title,
+						Description = pair.Value [0].description,
+						ImageUrl = pair.Value [0].url_img
 					});
-
-					lo.initUnidades (_currentCurso,_currentUnidad);
-
-
-
-
-					/*
-
-					for (int i = 0; i < pair.Value.Count; i++) {
-
-							lo._listUnidades.Add (new UnidadItem { 
-							Title = pair.Value[i].title,
-							Description = pair.Value[i].description,
-							ImageUrl = pair.Value[i].url_img
-							});
-
-					}
-					*/
-
 				}
 
-				lo._txtCursoN.Text = vm.CirclesList[_currentCurso].name;
-				//lo._txtUnidadN.Text = vm.LOsInCircle[imView.index].lo.title;
+				if (_currentCurso == 0 && _currentUnidad == 1) {		
+					var a = lo._listUnidades[4];		
+					var b = lo._listUnidades[2];		
+					var c = lo._listUnidades[3];		
+					lo._listUnidades [2] = a;		
+					lo._listUnidades [3] = b;		
+					lo._listUnidades [4] = c;		
+				}
 
+				lo.initUnidades (_currentCurso,_currentUnidad);
+
+				lo._txtCursoN.Text = vm.CirclesList[_currentCurso].name;
 
 				if (_currentCurso == 0 && _currentUnidad!=3) {
 
 					for (int i = 0; i < lo._listLinearUnidades.Count; i++) {
-
 						lo._listLinearUnidades [i].Click += lo_item_click;
-						lo._listIconMap [i].Click += map_item_click;
-
 					}
+
+					for (int i = 0; i < lo._listIconVerMap.Count; i++) {
+						lo._listIconVerMap [i].Click += map_item_click;
+					}
+
 				}
 
 				if(_currentCurso==2 && _currentUnidad==3)
@@ -1449,34 +1468,114 @@ namespace MLearning.Droid.Views
 		void map_item_click (object sender, EventArgs e)
 		{
 			_dialogDownload.Show ();
-			var item = sender as ImageIconMap;
+			var item = sender as LinearLayout;
 			vm._currentUnidad = _currentUnidad;
 			vm._currentCurso = _currentCurso;
-			vm._currentSection = item.index;
+			vm._currentSection = (int)item.Tag;
 			vm.OpenLOMapCommand.Execute(vm.LearningOjectsList[_currentUnidad]);
 
 		}
 
 		void playSound(object sender, EventArgs e)
 		{
+			if (!isOnline ()) {
+				var myHandler = new Handler ();
+				myHandler.Post(()=>{
+					Toast.MakeText (this, "Sin Conexión", ToastLength.Short).Show();
+				});
+				return;
+			}
+
 			var item = sender as ImageIconMap;
 			vm._currentUnidad = _currentUnidad;
 			vm._currentCurso = _currentCurso;
 			vm._currentSection = item.index;
-			StartPlayer (lo._listUnidades[item.index].Description);
+
+			if (_playerOn) {
+				player.Stop ();
+
+				if (_currentItemPlayer == item.index) {
+					item.SetImageBitmap (lo.iconPlay);
+					_playerOn = false;
+					return;
+				}
+
+			}
+
+			if (_currentItemPlayer != -1) {
+				lo._listIconMap [_currentItemPlayer].SetImageBitmap (lo.iconPlay);
+			}
+
+			item.SetImageBitmap (pausePlayer);
+			_currentItemPlayer = item.index;
+
+			StartPlayer (lo._listUnidades[item.index].Description, item);
 		}
 
-		public void StartPlayer(String  filePath)
+
+
+
+		private void playMp3(byte[] mp3SoundByteArray) {		
+						try {		
+								// create temp file that will hold byte array		
+								Java.IO.File tempMp3 = Java.IO.File.CreateTempFile("kurchina", "mp3", CacheDir);		
+								tempMp3.DeleteOnExit();		
+								Java.IO.FileOutputStream fos = new Java.IO.FileOutputStream(tempMp3);		
+								fos.Write(mp3SoundByteArray);		
+								fos.Close();		
+						
+								Java.IO.FileInputStream fis = new Java.IO.FileInputStream(tempMp3);		
+								player.SetDataSource(fis.FD);		
+								player.Prepare();
+								player.Start();		
+							} catch (Java.IO.IOException ex) {		
+								String s = ex.ToString ();		
+								ex.PrintStackTrace ();		
+						}		
+				}
+		
+		async public void StartPlayer(String  filePath, ImageIconMap item)
 		{
+
+			_dialogDownload = new ProgressDialog (this);		
+			_dialogDownload.SetCancelable (false);		
+			_dialogDownload.SetMessage ("Descargando Audio");		
+			_dialogDownload.Show ();		
+			CacheService cache = CacheService.Init(SessionService.GetCredentialFileName(), "user_pref", "cache.db");
+
 			if (player == null) {
 				player = new Android.Media.MediaPlayer();
 			} else {
 				player.Reset();
 				String url = Html.FromHtml (filePath).ToString();
-				player.SetDataSource(url);
-				player.Prepare();
-				player.Start();
+				var bytesAndPath = await cache.tryGetResource(url);		
+				_dialogDownload.Dismiss ();		
+						
+				playMp3 (bytesAndPath.Item1);
+
+				//player.SetAudioStreamType(Stream.Music);
+				//player.Prepared += (sender, args) => player.Start();
+				 
+				player.Completion += delegate {
+
+					item.SetImageBitmap(lo.iconPlay);
+					//setPlayerIcon();
+					_playerOn = false;
+					player.Stop();
+				};
+
+				//player.SetDataSourceAsync( url );
+
+				//player.PrepareAsync();
+
+				_playerOn = true;
+
 			}
+		}
+
+		public void setPlayerIcon()
+		{
+			player.Reset ();
 		}
 
 		void loadSection(){
@@ -1567,7 +1666,7 @@ namespace MLearning.Droid.Views
 				GcmClient.CheckDevice(this);
 				GcmClient.CheckManifest(this);
 
-				// Register for push notifications
+			
 				System.Diagnostics.Debug.WriteLine("Registering...");
 				GcmClient.Register(this, Core.Configuration.Constants.SenderID);
 			}
@@ -1576,218 +1675,19 @@ namespace MLearning.Droid.Views
 
 		void showMapInit (object sender, EventArgs e)
 		{
-
-
-			/*
-			var imView = sender as IconImageMap;
-
-			var s_listp = vm.LOsInCircle[_currentUnidad].stack.StacksList;
-			if (s_listp [imView.indexLO].PagesList.Count > 1) {
-
-
-				LinearLayout info = new LinearLayout (this);
-				info.LayoutParameters = new LinearLayout.LayoutParams (300, 300);
-				info.SetBackgroundColor (Color.Aqua);
-
-				lo.getMapSpaceLayout.SetBackgroundColor (Color.ParseColor ("#E0C7BC"));
-				lo.getMapSpaceLayout.AddView (map);
-
-				map.mapUrl = s_list [imView.indexLO].PagesList [1].page.url_img;
-				map.setMapImage (map.mapUrl);
-				loadPlacesDataSource (imView.indexLO);
-				map.iniPlancesList ();
-				map.listPlaces.ItemClick += ListPlaces_ItemClick;
-
-				//map.placesContainer.Click += map.showPLaceInfo;
-
-
-				_mapOpen = true;
-			} else {
-				var myHandler = new Handler ();
-				myHandler.Post(()=>{
-					Toast.MakeText (this, "No Disponible", ToastLength.Short).Show();
-				});		
-			}
-*/
 		}
 
 
 		void loadPlacesDataSource(int pageIndex)
 		{
-			/*
-			map._currentPlaces.Clear ();
-			map._placesData.Clear ();
-			var s_listp = vm.LOsInCircle[_currentUnidad].stack.StacksList;
-
-			var slides = s_listp [pageIndex].PagesList [1].content.lopage.loslide;
-
-
-			for (int m = 1; m < slides.Count; m++) {
-				map._currentPlaces.Add (new PlaceItem{ titulo = slides [m].lotitle });
-
-				List<PlaceDetalle> extraInfo = new List<PlaceDetalle> ();
-				for (int i = 0; i < slides [m].loitemize.loitem.Count; i++) {
-					PlaceDetalle itemPlace = new PlaceDetalle ();
-					itemPlace.detalle = slides [m].loitemize.loitem [i].lotext;
-					itemPlace.url = slides [m].loitemize.loitem [i].loimage;
-					extraInfo.Add (itemPlace);
-				}
-
-				map._placesData.Add (
-					new MapItemInfo {
-						titulo = slides [m].lotitle,
-						placeExtraInfo = extraInfo
-					}
-				);
-			}
-
-			//map.listPlaces.ItemClick += ListPlaces_ItemClick;
-
-*/
 		}
 
 		void ListPlaces_ItemClick (object sender, AdapterView.ItemClickEventArgs e)
 		{
-			/*
-			int position = e.Position;
-			map.showPLaceInfo(position);
-			*/
 		}
 
 		void LoadPagesDataSource (int pageIndex)
 		{
-
-
-			/*
-
-			_lectorOpen = true;
-			bool is_main = true;
-
-			for (int i = 0; i < vm.LOsInCircle.Count; i++)
-			{
-				var s_listp = vm.LOsInCircle[i].stack.StacksList;
-				int indice = 0;
-
-				if (s_listp != null) {
-					for (int j = 0; j < s_listp.Count; j++) {						
-
-						for (int k = 0; k < s_listp [j].PagesList.Count; k++) {
-
-							VerticalScrollViewPager scrollPager = new VerticalScrollViewPager (this);
-							scrollPager.setOnScrollViewListener (this); 
-							LinearLayout linearScroll = new LinearLayout (this);
-							linearScroll.LayoutParameters = new LinearLayout.LayoutParams (-1, -2);
-							linearScroll.Orientation = Orientation.Vertical;
-
-							var content = s_listp [j].PagesList [k].content;
-							FrontContainerViewPager front = new FrontContainerViewPager (this);
-							front.Tag = "pager";
-
-
-							front.ImageChapter = s_listp [j].PagesList [k].page.url_img;
-
-
-							front.Title = s_listp [j].PagesList [k].page.title;
-							front.Description = s_listp [j].PagesList [k].page.description;
-							var slides = s_listp [j].PagesList [k].content.lopage.loslide;
-							front.setBack (drBack);
-
-
-							linearScroll.AddView (front);
-							listFrontPager.Add (front);
-
-							var currentpage = s_listp [j].PagesList [k];
-
-
-							for (int m = 1; m < slides.Count; m++) {
-								LOSlideSource slidesource = new LOSlideSource (this);
-
-								var _id_ = vm.LOsInCircle [i].lo.color_id;
-								is_main = !is_main;
-
-
-								slidesource.ColorS = Configuration.ListaColores [indice % 6];
-
-								slidesource.Type = slides [m].lotype;
-								if (slides [m].lotitle != null)
-									slidesource.Title = slides [m].lotitle;
-								if (slides [m].loparagraph != null)
-									slidesource.Paragraph = slides [m].loparagraph;
-								if (slides [m].loimage != null)
-									slidesource.ImageUrl = slides [m].loimage;
-								if (slides [m].lotext != null)
-									slidesource.Paragraph = slides [m].lotext;
-								if (slides [m].loauthor != null)
-									slidesource.Author = slides [m].loauthor;
-								if (slides [m].lovideo != null)
-									slidesource.VideoUrl = slides [m].lovideo;
-
-								var c_slide = slides [m];
-
-
-								if (c_slide.loitemize != null) {
-									slidesource.Itemize = new ObservableCollection<LOItemSource> ();
-									var items = c_slide.loitemize.loitem;
-
-									for (int n = 0; n < items.Count; n++) { 
-										LOItemSource item = new LOItemSource ();
-										if (items [n].loimage != null)
-											item.ImageUrl = items [n].loimage;
-										if (items [n].lotext != null)
-											item.Text = items [n].lotext;
-
-
-										var c_item_ize = items [n];
-
-										slidesource.Itemize.Add (item);
-									}
-								}
-
-
-								linearScroll.AddView (slidesource.getViewSlide ());
-
-
-							} 
-
-							scrollPager.VerticalScrollBarEnabled = false;
-							if (k == 0) {
-								scrollPager.AddView (linearScroll);
-								listaScroll.Add (scrollPager);
-								indice++;
-							}
-
-
-
-						}
-
-					}
-
-
-
-
-				} else {
-					Console.WriteLine ("ERROR");
-				}
-
-
-
-			}
-			lo.getWorkSpaceLayout.RemoveAllViews ();
-			lo.getWorkSpaceLayout.SetBackgroundColor (Color.White);
-			lo.getWorkSpaceLayout.AddView (viewPager);
-			//_progresD.Hide ();
-
-			List<int> numUn = new List<int>();
-			numUn.Add (0);
-			numUn.Add (4);
-			numUn.Add (9);
-
-			LOViewAdapter adapter = new LOViewAdapter (this, listaScroll);
-			viewPager.Adapter = adapter;
-			viewPager.SetCurrentItem (numUn[_currentUnidad], false);
-			//viewPager.CurrentItem = IndiceSection;
-		*/
-
 		}
 
 
@@ -1871,6 +1771,15 @@ namespace MLearning.Droid.Views
 
 		public override void OnBackPressed ()
 		{
+			if (_isHome) {
+				this.Finish ();
+			}
+		
+
+			if (_playerOn) {
+				player.Stop ();
+				_playerOn = false;
+			}
 
 			if (_lectorOpen) {
 				_lectorOpen = false;
@@ -1878,19 +1787,7 @@ namespace MLearning.Droid.Views
 				lo.getWorkSpaceLayout.RemoveAllViews ();
 				lo.getWorkSpaceLayout.SetBackgroundColor (Color.Transparent);
 				//showRutas ();
-			}
-			/*else if (_mapOpen){
-
-				if (map.placeInfoOpen) {
-					map.placeInfoOpen = false;
-					map.hidePlaceInfo ();
-				} else {
-					_mapOpen = false;
-					lo.getMapSpaceLayout.RemoveAllViews ();
-					lo.getMapSpaceLayout.SetBackgroundColor (Color.Transparent);
-				}
-			}*/
-			else if (_currentCurso == 0) {
+			}else if (_currentCurso == 0) {
 				showHome ();
 			} else if (_currentCurso == 1) {
 				showHome ();
@@ -1899,6 +1796,8 @@ namespace MLearning.Droid.Views
 			} else if (_currentCurso == 3) {
 				showHome ();
 			} 
+
+
 
 
 		}

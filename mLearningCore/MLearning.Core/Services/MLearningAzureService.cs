@@ -183,7 +183,7 @@ namespace MLearning.Core.Services
              #if (WEB)
                           return await _repositoryService.SearchForAsync<Circle>(c => c.owner_id == user_id, c => c.updated_at, c => c.id, false);
             #else
-                        return await _repositoryService.SearchForAsync<Circle>(c => c.owner_id == user_id, c => c.updated_at, c => c.id, true);
+                        return await _repositoryService.SearchForAsync<Circle>(c => c.owner_id == user_id, c => c.updated_at, c => c.id, false);
             #endif
         }
 

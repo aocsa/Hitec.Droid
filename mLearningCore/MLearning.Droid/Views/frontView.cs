@@ -181,7 +181,7 @@ namespace MLearning.Droid
 
 			int heightItem = Configuration.getHeight (310);
 
-			Bitmap likeBitmap = Bitmap.CreateScaledBitmap (getBitmapFromAsset ("icons/like.png"), Configuration.getWidth (30), Configuration.getWidth (30), true);
+			//Bitmap likeBitmap = Bitmap.CreateScaledBitmap (getBitmapFromAsset ("icons/like.png"), Configuration.getWidth (30), Configuration.getWidth (30), true);
 
 
 			for (int i = 0; i < title.Count; i++) 
@@ -209,7 +209,7 @@ namespace MLearning.Droid
 				linearTitle.AddView (itemTitle);
 
 				ImageView iconlike = new ImageView (context);
-				iconlike.SetImageBitmap(likeBitmap);
+				//iconlike.SetImageBitmap(likeBitmap);
 
 
 				LinearLayout linearLike = new LinearLayout (context);
