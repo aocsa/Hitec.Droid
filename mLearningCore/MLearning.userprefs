@@ -1,17 +1,22 @@
 ﻿<Properties StartupItem="MLearning.Droid\Hitec.Droid.csproj">
-  <MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workbench ActiveDocument="MLearning.Droid\Views\MapView.cs">
     <Files>
-      <File FileName="MLearning.Droid\Views\WallView.cs" Line="776" Column="7" />
+      <File FileName="MLearning.Droid\Views\WallView.cs" Line="1" Column="1" />
       <File FileName="MLearning.Core\ViewModels\LOMapViewModel.cs" Line="1" Column="1" />
       <File FileName="MLearning.Droid\Views\LOMapView.cs" Line="1" Column="1" />
       <File FileName="MLearning.Core\ViewModels\MainViewModel.cs" Line="1" Column="1" />
-      <File FileName="MLearning.Droid\Views\MapView.cs" Line="1" Column="1" />
       <File FileName="MLearning.Droid\Views\MainView.cs" Line="1" Column="1" />
-      <File FileName="MLearning.Droid\Views\CustomerImageView.cs" Line="50" Column="4" />
-      <File FileName="MLearning.Droid\Views\Template1.cs" Line="86" Column="6" />
+      <File FileName="MLearning.Droid\Views\CustomerImageView.cs" Line="1" Column="1" />
+      <File FileName="MLearning.Droid\Views\Template1.cs" Line="1" Column="1" />
+      <File FileName="MLearning.Droid\Views\Configuration.cs" Line="1" Column="1" />
+      <File FileName="MLearning.Core\Services\IMLearningService.cs" Line="1" Column="1" />
+      <File FileName="MLearning.Core\Services\MLearningAzureService.cs" Line="1" Column="1" />
+      <File FileName="MLearning.Core\Configuration\Constants.cs" Line="9" Column="2" />
+      <File FileName="MLearning.Core\Repositories\WAMSRepositoryService.cs" Line="49" Column="4" />
+      <File FileName="MLearning.Droid\Views\MapView.cs" Line="394" Column="6" />
     </Files>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Release" PreferredExecutionTarget="Android.4C3AWN154L014669" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.4C3AWN154L014669" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
       <Breakpoint file="/Users/aocsa/Documents/proyectos/milton/Hitec.Droid dec 4/mLearningCore/MLearning.Droid/Views/MainView.cs" line="764" column="1" />

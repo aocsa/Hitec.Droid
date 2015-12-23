@@ -398,7 +398,7 @@ namespace MLearning.Droid
 			_mainLayout.AddView (leyendaLayout);
 
 			scrollPlaces = new VerticalScrollView (context);
-			scrollPlaces.LayoutParameters = new VerticalScrollView.LayoutParams (-1,Configuration.getHeight(1011-85));
+			scrollPlaces.LayoutParameters = new VerticalScrollView.LayoutParams (-1,Configuration.getHeight(1136-125-85));
 			scrollPlaces.AddView (placesInfoLayout);
 			scrollPlaces.SetY (Configuration.getHeight (125));
 
