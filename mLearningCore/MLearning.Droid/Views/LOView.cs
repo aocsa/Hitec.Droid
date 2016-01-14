@@ -119,7 +119,7 @@ namespace MLearning.Droid.Views
 			_mainLayout.AddView (_adLayout);
 
 			_adLayout.Click += delegate {
-				String url = "http://www.hi-tec.com/pe/";
+				String url = "https://www.facebook.com/HiTecPe";
 				Intent i = new Intent (Intent.ActionView);
 				i.SetData (Android.Net.Uri.Parse (url));
 				this.StartActivity(i);

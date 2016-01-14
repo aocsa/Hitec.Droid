@@ -252,6 +252,16 @@ namespace MLearning.Droid
 					contentLinearLayout.RemoveView (content);
 				}
 				content.TextFormatted = Html.FromHtml (_content);
+
+				ViewTreeObserver vto = content.ViewTreeObserver;
+				int H = 0;
+				vto.GlobalLayout += (sender, args) =>
+				{     
+					H = content.Height;
+					Console.WriteLine ("TAM:::1:" + H );
+					content.LayoutParameters.Height = H-Configuration.getHeight(40);
+
+				};  
 					//content.Text = _content;
 			}
 

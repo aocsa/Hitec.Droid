@@ -334,7 +334,7 @@ namespace MLearning.Droid
 			_mainLayout.AddView (_adLayout);
 
 			_adLayout.Click += delegate {
-				String url = "http://www.hi-tec.com/pe/";
+				String url = "https://www.facebook.com/HiTecPe";
 				Intent i = new Intent (Intent.ActionView);
 				i.SetData (Android.Net.Uri.Parse (url));
 				context.StartActivity(i);
@@ -856,16 +856,12 @@ namespace MLearning.Droid
 							test.SetGravity (Android.Views.GravityFlags.Center);
 							test.Tag = i;
 							test.SetX( Configuration.getWidth (100));
-							//test.SetPadding (Configuration.getWidth(30), Configuration.getWidth (25), Configuration.getWidth(30), Configuration.getWidth (25));
-
-
-						
-
-
+							test.SetPadding (Configuration.getWidth(30), Configuration.getWidth (25), Configuration.getWidth(30), Configuration.getWidth (25));
+							 
 							TextView verMapa = new TextView (context);
-							verMapa.Text = "* Ver Mapa";
+							verMapa.Text = "* Ver mapa y fotos";
 							verMapa.Typeface = Typeface.CreateFromAsset (context.Assets, "fonts/ArcherMediumPro.otf");
-							verMapa.SetTextSize (ComplexUnitType.Fraction, Configuration.getHeight (35));
+							verMapa.SetTextSize (ComplexUnitType.Fraction, Configuration.getHeight (37));
 							verMapa.SetTextColor (Color.ParseColor (Configuration.ListaColores [i % 6]));
 
 							test.AddView (verMapa);

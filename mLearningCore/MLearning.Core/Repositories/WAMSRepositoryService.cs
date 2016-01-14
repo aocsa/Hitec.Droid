@@ -352,6 +352,7 @@ namespace Core.Repositories
 						//TODO: Filter with predicate
 						await SyncLocalTable<T>(lastSync, getID);
 
+
 					}
 
 

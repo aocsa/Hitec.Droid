@@ -1416,14 +1416,14 @@ namespace MLearning.Droid.Views
 					});
 				}
 
-				if (_currentCurso == 0 && _currentUnidad == 1) {		
+				/*if (_currentCurso == 0 && _currentUnidad == 1) {		
 					var a = lo._listUnidades[4];		
 					var b = lo._listUnidades[2];		
 					var c = lo._listUnidades[3];		
 					lo._listUnidades [2] = a;		
 					lo._listUnidades [3] = b;		
 					lo._listUnidades [4] = c;		
-				}
+				} */
 
 				lo.initUnidades (_currentCurso,_currentUnidad);
 
