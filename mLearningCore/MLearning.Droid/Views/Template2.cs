@@ -131,7 +131,7 @@ namespace MLearning.Droid
 				{     
 					H = content.Height;
 					Console.WriteLine ("TAM:::1:" + H );
-					content.LayoutParameters.Height = H-Configuration.getHeight(40);
+					content.LayoutParameters.Height = H-Configuration.getHeight(35);
 
 				};  
 				//content.Text = _content;

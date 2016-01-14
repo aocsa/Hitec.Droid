@@ -13,6 +13,7 @@ using Android.Views;
 using Android.Widget;
 using Android.Graphics;
 using Android.Graphics.Drawables;
+using Square.Picasso;
 
 namespace MLearning.Droid
 {
@@ -65,25 +66,33 @@ namespace MLearning.Droid
 			Configuration.setWidthPixel (widthInDp);
 			Configuration.setHeigthPixel (heightInDp);
 
-			adsImagesPath.Add ("images/ad1.jpg");
-			adsImagesPath.Add ("images/ad2.jpg");
-			adsImagesPath.Add ("images/ad3.jpg");
-
+			foreach (var w in AddResources.Instance.addList)
+				adsImagesPath.Add (w);
+	
 			initUi ();
 			this.AddView (_mainLayout);
 		}
 
 		void showAd(int idAd)
 		{
+
 			adOpen = true;
 			_adLayout = new LinearLayout (context);
 			_adLayout.LayoutParameters = new LinearLayout.LayoutParams (-1, Configuration.getHeight (255));
-			Drawable dr = new BitmapDrawable (getBitmapFromAsset (adsImagesPath[idAd]));
-			_adLayout.SetBackgroundDrawable (dr);
-			_adLayout.SetY (Configuration.getHeight(1136-85-255));
-			_mainLayout.AddView (_adLayout);
 
-			_adLayout.Click += delegate {
+
+			//Drawable dr = new BitmapDrawable (getBitmapFromAsset (adsImagesPath[idAd]));
+			//_adLayout.SetBackgroundDrawable (dr);
+			//_adLayout.SetY (Configuration.getHeight(1136-85-255));
+
+			ImageView imgProfile = new ImageView (context);
+			imgProfile.LayoutParameters = new LinearLayout.LayoutParams (-1, Configuration.getHeight (255));
+			Picasso.With (context).Load (adsImagesPath[idAd]).Resize(Configuration.getWidth(640),Configuration.getHeight(255)).Into (imgProfile);
+			imgProfile.SetY (Configuration.getHeight (1136 - 85 - 255));
+
+			_mainLayout.AddView (imgProfile);
+
+			imgProfile.Click += delegate {
 				String url = "https://www.facebook.com/HiTecPe";
 				Intent i = new Intent (Intent.ActionView);
 				i.SetData (Android.Net.Uri.Parse (url));
@@ -131,7 +140,8 @@ namespace MLearning.Droid
 					hideAd ();
 				} else {
 					Random rnd = new Random();
-					showAd (rnd.Next(3));
+					int nextval = rnd.Next(0, 7);
+					showAd (nextval);
 				}
 			};
 

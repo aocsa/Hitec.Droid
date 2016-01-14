@@ -235,6 +235,7 @@
     <Compile Include="Views\ImageIconMap.cs" />
     <Compile Include="Views\LinearLayoutLO.cs" />
     <Compile Include="Views\JustifiedTextView.cs" />
+    <Compile Include="Resources\AddResources.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
